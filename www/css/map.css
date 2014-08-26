@@ -1,0 +1,28 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+html, body, #map {
+    height: 100%;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.fcoo-layercontrol-header {
+	font-size: larger;
+	font-weight: bold;
+	display: block;
+	position: relative;
+}
+
+.fcoo-title {
+	font-size: larger;
+	font-weight: bold;
+	display: block;
+        background-color: white;
+	position: relative;
+        z-index: 999;
+}

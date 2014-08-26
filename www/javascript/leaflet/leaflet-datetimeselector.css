@@ -1,0 +1,33 @@
+.leaflet-datetimeselector-title {
+	font-size: larger;
+	font-weight: bold;
+	display: block;
+	position: relative;
+}
+
+.leaflet-datetimeselector-dateselect {
+	font-size: normal;
+	font-weight: normal;
+	display: block;
+	position: relative;
+}
+
+.leaflet-datetimeselector-localtime {
+	display: inline-block;
+} 
+
+.leaflet-datetimeselector-float-left {
+	float: left;
+}
+
+.leaflet-datetimeselector-mleft {
+	margin-left: 7px;
+}
+
+.leaflet-datetimeselector-datediv {
+	cursor: pointer; 
+}
+
+.leaflet-datetimeselector-clearfloat {
+	clear: all;
+}

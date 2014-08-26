@@ -1,0 +1,97 @@
+/*@media screen {
+    html { width:8.5in; }
+    body { font: 9pt/1.5 Arial, sans-serif; }
+}*/
+
+@media print {
+    body {
+        size: A4 landscape;
+    }
+    @page {
+        /*size: A4;*/
+        size: landscape;
+        margin: 0;
+    }
+    * {
+        overflow: visible !important;
+        position: relative;
+    }
+    .hide-on-print {
+        visibility: hidden;
+    }
+    .show-on-print {
+        visibility: visible;
+    }
+}
+
+.fcoo-legend-item {
+	background-color: white;
+	border: 1px solid darkgray;
+	text-align: center;
+}
+
+.fcoo-icondiv {
+	width: 50px;
+	opacity: 0.7;
+	text-align: center;
+	background-color: lightgray;
+	border-radius: 10px;
+	border: 1px solid darkgray;
+}
+
+.fcoo-icondiv-temp {
+	color: black;
+	font-weight: bold;
+	text-shadow: 0.1em 0.1em 0.1em white;
+	xtext-shadow: white 0.1em 0.1em;
+}
+
+.fcoo-popup-name {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.fcoo-popup-name a:link, .fcoo-popup-name a:active, .fcoo-popup-name a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+.fcoo-popup-name a:hover {
+	color: red;
+	text-decoration: none;
+}
+
+.fcoo-popup-description {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.fcoo-popup-main {
+}
+
+.fcoo-popup-main img {
+	vertical-align: middle;
+}
+
+.fcoo-popup-main span {
+	padding-left: 0.5em;
+}
+
+.fcoo-popup-temp {
+	font-weight: bold;
+	font-size: 2em;
+}
+
+.fcoo-popup-details {
+}
+
+.fcoo-popup-detail {
+}
+
+.fcoo-popup-timestamp {
+	color: gray;
+	padding-top: 0.5em;
+}
+
+.fcoo-legend-item {
+}
