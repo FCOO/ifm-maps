@@ -91,7 +91,9 @@ L.DatetimeSelector = L.Control.extend({
                 backButton.click(this._datetimeBack);
                 backButton.appendTo(buttonDiv);
 
-                var nowButton = $('<button class="btn btn-default btn-lg">Now</button>');
+                var nowstr = this._('Now');
+                nowstr = '<button class="btn btn-default btn-lg">' + nowstr + '</button>';
+                var nowButton = $(nowstr);
                 nowButton.click(this._datetimeNow);
                 nowButton.appendTo(buttonDiv);
 
@@ -223,10 +225,12 @@ L.DatetimeSelector = L.Control.extend({
                 var lang = this.options.language;
                 var i18n = {
                         en: {
-                                  'Use local time': 'Use local time'
+                                  'Use local time': 'Use local time',
+                                  'Now': 'Now'
                         },
                         da: {
-                                  'Use local time': 'Brug lokal tid'
+                                  'Use local time': 'Brug lokal tid',
+                                  'Now': 'Nu'
                         }
                 };
 
