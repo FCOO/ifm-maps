@@ -14,6 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-datetimeselector.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/L.Control.MousePosition.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/L.Control.Print.css" />
+	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-control-position.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/Control.OSMGeocoder.css" />
         <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css' rel='stylesheet' />
         <script>window.L_PREFER_CANVAS = true;</script>
@@ -36,6 +37,7 @@
 	<script src="../javascript/map_<?php echo $domain_id ?>.js"></script>
 	<script src="../javascript/leaflet/leaflet-languageselector.js"></script>
 	<script src="../javascript/leaflet/leaflet-datetimeselector.js"></script>
+	<script src="../javascript/leaflet/leaflet-control-position.js"></script>
 	<script src="../javascript/leaflet/L.Control.MousePosition.js"></script>
 	<script src="../javascript/leaflet/L.Control.Print.js"></script>
 	<script src="../javascript/leaflet/Control.OSMGeocoder.js"></script>

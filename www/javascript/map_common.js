@@ -378,6 +378,9 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
 	patch.innerHTML = getI18n('maps', localLang); // 'Maps';
 	layerControl._form.children[0].parentNode.insertBefore(patch, layerControl._form.children[0]);
 
+        // Add text input position control
+        map.addControl(new L.Control.Position({position: 'topleft', collapsed: true}));
+
         // Add print control
         map.addControl(L.Control.print({}));
 
