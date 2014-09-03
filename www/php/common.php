@@ -31,8 +31,8 @@
 	<script src="../javascript/leaflet/Permalink.Overlay.js"></script>
 	<script src="../javascript/leaflet/leaflet-flattrbutton.js"></script>
 	<!---<script src="../javascript/leaflet/L.Graticule.js"></script>-->
-	<!--[if lt IE 9]><script type="text/javascript" src="../javascript/excanvas.js"></script><![endif]-->
-	<!--[if lt IE 10]><script type="text/javascript" src="../javascript/typedarray.js"></script><![endif]-->
+	<!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/excanvas.js"></script><![endif]-->
+	<!--[if lt IE 10]><script type="text/javascript" src="../javascript/polyfills/typedarray.js"></script><![endif]-->
 	<script src="../javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js"></script>
 	<script src="../javascript/map_<?php echo $domain_id ?>.js"></script>
 	<script src="../javascript/leaflet/leaflet-languageselector.js"></script>
