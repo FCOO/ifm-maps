@@ -26,15 +26,21 @@ L.Control.Position = L.Control.extend({
 		var form = this._form = L.DomUtil.create('form', className + '-form');
 
 		var input_lon = this._input_lon = document.createElement('input');
-		input_lon.type = "text";
+		input_lon.type = "number";
 		input_lon.name = "lon";
-                input_lon.size = 9;
-                input_lon.placeholder = "Dec. long";
+		input_lon.step = "any";
+                input_lon.min = -180.0;
+                input_lon.max = 180.0;
+                input_lon.required = true;
+                input_lon.placeholder = "Decimal longitude";
 		var input_lat = this._input_lat = document.createElement('input');
-		input_lat.type = "text";
+		input_lat.type = "number";
 		input_lat.name = "lat";
-                input_lat.size = 9;
-                input_lat.placeholder = "Dec. lat";
+		input_lat.step = "any";
+                input_lat.min = -85.0;
+                input_lat.max = 85.0;
+                input_lat.required = true;
+                input_lat.placeholder = "Decimal latitude";
 
 		var submit = document.createElement('input');
 		submit.type = "submit";
