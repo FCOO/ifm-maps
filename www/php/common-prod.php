@@ -14,8 +14,8 @@
 	<script src="ifm-maps.js"></script>
         <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
         <script>window.L_PREFER_CANVAS = true;</script>
-	<!--[if lt IE 9]><script type="text/javascript" src="../javascript/excanvas.js"></script><![endif]-->
-	<!--[if lt IE 10]><script type="text/javascript" src="../javascript/typedarray.js"></script><![endif]-->
+	<!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/excanvas.js"></script><![endif]-->
+	<!--[if lt IE 10]><script type="text/javascript" src="../javascript/polyfills/typedarray.js"></script><![endif]-->
 	<script>initMap();</script>
 </body>
 </html>
