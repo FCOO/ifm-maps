@@ -81,6 +81,16 @@ L.DatetimeSelector = L.Control.extend({
                 selectList.selectedIndex = select_index;
 		//L.DomEvent.addListener(selectList, 'onchange', this._datetimeChanged, L.DomEvent.stopPropagation);
 
+                // Add slider control
+                var sliderDiv = L.DomUtil.create('div', 'leaflet-datetimeselector-sliderdiv', container);
+                $(sliderDiv).slider({
+                    "class": "leaflet-datetimeselector-slider",
+                    min: 0,
+                    max: this.options.datetimes.length-1,
+                    value: select_index,
+                    slide: this._sliderChanged
+                });
+
                 // Add datetime button controls
                 var buttonDiv = L.DomUtil.create('div', 'leaflet-datetimeselector-buttondiv', container);
                 var startButton = $('<button class="btn btn-default btn-lg"><i class="fa fa-fast-backward fa-lg"></i></button>');
@@ -164,21 +174,36 @@ L.DatetimeSelector = L.Control.extend({
 	_datetimeChanged: function(pEvent) {
                 var select = $('select.leaflet-datetimeselector-dateselect')[0];
 		var inst = select._instance;
+                var index = select.selectedIndex;
+                $('.leaflet-datetimeselector-sliderdiv').slider("value", index);
+                inst._datetimeUpdate(select);
+	},
+
+	_sliderChanged: function(pEvent, elem) {
+                var select = $('select.leaflet-datetimeselector-dateselect')[0];
+                var index = Math.max(Math.min(elem.value, select.length - 1), 0);
+                select.selectedIndex = index;
+                elem.value = index;
+		var inst = select._instance;
                 inst._datetimeUpdate(select);
 	},
 
 	_datetimeStart: function(pEvent) {
 		var elem = pEvent.target;
+                var index = 0;
                 var select = $('select.leaflet-datetimeselector-dateselect')[0];
-                select.selectedIndex = 0;
+                select.selectedIndex = index;
+                $('.leaflet-datetimeselector-sliderdiv').slider("value", index);
 		var inst = select._instance;
                 inst._datetimeUpdate(select);
 	},
 
 	_datetimeBack: function(pEvent) {
-                var elem = pEvent.target;
                 var select = $('select.leaflet-datetimeselector-dateselect')[0];
-                select.selectedIndex = Math.max(select.selectedIndex - 1, 0);
+                var index = Math.max(select.selectedIndex - 1, 0);
+                select.selectedIndex = index;
+                console.log(index);
+                $('.leaflet-datetimeselector-sliderdiv').slider("value", index);
                 var inst = select._instance;
                 inst._datetimeUpdate(select);
 	},
@@ -188,6 +213,7 @@ L.DatetimeSelector = L.Control.extend({
 		var inst = select._instance;
                 var index = inst._getNowIndex();
                 select.selectedIndex = index;
+                $('.leaflet-datetimeselector-sliderdiv').slider("value", index);
                 inst._datetimeUpdate(select);
 	},
 
@@ -209,14 +235,18 @@ L.DatetimeSelector = L.Control.extend({
 
 	_datetimeForward: function(pEvent) {
                 var select = $('select.leaflet-datetimeselector-dateselect')[0];
-                select.selectedIndex = Math.min(select.selectedIndex + 1, select.length - 1);
+                var index = Math.min(select.selectedIndex + 1, select.length - 1);
+                select.selectedIndex = index;
+                $('.leaflet-datetimeselector-sliderdiv').slider("value", index);
 		var inst = select._instance;
                 inst._datetimeUpdate(select);
 	},
 
 	_datetimeEnd: function(pEvent) {
                 var select = $('select.leaflet-datetimeselector-dateselect')[0];
-                select.selectedIndex = select.length - 1;
+                var index = select.length - 1;
+                select.selectedIndex = index;
+                $('.leaflet-datetimeselector-sliderdiv').slider("value", index);
 		var inst = select._instance;
                 inst._datetimeUpdate(select);
 	},

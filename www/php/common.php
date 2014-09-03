@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet.css" />
 	<link rel="stylesheet" type="text/css" href="../css/map.css" />
 	<link rel="stylesheet" type="text/css" href="../css/flag-icon.css" />
+	<link rel="stylesheet" type="text/css" href="../javascript/jquery-ui-1.11.1.custom/jquery-ui.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-fcoo-layers.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-languageselector.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-datetimeselector.css" />
@@ -23,6 +24,7 @@
 <body>
 	<div id="map"></div>
 	<script src="../javascript/jquery-1.11.1.js"></script>
+        <script src="../javascript/jquery-ui-1.11.1.custom/jquery-ui.js"></script>
 	<script src="../javascript/date.js"></script>
 	<script src="../javascript/moment-with-langs.min.js"></script>
 	<script src="../javascript/leaflet/leaflet.js"></script>
