@@ -380,6 +380,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
 
         // Add text input position control
         map.addControl(new L.Control.Position({position: 'topleft', collapsed: true}));
+        //$('input, textarea').placeholder();
 
         // Add print control
         map.addControl(L.Control.print({}));
@@ -389,6 +390,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
         $(".leaflet-control-zoom").addClass("hide-on-print");
         $(".leaflet-control-locate").addClass("hide-on-print");
         $(".leaflet-control-geocoder").addClass("hide-on-print");
+        $(".leaflet-control-position").addClass("hide-on-print");
         $(".leaflet-control-print").addClass("hide-on-print");
         $(".leaflet-control-mouseposition").addClass("hide-on-print");
         $(".leaflet-control-permalink").addClass("hide-on-print");
@@ -399,6 +401,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
             $(".leaflet-control-zoom").css("visibility", "hidden");
             $(".leaflet-control-locate").css("visibility", "hidden");
             $(".leaflet-control-geocoder").css("visibility", "hidden");
+            $(".leaflet-control-position").css("visibility", "hidden");
             $(".leaflet-control-print").css("visibility", "hidden");
             $(".leaflet-control-mouseposition").css("visibility", "hidden");
             $(".leaflet-control-permalink").css("visibility", "hidden");

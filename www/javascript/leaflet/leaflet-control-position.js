@@ -7,7 +7,7 @@ L.Control.Position = L.Control.extend({
 	options: {
 		collapsed: true,
 		position: 'topright',
-		text: 'Zoom to position',
+		text: 'Zoom to (lon, lat) position',
 		bounds: null, // L.LatLngBounds
 	},
 
@@ -26,6 +26,7 @@ L.Control.Position = L.Control.extend({
 		var form = this._form = L.DomUtil.create('form', className + '-form');
 
 		var input_lon = this._input_lon = document.createElement('input');
+                input_lon.className = className + '-form-input-lon';
 		input_lon.type = "number";
 		input_lon.name = "lon";
 		input_lon.step = "any";
@@ -34,6 +35,7 @@ L.Control.Position = L.Control.extend({
                 input_lon.required = true;
                 input_lon.placeholder = "Decimal longitude";
 		var input_lat = this._input_lat = document.createElement('input');
+                input_lat.className = className + '-form-input-lat';
 		input_lat.type = "number";
 		input_lat.name = "lat";
 		input_lat.step = "any";

@@ -25,6 +25,7 @@
 	<div id="map"></div>
 	<script src="../javascript/jquery-1.11.1.js"></script>
         <script src="../javascript/jquery-ui-1.11.1.custom/jquery-ui.js"></script>
+        <script src="../javascript/polyfills/jquery.placeholder_v2.0.8.js"></script>
 	<script src="../javascript/date.js"></script>
 	<script src="../javascript/moment-with-langs.min.js"></script>
 	<script src="../javascript/leaflet/leaflet.js"></script>
