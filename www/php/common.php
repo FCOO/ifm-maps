@@ -33,7 +33,6 @@
 	<script src="../javascript/leaflet/Permalink.Layer.js"></script>
 	<script src="../javascript/leaflet/Permalink.Overlay.js"></script>
 	<script src="../javascript/leaflet/leaflet-flattrbutton.js"></script>
-	<!---<script src="../javascript/leaflet/L.Graticule.js"></script>-->
 	<!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/excanvas.js"></script><![endif]-->
 	<!--[if lt IE 10]><script type="text/javascript" src="../javascript/polyfills/typedarray.js"></script><![endif]-->
 	<script src="../javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js"></script>
