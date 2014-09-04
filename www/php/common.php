@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="../javascript/jquery-ui-1.11.1.custom/jquery-ui.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-fcoo-layers.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-languageselector.css" />
-	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-datetimeselector.css" />
+	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-control-datetime.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/L.Control.MousePosition.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/L.Control.Print.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-control-position.css" />
@@ -27,7 +27,7 @@
         <script src="../javascript/jquery-ui-1.11.1.custom/jquery-ui.js"></script>
         <script src="../javascript/polyfills/jquery.placeholder_v2.0.8.js"></script>
 	<script src="../javascript/date.js"></script>
-	<script src="../javascript/moment-with-langs.min.js"></script>
+	<script src="../javascript/moment-with-locales.min.js"></script>
 	<script src="../javascript/leaflet/leaflet.js"></script>
 	<script src="../javascript/leaflet/Permalink.js"></script>
 	<script src="../javascript/leaflet/Permalink.Layer.js"></script>
@@ -38,7 +38,7 @@
 	<script src="../javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js"></script>
 	<script src="../javascript/map_<?php echo $domain_id ?>.js"></script>
 	<script src="../javascript/leaflet/leaflet-languageselector.js"></script>
-	<script src="../javascript/leaflet/leaflet-datetimeselector.js"></script>
+	<script src="../javascript/leaflet/leaflet-control-datetime.js"></script>
 	<script src="../javascript/leaflet/leaflet-control-position.js"></script>
 	<script src="../javascript/leaflet/L.Control.MousePosition.js"></script>
 	<script src="../javascript/leaflet/L.Control.Print.js"></script>
