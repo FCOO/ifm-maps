@@ -18,7 +18,7 @@ L.DatetimeSelector = L.Control.extend({
 	initialize: function(options) {
 		L.Util.setOptions(this, options);
 		this._container = L.DomUtil.create('div',
-			'leaflet-control-layers leaflet-control-layers-expanded leaflet-control-control-datetime');
+			'leaflet-control-layers leaflet-control-layers-expanded leaflet-control-datetime');
                 if (this.options.visibility == 'hidden') {
                     $(this._container).css("visibility", this.options.visibility);
                 }
