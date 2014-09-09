@@ -6,11 +6,11 @@
  */
 
 (function () {
-	L.FLayer.windSpeed = function (options) {
+	L.FLayer.Ecmwf.windSpeed = function (options) {
                 options = L.extend(options, {attribution: 'Wind forecasts from <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>'});
-                return new L.FLayer._windSpeed('ECMWF/DXD/ECMWF_DXD_GLOBAL.nc', options);
+                return new L.FLayer.Ecmwf._windSpeed('ECMWF/DXD/ECMWF_DXD_GLOBAL.nc', options);
 	};
-	L.FLayer._windSpeed = function (dataset, options) {
+	L.FLayer.Ecmwf._windSpeed = function (dataset, options) {
                 var windoptions = {layers: 'U10M_V10M', cmap: 'Wind_ms_WBGYR_10colors'}
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);
@@ -21,11 +21,11 @@
 		return layer;
 	};
 
-	L.FLayer.windDirection = function (options) {
+	L.FLayer.Ecmwf.windDirection = function (options) {
                 options = L.extend(options, {attribution: 'Wind forecasts from <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>'});
-                return new L.FLayer._windDirection('ECMWF/DXD/ECMWF_DXD_GLOBAL.nc', options);
+                return new L.FLayer.Ecmwf._windDirection('ECMWF/DXD/ECMWF_DXD_GLOBAL.nc', options);
 	};
-	L.FLayer._windDirection = function (dataset, options) {
+	L.FLayer.Ecmwf._windDirection = function (dataset, options) {
                 var windoptions = {layers: 'U10M:V10M', styles: 'black_barbs'}
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);

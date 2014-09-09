@@ -5,18 +5,18 @@ function initMap() {
     var langs = ['da', 'en'];
     var basemap = "OSM Standard";
     var overlays = {
-        "windspeed": new L.FLayer.windSpeed({}),
-        "winddirection": new L.FLayer.windDirection({}),
-        "currentspeed": new L.FLayer.currentSpeed({}),
-        "currentdirection": new L.FLayer.currentDirection({}),
-        "visibility":  new L.FLayer.visibility({}),
-        "iceconcentration": new L.FLayer.iceConcentration({}),
-        "seatemp": new L.FLayer.sst({}),
-        "salinity": new L.FLayer.sss({}),
-        "pressure": new L.FLayer.seaLevelPressure({}),
-        "airtemp": new L.FLayer.airTemperature({}),
-        "humidity": new L.FLayer.humidity({}),
-        "cloudcover": new L.FLayer.totalCloudCover({})
+        "windspeed": new L.FLayer.Dmi.windSpeed({}),
+        "winddirection": new L.FLayer.Dmi.windDirection({}),
+        "currentspeed": new L.FLayer.Noaa.currentSpeed({}),
+        "currentdirection": new L.FLayer.Noaa.currentDirection({}),
+        "visibility":  new L.FLayer.Dmi.visibility({}),
+        "iceconcentration": new L.FLayer.Dmi.iceConcentration({}),
+        "seatemp": new L.FLayer.Noaa.sst({}),
+        "salinity": new L.FLayer.Noaa.sss({}),
+        "pressure": new L.FLayer.Dmi.seaLevelPressure({}),
+        "airtemp": new L.FLayer.Dmi.airTemperature({}),
+        "humidity": new L.FLayer.Dmi.humidity({}),
+        "cloudcover": new L.FLayer.Dmi.totalCloudCover({})
     }
     var minZoom = 2;
     var maxZoom = 12;

@@ -5,15 +5,15 @@ function initMap() {
     var langs = ['da', 'en'];
     var basemap = "Mapquest Open";
     var overlays = {
-        "windspeed": new L.FLayer.windSpeed({}),
-        "winddirection": new L.FLayer.windDirection({}),
-        "currentspeed": new L.FLayer.currentSpeed({}),
-        "currentdirection": new L.FLayer.currentDirection({}),
-        "pressure": new L.FLayer.seaLevelPressure({}),
-        "airtemp": new L.FLayer.airTemperature({}),
-        "humidity": new L.FLayer.humidity({}),
-        "cloudcover": new L.FLayer.totalCloudCover({}),
-        "visibility":  new L.FLayer.visibility({})
+        "windspeed": new L.FLayer.Dmi.windSpeed({}),
+        "winddirection": new L.FLayer.Dmi.windDirection({}),
+        "currentspeed": new L.FLayer.Noaa.currentSpeed({}),
+        "currentdirection": new L.FLayer.Noaa.currentDirection({}),
+        "pressure": new L.FLayer.Dmi.seaLevelPressure({}),
+        "airtemp": new L.FLayer.Dmi.airTemperature({}),
+        "humidity": new L.FLayer.Dmi.humidity({}),
+        "cloudcover": new L.FLayer.Dmi.totalCloudCover({}),
+        "visibility":  new L.FLayer.Noaa.visibility({})
     }
     var minZoom = 2;
     var maxZoom = 12;

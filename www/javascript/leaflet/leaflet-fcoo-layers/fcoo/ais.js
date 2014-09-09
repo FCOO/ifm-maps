@@ -6,12 +6,12 @@
  */
 
 (function () {
-	L.FLayer.ais = function (options) {
+	L.FLayer.Fcoo.ais = function (options) {
                 options = L.extend(options, {attribution: 'AIS data from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
-                var layer1 = new L.FLayer._ais('FCOO/AIS/allAISmsg1_3_distinct_mmsi_mediterranean.nc', options);
+                var layer1 = new L.FLayer.Fcoo._ais('FCOO/AIS/allAISmsg1_3_distinct_mmsi_mediterranean.nc', options);
                 return new L.FLayerGroup([layer1]);
 	};
-	L.FLayer._ais = function (dataset, options) {
+	L.FLayer.Fcoo._ais = function (dataset, options) {
                 var extraoptions = {layers: 'msg1_3'}
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);

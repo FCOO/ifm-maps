@@ -5,8 +5,8 @@ function initMap() {
     var langs = ['da', 'en'];
     var basemap = "OSM Standard";
     var overlays = {
-        "windspeed": new L.FLayer.windSpeed({}),
-        "winddirection": new L.FLayer.windDirection({}),
+        "windspeed": new L.FLayer.Ecmwf.windSpeed({}),
+        "winddirection": new L.FLayer.Ecmwf.windDirection({}),
     }
     var minZoom = 2;
     var maxZoom = 10;

@@ -6,11 +6,11 @@
  */
 
 (function () {
-	L.FLayer.iceConcentration = function (options) {
+	L.FLayer.Dmi.iceConcentration = function (options) {
                 options = L.extend(options, {attribution: 'Ice concentration from <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a>'});
-                return new L.FLayer._iceConcentration('DMI/ICECHART/DMI_ICECHART.nc', options);
+                return new L.FLayer.Dmi._iceConcentration('DMI/ICECHART/DMI_ICECHART.nc', options);
 	};
-	L.FLayer._iceConcentration = function (dataset, options) {
+	L.FLayer.Dmi._iceConcentration = function (dataset, options) {
                 var loptions = {layers: 'ice_concentration', 
                                 cmap: 'IceConcentration_10colors',
                                 time: 'current'}

@@ -4,12 +4,12 @@
  */
 
 (function () {
-	L.FLayer.visibility = function (options) {
+	L.FLayer.Noaa.visibility = function (options) {
                 options = L.extend(options, {attribution: 'Visibility forecasts from <a href="http://noaa.gov" alt="National Oceanic and Atmospheric Administration">NOAA</a>'});
-                var layer1 = new L.FLayer._visibility('NOAA/GFS/NOAA_GFS_VISIBILITY.nc', options);
+                var layer1 = new L.FLayer.Noaa._visibility('NOAA/GFS/NOAA_GFS_VISIBILITY.nc', options);
                 return new L.FLayerGroup([layer1]);
 	};
-	L.FLayer._visibility = function (dataset, options) {
+	L.FLayer.Noaa._visibility = function (dataset, options) {
                 var extraoptions = {layers: 'vis', cmap: 'AirVisibility_KM_BYR_3colors'}
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);

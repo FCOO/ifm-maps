@@ -4,15 +4,15 @@
  */
 
 (function () {
-	L.FLayer.waveHeight = function (options) {
+	L.FLayer.Fcoo.waveHeight = function (options) {
                 options = L.extend(options, {attribution: 'Wave forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
-                var layer1 = new L.FLayer._waveHeight('FCOO/WW3/ww3fcast_sigwave_grd_NSBaltic_v001C.nc', options);
+                var layer1 = new L.FLayer.Fcoo._waveHeight('FCOO/WW3/ww3fcast_sigwave_grd_NSBaltic_v001C.nc', options);
                 //var options2 = $.extend({legendImagePath: ''}, options);
-                //var layer2 = new L.FLayer._waveHeight('ww3fcast_sigwave_grd.DKinner', options2);
+                //var layer2 = new L.FLayer.Fcoo._waveHeight('ww3fcast_sigwave_grd.DKinner', options2);
                 //return new L.FLayerGroup([layer1, layer2]);
                 return new L.FLayerGroup([layer1]);
 	};
-	L.FLayer._waveHeight = function (dataset, options) {
+	L.FLayer.Fcoo._waveHeight = function (dataset, options) {
                 var waveoptions = {layers: 'u_v', cmap: 'Hs_m_GBP_20colors'}
                 options = L.extend(options, waveoptions);
 		var layer = new L.FLayer(dataset, options);
@@ -23,15 +23,15 @@
 		return layer;
 	};
 
-	L.FLayer.waveDirection = function (options) {
+	L.FLayer.Fcoo.waveDirection = function (options) {
                 options = L.extend(options, {attribution: 'Wave forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
-                var layer1 = new L.FLayer._waveDirection('FCOO/WW3/ww3fcast_sigwave_grd_NSBaltic_v001C.nc', options);
+                var layer1 = new L.FLayer.Fcoo._waveDirection('FCOO/WW3/ww3fcast_sigwave_grd_NSBaltic_v001C.nc', options);
                 //options = L.extend(options, {legendImagePath: ''});
-                //var layer2 = new L.FLayer._waveDirection('ww3fcast_sigwave_grd.DKinner', options);
+                //var layer2 = new L.FLayer.Fcoo._waveDirection('ww3fcast_sigwave_grd.DKinner', options);
                 //return new L.FLayerGroup([layer1, layer2]);
                 return new L.FLayerGroup([layer1]);
 	};
-	L.FLayer._waveDirection = function (dataset, options) {
+	L.FLayer.Fcoo._waveDirection = function (dataset, options) {
                 var waveoptions = {layers: 'u:v'}
                 options = L.extend(options, waveoptions);
 		var layer = new L.FLayer(dataset, options);
