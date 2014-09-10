@@ -19,7 +19,8 @@ function getI18n(key, lang) {
 		en: {
 			  maps: 'Maps'
 			, layers: 'Forecast Parameters'
-			, iceconcentration: 'Sea Ice Concentration'
+			, overlays: 'Overlays'
+			, iceconcentration: 'Sea Ice Concentration'	
 			, windspeed: 'Wind Speed'
 			, winddirection: 'Wind Direction'
 			, waveheight: 'Wave Height'
@@ -36,6 +37,7 @@ function getI18n(key, lang) {
 			, visibility: 'Visibility'
 			, ais: 'AIS Traffic Density'
                         , datetime: 'Select date and time'
+                        , EEZ: 'Exclusive Economic Zone (EEZ)'
 		}
 		//, gl: {
 			  //layers: 'Ilimasaarutinut uuttuutit'
@@ -46,6 +48,7 @@ function getI18n(key, lang) {
 		, da: {
 			  maps: 'Kort'
 			, layers: 'Prognoseparametre'
+			, overlays: 'Ekstra lag'
 			, iceconcentration: 'Havis (koncentration)'
 			, windspeed: 'Vind (fart)'
 			, winddirection: 'Vindretning'
@@ -63,6 +66,7 @@ function getI18n(key, lang) {
 			, visibility: 'Sigtbarhed'
 			, ais: 'AIS Trafiktæthed'
                         , datetime: 'Vælg tidspunkt'
+                        , EEZ: 'Eksklusiv Økonomisk Zone (EEZ)'
                         , "Locate": "Find"
                         , "Show me where I am": "Vis mig hvor jeg er"
                         , "You are within {distance} {unit} from this point": "Du er indenfor {distance} {unit} fra dette punkt"
@@ -106,12 +110,31 @@ function initBaseMaps() {
         maxZoom: 18, tileSize: 256, attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
     });
 
+    var fcoo_base = location.protocol + "//media.fcoo.dk/tiles/";
+    var tile_date = "201409090000";
+    var fcoo = L.tileLayer(fcoo_base + "tiles_bckgrnd_" + tile_date + "/{z}/{x}/{y}.png", {
+        maxZoom: 12,
+        tileSize: 256,
+        attribution: 'FCOO - Danish Defence Centre for Operational Oceanography',
+        continuousWorld: false
+    });
+
     var baseMaps = {
-        "OSM Standard": standard,
-        "Mapquest Open": mapquest,
+        "FCOO Standard": fcoo,
+//        "OSM Standard": standard,
+//        "Mapquest Open": mapquest,
         "ESRI Aerial": esri
     };
-    return baseMaps
+
+    var topLayer = L.tileLayer(fcoo_base + "tiles_top_" + tile_date + "/{z}/{x}/{y}.png", {
+    maxZoom: 12,
+    tileSize: 256,
+    zIndex: 1001,
+    continuousWorld: false,
+    errorTileUrl: fcoo_base + "empty.png"
+    });
+
+    return {baseMaps: baseMaps, topLayer: topLayer};
 }
 
 var overlayMaps = {};
@@ -257,8 +280,9 @@ function foundLocation(position) {
  */
 function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, useGeolocation, useGeoMetoc, useIfmChart) {
         // Initialize basemaps
-        var baseMaps = initBaseMaps();
-
+        var tmplayers = initBaseMaps();
+        var baseMaps = tmplayers.baseMaps;
+        var topLayer = tmplayers.topLayer;
         // List of languages to select from
 	var all_languages = [L.langObject('da', '<button class="flag-icon flag-icon-dk"></button>'),
 			     L.langObject('fo', '<button class="flag-icon flag-icon-fo"></button>'),
@@ -343,7 +367,11 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
         for (var key in overlays) {
             overlayMaps[getI18n(key, localLang)] = overlays[key];
         }
-	var layerControl = L.control.layers(baseMaps, overlayMaps, {collapsed: false}).addTo(map);
+
+        // Add foreground layer (land contours, names, ...)
+        topLayer.addTo(map)
+
+	var layerControl = L.control.layers(baseMaps, overlayMaps, {collapsed: false, autoZIndex: false}).addTo(map);
 
         // Add locator control
         map.addControl(L.control.locate({
@@ -374,6 +402,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
 	var patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
 	patch.innerHTML = getI18n('layers', localLang); // 'TileLayers';
 	layerControl._form.children[2].parentNode.insertBefore(patch, layerControl._form.children[2]);
+
 	patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
 	patch.innerHTML = getI18n('maps', localLang); // 'Maps';
 	layerControl._form.children[0].parentNode.insertBefore(patch, layerControl._form.children[0]);

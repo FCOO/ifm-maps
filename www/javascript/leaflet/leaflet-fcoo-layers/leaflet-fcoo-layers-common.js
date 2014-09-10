@@ -19,7 +19,7 @@ L.FLayer = L.TileLayer.WMS.extend({
 	},
         options: {
                 tileSize: 512,
-                opacity: 0.45,
+                opacity: 1.00,
 		maxZoom: 18,
 		showLegend: true,
 		legendImagePath: null,

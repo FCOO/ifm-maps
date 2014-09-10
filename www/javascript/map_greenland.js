@@ -3,12 +3,12 @@
  */
 function initMap() {
     var langs = ['da', 'en'];
-    var basemap = "OSM Standard";
+    var basemap = "FCOO Standard";
     var overlays = {
         "windspeed": new L.FLayer.windSpeed({}),
-        "winddirection": new L.FLayer.windDirection({}),
+        "winddirection": new L.FLayer.windDirection({zIndex: 101}),
         "currentspeed": new L.FLayer.currentSpeed({}),
-        "currentdirection": new L.FLayer.currentDirection({}),
+        "currentdirection": new L.FLayer.currentDirection({zIndex: 102}),
         "visibility":  new L.FLayer.visibility({}),
         "iceconcentration": new L.FLayer.iceConcentration({}),
         "seatemp": new L.FLayer.sst({}),
@@ -19,7 +19,7 @@ function initMap() {
         "cloudcover": new L.FLayer.totalCloudCover({})
     }
     var minZoom = 2;
-    var maxZoom = 12;
+    var maxZoom = 10;
     var zoom = 6;
     var lat = 62.0;
     var lon = -45.0;
