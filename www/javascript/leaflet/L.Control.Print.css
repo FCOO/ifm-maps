@@ -3,19 +3,16 @@
 }
 
 .leaflet-print-actions {
-	display: none;
-	list-style: none;
-	position: absolute;
-	margin: 0;
-	left: 26px;
-	top: 0;
-	padding: 0;
-        /*box-shadow: 0 1px 5px rgba(0,0,0,0.65);*/
-        background: #fff;
-        -moz-border-radius: 4px;
-        -webkit-border-radius: 4px;
-        border-radius: 4px;
-
+    display: none;
+    list-style: none;
+    position: absolute;
+    margin: 0;
+    left: 26px;
+    top: 0;
+    padding: 0;
+    /*box-shadow: 0 1px 5px rgba(0,0,0,0.65);*/
+    background: #fff;
+    border-radius: 4px;
 }
 
 .leaflet-right .leaflet-print-actions {
@@ -24,45 +21,38 @@
 }
 
 .leaflet-print-actions li {
-	float: left;
+    float: left;
 }
 
 .leaflet-print-actions li:first-child a {
-	border-left: none;
+    border-left: none;
 }
 
 .leaflet-print-actions li:last-child a {
-	-webkit-border-radius: 0 4px 4px 0;
-	        border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
 }
 
 .leaflet-right .leaflet-print-actions li:first-child a {
-	-webkit-border-radius: 4px 0 0 4px;
-	        border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
 }
 
 .leaflet-right .leaflet-print-actions li:last-child a {
-	-webkit-border-radius: 0;
-	        border-radius: 0;
+    border-radius: 0;
 }
 
 .leaflet-left .leaflet-print-actions-visible a:first-child {
-    -webkit-border-top-right-radius: 0;
     border-top-right-radius: 0;
 }
 
 .leaflet-left .leaflet-print-actions-visible a:last-child {
-    -webkit-border-bottom-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
 .leaflet-right .leaflet-print-actions-visible a:first-child {
-    -webkit-border-top-left-radius: 0;
     border-top-left-radius: 0;
 }
 
 .leaflet-right .leaflet-print-actions-visible a:last-child {
-    -webkit-border-bottom-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 
@@ -70,18 +60,18 @@
     display: block;
     text-align: center;
     text-decoration: none;
-	/*background-color: #919187;*/
-	background-color: #FFF;
-	border-left: 1px solid #AAA;
-	/*color: #FFF;*/
-	color: black;
-	font: 11px/19px "Helvetica Neue", Arial, Helvetica, sans-serif;
-	line-height: 26px;
-	text-decoration: none;
-	width: 100px;
-	height: 26px;
+    /*background-color: #919187;*/
+    background-color: #FFF;
+    border-left: 1px solid #AAA;
+    /*color: #FFF;*/
+    color: black;
+    font: 11px/19px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    line-height: 26px;
+    text-decoration: none;
+    width: 100px;
+    height: 26px;
 }
 
 .leaflet-print-actions a:hover {
-	background-color: #A0A098;
+    background-color: #A0A098;
 }
