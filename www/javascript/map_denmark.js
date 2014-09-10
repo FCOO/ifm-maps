@@ -3,7 +3,7 @@
  */
 function initMap() {
     var langs = ['da', 'en'];
-    var basemap = "OSM Standard";
+    var basemap = "FCOO Standard";
     var overlays = {
         "FCOO": {
 	    "elev": new L.FLayer.Fcoo.elevation({}),

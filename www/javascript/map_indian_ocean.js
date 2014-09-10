@@ -3,7 +3,7 @@
  */
 function initMap() {
     var langs = ['da', 'en'];
-    var basemap = "Mapquest Open";
+    var basemap = "FCOO Standard";
     var overlays = {
         "NOAA": {
             "currentspeed": new L.FLayer.Noaa.currentSpeed({}),

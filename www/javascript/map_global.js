@@ -3,7 +3,7 @@
  */
 function initMap() {
     var langs = ['da', 'en'];
-    var basemap = "OSM Standard";
+    var basemap = "FCOO Standard";
     var overlays = {
         "ECMWF": {
             "windspeed": new L.FLayer.Ecmwf.windSpeed({}),

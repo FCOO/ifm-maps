@@ -3,7 +3,7 @@
  */
 function initMap() {
     var langs = ['da', 'en'];
-    var basemap = "Mapquest Open";
+    var basemap = "FCOO Standard";
     var overlays = {
         "DMI": {
             "windspeed": new L.FLayer.Dmi.windSpeed({}),

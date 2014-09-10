@@ -3,7 +3,7 @@
  */
 function initMap() {
     var langs = ['da', 'fo', 'en'];
-    var basemap = "OSM Standard";
+    var basemap = "FCOO Standard";
     var overlays = {
         "DMI": {
             "windspeed": new L.FLayer.Dmi.windSpeed({}),
