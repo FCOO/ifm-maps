@@ -169,14 +169,14 @@ L.Control.Print = L.Control.extend({
             // Get time information
             var datetimes = [];
             var datetimes_local = [];
-            if ($('.leaflet-datetimeselector-dateselect option').length == 0) {
-                console.error('Could not find datetime selector');
+            if ($('.leaflet-control-datetime-dateselect option').length == 0) {
+                throw new Error('Could not find datetime selector');
             }
-            $('.leaflet-datetimeselector-dateselect option').each(function() {
+            $('.leaflet-control-datetime-dateselect option').each(function() {
                 datetimes.push($(this).val());
                 datetimes_local.push($(this).text());
             });
-            var current = $('.leaflet-datetimeselector-dateselect option:selected').index();
+            var current = $('.leaflet-control-datetime-dateselect option:selected').index();
             var last = datetimes[datetimes.length-1];
 
             var w = window.open();

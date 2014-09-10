@@ -80,25 +80,21 @@ L.FLayer = L.TileLayer.WMS.extend({
                          }).parent().find('Extent');
                      this._timesteps = Array();
                      var extent = belem.text()
+                     if (typeof extent == 'undefined' || extent == '') {
+                         throw new Error("Error getting forecast time range for " + first_layer);
+                     }
 		     if (typeof extent != 'undefined') {
                          extent = extent.split(',');
                          // Make array of timesteps for this layer
                          function parseDecimalInt(s) {
                              return parseInt(s, 10);
                          }
-                         var dt1 = extent[0].split('T');
-                         var d1 = dt1[0].split('-').map(parseDecimalInt);
-                         var t1 = dt1[1].split(':').map(parseDecimalInt);
-                         var dt2 = extent[extent.length-1].split('T');
-                         var d2 = dt2[0].split('-').map(parseDecimalInt);
-                         var t2 = dt2[1].split(':').map(parseDecimalInt);
-                         var currentdate = new Date(Date.UTC(d1[0], d1[1]-1, d1[2], t1[0], t1[1], t1[2]));
-                         var enddate = new Date(Date.UTC(d2[0], d2[1]-1, d2[2], t2[0], t2[1], t2[2]));
-                         var i = 0;
-                         while (currentdate <= enddate) {
-                                 this._timesteps[i] = new Date(currentdate);
-                                 i = i+1;
-                                 currentdate = currentdate.addHours(1);
+                         for (var i=0; i<extent.length; i++) {
+                             var dt = extent[i].split('T');
+                             var d = dt[0].split('-').map(parseDecimalInt);
+                             var t = dt[1].split(':').map(parseDecimalInt);
+                             var currentdate = new Date(Date.UTC(d[0], d[1]-1, d[2], t[0], t[1], t[2]));
+                             this._timesteps[i] = new Date(currentdate);
                          }
                      }
                      this._timestepsready = true;
