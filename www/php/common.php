@@ -7,6 +7,7 @@
         <!--<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.1.0/css/font-awesome.min.css" />-->
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet.css" />
+	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-categorized-layers.src.css" />
 	<link rel="stylesheet" type="text/css" href="../css/map.css" />
 	<link rel="stylesheet" type="text/css" href="../css/flag-icon.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/jquery-ui-1.11.1.custom/jquery-ui.css" />
@@ -28,7 +29,8 @@
         <script src="../javascript/polyfills/jquery.placeholder_v2.0.8.js"></script>
 	<script src="../javascript/date.js"></script>
 	<script src="../javascript/moment-with-locales.min.js"></script>
-	<script src="../javascript/leaflet/leaflet.js"></script>
+	<script src="../javascript/leaflet/leaflet-src.js"></script>
+	<script src="../javascript/leaflet/leaflet-categorized-layers.src.js"></script>
 	<script src="../javascript/leaflet/Permalink.js"></script>
 	<script src="../javascript/leaflet/Permalink.Layer.js"></script>
 	<script src="../javascript/leaflet/Permalink.Overlay.js"></script>

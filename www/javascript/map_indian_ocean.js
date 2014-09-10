@@ -5,8 +5,10 @@ function initMap() {
     var langs = ['da', 'en'];
     var basemap = "Mapquest Open";
     var overlays = {
-        "currentspeed": new L.FLayer.Noaa.currentSpeed({}),
-        "currentdirection": new L.FLayer.Noaa.currentDirection({}),
+        "NOAA": {
+            "currentspeed": new L.FLayer.Noaa.currentSpeed({}),
+            "currentdirection": new L.FLayer.Noaa.currentDirection({}),
+        }
     }
     var minZoom = 2;
     var maxZoom = 12;

@@ -45,6 +45,7 @@ function getI18n(key, lang) {
 		//}
 		, da: {
 			  maps: 'Kort'
+			, 'Background Maps': 'Baggrundskort'
 			, layers: 'Prognoseparametre'
 			, iceconcentration: 'Havis (koncentration)'
 			, windspeed: 'Vind (fart)'
@@ -84,7 +85,7 @@ function getI18n(key, lang) {
 /**
  * Initialize base maps
  */
-function initBaseMaps() {
+function initBaseMaps(lang) {
     var standard = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         tileSize: 256,
@@ -106,10 +107,12 @@ function initBaseMaps() {
         maxZoom: 18, tileSize: 256, attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
     });
 
-    var baseMaps = {
-        "OSM Standard": standard,
-        "Mapquest Open": mapquest,
-        "ESRI Aerial": esri
+    var bgstring = getI18n("Background Maps", lang);
+    var baseMaps = {};
+    baseMaps[bgstring] = {
+            "OSM Standard": standard,
+            "Mapquest Open": mapquest,
+            "ESRI Aerial": esri
     };
     return baseMaps
 }
@@ -121,10 +124,13 @@ var overlayMaps = {};
  */
 function changeDatetime(pDate) {
     for (var i in overlayMaps) {
-        var layer = overlayMaps[i];
-        var timesteps = layer.getTimesteps();
-        if (timesteps !== null && timesteps.length > 1) {
-            layer.setParams({time: pDate}, false);
+        var layergroup = overlayMaps[i];
+        for (var j in layergroup) {
+            var layer = layergroup[j];
+            var timesteps = layer.getTimesteps();
+            if (timesteps !== null && timesteps.length > 1) {
+                layer.setParams({time: pDate}, false);
+            }
         }
     }
 }
@@ -256,8 +262,10 @@ function foundLocation(position) {
  * Initialize the map.
  */
 function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, useGeolocation, useGeoMetoc, useIfmChart) {
+	var localLang = getLocalLanguage();
+
         // Initialize basemaps
-        var baseMaps = initBaseMaps();
+        var baseMaps = initBaseMaps(localLang);
 
         // List of languages to select from
 	var all_languages = [L.langObject('da', '<button class="flag-icon flag-icon-dk"></button>'),
@@ -274,7 +282,6 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
             }
         }
 
-	var localLang = getLocalLanguage();
 	var urlParams = getUrlParameters();
 	if (typeof urlParams.zoom != "undefined" && typeof urlParams.lat != "undefined" && typeof urlParams.lon != "undefined") {
 		zoom = urlParams.zoom;
@@ -290,7 +297,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
                 maxZoom: maxZoom,
                 //crs: L.CRS.EPSG4326,
                 crs: L.CRS.EPSG3857,
-		layers: [baseMaps[basemap]]
+		layers: [baseMaps[Object.keys(baseMaps)[0]][basemap]]
 	});
 	map.attributionControl.setPrefix("");
 
@@ -341,9 +348,15 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
         // Add base layers and overlays to map
         overlayMaps = [];
         for (var key in overlays) {
-            overlayMaps[getI18n(key, localLang)] = overlays[key];
+            var nkey = getI18n(key, localLang);
+            overlayMaps[nkey] = {};
+            for (var lkey in overlays[key]) {
+                 overlayMaps[nkey][getI18n(lkey, localLang)] = overlays[key][lkey];
+            }
         }
-	var layerControl = L.control.layers(baseMaps, overlayMaps, {collapsed: false}).addTo(map);
+	//var layerControl = L.control.layers(baseMaps, overlayMaps, {collapsed: false}).addTo(map);
+	var layerControl = (new L.Control.CategorizedLayers(baseMaps, overlayMaps, 
+                           {collapsed: false, groupsCollapsed: false})).addTo(map);
 
         // Add locator control
         map.addControl(L.control.locate({
@@ -423,7 +436,10 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
         // Add datetime selector when date arrays have been fetched
         var dt_check = 10;
         function checkTimesteps() {
-            var overlay = overlayMaps[Object.keys(overlayMaps)[0]];
+            var k1 = Object.keys(overlayMaps)[0];
+            var category = overlayMaps[k1];
+            var k2 = Object.keys(category)[0];
+            var overlay = category[k2];
             var dates = overlay.getTimesteps();
             if (dates !== null) {
                 var visibility = "visible";
