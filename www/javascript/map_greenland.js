@@ -18,6 +18,9 @@ function initMap() {
         "ECMWF": {
             "windspeed": new L.FLayer.Ecmwf.windSpeed({}),
             "winddirection": new L.FLayer.Ecmwf.windDirection({zIndex: 102}),
+            "pressure": new L.FLayer.Ecmwf.seaLevelPressure({}),
+            "airtemp": new L.FLayer.Ecmwf.airTemperature({}),
+            "cloudcover": new L.FLayer.Ecmwf.totalCloudCover({})
         },
         "NOAA": {
             "currentspeed": new L.FLayer.Noaa.currentSpeed({}),
