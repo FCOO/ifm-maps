@@ -159,13 +159,14 @@ L.Control.Print = L.Control.extend({
             var nx = $(window).width();
             var ny = $(window).height();
             // Base URL for print service
-            var baseurl = 'http://api.fcoo.dk/print?nx=' + nx + '&ny=' + ny + '&';
+            var prot = location.protocol;
+            var baseurl = prot + '//api.fcoo.dk/print?nx=' + nx + '&ny=' + ny + '&';
             // We get the url from the permalink
             var permalink = $('.leaflet-control-permalink')[0].childNodes[0];
             var href = permalink.getAttribute('href');
             // Hide controls
             href = href + '&hidecontrols=true';
-            var logo = $('<div><img src="http://media.fcoo.dk/logos/FCOO_logo_270x90.png" /></div>');
+            var logo = $('<div><img src="' + prot + '//media.fcoo.dk/logos/FCOO_logo_270x90.png" /></div>');
             // Get time information
             var datetimes = [];
             var datetimes_local = [];
