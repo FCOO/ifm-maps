@@ -465,11 +465,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
         // Add datetime selector when date arrays have been fetched
         var dt_check = 10;
         function checkTimesteps() {
-            var k1 = Object.keys(overlayMaps)[0];
-            var category = overlayMaps[k1];
-            var k2 = Object.keys(category)[0];
-            var overlay = category[k2];
-            var dates = overlay.getTimesteps();
+            var dates = getTimeSteps(overlayMaps);
             if (dates !== null) {
                 var visibility = "visible";
                 if (urlParams.hidecontrols == "true") {
@@ -490,4 +486,45 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
             }
         }
         setTimeout(function(){checkTimesteps()}, dt_check);
+}
+
+function dateArrayUnique(array) {
+    var a = array.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i].getTime() == a[j].getTime())
+                a.splice(j--, 1);
+        }
+    }
+    return a;
+};
+
+/**
+ * Get time steps
+ */
+function getTimeSteps(overlayMaps) {
+    var date_min = new Date(8640000000000000)
+    var date_max = new Date(-8640000000000000)
+    var outdates = [];
+    for (var i in overlayMaps) {
+        var category = overlayMaps[i];
+        for (var j in category) {
+            overlay = category[j];
+            var dates = overlay.getTimesteps();
+            if (dates !== null) {
+                // We ignore static fields
+                if (dates.length > 1) {
+                    if (dates[0] < date_min || dates[dates.length-1] > date_max) {
+                        outdates = dateArrayUnique(outdates.concat(dates));
+                        outdates.sort(function(a,b){
+                            return a - b;
+                        });
+                    }
+                }
+            } else {
+                return null;
+            }
+        }
+    }
+    return outdates
 }
