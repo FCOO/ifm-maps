@@ -288,7 +288,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
 	var localLang = getLocalLanguage();
 
         // Initialize basemaps
-        var tmplayers = initBaseMaps();
+        var tmplayers = initBaseMaps(localLang);
         var baseMaps = tmplayers.baseMaps;
         var topLayer = tmplayers.topLayer;
         // List of languages to select from

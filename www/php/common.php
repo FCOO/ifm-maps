@@ -18,9 +18,8 @@
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/L.Control.Print.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-control-position.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/Control.OSMGeocoder.css" />
-        <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css' rel='stylesheet' />
+        <link href='../javascript/leaflet/leaflet-locatecontrol_2014-09-11/L.Control.Locate.css' rel='stylesheet' />
         <script>window.L_PREFER_CANVAS = true;</script>
-        <!--[if lt IE 9]><link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' /><![endif]-->
 </head>
 <body>
 	<div id="map"></div>
@@ -32,8 +31,8 @@
 	<script src="../javascript/leaflet/leaflet-src.js"></script>
 	<script src="../javascript/leaflet/leaflet-categorized-layers.src.js"></script>
 	<script src="../javascript/leaflet/Permalink.js"></script>
-	<script src="../javascript/leaflet/Permalink.Layer.js"></script>
-	<script src="../javascript/leaflet/Permalink.Overlay.js"></script>
+	<script src="../javascript/leaflet/Permalink.CategorizedLayer.js"></script>
+	<script src="../javascript/leaflet/Permalink.CategorizedOverlay.js"></script>
 	<script src="../javascript/leaflet/leaflet-flattrbutton.js"></script>
 	<!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/excanvas.js"></script><![endif]-->
 	<!--[if lt IE 10]><script type="text/javascript" src="../javascript/polyfills/typedarray.js"></script><![endif]-->
@@ -46,8 +45,7 @@
 	<script src="../javascript/leaflet/L.Control.Print.js"></script>
 	<script src="../javascript/leaflet/Control.OSMGeocoder.js"></script>
 	<script src="../javascript/leaflet/leaflet.dbpedialayer.js"></script>
-        <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
-        <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.1.2/leaflet-omnivore.min.js'></script>
+        <script src='../javascript/leaflet/leaflet-locatecontrol_2014-09-11/L.Control.Locate.js'></script>
         <script src="../javascript/map_common.js"></script>
 <?php
 $arrlength=count($model_ids);

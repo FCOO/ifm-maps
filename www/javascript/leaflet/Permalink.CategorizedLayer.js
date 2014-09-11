@@ -26,7 +26,7 @@ L.Control.Permalink.include({
 		//console.info(this.options.layers);
 		var layer = this.options.layers.currentBaseLayer();
 		if (layer)
-			this._update({layer: layer.name});
+			this._update({layer: layer._name});
 	},
 
 	_set_layer: function(e) {
@@ -37,37 +37,41 @@ L.Control.Permalink.include({
 	}
 });
 
-L.Control.Layers.include({
+//L.Control.Layers.include({
+L.Control.CategorizedLayers.include({
 	chooseBaseLayer: function(name) {
+                //console.log('Choosing baselayer');
 		var layer, obj;
-		for (var i in this._layers) {
-			if (!this._layers.hasOwnProperty(i))
+                var baseLayers = this._layers[Object.keys(this._layers)[0]];
+		for (var i in baseLayers) {
+			if (!baseLayers.hasOwnProperty(i))
 				continue;
-			obj = this._layers[i];
-			if (!obj.overlay && obj.name == name)
-				layer = obj.layer;
+			obj = baseLayers[i];
+			if (!obj._overlay && obj._name == name)
+				layer = obj;
 		}
 		if (!layer || this._map.hasLayer(layer))
 			return;
 
-		for (var i in this._layers) {
-			if (!this._layers.hasOwnProperty(i))
+		for (var i in baseLayers) {
+			if (!baseLayers.hasOwnProperty(i))
 				continue;
-			obj = this._layers[i];
-			if (!obj.overlay && this._map.hasLayer(obj.layer))
-				this._map.removeLayer(obj.layer)
+			obj = baseLayers[i];
+			if (!obj._overlay && this._map.hasLayer(obj))
+				this._map.removeLayer(obj)
 		}
 		this._map.addLayer(layer)
 		this._update();
 	},
 
 	currentBaseLayer: function() {
-		for (var i in this._layers) {
-			if (!this._layers.hasOwnProperty(i))
+                var baseLayers = this._layers[Object.keys(this._layers)[0]];
+		for (var i in baseLayers) {
+			if (!baseLayers.hasOwnProperty(i))
 				continue;
-			var obj = this._layers[i];
-			if (obj.overlay) continue;
-			if (!obj.overlay && this._map.hasLayer(obj.layer))
+			var obj = baseLayers[i];
+			if (obj._overlay) continue;
+			if (!obj._overlay && this._map.hasLayer(obj))
 				return obj;
 		}
 	}
