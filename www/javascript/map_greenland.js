@@ -26,7 +26,7 @@ function initMap() {
             "currentspeed": new L.FLayer.Noaa.currentSpeed({zIndex: 100}),
             "currentdirection": new L.FLayer.Noaa.currentDirection({zIndex: 200}),
             "seatemp": new L.FLayer.Noaa.sst({zIndex: 100}),
-            "salinity": new L.FLayer.Noaa.sss({zIndex: 100}),
+            "salinity": new L.FLayer.Noaa.sss({zIndex: 100})
         }
     };
     var minZoom = 2;

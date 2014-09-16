@@ -14,7 +14,7 @@ function initMap() {
         },
         "DMI": {
             "windspeed": new L.FLayer.Dmi.windSpeed({zIndex: 100}),
-            "winddirection": new L.FLayer.Dmi.windDirection({zIndex: 200}),
+            "winddirection": new L.FLayer.Dmi.windDirection({zIndex: 200})
         }
     }
     var minZoom = 5;

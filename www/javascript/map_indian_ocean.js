@@ -7,8 +7,7 @@ function initMap() {
     var overlays = {
         "NOAA": {
             "currentspeed": new L.FLayer.Noaa.currentSpeed({zIndex: 100}),
-            "currentdirection": new L.FLayer.Noaa.currentDirection({zIndex: 200}),
-        }
+            "currentdirection": new L.FLayer.Noaa.currentDirection({zIndex: 200})
         }
     }
     var minZoom = 2;

@@ -8,7 +8,7 @@ function initMap() {
         "DMI": {
             "windspeed": new L.FLayer.Dmi.windSpeed({zIndex: 100}),
             "winddirection": new L.FLayer.Dmi.windDirection({zIndex: 200}),
-            "pressure": new L.FLayer.Dmi.seaLevelPressure({zIndex: 200}),
+            "pressure": new L.FLayer.Dmi.seaLevelPressure({zIndex: 200})
         },
         "NOAA": {
             "currentspeed": new L.FLayer.Noaa.currentSpeed({zIndex: 100}),

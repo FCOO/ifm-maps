@@ -11,7 +11,7 @@ function initMap() {
             "pressure": new L.FLayer.Dmi.seaLevelPressure({zIndex: 200}),
             "airtemp": new L.FLayer.Dmi.airTemperature({zIndex: 100}),
             "humidity": new L.FLayer.Dmi.humidity({zIndex: 100}),
-            "cloudcover": new L.FLayer.Dmi.totalCloudCover({zIndex: 100}),
+            "cloudcover": new L.FLayer.Dmi.totalCloudCover({zIndex: 100})
         },
         "NOAA": {
             "currentspeed": new L.FLayer.Noaa.currentSpeed({zIndex: 100}),
