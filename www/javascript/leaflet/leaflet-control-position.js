@@ -27,8 +27,12 @@ L.Control.Position = L.Control.extend({
 
 		var input_lon = this._input_lon = document.createElement('input');
                 input_lon.className = className + '-form-input-lon';
-		input_lon.type = "number";
 		input_lon.name = "lon";
+                try {
+		    input_lon.type = "number";
+                } catch(err) {
+		    input_lon.type = "text";
+                }
 		input_lon.step = "any";
                 input_lon.min = -180.0;
                 input_lon.max = 180.0;
@@ -36,7 +40,11 @@ L.Control.Position = L.Control.extend({
                 input_lon.placeholder = "Decimal longitude";
 		var input_lat = this._input_lat = document.createElement('input');
                 input_lat.className = className + '-form-input-lat';
-		input_lat.type = "number";
+                try {
+		    input_lat.type = "number";
+                } catch(err) {
+		    input_lat.type = "text";
+                }
 		input_lat.name = "lat";
 		input_lat.step = "any";
                 input_lat.min = -85.0;
