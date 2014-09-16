@@ -112,8 +112,8 @@ function initBaseMaps(lang) {
     });
 
     var fcoo_base = location.protocol + "//media.fcoo.dk/tiles/";
-    var tile_date = "201409090000";
-    var fcoo = L.tileLayer(fcoo_base + "tiles_bckgrnd_" + tile_date + "/{z}/{x}/{y}.png", {
+    var tile_bckgrnd_date = "201409090000";
+    var fcoo = L.tileLayer(fcoo_base + "tiles_bckgrnd_" + tile_bckgrnd_date + "/{z}/{x}/{y}.png", {
         maxZoom: 12,
         tileSize: 256,
         attribution: 'FCOO - Danish Defence Centre for Operational Oceanography',
@@ -129,7 +129,8 @@ function initBaseMaps(lang) {
         "ESRI Aerial": esri
     };
 
-    var topLayer = L.tileLayer(fcoo_base + "tiles_top_" + tile_date + "/{z}/{x}/{y}.png", {
+    var tile_top_date = "201409110000";
+    var topLayer = L.tileLayer(fcoo_base + "tiles_top_" + tile_top_date + "/{z}/{x}/{y}.png", {
     maxZoom: 12,
     tileSize: 256,
     zIndex: 1001,
