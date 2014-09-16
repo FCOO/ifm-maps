@@ -6,17 +6,17 @@ function initMap() {
     var basemap = "FCOO Standard";
     var overlays = {
         "DMI": {
-            "windspeed": new L.FLayer.Dmi.windSpeed({}),
-            "winddirection": new L.FLayer.Dmi.windDirection({}),
-            "pressure": new L.FLayer.Dmi.seaLevelPressure({}),
-            "airtemp": new L.FLayer.Dmi.airTemperature({}),
-            "humidity": new L.FLayer.Dmi.humidity({}),
-            "cloudcover": new L.FLayer.Dmi.totalCloudCover({}),
+            "windspeed": new L.FLayer.Dmi.windSpeed({zIndex: 100}),
+            "winddirection": new L.FLayer.Dmi.windDirection({zIndex: 200}),
+            "pressure": new L.FLayer.Dmi.seaLevelPressure({zIndex: 200}),
+            "airtemp": new L.FLayer.Dmi.airTemperature({zIndex: 100}),
+            "humidity": new L.FLayer.Dmi.humidity({zIndex: 100}),
+            "cloudcover": new L.FLayer.Dmi.totalCloudCover({zIndex: 100}),
         },
         "NOAA": {
-            "currentspeed": new L.FLayer.Noaa.currentSpeed({}),
-            "currentdirection": new L.FLayer.Noaa.currentDirection({}),
-            "visibility":  new L.FLayer.Noaa.visibility({})
+            "currentspeed": new L.FLayer.Noaa.currentSpeed({zIndex: 100}),
+            "currentdirection": new L.FLayer.Noaa.currentDirection({zIndex: 200}),
+            "visibility":  new L.FLayer.Noaa.visibility({zIndex: 100})
         }
     }
     var minZoom = 2;
