@@ -31,7 +31,8 @@
                 return new L.FLayerGroup([layer1]);
 	};
 	L.FLayer.Noaa._currentDirection = function (dataset, options) {
-                var currentoptions = {layers: 'u_velocity:v_velocity'}
+                var currentoptions = {layers: 'u_velocity:v_velocity',
+                                      styles: 'black_vector,0.3'}
                 options = L.extend(options, currentoptions);
 		var layer = new L.FLayer(dataset, options);
 		return layer;

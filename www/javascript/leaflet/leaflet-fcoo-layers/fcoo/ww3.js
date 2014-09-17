@@ -32,7 +32,7 @@
                 return new L.FLayerGroup([layer1]);
 	};
 	L.FLayer.Fcoo._waveDirection = function (dataset, options) {
-                var waveoptions = {layers: 'u:v'}
+                var waveoptions = {layers: 'u:v', styles: 'black_vector,0.5'}
                 options = L.extend(options, waveoptions);
 		var layer = new L.FLayer(dataset, options);
 		return layer;

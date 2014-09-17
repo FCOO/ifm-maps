@@ -31,7 +31,7 @@
                 return new L.FLayerGroup([layer1]);
 	};
 	L.FLayer.Fcoo._currentDirection = function (dataset, options) {
-                var currentoptions = {layers: 'uu:vv'}
+                var currentoptions = {layers: 'uu:vv', styles: 'black_vector,0.3'}
                 options = L.extend(options, currentoptions);
 		var layer = new L.FLayer(dataset, options);
 		return layer;
