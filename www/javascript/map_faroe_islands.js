@@ -19,7 +19,7 @@ function initMap() {
         }
     }
     var minZoom = 2;
-    var maxZoom = 12;
+    var maxZoom = 10;
     var zoom = 7;
     var lat = 61.5;
     var lon = -6.0;
