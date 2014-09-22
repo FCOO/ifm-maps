@@ -317,7 +317,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
 
 	map = L.map('map', {
 		center: new L.LatLng(lat, lon), zoom: zoom,
-                zoomAnimation: true, // There is a bug with layer hiding when enabled
+                zoomAnimation: false, // There is a bug with layer hiding when enabled
                 minZoom: minZoom,
                 maxZoom: maxZoom,
                 //crs: L.CRS.EPSG4326,

@@ -44,6 +44,9 @@ L.FLayer = L.TileLayer.WMS.extend({
                   context: this,
                   error: this._error_capabilities,
                   success: this._got_capabilities,
+                  beforeSend: function(jqXHR, settings) {
+                      jqXHR.url = settings.url;
+                  },
                   cache: true,
                   dataType: 'xml',
                   async: true
@@ -60,10 +63,13 @@ L.FLayer = L.TileLayer.WMS.extend({
         },
 
         _error_capabilities: function(jqXHR, textStatus, err) {
+                console.error(jqXHR);
                 console.error(textStatus);
+                console.error(err);
         },
 
         _got_capabilities: function(xml, textStatus, jqXHR) {
+                // TODO: This function needs more exception handling
                 try {
                      var first_layer = this.wmsParams.layers.split(':')[0];
                      var $xml = $(xml),
@@ -81,7 +87,8 @@ L.FLayer = L.TileLayer.WMS.extend({
                      this._timesteps = Array();
                      var extent = belem.text()
                      if (typeof extent == 'undefined' || extent == '') {
-                         throw new Error("Error getting forecast time range for " + first_layer);
+                         throw new Error("Error getting forecast time range for layer " +
+                                         first_layer + " using url: " + jqXHR.url);
                      }
 		     if (typeof extent != 'undefined') {
                          extent = extent.split(',');

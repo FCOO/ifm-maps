@@ -6,50 +6,92 @@
 (function () {
 	L.FLayer.Fcoo.currentSpeed = function (options) {
                 options = L.extend(options, {attribution: 'Current forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
-                var layer1 = new L.FLayer.Fcoo._currentSpeed('FCOO/GETM/metoc.full_dom.velocities.surface.3nm.1h.NS1C-v001C.nc', options);
-                //options = L.extend(options, {legendImagePath: ''});
-                //var layer2 = new L.FLayer.Fcoo._currentSpeed('metoc.dk.velocities.1nm.surface.1h.NS1C', options);
-                //return new L.FLayerGroup([layer1, layer2]);
-                return new L.FLayerGroup([layer1]);
+                var options1 = L.extend({minZoom: 1, maxZoom: 8}, options);
+                var layer1 = new L.FLayer.Fcoo._currentSpeed('FCOO/GETM/nsbalt.velocities.1nm.surface.1h.DK1NM-v002C.nc', options1);
+                var options2 = L.extend({minZoom: 9, maxZoom: 18, showLegend: false}, options);
+                var layer2 = new L.FLayer.Fcoo._currentSpeed('FCOO/GETM/idk.velocities.600m.surface.1h.DK600-v004C.nc', options2);
+                return new L.FLayerGroup([layer1, layer2]);
 	};
 	L.FLayer.Fcoo._currentSpeed = function (dataset, options) {
                 var currentoptions = {layers: 'uu_vv', cmap: 'Current_ms_GYR_9colors'}
-                options = L.extend(options, currentoptions);
-		var layer = new L.FLayer(dataset, options);
+                var currentoptions = L.extend(currentoptions, options);
+		var layer = new L.FLayer(dataset, currentoptions);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM / NS1C';
+                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=uu_vv&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Current_ms_GYR_9colors';
 		}
 		return layer;
 	};
 
 	L.FLayer.Fcoo.currentDirection = function (options) {
-                options = L.extend(options, {attribution: 'Current forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
-                var layer1 = new L.FLayer.Fcoo._currentDirection('FCOO/GETM/metoc.full_dom.velocities.surface.3nm.1h.NS1C-v001C.nc', options);
-                //var layer2 = new L.FLayer.Fcoo._currentDirection('metoc.dk.velocities.1nm.surface.1h.NS1C', options);
-                //return new L.FLayerGroup([layer1, layer2]);
-                return new L.FLayerGroup([layer1]);
+                var options1 = L.extend({minZoom: 1, maxZoom: 8}, options);
+                var layer1 = new L.FLayer.Fcoo._currentDirection('FCOO/GETM/nsbalt.velocities.1nm.surface.1h.DK1NM-v002C.nc', options1);
+                var options2 = L.extend({minZoom: 9, maxZoom: 18, showLegend: false}, options);
+                var layer2 = new L.FLayer.Fcoo._currentDirection('FCOO/GETM/idk.velocities.600m.surface.1h.DK600-v004C.nc', options2);
+                return new L.FLayerGroup([layer1, layer2]);
 	};
 	L.FLayer.Fcoo._currentDirection = function (dataset, options) {
                 var currentoptions = {layers: 'uu:vv', styles: 'black_vector,0.3'}
-                options = L.extend(options, currentoptions);
-		var layer = new L.FLayer(dataset, options);
+                currentoptions = L.extend(currentoptions, options);
+		var layer = new L.FLayer(dataset, currentoptions);
 		return layer;
 	};
 
 	L.FLayer.Fcoo.elevation = function (options) {
                 options = L.extend(options, {attribution: 'Elevation forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
-                var layer1 = new L.FLayer.Fcoo._elevation('FCOO/GETM/metoc.dk.2Dvars.1nm.2D.1h.NS1C-v001C.nc', options);
-                return new L.FLayerGroup([layer1]);
+                var options1 = L.extend({minZoom: 1, maxZoom: 8}, options);
+                var layer1 = new L.FLayer.Fcoo._elevation('FCOO/GETM/nsbalt.2Dvars.1nm.2D.1h.DK1NM-v002C.nc', options1);
+                var options2 = L.extend({minZoom: 9, maxZoom: 18, showLegend: false}, options);
+                var layer2 = new L.FLayer.Fcoo._elevation('FCOO/GETM/idk.2Dvars.600m.2D.1h.DK600-v004C.nc', options2);
+                return new L.FLayerGroup([layer1, layer2]);
 	};
 	L.FLayer.Fcoo._elevation = function (dataset, options) {
                 var elevationoptions = {layers: 'elev', cmap: 'SeaLvl_m_PBGYR_20colors'}
-                options = L.extend(options, elevationoptions);
-		var layer = new L.FLayer(dataset, options);
+                elevationoptions = L.extend(elevationoptions, options);
+		var layer = new L.FLayer(dataset, elevationoptions);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM / NS1C';
+                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=elev&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaLvl_m_PBGYR_20colors';
 		}
 		return layer;
 	};
+
+        L.FLayer.Fcoo.sss = function (options) {
+                options = L.extend(options, {attribution: 'Sea surface salinity forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
+                var options1 = L.extend({minZoom: 1, maxZoom: 8}, options);
+                var layer1 = new L.FLayer.Fcoo._sss('FCOO/GETM/nsbalt.salt-temp.1nm.surface.1h.DK1NM-v002C.nc', options1);
+                var options2 = L.extend({minZoom: 9, maxZoom: 18, showLegend: false}, options);
+                var layer2 = new L.FLayer.Fcoo._sss('FCOO/GETM/idk.salt-temp.600m.surface.1h.DK600-v004C.nc', options2);
+                return new L.FLayerGroup([layer1, layer2]);
+        };
+        L.FLayer.Fcoo._sss = function (dataset, options) {
+                var extraoptions = {layers: 'salt', cmap: 'PrSal_psu_GB_18colors'}
+                extraoptions = L.extend(extraoptions, options);
+                var layer = new L.FLayer(dataset, extraoptions);
+                if (layer.options.legendImagePath == null) {
+                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
+                        layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=salt&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=PrSal_psu_GB_18colors';
+                }
+                return layer;
+        };
+
+        L.FLayer.Fcoo.sst = function (options) {
+                options = L.extend(options, {attribution: 'Sea surface temperature forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
+                var options1 = L.extend({minZoom: 1, maxZoom: 8}, options);
+                var layer1 = new L.FLayer.Fcoo._sst('FCOO/GETM/nsbalt.salt-temp.1nm.surface.1h.DK1NM-v002C.nc', options1);
+                var options2 = L.extend({minZoom: 9, maxZoom: 18, showLegend: false}, options);
+                var layer2 = new L.FLayer.Fcoo._sst('FCOO/GETM/idk.salt-temp.600m.surface.1h.DK600-v004C.nc', options2);
+                return new L.FLayerGroup([layer1, layer2]);
+        };
+        L.FLayer.Fcoo._sst = function (dataset, options) {
+                var extraoptions = {layers: 'temp', cmap: 'SeaTemp_C_BGYR_13colors'}
+                extraoptions = L.extend(extraoptions, options);
+                var layer = new L.FLayer(dataset, extraoptions);
+                if (layer.options.legendImagePath == null) {
+                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
+                        layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=temp&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaTemp_C_BGYR_13colors';
+                }
+                return layer;
+        };
+
 }());
