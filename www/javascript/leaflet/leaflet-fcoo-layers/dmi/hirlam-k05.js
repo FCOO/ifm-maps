@@ -43,7 +43,7 @@
                 return new L.FLayerGroup([layer1]);
 	};
 	L.FLayer.Dmi._windDirection = function (dataset, options) {
-                var windoptions = {layers: 'u10:v10', styles: 'black_barbs'}
+                var windoptions = {layers: 'u10:v10', styles: 'black_arrowbarbs'}
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);
 		return layer;

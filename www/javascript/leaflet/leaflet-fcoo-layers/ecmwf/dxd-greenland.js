@@ -26,7 +26,7 @@
                 return new L.FLayer.Ecmwf._windDirection('ECMWF/DXD/ECMWF_DXD_GREENLAND.nc', options);
 	};
 	L.FLayer.Ecmwf._windDirection = function (dataset, options) {
-                var windoptions = {layers: 'U10M:V10M', styles: 'black_barbs'}
+                var windoptions = {layers: 'U10M:V10M', styles: 'black_arrowbarbs'}
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);
 		return layer;
