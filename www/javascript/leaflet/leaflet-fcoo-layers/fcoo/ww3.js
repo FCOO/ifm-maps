@@ -4,13 +4,22 @@
  */
 
 (function () {
-	L.FLayer.Fcoo.waveHeight = function (options) {
+	L.FLayer.Fcoo.waveHeight = function (options, domain) {
                 options = L.extend(options, {attribution: 'Wave forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
-                var options1 = L.extend({minZoom: 1, maxZoom: 8}, options);
-                var layer1 = new L.FLayer.Fcoo._waveHeight('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options1);
-                var options2 = L.extend({minZoom: 9, maxZoom: 18, showLegend: false}, options);
-                var layer2 = new L.FLayer.Fcoo._waveHeight('FCOO/WW3//ww3fcast_grd_DKinner_v006C.nc', options2);
-                return new L.FLayerGroup([layer1, layer2]);
+                var layer;
+                switch (domain) {
+                    case 'NSBaltic':
+                        var layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
+                        break;
+                    case 'DKinner':
+                        var layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3//ww3fcast_grd_DKinner_v006C.nc', options);
+                        break;
+                    default:
+                        console.error('domain = ' + domain);
+                        throw new Error("Please specify domain (NSBaltic, DKinner)");
+                        break;
+                } 
+                return layer;
 	};
 	L.FLayer.Fcoo._waveHeight = function (dataset, options) {
                 var waveoptions = {layers: 'u_v', cmap: 'Hs_m_GBP_20colors'}
@@ -23,13 +32,22 @@
 		return layer;
 	};
 
-	L.FLayer.Fcoo.waveDirection = function (options) {
+	L.FLayer.Fcoo.waveDirection = function (options, domain) {
                 options = L.extend(options, {attribution: 'Wave forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
-                var options1 = L.extend({minZoom: 1, maxZoom: 8}, options);
-                var layer1 = new L.FLayer.Fcoo._waveDirection('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options1);
-                var options2 = L.extend({minZoom: 9, maxZoom: 18, showLegend: false}, options);
-                var layer2 = new L.FLayer.Fcoo._waveDirection('FCOO/WW3//ww3fcast_grd_DKinner_v006C.nc', options2);
-                return new L.FLayerGroup([layer1, layer2]);
+                var layer;
+                switch (domain) {
+                    case 'NSBaltic':
+                        var layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
+                        break;
+                    case 'DKinner':
+                        var layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3//ww3fcast_grd_DKinner_v006C.nc', options);
+                        break;
+                    default:
+                        console.error('domain = ' + domain);
+                        throw new Error("Please specify domain (NSBaltic, DKinner)");
+                        break;
+                } 
+                return layer;
 	};
 	L.FLayer.Fcoo._waveDirection = function (dataset, options) {
                 var waveoptions = {layers: 'u:v', styles: 'black_vector,0.5'}

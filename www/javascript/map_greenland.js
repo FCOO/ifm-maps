@@ -13,20 +13,22 @@ function initMap() {
             "pressure": new L.FLayer.Dmi.seaLevelPressure({zIndex: 200}),
             "airtemp": new L.FLayer.Dmi.airTemperature({zIndex: 100}),
             "humidity": new L.FLayer.Dmi.humidity({zIndex: 100}),
-            "cloudcover": new L.FLayer.Dmi.totalCloudCover({zIndex: 100})
+            "cloudcover": new L.FLayer.Dmi.totalCloudCover({zIndex: 100}),
         },
         "ECMWF": {
             "windspeed": new L.FLayer.Ecmwf.windSpeed({zIndex: 100}),
             "winddirection": new L.FLayer.Ecmwf.windDirection({zIndex: 200}),
             "pressure": new L.FLayer.Ecmwf.seaLevelPressure({zIndex: 200}),
             "airtemp": new L.FLayer.Ecmwf.airTemperature({zIndex: 100}),
-            "cloudcover": new L.FLayer.Ecmwf.totalCloudCover({zIndex: 100})
+            "cloudcover": new L.FLayer.Ecmwf.totalCloudCover({zIndex: 100}),
+            "waveheight": new L.FLayer.Ecmwf.waveHeight({zIndex: 100}),
+            "wavedirection": new L.FLayer.Ecmwf.waveDirection({zIndex: 200}),
         },
         "NOAA": {
             "currentspeed": new L.FLayer.Noaa.currentSpeed({zIndex: 100}),
             "currentdirection": new L.FLayer.Noaa.currentDirection({zIndex: 200}),
             "seatemp": new L.FLayer.Noaa.sst({zIndex: 100}),
-            "salinity": new L.FLayer.Noaa.sss({zIndex: 100})
+            "salinity": new L.FLayer.Noaa.sss({zIndex: 100}),
         }
     };
     var minZoom = 2;

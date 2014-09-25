@@ -4,13 +4,22 @@
  */
 
 (function () {
-	L.FLayer.Fcoo.currentSpeed = function (options) {
+	L.FLayer.Fcoo.currentSpeed = function (options, domain) {
                 options = L.extend(options, {attribution: 'Current forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
-                var options1 = L.extend({minZoom: 1, maxZoom: 8}, options);
-                var layer1 = new L.FLayer.Fcoo._currentSpeed('FCOO/GETM/nsbalt.velocities.1nm.surface.1h.DK1NM-v002C.nc', options1);
-                var options2 = L.extend({minZoom: 9, maxZoom: 18, showLegend: false}, options);
-                var layer2 = new L.FLayer.Fcoo._currentSpeed('FCOO/GETM/idk.velocities.600m.surface.1h.DK600-v004C.nc', options2);
-                return new L.FLayerGroup([layer1, layer2]);
+                var layer;
+                switch (domain) {
+                    case 'nsbalt':
+                        var layer = L.FLayer.Fcoo._currentSpeed('FCOO/GETM/nsbalt.velocities.1nm.surface.1h.DK1NM-v002C.nc', options);
+                        break;
+                    case 'idk':
+                        var layer = L.FLayer.Fcoo._currentSpeed('FCOO/GETM/idk.velocities.600m.surface.1h.DK600-v004C.nc', options);
+                        break;
+                    default:
+                        console.error('domain = ' + domain);
+                        throw new Error("Please specify domain (nsbalt, idk)");
+                        break;
+                } 
+                return layer;
 	};
 	L.FLayer.Fcoo._currentSpeed = function (dataset, options) {
                 var currentoptions = {layers: 'uu_vv', cmap: 'Current_ms_GYR_9colors'}
@@ -23,12 +32,22 @@
 		return layer;
 	};
 
-	L.FLayer.Fcoo.currentDirection = function (options) {
-                var options1 = L.extend({minZoom: 1, maxZoom: 8}, options);
-                var layer1 = new L.FLayer.Fcoo._currentDirection('FCOO/GETM/nsbalt.velocities.1nm.surface.1h.DK1NM-v002C.nc', options1);
-                var options2 = L.extend({minZoom: 9, maxZoom: 18, showLegend: false}, options);
-                var layer2 = new L.FLayer.Fcoo._currentDirection('FCOO/GETM/idk.velocities.600m.surface.1h.DK600-v004C.nc', options2);
-                return new L.FLayerGroup([layer1, layer2]);
+	L.FLayer.Fcoo.currentDirection = function (options, domain) {
+                options = L.extend(options, {attribution: 'Current forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
+                var layer;
+                switch (domain) {
+                    case 'nsbalt':
+                        var layer = L.FLayer.Fcoo._currentDirection('FCOO/GETM/nsbalt.velocities.1nm.surface.1h.DK1NM-v002C.nc', options);
+                        break;
+                    case 'idk':
+                        var layer = L.FLayer.Fcoo._currentDirection('FCOO/GETM/idk.velocities.600m.surface.1h.DK600-v004C.nc', options);
+                        break;
+                    default:
+                        console.error('domain = ' + domain);
+                        throw new Error("Please specify domain (nsbalt, idk)");
+                        break;
+                } 
+                return layer;
 	};
 	L.FLayer.Fcoo._currentDirection = function (dataset, options) {
                 var currentoptions = {layers: 'uu:vv', styles: 'black_vector,0.3'}
@@ -37,13 +56,22 @@
 		return layer;
 	};
 
-	L.FLayer.Fcoo.elevation = function (options) {
+	L.FLayer.Fcoo.elevation = function (options, domain) {
                 options = L.extend(options, {attribution: 'Elevation forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
-                var options1 = L.extend({minZoom: 1, maxZoom: 8}, options);
-                var layer1 = new L.FLayer.Fcoo._elevation('FCOO/GETM/nsbalt.2Dvars.1nm.2D.1h.DK1NM-v002C.nc', options1);
-                var options2 = L.extend({minZoom: 9, maxZoom: 18, showLegend: false}, options);
-                var layer2 = new L.FLayer.Fcoo._elevation('FCOO/GETM/idk.2Dvars.600m.2D.1h.DK600-v004C.nc', options2);
-                return new L.FLayerGroup([layer1, layer2]);
+                var layer;
+                switch (domain) {
+                    case 'nsbalt':
+                        var layer = L.FLayer.Fcoo._elevation('FCOO/GETM/nsbalt.2Dvars.1nm.2D.1h.DK1NM-v002C.nc', options);
+                        break;
+                    case 'idk':
+                        var layer = L.FLayer.Fcoo._elevation('FCOO/GETM/idk.2Dvars.600m.2D.1h.DK600-v004C.nc', options);
+                        break;
+                    default:
+                        console.error('domain = ' + domain);
+                        throw new Error("Please specify domain (nsbalt, idk)");
+                        break;
+                } 
+                return layer;
 	};
 	L.FLayer.Fcoo._elevation = function (dataset, options) {
                 var elevationoptions = {layers: 'elev', cmap: 'SeaLvl_m_PBGYR_20colors'}
@@ -56,13 +84,22 @@
 		return layer;
 	};
 
-        L.FLayer.Fcoo.sss = function (options) {
+        L.FLayer.Fcoo.sss = function (options, domain) {
                 options = L.extend(options, {attribution: 'Sea surface salinity forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
-                var options1 = L.extend({minZoom: 1, maxZoom: 8}, options);
-                var layer1 = new L.FLayer.Fcoo._sss('FCOO/GETM/nsbalt.salt-temp.1nm.surface.1h.DK1NM-v002C.nc', options1);
-                var options2 = L.extend({minZoom: 9, maxZoom: 18, showLegend: false}, options);
-                var layer2 = new L.FLayer.Fcoo._sss('FCOO/GETM/idk.salt-temp.600m.surface.1h.DK600-v004C.nc', options2);
-                return new L.FLayerGroup([layer1, layer2]);
+                var layer;
+                switch (domain) {
+                    case 'nsbalt':
+                        var layer = L.FLayer.Fcoo._sss('FCOO/GETM/nsbalt.salt-temp.1nm.surface.1h.DK1NM-v002C.nc', options);
+                        break;
+                    case 'idk':
+                        var layer = L.FLayer.Fcoo._sss('FCOO/GETM/idk.salt-temp.600m.surface.1h.DK600-v004C.nc', options);
+                        break;
+                    default:
+                        console.error('domain = ' + domain);
+                        throw new Error("Please specify domain (nsbalt, idk)");
+                        break;
+                } 
+                return layer;
         };
         L.FLayer.Fcoo._sss = function (dataset, options) {
                 var extraoptions = {layers: 'salt', cmap: 'PrSal_psu_GB_18colors'}
@@ -75,13 +112,22 @@
                 return layer;
         };
 
-        L.FLayer.Fcoo.sst = function (options) {
+        L.FLayer.Fcoo.sst = function (options, domain) {
                 options = L.extend(options, {attribution: 'Sea surface temperature forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
-                var options1 = L.extend({minZoom: 1, maxZoom: 8}, options);
-                var layer1 = new L.FLayer.Fcoo._sst('FCOO/GETM/nsbalt.salt-temp.1nm.surface.1h.DK1NM-v002C.nc', options1);
-                var options2 = L.extend({minZoom: 9, maxZoom: 18, showLegend: false}, options);
-                var layer2 = new L.FLayer.Fcoo._sst('FCOO/GETM/idk.salt-temp.600m.surface.1h.DK600-v004C.nc', options2);
-                return new L.FLayerGroup([layer1, layer2]);
+                var layer;
+                switch (domain) {
+                    case 'nsbalt':
+                        var layer = L.FLayer.Fcoo._sst('FCOO/GETM/nsbalt.salt-temp.1nm.surface.1h.DK1NM-v002C.nc', options);
+                        break;
+                    case 'idk':
+                        var layer = L.FLayer.Fcoo._sst('FCOO/GETM/idk.salt-temp.600m.surface.1h.DK600-v004C.nc', options);
+                        break;
+                    default:
+                        console.error('domain = ' + domain);
+                        throw new Error("Please specify domain (nsbalt, idk)");
+                        break;
+                } 
+                return layer;
         };
         L.FLayer.Fcoo._sst = function (dataset, options) {
                 var extraoptions = {layers: 'temp', cmap: 'SeaTemp_C_BGYR_13colors'}

@@ -7,7 +7,9 @@ function initMap() {
     var overlays = {
         "ECMWF": {
             "windspeed": new L.FLayer.Ecmwf.windSpeed({zIndex: 100}),
-            "winddirection": new L.FLayer.Ecmwf.windDirection({zIndex: 200})
+            "winddirection": new L.FLayer.Ecmwf.windDirection({zIndex: 200}),
+            "waveheight": new L.FLayer.Ecmwf.waveHeight({zIndex: 100}),
+            "wavedirection": new L.FLayer.Ecmwf.waveDirection({zIndex: 200}),
         }
     }
     var minZoom = 2;

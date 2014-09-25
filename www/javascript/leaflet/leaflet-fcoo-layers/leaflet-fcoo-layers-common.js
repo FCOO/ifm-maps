@@ -2,7 +2,6 @@
  * A JavaScript library for using Danish Defence Center for Operational Oceanography's (FCOO)
  * Web Map Service layers without hassle.
  */
-
 L.FLayer = L.TileLayer.WMS.extend({
         baseUrl: "http://wms-dev01:8080/{dataset}.wms",
         //baseUrl: location.protocol + "//api.fcoo.dk/webmap/{dataset}.wms",
@@ -25,6 +24,7 @@ L.FLayer = L.TileLayer.WMS.extend({
 		legendImagePath: null,
 		legendPosition: 'bottomleft',
                 legendAttribution: null,
+                foreground: null,
                 crs: L.CRS.EPSG3857,
 		attribution: 'Weather from <a href="http://fcoo.dk/" alt="Danish Defence METOC Forecast Service">FCOO</a>'
 	},
@@ -125,6 +125,9 @@ L.FLayer = L.TileLayer.WMS.extend({
 			this._legendControl = this._getLegendControl();
 			this._legendId = this._legendControl.addLegend(this.options.legendImagePath, this.options.legendAttribution);
 		}
+                if (this.options.foreground != null) {
+                    this.options.foreground.addTo(map);
+                }
 		L.TileLayer.WMS.prototype.onAdd.call(this, map);
 	},
 
@@ -134,6 +137,9 @@ L.FLayer = L.TileLayer.WMS.extend({
 			this._legendControl = null;
 			this._legendId = null;
 		}
+                if (this.options.foreground != null) {
+                    this.options.foreground.removeFrom(map);
+                }
 		L.TileLayer.WMS.prototype.onRemove.call(this, map);
 		this._map = null;
 	},
@@ -265,3 +271,26 @@ L.FLayer.Utils = {
 		}
 	}
 };
+
+L.CountingTileLayer = L.TileLayer.extend({
+        initialize: function (url, options) {
+                this._counter = 0;
+		L.TileLayer.prototype.initialize.call(this, url, options);
+        },
+	addTo: function(map) {
+                this._map = map;
+                this._counter += 1;
+                if (this._counter < 2) {
+		    L.TileLayer.prototype.addTo.call(this, map);
+                }
+	},
+	removeFrom: function(map) {
+                this._map = map;
+                this._counter -= 1;
+                if (this._counter < 1) {
+		        L.TileLayer.prototype.removeFrom.call(this, map);
+                }
+	},
+
+});
+
