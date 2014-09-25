@@ -465,6 +465,8 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
 
         // Add datetime selector when date arrays have been fetched
         var dt_check = 10;
+        var dt_max = 30000;
+        var dt_current = 0;
         function checkTimesteps() {
             var dates = getTimeSteps(overlayMaps);
             if (dates !== null) {
@@ -483,7 +485,12 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
                         position: 'topright'
                 }).addTo(map);
             } else {
-                setTimeout(function(){checkTimesteps()}, dt_check);
+                if (dt_current <= dt_max) {
+                    dt_current += dt_check;
+                    setTimeout(function(){checkTimesteps()}, dt_check);
+                } else {
+                    throw new Error("Error: timeout encountered while getting timesteps");
+                }
             }
         }
         setTimeout(function(){checkTimesteps()}, dt_check);
