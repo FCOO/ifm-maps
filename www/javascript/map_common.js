@@ -19,7 +19,7 @@ function getI18n(key, lang) {
 		en: {
 			  maps: 'Maps'
 			, layers: 'Forecast Parameters'
-			, overlays: 'Overlays'
+			, boundaries: 'Boundaries'
 			, iceconcentration: 'Sea Ice Concentration'	
 			, windspeed: 'Wind Speed'
 			, winddirection: 'Wind Direction'
@@ -37,7 +37,7 @@ function getI18n(key, lang) {
 			, visibility: 'Visibility'
 			, ais: 'AIS Traffic Density'
                         , datetime: 'Select date and time'
-                        , EEZ: 'Exclusive Economic Zone (EEZ)'
+                        , EEZ: 'EEZ'
 		}
 		//, gl: {
 			  //layers: 'Ilimasaarutinut uuttuutit'
@@ -49,7 +49,7 @@ function getI18n(key, lang) {
 			  maps: 'Kort'
 			, 'Background Maps': 'Baggrundskort'
 			, layers: 'Prognoseparametre'
-			, overlays: 'Ekstra lag'
+			, boundaries: 'Grænser'
 			, iceconcentration: 'Havis (koncentration)'
 			, windspeed: 'Vind (fart)'
 			, winddirection: 'Vindretning'
@@ -67,7 +67,7 @@ function getI18n(key, lang) {
 			, visibility: 'Sigtbarhed'
 			, ais: 'AIS Trafiktæthed'
                         , datetime: 'Vælg tidspunkt'
-                        , EEZ: 'Eksklusiv Økonomisk Zone (EEZ)'
+                        , EEZ: 'EEZ'
                         , "Locate": "Find"
                         , "Show me where I am": "Vis mig hvor jeg er"
                         , "You are within {distance} {unit} from this point": "Du er indenfor {distance} {unit} fra dette punkt"
@@ -112,7 +112,7 @@ function initBaseMaps(lang) {
     });
 
     var fcoo_base = location.protocol + "//media.fcoo.dk/tiles/";
-    var tile_bckgrnd_date = "201409090000";
+    var tile_bckgrnd_date = "201409250000";
     var fcoo = L.tileLayer(fcoo_base + "tiles_bckgrnd_" + tile_bckgrnd_date + "/{z}/{x}/{y}.png", {
         maxZoom: 10,
         tileSize: 256,
@@ -129,7 +129,7 @@ function initBaseMaps(lang) {
         "ESRI Aerial": esri
     };
 
-    var tile_top_date = "201409110000";
+    var tile_top_date = "201409230000";
     var topLayer = L.tileLayer(fcoo_base + "tiles_top_" + tile_top_date + "/{z}/{x}/{y}.png", {
         maxZoom: 10,
         tileSize: 256,

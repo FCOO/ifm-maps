@@ -36,6 +36,9 @@ function initMap() {
 	    "seatemp": new L.FLayer.Fcoo.sst({zIndex: 101, foreground: landLayer}, 'idk'),
 	    "salinity": new L.FLayer.Fcoo.sss({zIndex: 101, foreground: landLayer}, 'idk'),
         },
+        "boundaries": {
+            "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_201409160000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),
+        },
     }
     var minZoom = 5;
     var maxZoom = 10;

@@ -2,12 +2,16 @@
  * Initialize the map.
  */
 function initMap() {
+    var fcoo_base = location.protocol + "//media.fcoo.dk/tiles/";
     var langs = ['da', 'en'];
     var basemap = "FCOO Standard";
     var overlays = {
         "NOAA": {
             "currentspeed": new L.FLayer.Noaa.currentSpeed({zIndex: 100}),
             "currentdirection": new L.FLayer.Noaa.currentDirection({zIndex: 200})
+        },
+        "boundaries": {
+            "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_201409160000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),
         }
     }
     var minZoom = 2;

@@ -4,6 +4,7 @@
 function initMap() {
     var langs = ['da', 'en'];
     var basemap = "FCOO Standard";
+    var fcoo_base = location.protocol + "//media.fcoo.dk/tiles/";
     var overlays = {
         "DMI": {
             "windspeed": new L.FLayer.Dmi.windSpeed({zIndex: 100}),
@@ -29,6 +30,10 @@ function initMap() {
             "currentdirection": new L.FLayer.Noaa.currentDirection({zIndex: 200}),
             "seatemp": new L.FLayer.Noaa.sst({zIndex: 100}),
             "salinity": new L.FLayer.Noaa.sss({zIndex: 100}),
+        },
+        "boundaries": {
+            "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_201409160000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),
+            "SAR": new L.tileLayer(fcoo_base + "tiles_SAR_201409220000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),
         }
     };
     var minZoom = 2;
