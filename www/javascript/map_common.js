@@ -151,9 +151,11 @@ function changeDatetime(pDate) {
         var layergroup = overlayMaps[i];
         for (var j in layergroup) {
             var layer = layergroup[j];
-            var timesteps = layer.getTimesteps();
-            if (timesteps !== null && timesteps.length > 1) {
-                layer.setParams({time: pDate}, false);
+            if (layer.getTimesteps !== undefined) {
+                var timesteps = layer.getTimesteps();
+                if (timesteps !== null && timesteps.length > 1) {
+                    layer.setParams({time: pDate}, false);
+                }
             }
         }
     }
@@ -518,19 +520,21 @@ function getTimeSteps(overlayMaps) {
         var category = overlayMaps[i];
         for (var j in category) {
             overlay = category[j];
-            var dates = overlay.getTimesteps();
-            if (dates !== null) {
-                // We ignore static fields
-                if (dates.length > 1) {
-                    if (dates[0] < date_min || dates[dates.length-1] > date_max) {
-                        outdates = dateArrayUnique(outdates.concat(dates));
-                        outdates.sort(function(a,b){
-                            return a - b;
-                        });
+            if (overlay.getTimesteps !== undefined) {
+                var dates = overlay.getTimesteps();
+                if (dates !== null) {
+                    // We ignore static fields
+                    if (dates.length > 1) {
+                        if (dates[0] < date_min || dates[dates.length-1] > date_max) {
+                            outdates = dateArrayUnique(outdates.concat(dates));
+                            outdates.sort(function(a,b){
+                                return a - b;
+                            });
+                        }
                     }
+                } else {
+                    return null;
                 }
-            } else {
-                return null;
             }
         }
     }
