@@ -1,6 +1,8 @@
 /**
  * Adds a time selector to Leaflet based maps.
  **/
+(function() {
+
 L.DatetimeSelector = L.Control.extend({
 
 	options: {
@@ -283,3 +285,5 @@ L.dateObject = function(dateId, text, img) {
 
 
 L.datetimeSelector = function(options) { return new L.DatetimeSelector(options); };
+
+})();

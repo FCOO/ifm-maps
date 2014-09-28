@@ -32,5 +32,25 @@
 		return layer;
 	};
 
+	L.FLayer.Ecmwf.wavePeriod = function (options) {
+                options = L.extend(options, {attribution: 'Wave forecasts from <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>'});
+                return new L.FLayer.Ecmwf._wavePeriod('ECMWF/DXP/ECMWF_DXP_GREENLAND.nc', options);
+	};
+	L.FLayer.Ecmwf._wavePeriod = function (dataset, options) {
+                var opts = {layers: 'MWP', 
+                            cmap: 'Wind_ms_WBGYR_10colors',
+                            styles: 'contour'};
+                wms_opts = L.extend({}, opts);
+                wms_opts = L.extend(wms_opts, options);
+		var layer = new L.FLayer(dataset, wms_opts);
+		if (layer.options.legendImagePath == null) {
+                        layer.options.legendAttribution = 'Source: <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a> / WAM';
+                        var params = L.extend({}, layer.defaultLegendParams);
+                        params = L.extend(params, opts);
+			layer.options.legendImagePath = layer._fcootileurl + '?' + $.param(params);
+		}
+		return layer;
+	};
+
 }());
 

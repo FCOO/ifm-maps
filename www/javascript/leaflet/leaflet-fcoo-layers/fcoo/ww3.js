@@ -9,10 +9,10 @@
                 var layer;
                 switch (domain) {
                     case 'NSBaltic':
-                        var layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
+                        layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
                         break;
                     case 'DKinner':
-                        var layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3//ww3fcast_grd_DKinner_v006C.nc', options);
+                        layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3//ww3fcast_grd_DKinner_v006C.nc', options);
                         break;
                     default:
                         console.error('domain = ' + domain);
@@ -37,10 +37,10 @@
                 var layer;
                 switch (domain) {
                     case 'NSBaltic':
-                        var layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
+                        layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
                         break;
                     case 'DKinner':
-                        var layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3//ww3fcast_grd_DKinner_v006C.nc', options);
+                        layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3//ww3fcast_grd_DKinner_v006C.nc', options);
                         break;
                     default:
                         console.error('domain = ' + domain);
@@ -54,5 +54,38 @@
                 waveoptions = L.extend(waveoptions, options);
 		var layer = new L.FLayer(dataset, waveoptions);
 		return layer;
+	};
+
+	L.FLayer.Fcoo.wavePeriod = function (options, domain) {
+                options = L.extend(options, {attribution: 'Wave forecasts from <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'});
+                var layer;
+                switch (domain) {
+                    case 'NSBaltic':
+                        layer = L.FLayer.Fcoo._wavePeriod('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
+                        break;
+                    case 'DKinner':
+                        layer = L.FLayer.Fcoo._wavePeriod('FCOO/WW3//ww3fcast_grd_DKinner_v006C.nc', options);
+                        break;
+                    default:
+                        console.error('domain = ' + domain);
+                        throw new Error("Please specify domain (NSBaltic, DKinner)");
+                        break;
+                } 
+                return layer;
+	};
+	L.FLayer.Fcoo._wavePeriod = function (dataset, options) {
+                var opts = {layers: 'TMN', 
+                            cmap: 'Wind_ms_WBGYR_10colors',
+                            styles: 'contour'};
+                wms_opts = L.extend({}, opts);
+                wms_opts = L.extend(wms_opts, options);
+                var layer = new L.FLayer(dataset, wms_opts);
+                if (layer.options.legendImagePath == null) {
+                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / WW3';
+                        var params = L.extend({}, layer.defaultLegendParams);
+                        params = L.extend(params, opts);
+                        layer.options.legendImagePath = layer._fcootileurl + '?' + $.param(params);
+                }
+                return layer;
 	};
 }());

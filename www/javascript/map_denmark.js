@@ -19,6 +19,7 @@ function initMap() {
             "winddirection": new L.FLayer.Dmi.windDirection({zIndex: 200}),
         },
         "FCOO - North Sea/Baltic Sea": {
+            "waveperiod": new L.FLayer.Fcoo.wavePeriod({zIndex: 200, foreground: landLayer}, 'NSBaltic'),
             "waveheight": new L.FLayer.Fcoo.waveHeight({zIndex: 100, foreground: landLayer}, 'NSBaltic'),
 	    "wavedirection": new L.FLayer.Fcoo.waveDirection({zIndex: 200, foreground: landLayer}, 'NSBaltic'),
             "currentspeed": new L.FLayer.Fcoo.currentSpeed({zIndex: 100, foreground: landLayer}, 'nsbalt'),
@@ -28,6 +29,7 @@ function initMap() {
 	    "salinity": new L.FLayer.Fcoo.sss({zIndex: 100, foreground: landLayer}, 'nsbalt'),
         },
         "FCOO - Danish Waters": {
+            "waveperiod": new L.FLayer.Fcoo.wavePeriod({zIndex: 200, foreground: landLayer}, 'DKinner'),
             "waveheight": new L.FLayer.Fcoo.waveHeight({zIndex: 101, foreground: landLayer}, 'DKinner'),
 	    "wavedirection": new L.FLayer.Fcoo.waveDirection({zIndex: 201, foreground: landLayer}, 'DKinner'),
             "currentspeed": new L.FLayer.Fcoo.currentSpeed({zIndex: 101, foreground: landLayer}, 'idk'),

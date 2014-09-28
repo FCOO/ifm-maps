@@ -22,6 +22,7 @@ function initMap() {
             "pressure": new L.FLayer.Ecmwf.seaLevelPressure({zIndex: 200}),
             "airtemp": new L.FLayer.Ecmwf.airTemperature({zIndex: 100}),
             "cloudcover": new L.FLayer.Ecmwf.totalCloudCover({zIndex: 100}),
+            "waveperiod": new L.FLayer.Ecmwf.wavePeriod({zIndex: 200}),
             "waveheight": new L.FLayer.Ecmwf.waveHeight({zIndex: 100}),
             "wavedirection": new L.FLayer.Ecmwf.waveDirection({zIndex: 200}),
         },

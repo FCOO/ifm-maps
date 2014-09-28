@@ -16,6 +16,16 @@ L.FLayer = L.TileLayer.WMS.extend({
                 crs: L.CRS.EPSG3857,
 		transparent: true,
 	},
+        defaultLegendParams: {
+                service: 'WMS',
+                request: 'GetColorbar',
+                version: '1.1.1',
+                layers: '',
+                styles: 'horizontal',
+                format: 'image/png',
+                transparent: false,
+                cmap: '',
+        },
         options: {
                 tileSize: 512,
                 opacity: 1.00,
