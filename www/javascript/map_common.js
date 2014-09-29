@@ -74,6 +74,8 @@ function getI18n(key, lang) {
                         , "Show me where I am": "Vis mig hvor jeg er"
                         , "You are within {distance} {unit} from this point": "Du er indenfor {distance} {unit} fra dette punkt"
                         , "You seem located outside the boundaries of the map": "Du ser ud til at befinde dig udenfor kortets grænser"
+                        , "FCOO - North Sea/Baltic Sea": "FCOO - Nordsø/Østersø"
+                        , "FCOO - Danish Waters": "FCOO - Danske farvande"
 		}
 	};
 
