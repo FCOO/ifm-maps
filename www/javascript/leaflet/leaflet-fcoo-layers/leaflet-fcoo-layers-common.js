@@ -97,9 +97,8 @@ L.FLayer = L.TileLayer.WMS.extend({
                      this._timesteps = Array();
                      var extent = belem.text()
                      if (typeof extent == 'undefined' || extent == '') {
-                         var msg = "Error getting forecast time range for layer " +
+                         var msg = "Failed getting forecast time range for layer " +
                                    first_layer + " using url: " + jqXHR.url;
-                         var n = noty({text: msg, type: "error"});
                          throw new Error(msg);
                      }
 		     if (typeof extent != 'undefined') {
@@ -119,7 +118,7 @@ L.FLayer = L.TileLayer.WMS.extend({
                      this._timestepsready = true;
                 } catch (err) {
                      //console.log('Error accessing: ' + jqXHR.url);
-                     var n = noty({text: err, type: "error"});
+                     var n = noty({text: err.message, type: "error"});
                      throw err;
                 }
         },
