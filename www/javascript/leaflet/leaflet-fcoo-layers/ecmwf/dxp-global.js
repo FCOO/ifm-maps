@@ -37,9 +37,7 @@
                 return new L.FLayer.Ecmwf._wavePeriod('ECMWF/DXP/ECMWF_DXP_GLOBAL.nc', options);
 	};
 	L.FLayer.Ecmwf._wavePeriod = function (dataset, options) {
-                var opts = {layers: 'MWP', 
-                            cmap: 'Wind_ms_WBGYR_10colors',
-                            styles: 'contour'};
+                var opts = {layers: 'MWP', cmap: 'Wind_ms_WBGYR_10colors'};
                 wms_opts = L.extend({}, opts);
                 wms_opts = L.extend(wms_opts, options);
 		var layer = new L.FLayer(dataset, wms_opts);
