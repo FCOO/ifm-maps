@@ -15,8 +15,10 @@
                         var layer = L.FLayer.Fcoo._currentSpeed('FCOO/GETM/idk.velocities.600m.surface.1h.DK600-v004C.nc', options);
                         break;
                     default:
-                        console.error('domain = ' + domain);
-                        throw new Error("Please specify domain (nsbalt, idk)");
+                        var msg = 'Error initializing current speed for domain ' + domain;
+                        console.error(msg)
+                        var n = noty({text: msg, type: "error"});
+                        throw new Error(msg);
                         break;
                 } 
                 return layer;
@@ -43,8 +45,10 @@
                         var layer = L.FLayer.Fcoo._currentDirection('FCOO/GETM/idk.velocities.600m.surface.1h.DK600-v004C.nc', options);
                         break;
                     default:
-                        console.error('domain = ' + domain);
-                        throw new Error("Please specify domain (nsbalt, idk)");
+                        var msg = 'Error initializing current direction for domain ' + domain;
+                        console.error(msg)
+                        var n = noty({text: msg, type: "error"});
+                        throw new Error(msg);
                         break;
                 } 
                 return layer;
@@ -67,8 +71,10 @@
                         var layer = L.FLayer.Fcoo._elevation('FCOO/GETM/idk.2Dvars.600m.2D.1h.DK600-v004C.nc', options);
                         break;
                     default:
-                        console.error('domain = ' + domain);
-                        throw new Error("Please specify domain (nsbalt, idk)");
+                        var msg = 'Error initializing elevation for domain ' + domain;
+                        console.error(msg)
+                        var n = noty({text: msg, type: "error"});
+                        throw new Error(msg);
                         break;
                 } 
                 return layer;
@@ -95,8 +101,10 @@
                         var layer = L.FLayer.Fcoo._sss('FCOO/GETM/idk.salt-temp.600m.surface.1h.DK600-v004C.nc', options);
                         break;
                     default:
-                        console.error('domain = ' + domain);
-                        throw new Error("Please specify domain (nsbalt, idk)");
+                        var msg = 'Error initializing sea surface salinity for domain ' + domain;
+                        console.error(msg)
+                        var n = noty({text: msg, type: "error"});
+                        throw new Error(msg);
                         break;
                 } 
                 return layer;
@@ -123,8 +131,10 @@
                         var layer = L.FLayer.Fcoo._sst('FCOO/GETM/idk.salt-temp.600m.surface.1h.DK600-v004C.nc', options);
                         break;
                     default:
-                        console.error('domain = ' + domain);
-                        throw new Error("Please specify domain (nsbalt, idk)");
+                        var msg = 'Error initializing sea surface temperature for domain ' + domain;
+                        console.error(msg)
+                        var n = noty({text: msg, type: "error"});
+                        throw new Error(msg);
                         break;
                 } 
                 return layer;

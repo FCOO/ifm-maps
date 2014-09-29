@@ -18,8 +18,10 @@
                         layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3/WW3_Arctic_geo9nm_v001C.nc', options);
                         break;
                     default:
-                        console.error('domain = ' + domain);
-                        throw new Error("Please specify domain (NSBaltic, DKinner, Greenland)");
+                        var msg = 'Error initializing wave height for domain ' + domain;
+                        console.error(msg)
+                        var n = noty({text: msg, type: "error"});
+                        throw new Error(msg);
                         break;
                 } 
                 return layer;
@@ -49,8 +51,10 @@
                         layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3/WW3_Arctic_geo9nm_v001C.nc', options);
                         break;
                     default:
-                        console.error('domain = ' + domain);
-                        throw new Error("Please specify domain (NSBaltic, DKinner, Greenland)");
+                        var msg = 'Error initializing wave direction for domain ' + domain;
+                        console.error(msg)
+                        var n = noty({text: msg, type: "error"});
+                        throw new Error(msg);
                         break;
                 } 
                 return layer;
@@ -76,8 +80,10 @@
                         layer = L.FLayer.Fcoo._wavePeriod('FCOO/WW3/WW3_Arctic_geo9nm_v001C.nc', options);
                         break;
                     default:
-                        console.error('domain = ' + domain);
-                        throw new Error("Please specify domain (NSBaltic, DKinner, Greenland)");
+                        var msg = 'Error initializing wave period for domain ' + domain;
+                        console.error(msg)
+                        var n = noty({text: msg, type: "error"});
+                        throw new Error(msg);
                         break;
                 } 
                 return layer;
