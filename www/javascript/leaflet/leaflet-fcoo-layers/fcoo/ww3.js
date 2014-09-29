@@ -12,11 +12,14 @@
                         layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
                         break;
                     case 'DKinner':
-                        layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3//ww3fcast_grd_DKinner_v006C.nc', options);
+                        layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3/ww3fcast_grd_DKinner_v006C.nc', options);
+                        break;
+                    case 'Greenland':
+                        layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3/WW3_Arctic_geo9nm_v001C.nc', options);
                         break;
                     default:
                         console.error('domain = ' + domain);
-                        throw new Error("Please specify domain (NSBaltic, DKinner)");
+                        throw new Error("Please specify domain (NSBaltic, DKinner, Greenland)");
                         break;
                 } 
                 return layer;
@@ -40,11 +43,14 @@
                         layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
                         break;
                     case 'DKinner':
-                        layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3//ww3fcast_grd_DKinner_v006C.nc', options);
+                        layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3/ww3fcast_grd_DKinner_v006C.nc', options);
+                        break;
+                    case 'Greenland':
+                        layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3/WW3_Arctic_geo9nm_v001C.nc', options);
                         break;
                     default:
                         console.error('domain = ' + domain);
-                        throw new Error("Please specify domain (NSBaltic, DKinner)");
+                        throw new Error("Please specify domain (NSBaltic, DKinner, Greenland)");
                         break;
                 } 
                 return layer;
@@ -64,11 +70,14 @@
                         layer = L.FLayer.Fcoo._wavePeriod('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
                         break;
                     case 'DKinner':
-                        layer = L.FLayer.Fcoo._wavePeriod('FCOO/WW3//ww3fcast_grd_DKinner_v006C.nc', options);
+                        layer = L.FLayer.Fcoo._wavePeriod('FCOO/WW3/ww3fcast_grd_DKinner_v006C.nc', options);
+                        break;
+                    case 'Greenland':
+                        layer = L.FLayer.Fcoo._wavePeriod('FCOO/WW3/WW3_Arctic_geo9nm_v001C.nc', options);
                         break;
                     default:
                         console.error('domain = ' + domain);
-                        throw new Error("Please specify domain (NSBaltic, DKinner)");
+                        throw new Error("Please specify domain (NSBaltic, DKinner, Greenland)");
                         break;
                 } 
                 return layer;

@@ -388,8 +388,12 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
         topLayer.addTo(map)
 
 	//var layerControl = L.control.layers(baseMaps, overlayMaps, {collapsed: false}).addTo(map);
+        var opts = {collapsed: false,
+                    groupsCollapsed: true, 
+                    collapseActiveGroups: true, 
+                    autoZIndex: false};
 	var layerControl = (new L.Control.CategorizedLayers(baseMaps, overlayMaps, 
-                           {collapsed: false, groupsCollapsed: false, autoZIndex: false})).addTo(map);
+                            opts)).addTo(map);
 
         // Add locator control
         map.addControl(L.control.locate({
