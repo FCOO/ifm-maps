@@ -16,11 +16,11 @@ function initMap() {
             "humidity": new L.FLayer.Dmi.humidity({zIndex: 100}),
             "cloudcover": new L.FLayer.Dmi.totalCloudCover({zIndex: 100}),
         },
-        "FCOO": {
-            "waveperiod": new L.FLayer.Fcoo.wavePeriod({zIndex: 100}, 'Greenland'),
-            "waveheight": new L.FLayer.Fcoo.waveHeight({zIndex: 100}, 'Greenland'),
-	    "wavedirection": new L.FLayer.Fcoo.waveDirection({zIndex: 200}, 'Greenland'),
-        },
+        //"FCOO": {
+            //"waveperiod": new L.FLayer.Fcoo.wavePeriod({zIndex: 100}, 'Greenland'),
+            //"waveheight": new L.FLayer.Fcoo.waveHeight({zIndex: 100}, 'Greenland'),
+	    //"wavedirection": new L.FLayer.Fcoo.waveDirection({zIndex: 200}, 'Greenland'),
+        //},
         "ECMWF": {
             "windspeed": new L.FLayer.Ecmwf.windSpeed({zIndex: 100}),
             "winddirection": new L.FLayer.Ecmwf.windDirection({zIndex: 200}),
