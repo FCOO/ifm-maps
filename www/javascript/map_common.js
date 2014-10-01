@@ -499,7 +499,9 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
                     dt_current += dt_check;
                     setTimeout(function(){checkTimesteps()}, dt_check);
                 } else {
-                    throw new Error("Error: timeout encountered while getting timesteps");
+                    var msg = "Timeout encountered while getting timesteps";
+                    var n = noty({text: msg, type: "error"});
+                    throw new Error(msg);
                 }
             }
         }
