@@ -3,7 +3,7 @@
  */
 function initMap() {
     var fcoo_base = location.protocol + "//media.fcoo.dk/tiles/";
-    var landLayer = new L.CountingTileLayer(fcoo_base + "tiles_frgrnd_201409230000/{z}/{x}/{y}.png", {
+    var landLayer = new L.CountingTileLayer(fcoo_base + "tiles_frgrnd_201410030000/{z}/{x}/{y}.png", {
         maxZoom: 10,
         tileSize: 256,
         zIndex: 1000,
@@ -39,7 +39,7 @@ function initMap() {
 	    "salinity": new L.FLayer.Fcoo.sss({zIndex: 101, foreground: landLayer}, 'idk'),
         },
         "boundaries": {
-            "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_201409160000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),
+            "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_201410030000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),
         },
     }
     var minZoom = 5;

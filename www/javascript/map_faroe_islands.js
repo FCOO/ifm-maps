@@ -19,7 +19,7 @@ function initMap() {
             "visibility":  new L.FLayer.Noaa.visibility({zIndex: 100})
         },
         "boundaries": {
-            "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_201409160000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),
+            "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_201410030000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),
         },
     }
     var minZoom = 2;

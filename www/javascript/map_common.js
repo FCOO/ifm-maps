@@ -116,7 +116,7 @@ function initBaseMaps(lang) {
     });
 
     var fcoo_base = location.protocol + "//media.fcoo.dk/tiles/";
-    var tile_bckgrnd_date = "201409250000";
+    var tile_bckgrnd_date = "201410020000";
     var fcoo = L.tileLayer(fcoo_base + "tiles_bckgrnd_" + tile_bckgrnd_date + "/{z}/{x}/{y}.png", {
         maxZoom: 10,
         tileSize: 256,
@@ -133,7 +133,7 @@ function initBaseMaps(lang) {
         "ESRI Aerial": esri
     };
 
-    var tile_top_date = "201409230000";
+    var tile_top_date = "201410020000";
     var topLayer = L.tileLayer(fcoo_base + "tiles_top_" + tile_top_date + "/{z}/{x}/{y}.png", {
         maxZoom: 10,
         tileSize: 256,
