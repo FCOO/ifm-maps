@@ -548,5 +548,5 @@ function getTimeSteps(overlayMaps) {
             }
         }
     }
-    return outdates
+    return outdates;
 }
