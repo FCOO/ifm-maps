@@ -24,12 +24,12 @@
                 return layer;
 	};
 	L.FLayer.Fcoo._currentSpeed = function (dataset, options) {
-                var currentoptions = {layers: 'uu_vv', cmap: 'Current_ms_GYR_9colors'}
+                var currentoptions = {layers: 'uu_vv', cmap: 'Current_kn_GYR_19colors'}
                 var currentoptions = L.extend(currentoptions, options);
 		var layer = new L.FLayer(dataset, currentoptions);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=uu_vv&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Current_ms_GYR_9colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=uu_vv&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Current_kn_GYR_19colors';
 		}
 		return layer;
 	};
@@ -80,12 +80,12 @@
                 return layer;
 	};
 	L.FLayer.Fcoo._elevation = function (dataset, options) {
-                var elevationoptions = {layers: 'elev', cmap: 'SeaLvl_m_PBGYR_20colors'}
+                var elevationoptions = {layers: 'elev', cmap: 'SeaLvl_m_BWR_20colors'}
                 elevationoptions = L.extend(elevationoptions, options);
 		var layer = new L.FLayer(dataset, elevationoptions);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=elev&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaLvl_m_PBGYR_20colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=elev&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaLvl_m_BWR_20colors';
 		}
 		return layer;
 	};
@@ -110,12 +110,12 @@
                 return layer;
         };
         L.FLayer.Fcoo._sss = function (dataset, options) {
-                var extraoptions = {layers: 'salt', cmap: 'PrSal_psu_GB_18colors'}
+                var extraoptions = {layers: 'salt', cmap: 'PrSal_psu_GB_20colors'}
                 extraoptions = L.extend(extraoptions, options);
                 var layer = new L.FLayer(dataset, extraoptions);
                 if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
-                        layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=salt&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=PrSal_psu_GB_18colors';
+                        layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=salt&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=PrSal_psu_GB_20colors';
                 }
                 return layer;
         };
@@ -140,12 +140,12 @@
                 return layer;
         };
         L.FLayer.Fcoo._sst = function (dataset, options) {
-                var extraoptions = {layers: 'temp', cmap: 'SeaTemp_C_BGYR_13colors'}
+                var extraoptions = {layers: 'temp', cmap: 'SeaTemp_C_BGYR_14colors'}
                 extraoptions = L.extend(extraoptions, options);
                 var layer = new L.FLayer(dataset, extraoptions);
                 if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
-                        layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=temp&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaTemp_C_BGYR_13colors';
+                        layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=temp&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaTemp_C_BGYR_14colors';
                 }
                 return layer;
         };

@@ -11,12 +11,12 @@
                 return new L.FLayer.Ecmwf._windSpeed('ECMWF/DXD/ECMWF_DXD_GREENLAND.nc', options);
 	};
 	L.FLayer.Ecmwf._windSpeed = function (dataset, options) {
-                var windoptions = {layers: 'U10M_V10M', cmap: 'Wind_ms_WBGYR_10colors'}
+                var windoptions = {layers: 'U10M_V10M', cmap: 'Wind_ms_YRP_16colors'}
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a> / IFS';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=U10M_V10M&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Wind_ms_WBGYR_10colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=U10M_V10M&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Wind_ms_YRP_16colors';
 		}
 		return layer;
 	};
@@ -65,12 +65,12 @@
                 return new L.FLayer.Ecmwf._totalCloudCover('ECMWF/DXD/ECMWF_DXD_GREENLAND.nc', options);
 	};
 	L.FLayer.Ecmwf._totalCloudCover = function (dataset, options) {
-                var extraoptions = {layers: 'TCC', cmap: 'CloudCover_KM_BYR_3colors'}
+                var extraoptions = {layers: 'TCC', cmap: 'CloudCover_km_WGB_10colors'}
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a> / IFS';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=TCC&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=CloudCover_KM_BYR_3colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=TCC&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=CloudCover_km_WGB_10colors';
 		}
 		return layer;
 	};
@@ -80,12 +80,12 @@
                 return new L.FLayer.Ecmwf._seaIceCover('ECMWF/DXD/ECMWF_DXD_GREENLAND.nc', options);
 	};
 	L.FLayer.Ecmwf._seaIceCover = function (dataset, options) {
-                var extraoptions = {layers: 'CI', cmap: 'CloudCover_KM_BYR_3colors'}
+                var extraoptions = {layers: 'CI', cmap: 'CloudCover_km_WGB_10colors'}
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a> / IFS';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=CI&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=CloudCover_KM_BYR_3colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=CI&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=CloudCover_km_WGB_10colors';
 		}
 		return layer;
 	};

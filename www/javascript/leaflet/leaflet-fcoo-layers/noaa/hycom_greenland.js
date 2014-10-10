@@ -14,12 +14,12 @@
 	};
 	L.FLayer.Noaa._currentSpeed = function (dataset, options) {
                 var currentoptions = {layers: 'u_velocity_v_velocity', 
-                                      cmap: 'Current_kn_GYR_9colors'}
+                                      cmap: 'CurrentArctic_kn_GYR_17colors'}
                 options = L.extend(options, currentoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://noaa.gov" alt="National Oceanic and Atmospheric Administration">NOAA</a> / HYCOM';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=u_velocity_v_velocity&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Current_kn_GYR_9colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=u_velocity_v_velocity&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=CurrentArctic_kn_GYR_17colors';
 		}
 		return layer;
 	};
@@ -45,12 +45,12 @@
                 return new L.FLayerGroup([layer1]);
 	};
 	L.FLayer.Noaa._sss = function (dataset, options) {
-                var extraoptions = {layers: 'sss', cmap: 'PrSalArctic_psu_GB_17colors'}
+                var extraoptions = {layers: 'sss', cmap: 'PrSalArctic_psu_GB_16colors'}
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://noaa.gov" alt="National Oceanic and Atmospheric Administration">NOAA</a> / HYCOM';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=sss&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=PrSalArctic_psu_GB_17colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=sss&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=PrSalArctic_psu_GB_16colors';
 		}
 		return layer;
 	};
@@ -61,12 +61,12 @@
                 return new L.FLayerGroup([layer1]);
 	};
 	L.FLayer.Noaa._sst = function (dataset, options) {
-                var extraoptions = {layers: 'sst', cmap: 'SeaTempArctic_C_BGYR_13colors'}
+                var extraoptions = {layers: 'sst', cmap: 'SeaTempArctic_C_BGYR_14colors'}
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://noaa.gov" alt="National Oceanic and Atmospheric Administration">NOAA</a> / HYCOM';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=sst&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaTempArctic_C_BGYR_13colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=sst&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaTempArctic_C_BGYR_14colors';
 		}
 		return layer;
 	};

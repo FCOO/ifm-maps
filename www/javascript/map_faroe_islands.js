@@ -16,7 +16,7 @@ function initMap() {
             "currentdirection": new L.FLayer.Noaa.currentDirection({zIndex: 200}),
             "seatemp": new L.FLayer.Noaa.sst({zIndex: 100}),
             "salinity": new L.FLayer.Noaa.sss({zIndex: 100}),
-            "visibility":  new L.FLayer.Noaa.visibility({zIndex: 100})
+//            "visibility":  new L.FLayer.Noaa.visibility({zIndex: 100})
         },
         "boundaries": {
             "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_201410030000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),

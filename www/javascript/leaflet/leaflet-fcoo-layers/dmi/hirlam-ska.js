@@ -12,12 +12,12 @@
                 return new L.FLayerGroup([layer1]);
 	};
 	L.FLayer.Dmi._windSpeed = function (dataset, options) {
-                var windoptions = {layers: 'u10_v10', cmap: 'Wind_ms_WBGYR_10colors'}
+                var windoptions = {layers: 'u10_v10', cmap: 'Wind_ms_YRP_16colors'}
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / SKA';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=u10_v10&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Wind_ms_WBGYR_10colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=u10_v10&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Wind_ms_YRP_16colors';
 		}
 		return layer;
 	};

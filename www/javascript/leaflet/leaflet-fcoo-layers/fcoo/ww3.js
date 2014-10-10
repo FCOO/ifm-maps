@@ -89,7 +89,7 @@
                 return layer;
 	};
 	L.FLayer.Fcoo._wavePeriod = function (dataset, options) {
-                var opts = {layers: 'TMN', cmap: 'Wind_ms_WBGYR_10colors'};
+                var opts = {layers: 'TMN', cmap: 'MeanPeriod_s_RGB_19colors'};
                 wms_opts = L.extend({}, opts);
                 wms_opts = L.extend(wms_opts, options);
                 var layer = new L.FLayer(dataset, wms_opts);
