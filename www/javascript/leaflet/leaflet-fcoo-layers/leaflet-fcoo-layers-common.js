@@ -3,9 +3,9 @@
  * Web Map Service layers without hassle.
  */
 L.FLayer = L.TileLayer.WMS.extend({
-        //baseUrl: "http://wms-dev01:8090/{dataset}.wms",
+        baseUrl: "http://wms-dev01:8080/{dataset}.wms",
         //baseUrl: location.protocol + "//api.fcoo.dk/webmap/{dataset}.wms",
-        baseUrl: location.protocol + "//webmap-stag01:8080/{dataset}.wms",
+        //baseUrl: location.protocol + "//webmap-stag01:8080/{dataset}.wms",
 	defaultWmsParams: {
 		service: 'WMS',
 		request: 'GetMap',
