@@ -11,12 +11,12 @@
                 return new L.FLayer.Ecmwf._waveHeight('ECMWF/DXP/ECMWF_DXP_GREENLAND.nc', options);
 	};
 	L.FLayer.Ecmwf._waveHeight = function (dataset, options) {
-                var waveoptions = {layers: 'u_v', cmap: 'Hs_m_GBP_20colors'}
+                var waveoptions = {layers: 'u_v', cmap: 'Hs_m_GBP_9colors'}
                 waveoptions = L.extend(waveoptions, options);
 		var layer = new L.FLayer(dataset, waveoptions);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a> / WAM';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=u_v&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Hs_m_GBP_20colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=u_v&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Hs_m_GBP_9colors';
 		}
 		return layer;
 	};
@@ -37,7 +37,7 @@
                 return new L.FLayer.Ecmwf._wavePeriod('ECMWF/DXP/ECMWF_DXP_GREENLAND.nc', options);
 	};
 	L.FLayer.Ecmwf._wavePeriod = function (dataset, options) {
-                var opts = {layers: 'MWP', cmap: 'MeanPeriod_s_RGB_19colors'};
+                var opts = {layers: 'MWP', cmap: 'MeanPeriod_s_RGB_10colors'};
                 wms_opts = L.extend({}, opts);
                 wms_opts = L.extend(wms_opts, options);
 		var layer = new L.FLayer(dataset, wms_opts);

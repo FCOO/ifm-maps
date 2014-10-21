@@ -24,12 +24,12 @@
                 return layer;
 	};
 	L.FLayer.Fcoo._currentSpeed = function (dataset, options) {
-                var currentoptions = {layers: 'uu_vv', cmap: 'Current_kn_GYR_19colors'}
+                var currentoptions = {layers: 'uu_vv', cmap: 'Current_kn_GYR_11colors'}
                 var currentoptions = L.extend(currentoptions, options);
 		var layer = new L.FLayer(dataset, currentoptions);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=uu_vv&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Current_kn_GYR_19colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=uu_vv&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Current_kn_GYR_11colors';
 		}
 		return layer;
 	};

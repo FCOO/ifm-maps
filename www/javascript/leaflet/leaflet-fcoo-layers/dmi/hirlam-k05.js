@@ -11,12 +11,12 @@
                 return new L.FLayer.Dmi._visibility('DMI/HIRLAM/DMI_HIRLAM_K05.nc', options);
 	};
 	L.FLayer.Dmi._visibility = function (dataset, options) {
-                var extraoptions = {layers: 'vis', cmap: 'AirVisibility_km_RYG_10colors'}
+                var extraoptions = {layers: 'vis', cmap: 'AirVisibility_km_RYG_11colors'}
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=vis&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=AirVisibility_km_RYG_10colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=vis&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=AirVisibility_km_RYG_11colors';
 		}
 		return layer;
 	};
@@ -27,12 +27,12 @@
                 return new L.FLayerGroup([layer1]);
 	};
 	L.FLayer.Dmi._windSpeed = function (dataset, options) {
-                var windoptions = {layers: 'u10_v10', cmap: 'Wind_ms_YRP_16colors'}
+                var windoptions = {layers: 'u10_v10', cmap: 'Wind_ms_YRP_11colors'}
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=u10_v10&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Wind_ms_YRP_16colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=u10_v10&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Wind_ms_YRP_11colors';
 		}
 		return layer;
 	};
