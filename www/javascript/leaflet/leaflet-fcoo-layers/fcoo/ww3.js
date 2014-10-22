@@ -9,7 +9,7 @@
                 var layer;
                 switch (domain) {
                     case 'NSBaltic':
-                        layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
+                        layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3/ww3c_NSBALT3NM_v001C-FCAST.nc', options);
                         break;
                     case 'DKinner':
                         layer = L.FLayer.Fcoo._waveHeight('FCOO/WW3/ww3fcast_grd_DKinner_v006C.nc', options);
@@ -42,7 +42,7 @@
                 var layer;
                 switch (domain) {
                     case 'NSBaltic':
-                        layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
+                        layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3/ww3c_NSBALT3NM_v001C-FCAST.nc', options);
                         break;
                     case 'DKinner':
                         layer = L.FLayer.Fcoo._waveDirection('FCOO/WW3/ww3fcast_grd_DKinner_v006C.nc', options);
@@ -71,7 +71,7 @@
                 var layer;
                 switch (domain) {
                     case 'NSBaltic':
-                        layer = L.FLayer.Fcoo._wavePeriod('FCOO/WW3/ww3fcast_grd_NSBaltic_v006C.nc', options);
+                        layer = L.FLayer.Fcoo._wavePeriod('FCOO/WW3/ww3c_NSBALT3NM_v001C-FCAST.nc', options);
                         break;
                     case 'DKinner':
                         layer = L.FLayer.Fcoo._wavePeriod('FCOO/WW3/ww3fcast_grd_DKinner_v006C.nc', options);
