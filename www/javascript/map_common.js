@@ -494,6 +494,8 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
                         vertical: false,
                         position: 'topright'
                 }).addTo(map);
+                // Make sure that overlays are updated
+                map.fire("overlayadd");
             } else {
                 if (dt_current <= dt_max) {
                     dt_current += dt_check;
