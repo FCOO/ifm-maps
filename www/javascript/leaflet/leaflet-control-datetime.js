@@ -32,11 +32,13 @@ L.DatetimeSelector = L.Control.extend({
 
 	onAdd: function(map) {
 		this._map = map;
+                this._map.on("overlayadd overlayremove", this._layersChanged, this);
 		return this._container;
 	},
 
 	onRemove: function(map) {
 		this._container.style.display = 'none';
+                this._map.off("overlayadd overlayremove", this._layersChanged, this);
 		this._map = null;
 	},
 
@@ -84,14 +86,17 @@ L.DatetimeSelector = L.Control.extend({
 		//L.DomEvent.addListener(selectList, 'onchange', this._datetimeChanged, L.DomEvent.stopPropagation);
 
                 // Add slider control
-                var sliderDiv = L.DomUtil.create('div', 'leaflet-control-datetime-sliderdiv', container);
-                $(sliderDiv).slider({
+                var sliderDiv = $(L.DomUtil.create('div', 'leaflet-control-datetime-sliderdiv', container));
+                sliderDiv.slider({
                     "class": "leaflet-control-datetime-slider",
                     min: 0,
                     max: this.options.datetimes.length-1,
                     value: select_index,
                     slide: this._sliderChanged
                 });
+                // Create time slider shade
+                sliderRange = $('<div id="range"></div>');
+                sliderDiv.append(sliderRange);
 
                 // Add datetime button controls
                 var buttonDiv = L.DomUtil.create('div', 'leaflet-control-datetime-buttondiv', container);
@@ -163,6 +168,58 @@ L.DatetimeSelector = L.Control.extend({
                 localdiv.appendTo(container);
 	},
 
+        _layersChanged: function(pEvent) {
+                // Find min and max time for selector (reversed)
+                var datetimes = this.options.datetimes;
+                var tmin = datetimes[datetimes.length-1];
+                var tmax = datetimes[0];
+                // Find min and max time
+                this._map.eachLayer(function (layer) {
+                    if (layer._overlay !== undefined && layer._overlay === true) {
+                        if (layer.getTimesteps !== undefined) {
+                            var timesteps = layer.getTimesteps();
+                            if (timesteps !== null && timesteps.length > 1) {
+                                tmin = (timesteps[0] < tmin ? timesteps[0] : tmin);
+                                tmax = (timesteps[timesteps.length-1] > tmax ? timesteps[timesteps.length-1] : tmax);
+                            }
+                        }
+                    }
+                });
+                // Find indices for min and max
+                var minDiff = 10000000000;
+                var imin = null;
+                for (i in datetimes) {
+                    var m = Math.abs(tmin - datetimes[i]);
+                    if (m < minDiff) { 
+                        minDiff = m; 
+                        imin = i; 
+                    }
+                }
+                var minDiff = 10000000000;
+                var imax = null;
+                for (i in datetimes) {
+                    var m = Math.abs(tmax - datetimes[i]);
+                    if (m < minDiff) { 
+                        minDiff = m; 
+                        imax = i; 
+                    }
+                }
+                if (imax > imin) {
+                    // Calculate slider percentages
+                    ifull = datetimes.length-1;
+                    var pmin = imin/ifull*100.0;
+                    var pmax = imax/ifull*100.0;
+                    var pwidth = pmax - pmin;
+                    // Set slider range to span min to max
+                    var sliderRange = $("#range");
+                    sliderRange.css({"margin-left": pmin + "%", "width": pwidth + "%"});
+                } else {
+                    // Unset slider range when no overlays are selected
+                    var sliderRange = $("#range");
+                    sliderRange.css({"margin-left": "", "width": ""});
+                }
+        },
+
         _datetimeUpdate: function(select) {
                 var date = select.options[select.selectedIndex].value;
                 var container = select.parentElement;
@@ -204,7 +261,6 @@ L.DatetimeSelector = L.Control.extend({
                 var select = $('select.leaflet-control-datetime-dateselect')[0];
                 var index = Math.max(select.selectedIndex - 1, 0);
                 select.selectedIndex = index;
-                console.log(index);
                 $('.leaflet-control-datetime-sliderdiv').slider("value", index);
                 var inst = select._instance;
                 inst._datetimeUpdate(select);
