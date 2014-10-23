@@ -16,7 +16,7 @@ L.Control.CategorizedLayers = L.Control.Layers.extend({
     groupsCollapsed: true,
     collapseActiveGroups: false,
     position: 'topright',
-    autoZIndex: true
+    autoZIndex: true,
   },
   
   initialize: function (baseLayers, overlays, options) {
@@ -233,9 +233,10 @@ L.Control.CategorizedLayers = L.Control.Layers.extend({
       var obj = input.overlay ? this._overlays[input.category][input.layerId] : this._layers[input.category][input.layerId]
       if (input.checked && !this._map.hasLayer(obj)) {
         this._map.addLayer(obj);
-
+        this._map.fire('overlayadd');
       } else if (!input.checked && this._map.hasLayer(obj)) {
         this._map.removeLayer(obj);
+        this._map.fire('overlayremove');
       }
     }
 
