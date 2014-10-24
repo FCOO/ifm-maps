@@ -95,7 +95,7 @@ L.DatetimeSelector = L.Control.extend({
                     slide: this._sliderChanged
                 });
                 // Create time slider shade
-                sliderRange = $('<div id="range"></div>');
+                sliderRange = $('<div id="leaflet-control-datetime-range"></div>');
                 sliderDiv.append(sliderRange);
 
                 // Add datetime button controls
@@ -191,8 +191,8 @@ L.DatetimeSelector = L.Control.extend({
                 for (i in datetimes) {
                     var m = Math.abs(tmin - datetimes[i]);
                     if (m < minDiff) { 
-                        minDiff = m; 
-                        imin = i; 
+                        minDiff = m;
+                        imin = i;
                     }
                 }
                 var minDiff = 10000000000;
@@ -200,10 +200,11 @@ L.DatetimeSelector = L.Control.extend({
                 for (i in datetimes) {
                     var m = Math.abs(tmax - datetimes[i]);
                     if (m < minDiff) { 
-                        minDiff = m; 
-                        imax = i; 
+                        minDiff = m;
+                        imax = i;
                     }
                 }
+                var sliderRange = $("#leaflet-control-datetime-range");
                 if (imax > imin) {
                     // Calculate slider percentages
                     ifull = datetimes.length-1;
@@ -211,11 +212,9 @@ L.DatetimeSelector = L.Control.extend({
                     var pmax = imax/ifull*100.0;
                     var pwidth = pmax - pmin;
                     // Set slider range to span min to max
-                    var sliderRange = $("#range");
                     sliderRange.css({"margin-left": pmin + "%", "width": pwidth + "%"});
                 } else {
                     // Unset slider range when no overlays are selected
-                    var sliderRange = $("#range");
                     sliderRange.css({"margin-left": "", "width": ""});
                 }
         },
