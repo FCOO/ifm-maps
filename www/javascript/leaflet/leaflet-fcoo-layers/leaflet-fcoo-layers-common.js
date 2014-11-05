@@ -72,6 +72,34 @@ L.FLayer = L.TileLayer.WMS.extend({
                 return this;
         },
 
+        getTileUrl: function (coords) {
+                /*
+                 * Override getTileUrl when requesting data outside time range.
+                 * When outside we just return an empty string for the url.
+                 */
+                function parseDecimalInt(s) {
+                        return parseInt(s, 10);
+                }
+                var stime = this.wmsParams.time;
+                var sptime = stime.split('T');
+                if (sptime !== undefined && sptime.length == 2) {
+                        var date = sptime[0].split('-').map(parseDecimalInt);
+                        var time = sptime[1].split(':').map(parseDecimalInt);
+                        var timestep = new Date(Date.UTC(date[0], date[1]-1, date[2],
+                                                         time[0], time[1], time[2]));
+                        var timesteps = this.getTimesteps()
+                        if (timesteps !== null && timestep >= timesteps[0] && 
+                            timestep <= timesteps[timesteps.length-1]) {
+                            var url = L.TileLayer.WMS.prototype.getTileUrl.call(this, coords);
+                        } else {
+                            var url = '';
+                        }
+                } else {
+                    var url = L.TileLayer.WMS.prototype.getTileUrl.call(this, coords);
+                }
+                return url;
+        },
+
         _error_capabilities: function(jqXHR, textStatus, err) {
                 var msg = 'Failed getting web map capabilities from ' + jqXHR.url;
                 var n = noty({text: msg, type: "error"});
