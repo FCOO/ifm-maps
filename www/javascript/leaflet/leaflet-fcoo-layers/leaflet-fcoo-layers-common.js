@@ -122,8 +122,14 @@ L.FLayer = L.TileLayer.WMS.extend({
                          belem = $xml.find('Name').filter(function () {
                            return $( this ).text() === first_layer;
                          }).parent().find('BoundingBox');
-                     var bounds = L.latLngBounds(L.latLng(belem.attr('miny'), belem.attr('minx') % 360.0), 
-                                                 L.latLng(belem.attr('maxy'), belem.attr('maxx') % 360.0));
+                     var minx = belem.attr('minx'),
+                         miny = belem.attr('miny'),
+                         maxx = belem.attr('maxx'),
+                         maxy = belem.attr('maxy');
+                     minx = (minx > 180.0) ? minx - 360.0 : minx;
+                     maxx = (maxx > 180.0) ? maxx - 360.0 : maxx;
+                     var bounds = L.latLngBounds(L.latLng(miny, minx), 
+                                                 L.latLng(maxy, maxx));
                      this.options.bounds = bounds;
                      // Get time extent
                      $xml = $(xml),
