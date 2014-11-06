@@ -74,9 +74,13 @@ L.FLayer = L.TileLayer.WMS.extend({
 
         getTileUrl: function (coords) {
                 /*
-                 * Override getTileUrl when requesting data outside time range.
+                 * Override getTileUrl when requesting data outside 
+                 * time range.
                  * When outside we just return an empty string for the url.
                  */
+
+                // Check if within time range
+                var load_tile = true;
                 function parseDecimalInt(s) {
                         return parseInt(s, 10);
                 }
@@ -88,14 +92,18 @@ L.FLayer = L.TileLayer.WMS.extend({
                         var timestep = new Date(Date.UTC(date[0], date[1]-1, date[2],
                                                          time[0], time[1], time[2]));
                         var timesteps = this.getTimesteps()
-                        if (timesteps !== null && timestep >= timesteps[0] && 
-                            timestep <= timesteps[timesteps.length-1]) {
-                            var url = L.TileLayer.WMS.prototype.getTileUrl.call(this, coords);
-                        } else {
-                            var url = '';
+                        if (timesteps !== null && (timestep < timesteps[0] ||
+                            timestep > timesteps[timesteps.length-1])) {
+                            load_tile = false;
                         }
+                }
+ 
+                if (load_tile) {
+                        var url = L.TileLayer.WMS.prototype.getTileUrl.call(this, coords);
                 } else {
-                    var url = L.TileLayer.WMS.prototype.getTileUrl.call(this, coords);
+                        // 1x1 pixel transparent image
+                        var url = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=';
+
                 }
                 return url;
         },
@@ -114,9 +122,9 @@ L.FLayer = L.TileLayer.WMS.extend({
                          belem = $xml.find('Name').filter(function () {
                            return $( this ).text() === first_layer;
                          }).parent().find('BoundingBox');
-                     var bounds = L.latLngBounds(L.latLng(belem.attr('miny'), belem.attr('minx')), 
-                                                 L.latLng(belem.attr('maxy'), belem.attr('maxx')));
-                     this.wmsParams.bounds = bounds;
+                     var bounds = L.latLngBounds(L.latLng(belem.attr('miny'), belem.attr('minx') % 360.0), 
+                                                 L.latLng(belem.attr('maxy'), belem.attr('maxx') % 360.0));
+                     this.options.bounds = bounds;
                      // Get time extent
                      $xml = $(xml),
                          belem = $xml.find('Name').filter(function () {
