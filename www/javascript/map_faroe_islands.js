@@ -43,7 +43,6 @@ function initMap() {
     var lon = -6.0;
     var useGeolocation = true;
     var useGeoMetoc = false;
-    var useIfmChart = false;
 
-    initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, useGeolocation, useGeoMetoc, useIfmChart);
+    initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, useGeolocation, useGeoMetoc);
 }

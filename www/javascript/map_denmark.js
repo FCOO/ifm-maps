@@ -11,9 +11,35 @@ function initMap() {
         errorTileUrl: fcoo_base + "empty.png"
     });
 
+    var minZoom = 5;
+    var maxZoom = 10;
+    var zoom = 6;
+    var lat = 55.7;
+    var lon = 11.1;
+    var useGeolocation = true;
+    var useGeoMetoc = false;
+
     var langs = ['da', 'en'];
     var basemap = "FCOO Standard";
-    var overlays = {
+
+    var link_template = "http://ifm.fcoo.dk/asp/oceanChart.asp?hindcastPeriod=12&forecastPeriod=24&width=500&height=350&id=__STATION__&paramId=SeaLvl&forecastMode=1";
+    $.getJSON("http://api.fcoo.dk/ifm-maps/json/Observations.json", function(data) {
+      var geojson = L.geoJson(data, {
+          onEachFeature: function (feature, layer) {
+              layer.bindPopup('<img src="' + link_template.replace('__STATION__', feature.properties.id) + '" height="350" width="500" />', {maxWidth: 700, maxHeight: 600});
+          },
+          pointToLayer: function (feature, latlng) {
+              return L.circleMarker(latlng, {
+                      radius: 5,
+                      fillColor: "#ff7800",
+                      color: "#000",
+                      weight: 1,
+                      opacity: 1,
+                      fillOpacity: 0.8
+                     });
+            }
+        });
+        var overlays = {
         "DMI": {
             "windspeed": new L.FLayer.Dmi.windSpeed({zIndex: 100}),
             "winddirection": new L.FLayer.Dmi.windDirection({zIndex: 200}),
@@ -41,15 +67,12 @@ function initMap() {
         "boundaries": {
             "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_201410030000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),
         },
+        "stations": {
+            "Sea level": geojson,
+        },
     }
-    var minZoom = 5;
-    var maxZoom = 10;
-    var zoom = 6;
-    var lat = 55.7;
-    var lon = 11.1;
-    var useGeolocation = true;
-    var useGeoMetoc = false;
-    var useIfmChart = false;
 
-    initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, useGeolocation, useGeoMetoc, useIfmChart);
+    initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, useGeolocation, useGeoMetoc);
+    });
+
 }

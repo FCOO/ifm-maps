@@ -21,7 +21,6 @@ function initMap() {
     var lon = 52.0;
     var useGeolocation = false;
     var useGeoMetoc = false;
-    var useIfmChart = false;
 
-    initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, useGeolocation, useGeoMetoc, useIfmChart);
+    initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, useGeolocation, useGeoMetoc);
 }

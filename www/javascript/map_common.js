@@ -20,6 +20,7 @@ function getI18n(key, lang) {
 			  maps: 'Maps'
 			, layers: 'Forecast Parameters'
 			, boundaries: 'Boundaries'
+			, stations: 'Stations'
 			, iceconcentration: 'Sea Ice Concentration'	
 			, windspeed: 'Wind Speed'
 			, winddirection: 'Wind Direction'
@@ -51,6 +52,7 @@ function getI18n(key, lang) {
 			, 'Background Maps': 'Baggrundskort'
 			, layers: 'Prognoseparametre'
 			, boundaries: 'Grænser'
+			, stations: 'Stationer'
 			, iceconcentration: 'Havis (koncentration)'
 			, windspeed: 'Vind (fart)'
 			, winddirection: 'Vindretning'
@@ -291,7 +293,7 @@ function foundLocation(position) {
 /**
  * Initialize the map.
  */
-function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, useGeolocation, useGeoMetoc, useIfmChart) {
+function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, useGeolocation, useGeoMetoc) {
 	var localLang = getLocalLanguage();
 
         // Initialize basemaps
@@ -354,27 +356,6 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lo
                 useAnchor: false,
                 position: 'topright'
 	}));
-
-        if (useIfmChart) {
-            var link_template = "http://ifm.fcoo.dk/asp/oceanChart.asp?hindcastPeriod=12&forecastPeriod=24&width=500&height=350&id=__STATION__&paramId=SeaLvl&forecastMode=1";
-            $.getJSON("http://api.fcoo.dk/ifm-maps/json/Observations.json", function(data) {
-              var geojson = L.geoJson(data, {
-                onEachFeature: function (feature, layer) {
-                  layer.bindPopup('<img src="' + link_template.replace('__STATION__', feature.properties.id) + '" height="350" width="500" />', {maxWidth: 700, maxHeight: 600});
-                },
-                pointToLayer: function (feature, latlng) {
-                  return L.circleMarker(latlng, {
-                          radius: 5,
-                          fillColor: "#ff7800",
-                          color: "#000",
-                          weight: 1,
-                          opacity: 1,
-                          fillOpacity: 0.8
-                         });
-                }
-              }).addTo(map);
-            });
-        }
 
         // Add base layers and overlays to map
         overlayMaps = [];
