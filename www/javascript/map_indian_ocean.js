@@ -21,7 +21,7 @@ function initMap() {
             "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_201410030000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),
         }
     }
-    var minZoom = 2;
+    var minZoom = 4;
     var maxZoom = 10;
     var zoom = 6;
     var lat = 10.0;
