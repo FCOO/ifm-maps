@@ -6,6 +6,13 @@ function initMap() {
     var langs = ['da', 'en'];
     var basemap = "FCOO Standard";
     var overlays = {
+        "ECMWF": {
+            "windspeed": new L.FLayer.Ecmwf.windSpeed({zIndex: 100}),
+            "winddirection": new L.FLayer.Ecmwf.windDirection({zIndex: 200}),
+            "waveperiod": new L.FLayer.Ecmwf.wavePeriod({zIndex: 100}),
+            "waveheight": new L.FLayer.Ecmwf.waveHeight({zIndex: 100}),
+            "wavedirection": new L.FLayer.Ecmwf.waveDirection({zIndex: 200}),
+        },
         "NOAA": {
             "currentspeed": new L.FLayer.Noaa.currentSpeed({zIndex: 100}),
             "currentdirection": new L.FLayer.Noaa.currentDirection({zIndex: 200})
