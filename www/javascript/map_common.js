@@ -534,3 +534,19 @@ function getTimeSteps(overlayMaps) {
     }
     return outdates;
 }
+
+function getTilesize() {
+    /* Returns tilesize, possibly from url parameter */
+    var urlParams = getUrlParameters();
+    var tilesize;
+    if (typeof urlParams.tilesize != "undefined") {
+        tilesize = parseInt(urlParams.tilesize, 10);
+        // Allowed values:
+        if ([256, 512, 1024].indexOf(tilesize) == -1) {
+            tilesize = 512;
+        }
+    } else {
+        tilesize = 512;
+    }
+    return tilesize;
+}
