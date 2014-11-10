@@ -544,8 +544,12 @@ function getTilesize() {
         // Allowed values:
         if ([256, 512, 1024].indexOf(tilesize) == -1) {
             tilesize = 512;
+            var msg = "Invalid tile size specified (must be 256, 512 or 1024)";
+            var n = noty({text: msg, type: "error"});
+            throw new Error(msg);
         }
     } else {
+        // Default value
         tilesize = 512;
     }
     return tilesize;
