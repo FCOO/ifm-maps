@@ -41,13 +41,13 @@ L.FLayer = L.TileLayer.WMS.extend({
 	},
 
 	initialize: function (dataset, options) {
-		this._fcootileurl = this.baseUrl.replace('{dataset}', dataset);
+		this._basetileurl = this.baseUrl.replace('{dataset}', dataset);
 		this._map = null;
 		this._legendControl = null;
 		this._legendId = null;
                 this._timesteps = null;
                 this._timestepsready = false;
-                L.TileLayer.WMS.prototype.initialize.call(this, this._fcootileurl, options);
+                L.TileLayer.WMS.prototype.initialize.call(this, this._basetileurl, options);
                 jQuery.support.cors = true;
                 // We just select a subdomain to request capabilities from
                 // based on the dataset name and layer names. This is simply
@@ -55,10 +55,10 @@ L.FLayer = L.TileLayer.WMS.extend({
                 // subdomains.
                 var subindex = dataset.length + options.layers.length;
                 subindex = subindex % this.options.subdomains.length;
-                var url = L.Util.template(this._fcootileurl, 
-                            {s: this.options.subdomains[subindex]});
+                this._fcootileurl = L.Util.template(this._basetileurl, 
+                               {s: this.options.subdomains[subindex]});
                 $.ajax({
-                  url: url,
+                  url: this._fcootileurl,
                   data: {SERVICE: 'WMS', REQUEST: 'GetCapabilities', VERSION: this.wmsParams.version},
                   context: this,
                   error: this._error_capabilities,
