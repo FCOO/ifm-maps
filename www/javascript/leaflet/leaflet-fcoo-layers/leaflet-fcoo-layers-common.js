@@ -4,7 +4,7 @@
  */
 L.FLayer = L.TileLayer.WMS.extend({
         baseUrl: "http://wms-dev01:8080/{dataset}.wms",
-        //baseUrl: location.protocol + "//api.fcoo.dk/webmap/{dataset}.wms",
+        //baseUrl: location.protocol + "//{s}.fcoo.dk/webmap/{dataset}.wms",
         //baseUrl: location.protocol + "//webmap-stag01:8080/{dataset}.wms",
 	defaultWmsParams: {
 		service: 'WMS',
@@ -29,6 +29,7 @@ L.FLayer = L.TileLayer.WMS.extend({
         options: {
                 tileSize: 512,
                 opacity: 1.00,
+                subdomains: ['api'],
 		maxZoom: 18,
 		showLegend: true,
 		legendImagePath: null,
@@ -48,8 +49,16 @@ L.FLayer = L.TileLayer.WMS.extend({
                 this._timestepsready = false;
                 L.TileLayer.WMS.prototype.initialize.call(this, this._fcootileurl, options);
                 jQuery.support.cors = true;
+                // We just select a subdomain to request capabilities from
+                // based on the dataset name and layer names. This is simply
+                // done to distribute the requests somewhat between the
+                // subdomains.
+                var subindex = dataset.length + options.layers.length;
+                subindex = subindex % this.options.subdomains.length;
+                var url = L.Util.template(this._fcootileurl, 
+                            {s: this.options.subdomains[subindex]});
                 $.ajax({
-                  url: this._fcootileurl,
+                  url: url,
                   data: {SERVICE: 'WMS', REQUEST: 'GetCapabilities', VERSION: this.wmsParams.version},
                   context: this,
                   error: this._error_capabilities,
@@ -101,9 +110,7 @@ L.FLayer = L.TileLayer.WMS.extend({
                 if (load_tile) {
                         var url = L.TileLayer.WMS.prototype.getTileUrl.call(this, coords);
                 } else {
-                        // 1x1 pixel transparent image
-                        var url = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=';
-
+                        var url = L.Util.emptyImageUrl;
                 }
                 return url;
         },
