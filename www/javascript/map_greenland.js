@@ -5,6 +5,7 @@ function initMap() {
     var langs = ['da', 'en'];
     var basemap = "FCOO Standard";
     var fcoo_base = location.protocol + "//media.fcoo.dk/tiles/";
+    var fcoo_tileSize = 1024;
     var overlays = {
         "DMI": {
             "windspeed": new L.FLayer.Dmi.windSpeed({zIndex: 100}),
@@ -38,8 +39,10 @@ function initMap() {
             "salinity": new L.FLayer.Noaa.sss({zIndex: 100}),
         },
         "boundaries": {
-            "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_201410030000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),
-            "SAR": new L.tileLayer(fcoo_base + "tiles_SAR_201410030000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: 256, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty.png"}),
+            "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_" + fcoo_tileSize + "_mercator_201411070000" + "/{z}/{x}/{y}.png",
+		 {maxZoom: 10, tileSize: fcoo_tileSize, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + fcoo_tileSize +".png"}),
+            "SAR": new L.tileLayer(fcoo_base + "tiles_SAR_" + fcoo_tileSize + "_mercator_201411070000" + "/{z}/{x}/{y}.png",
+		 {maxZoom: 10, tileSize: fcoo_tileSize, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + fcoo_tileSize +".png"}),
         }
     };
     var minZoom = 2;
