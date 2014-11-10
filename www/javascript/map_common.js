@@ -95,7 +95,7 @@ function getI18n(key, lang) {
 /**
  * Initialize base maps
  */
-function initBaseMaps(lang) {
+function initBaseMaps(lang, tilesize) {
     var standard = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         tileSize: 256,
@@ -119,10 +119,9 @@ function initBaseMaps(lang) {
 
     var fcoo_base = location.protocol + "//media.fcoo.dk/tiles/";
     var tile_bckgrnd_date = "201411070000";
-    var fcoo_tileSize = 1024;
-    var fcoo = L.tileLayer(fcoo_base + "tiles_bckgrnd_" + fcoo_tileSize + "_mercator_" + tile_bckgrnd_date + "/{z}/{x}/{y}.png", {
+    var fcoo = L.tileLayer(fcoo_base + "tiles_bckgrnd_" + tilesize + "_mercator_" + tile_bckgrnd_date + "/{z}/{x}/{y}.png", {
         maxZoom: 10,
-        tileSize: fcoo_tileSize,
+        tileSize: tilesize,
         attribution: 'FCOO - Danish Defence Centre for Operational Oceanography',
         continuousWorld: false
     });
@@ -137,12 +136,12 @@ function initBaseMaps(lang) {
     };
 
     var tile_top_date = "201411070000";
-    var topLayer = L.tileLayer(fcoo_base + "tiles_top_" + fcoo_tileSize + "_mercator_" + tile_top_date + "/{z}/{x}/{y}.png", {
+    var topLayer = L.tileLayer(fcoo_base + "tiles_top_" + tilesize + "_mercator_" + tile_top_date + "/{z}/{x}/{y}.png", {
         maxZoom: 10,
-        tileSize: fcoo_tileSize,
+        tileSize: tilesize,
         zIndex: 1001,
         continuousWorld: false,
-        errorTileUrl: fcoo_base + "empty_" + fcoo_tileSize + ".png"
+        errorTileUrl: fcoo_base + "empty_" + tilesize + ".png"
     });
 
     return {baseMaps: baseMaps, topLayer: topLayer};
@@ -294,11 +293,12 @@ function foundLocation(position) {
 /**
  * Initialize the map.
  */
-function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, useGeolocation, useGeoMetoc) {
+function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, 
+                       lon, tilesize, useGeolocation, useGeoMetoc) {
 	var localLang = getLocalLanguage();
 
         // Initialize basemaps
-        var tmplayers = initBaseMaps(localLang);
+        var tmplayers = initBaseMaps(localLang, tilesize);
         var baseMaps = tmplayers.baseMaps;
         var topLayer = tmplayers.topLayer;
         // List of languages to select from
