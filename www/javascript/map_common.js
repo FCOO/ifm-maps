@@ -142,7 +142,7 @@ function initBaseMaps(lang) {
         tileSize: fcoo_tileSize,
         zIndex: 1001,
         continuousWorld: false,
-        errorTileUrl: fcoo_base + "empty.png"
+        errorTileUrl: fcoo_base + "empty_" + fcoo_tileSize + ".png"
     });
 
     return {baseMaps: baseMaps, topLayer: topLayer};

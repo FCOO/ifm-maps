@@ -9,7 +9,7 @@ function initMap() {
         tileSize: 256,
         zIndex: 1000,
         continuousWorld: false,
-        errorTileUrl: fcoo_base + "empty.png"
+        errorTileUrl: fcoo_base + "empty_" + fcoo_tileSize + ".png"
     });
 
     var minZoom = 5;
