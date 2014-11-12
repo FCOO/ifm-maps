@@ -94,16 +94,21 @@ L.FLayer = L.TileLayer.WMS.extend({
                         return parseInt(s, 10);
                 }
                 var stime = this.wmsParams.time;
-                var sptime = stime.split('T');
-                if (sptime !== undefined && sptime.length == 2) {
-                        var date = sptime[0].split('-').map(parseDecimalInt);
-                        var time = sptime[1].split(':').map(parseDecimalInt);
-                        var timestep = new Date(Date.UTC(date[0], date[1]-1, date[2],
+                // wmsParams.time might not yet be initialized.
+                // In that case we just request the image even
+                // if it is out of time range
+                if (stime !== undefined) {
+                        var sptime = stime.split('T');
+                        if (sptime.length == 2) {
+                                var date = sptime[0].split('-').map(parseDecimalInt);
+                                var time = sptime[1].split(':').map(parseDecimalInt);
+                                var timestep = new Date(Date.UTC(date[0], date[1]-1, date[2],
                                                          time[0], time[1], time[2]));
-                        var timesteps = this.getTimesteps()
-                        if (timesteps !== null && (timestep < timesteps[0] ||
-                            timestep > timesteps[timesteps.length-1])) {
-                            load_tile = false;
+                                var timesteps = this.getTimesteps()
+                                if (timesteps !== null && (timestep < timesteps[0] ||
+                                     timestep > timesteps[timesteps.length-1])) {
+                                     load_tile = false;
+                                }
                         }
                 }
  
