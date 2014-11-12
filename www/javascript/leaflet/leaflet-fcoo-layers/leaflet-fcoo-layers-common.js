@@ -29,7 +29,7 @@ L.FLayer = L.TileLayer.WMS.extend({
         options: {
                 tileSize: 512,
                 opacity: 1.00,
-                subdomains: ['api'],
+                subdomains: ['api01', 'api02', 'api03', 'api04', 'api05'],
 		maxZoom: 18,
 		showLegend: true,
 		legendImagePath: null,

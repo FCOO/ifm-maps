@@ -3,7 +3,8 @@
  */
 function initMap() {
     var tilesize = getTilesize();
-    var fcoo_base = location.protocol + "//media.fcoo.dk/tiles/";
+    var subdomains = ["media01", "media02", "media03", "media04", "media05"];
+    var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
     var langs = ['da', 'en'];
     var basemap = "FCOO Standard";
     var overlays = {
@@ -16,7 +17,7 @@ function initMap() {
         },
         "boundaries": {
             "EEZ": new l.tilelayer(fcoo_base + "tiles_eez_" + tilesize + "_mercator_201411070000" + "/{z}/{x}/{y}.png",
-                 {maxzoom: 10, tilesize: tilesize, zindex: 200, continuousworld: false, errortileurl: fcoo_base + "empty_" + tilesize +".png"}),
+		 {maxZoom: 10, tileSize: tilesize, subdomains: subdomains, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + tilesize +".png"}),
         },
     }
     var minZoom = 2;

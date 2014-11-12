@@ -3,7 +3,8 @@
  */
 function initMap() {
     var tilesize = getTilesize();
-    var fcoo_base = location.protocol + "//media.fcoo.dk/tiles/";
+    var subdomains = ["media01", "media02", "media03", "media04", "media05"];
+    var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
     var langs = ['da', 'en'];
     var basemap = "FCOO Standard";
     var overlays = {
@@ -11,6 +12,7 @@ function initMap() {
             "windspeed": new L.FLayer.Ecmwf.windSpeed({tileSize: tilesize, zIndex: 100}),
             "winddirection": new L.FLayer.Ecmwf.windDirection({tileSize: tilesize, zIndex: 200}),
             "pressure": new L.FLayer.Ecmwf.seaLevelPressure({tileSize: tilesize, zIndex: 200}),
+            "precip": new L.FLayer.Ecmwf.totalPrecipitation({tileSize: tilesize, zIndex: 100}),
             "airtemp": new L.FLayer.Ecmwf.airTemperature({tileSize: tilesize, zIndex: 100}),
             "cloudcover": new L.FLayer.Ecmwf.totalCloudCover({tileSize: tilesize, zIndex: 100}),
             "waveperiod": new L.FLayer.Ecmwf.wavePeriod({tileSize: tilesize, zIndex: 100}),
@@ -23,7 +25,7 @@ function initMap() {
         },
         "boundaries": {
             "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_" + tilesize + "_mercator_201411070000" + "/{z}/{x}/{y}.png",
-                 {maxZoom: 10, tileSize: tilesize, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + tilesize +".png"}),
+		 {maxZoom: 10, tileSize: tilesize, subdomains: subdomains, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + tilesize +".png"}),
         }
     }
     var minZoom = 4;

@@ -74,5 +74,20 @@
 		}
 		return layer;
 	};
+
+	L.FLayer.Ecmwf.totalPrecipitation = function (options) {
+                options = L.extend(options, {attribution: 'Precipitation forecasts from <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>'});
+                return new L.FLayer.Ecmwf._totalPrecipitation('ECMWF/DXD/ECMWF_DXD_AFR.nc', options);
+	};
+	L.FLayer.Ecmwf._totalPrecipitation = function (dataset, options) {
+                var extraoptions = {layers: 'TP', cmap: 'Precip_mm_per_h_YRP_11colors'}
+                options = L.extend(options, extraoptions);
+		var layer = new L.FLayer(dataset, options);
+		if (layer.options.legendImagePath == null) {
+                        layer.options.legendAttribution = 'Source: <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a> / IFS';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=TP&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Precip_mm_per_h_YRP_11colors';
+		}
+		return layer;
+	};
 }());
 

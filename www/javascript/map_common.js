@@ -31,6 +31,7 @@ function getI18n(key, lang) {
 			, currentdirection: 'Current Direction'
 			, elev: 'Sea Surface Elevation'
 			, airtemp: 'Air Temperature (2m)'
+			, precip: 'Precipitation'
 			, seatemp: 'Sea Temperature'
                         , salinity: 'Salinity'
 			, humidity: 'Specific Humidity'
@@ -63,6 +64,7 @@ function getI18n(key, lang) {
 			, currentdirection: 'Strømretning'
 			, elev: 'Vandstand'
 			, airtemp: 'Lufttemperatur (2m)'
+			, precip: 'Nedbør'
 			, seatemp: 'Havtemperatur'
                         , salinity: 'Salinitet'
 			, humidity: 'Specifik Luftfugtighed'
@@ -117,11 +119,13 @@ function initBaseMaps(lang, tilesize) {
         maxZoom: 18, tileSize: 256, attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
     });
 
-    var fcoo_base = location.protocol + "//media.fcoo.dk/tiles/";
+    var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
+    var subdomains = ["media01", "media02", "media03", "media04", "media05"];
     var tile_bckgrnd_date = "201411070000";
     var fcoo = L.tileLayer(fcoo_base + "tiles_bckgrnd_" + tilesize + "_mercator_" + tile_bckgrnd_date + "/{z}/{x}/{y}.png", {
         maxZoom: 10,
         tileSize: tilesize,
+        subdomains: subdomains,
         attribution: 'FCOO - Danish Defence Centre for Operational Oceanography',
         continuousWorld: false
     });
@@ -139,6 +143,7 @@ function initBaseMaps(lang, tilesize) {
     var topLayer = L.tileLayer(fcoo_base + "tiles_top_" + tilesize + "_mercator_" + tile_top_date + "/{z}/{x}/{y}.png", {
         maxZoom: 10,
         tileSize: tilesize,
+        subdomains: subdomains,
         zIndex: 1001,
         continuousWorld: false,
         errorTileUrl: fcoo_base + "empty_" + tilesize + ".png"
