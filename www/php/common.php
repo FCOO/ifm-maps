@@ -45,7 +45,7 @@
 	<script src="../javascript/leaflet/L.Control.MousePosition.js"></script>
 	<script src="../javascript/leaflet/L.Control.Print.js"></script>
 	<script src="../javascript/leaflet/Control.OSMGeocoder.js"></script>
-	<script src="../javascript/leaflet/leaflet.dbpedialayer.js"></script>
+	<script src="../javascript/leaflet/leaflet.dbpedialayer-src.js"></script>
         <script src='../javascript/leaflet/leaflet-locatecontrol_2014-09-11/L.Control.Locate.js'></script>
         <script src="../javascript/map_common.js"></script>
 <?php

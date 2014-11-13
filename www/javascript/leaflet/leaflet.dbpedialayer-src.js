@@ -40,6 +40,17 @@ L.DBpediaLayer = L.LayerGroup.extend({
                 }
             }
         );
+        if (map.hasLayer(_this)) {
+            var bounds = map.getBounds(),
+                SW = bounds._southWest,
+                NE = bounds._northEast,
+                areaToLoad = _this.dbp.utils._identifyAreaToLoad({SW: SW, NE: NE}, _this.dbp.visitedBounds);
+            //console.log("to_load: ", areaToLoad)
+            if (areaToLoad) {
+                _this.dbp._ajaxWrapper(areaToLoad.current, areaToLoad.not);
+            }
+            _this.dbp.visitedBounds.push({SW: SW, NE: NE});
+        }
     },
     dbp: {
         utils: {},
