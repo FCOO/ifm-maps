@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-categorized-layers.src.css" />
 	<link rel="stylesheet" type="text/css" href="../css/map.css" />
 	<link rel="stylesheet" type="text/css" href="../css/flag-icon.css" />
-	<link rel="stylesheet" type="text/css" href="../javascript/jquery-ui-1.11.1.custom/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="../javascript/jquery-ui-1.11.2.custom/jquery-ui.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-fcoo-layers.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-languageselector.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-control-datetime.css" />
@@ -24,7 +24,7 @@
 <body>
 	<div id="map"></div>
 	<script src="../javascript/jquery-1.11.1.js"></script>
-        <script src="../javascript/jquery-ui-1.11.1.custom/jquery-ui.js"></script>
+        <script src="../javascript/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
         <script src="../javascript/noty-2.2.9/jquery.noty.packaged.js"></script>
         <script src="../javascript/polyfills/jquery.placeholder_v2.0.8.js"></script>
 	<script src="../javascript/date.js"></script>

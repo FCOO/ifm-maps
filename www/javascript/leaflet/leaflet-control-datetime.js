@@ -85,7 +85,7 @@ L.DatetimeSelector = L.Control.extend({
                 selectList.selectedIndex = select_index;
 		//L.DomEvent.addListener(selectList, 'onchange', this._datetimeChanged, L.DomEvent.stopPropagation);
 
-                // Add slider control
+                // Add slider control (jquery-ui)
                 var sliderDiv = $(L.DomUtil.create('div', 'leaflet-control-datetime-sliderdiv', container));
                 sliderDiv.slider({
                     "class": "leaflet-control-datetime-slider",
