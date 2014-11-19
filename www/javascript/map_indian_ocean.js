@@ -33,9 +33,9 @@ function initMap() {
     }
     var minZoom = 4;
     var maxZoom = 10;
-    var zoom = 6;
-    var lat = 10.0;
-    var lon = 52.0;
+    var zoom = 5;
+    var lat = 0.0;
+    var lon = 56.0;
     var useGeolocation = false;
     var useGeoMetoc = false;
 
