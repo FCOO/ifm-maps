@@ -141,7 +141,7 @@ function initBaseMaps(lang, tilesize) {
         "ESRI Aerial": esri
     };
 
-    var tile_top_date = "201411070000";
+    var tile_top_date = "201411170000";
     var topLayer = L.tileLayer(fcoo_base + "tiles_top_" + tilesize + "_mercator_" + tile_top_date + "/{z}/{x}/{y}.png", {
         maxZoom: 10,
         tileSize: tilesize,
