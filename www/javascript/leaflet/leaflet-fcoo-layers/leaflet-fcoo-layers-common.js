@@ -57,6 +57,7 @@ L.FLayer = L.TileLayer.WMS.extend({
                 subindex = subindex % this.options.subdomains.length;
                 this._fcootileurl = L.Util.template(this._basetileurl, 
                                {s: this.options.subdomains[subindex]});
+
                 $.ajax({
                   url: this._fcootileurl,
                   data: {SERVICE: 'WMS', REQUEST: 'GetCapabilities', VERSION: this.wmsParams.version},
@@ -67,7 +68,8 @@ L.FLayer = L.TileLayer.WMS.extend({
                       jqXHR.url = settings.url;
                   },
                   cache: true,
-                  dataType: 'xml',
+                  dataType: "text", // seems to work for all browsers
+                  //dataType: ($.browser.msie) ? "text" : "xml", // text for IE, xml for the rest
                   async: true
                 });
 	},
@@ -127,7 +129,6 @@ L.FLayer = L.TileLayer.WMS.extend({
         },
 
         _got_capabilities: function(xml, textStatus, jqXHR) {
-                // TODO: This function needs more exception handling
                 try {
                      var first_layer = this.wmsParams.layers.split(':')[0];
                      var $xml = $(xml),
@@ -172,6 +173,7 @@ L.FLayer = L.TileLayer.WMS.extend({
                      this._timestepsready = true;
                 } catch (err) {
                      //console.log('Error accessing: ' + jqXHR.url);
+                     console.log(err);
                      var n = noty({text: err.message, type: "error"});
                      throw err;
                 }

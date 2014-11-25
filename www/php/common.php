@@ -23,7 +23,9 @@
 </head>
 <body>
 	<div id="map"></div>
+	<!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/object.js"></script><![endif]-->
 	<script src="../javascript/jquery-1.11.1.js"></script>
+	<!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/jquery.xdomainrequest.min.js"></script><![endif]-->
         <script src="../javascript/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
         <script src="../javascript/noty-2.2.9/jquery.noty.packaged.js"></script>
         <script src="../javascript/polyfills/jquery.placeholder_v2.0.8.js"></script>

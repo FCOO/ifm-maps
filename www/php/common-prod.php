@@ -10,9 +10,11 @@
 </head>
 <body>
     <div id="map"></div>
+    <!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/object.js"></script><![endif]-->
     <script src="ifm-maps.js"></script>
     <script src='../javascript/leaflet/leaflet-locatecontrol_2014-09-11/L.Control.Locate.js'></script>
     <script>window.L_PREFER_CANVAS = true;</script>
+    <!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/jquery.xdomainrequest.min.js"></script><![endif]-->
     <!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/excanvas.js"></script><![endif]-->
     <!--[if lt IE 10]><script type="text/javascript" src="../javascript/polyfills/typedarray.js"></script><![endif]-->
     <script>initMap();</script>
