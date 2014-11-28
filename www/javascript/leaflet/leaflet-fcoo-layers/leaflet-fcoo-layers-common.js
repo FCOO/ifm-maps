@@ -131,10 +131,21 @@ L.FLayer = L.TileLayer.WMS.extend({
         _got_capabilities: function(xml, textStatus, jqXHR) {
                 try {
                      var first_layer = this.wmsParams.layers.split(':')[0];
-                     var $xml = $(xml),
-                         belem = $xml.find('Name').filter(function () {
+                     var $xml = $(xml);
+                     belem = $xml.find('Name').filter(function () {
                            return $( this ).text() === first_layer;
-                         }).parent().find('BoundingBox');
+                     })
+                     if (typeof belem[0] == 'undefined' || belem[0] == '') {
+                         var msg = "Failed finding layer element " +
+                                   first_layer + " in url: " + jqXHR.url;
+                         throw new Error(msg);
+                     }
+                     belem = belem.parent().find('BoundingBox');
+                     if (typeof belem[0] == 'undefined') {
+                         var msg = "Failed finding bounding box for layer " +
+                                   first_layer + " in url: " + jqXHR.url;
+                         throw new Error(msg);
+                     }
                      var minx = belem.attr('minx'),
                          miny = belem.attr('miny'),
                          maxx = belem.attr('maxx'),
