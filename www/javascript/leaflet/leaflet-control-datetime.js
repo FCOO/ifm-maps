@@ -192,7 +192,7 @@ L.DatetimeSelector = L.Control.extend({
                     var m = Math.abs(tmin - datetimes[i]);
                     if (m < minDiff) { 
                         minDiff = m;
-                        imin = i;
+                        imin = parseInt(i);
                     }
                 }
                 var minDiff = 10000000000;
@@ -201,7 +201,7 @@ L.DatetimeSelector = L.Control.extend({
                     var m = Math.abs(tmax - datetimes[i]);
                     if (m < minDiff) { 
                         minDiff = m;
-                        imax = i;
+                        imax = parseInt(i);
                     }
                 }
                 var sliderRange = $("#leaflet-control-datetime-range");
