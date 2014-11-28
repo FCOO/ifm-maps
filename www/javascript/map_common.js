@@ -382,7 +382,8 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
         var opts = {collapsed: false,
                     groupsCollapsed: true, 
                     collapseActiveGroups: true, 
-                    autoZIndex: false};
+                    autoZIndex: false,
+                    position: "topright"};
 	var layerControl = (new L.Control.CategorizedLayers(baseMaps, overlayMaps, 
                             opts)).addTo(map);
 
