@@ -47,6 +47,7 @@ function initMap() {
             "DMI": {
                 "windspeed": new L.FLayer.Dmi.windSpeed({tileSize: tilesize, zIndex: 100}),
                 "winddirection": new L.FLayer.Dmi.windDirection({tileSize: tilesize, zIndex: 200}),
+                "pressure": new L.FLayer.Dmi.seaLevelPressure({tileSize: tilesize, zIndex: 200}),
             },
             "FCOO - North Sea/Baltic Sea": {
                 "waveperiod": new L.FLayer.Fcoo.wavePeriod({tileSize: tilesize, zIndex: 100, foreground: landLayer}, 'NSBaltic'),
