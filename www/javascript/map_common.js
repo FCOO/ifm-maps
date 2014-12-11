@@ -156,18 +156,44 @@ function initBaseMaps(lang, tilesize) {
 
 var overlayMaps = {};
 /**
- * Add or replace the datetime parameter of the URL and reload the page.
- * @param Date date
+ * Called when something is updated in the datetime selector. If
+ * type is 'datetime' all overlays with timesteps will be updated
+ * with a new time. If type is 'timezone' all overlays with 
+ * @param type string
+ * @param arg date|boolean
  */
-function changeDatetime(pDate) {
-    for (var i in overlayMaps) {
-        var layergroup = overlayMaps[i];
-        for (var j in layergroup) {
-            var layer = layergroup[j];
-            if (layer.getTimesteps !== undefined) {
-                var timesteps = layer.getTimesteps();
-                if (timesteps !== null && timesteps.length > 1) {
-                    layer.setParams({time: pDate}, false);
+function changeDatetime(type, arg) {
+    if (type == 'datetime') {
+        for (var i in overlayMaps) {
+            var layergroup = overlayMaps[i];
+            for (var j in layergroup) {
+                var layer = layergroup[j];
+                if (layer.getTimesteps !== undefined) {
+                    var timesteps = layer.getTimesteps();
+                    if (timesteps !== null && timesteps.length > 1) {
+                        layer.setParams({time: arg}, false);
+                    }
+                }
+            }
+        }
+    } else if (type == 'timezone') {
+        for (var i in overlayMaps) {
+            var layergroup = overlayMaps[i];
+            for (var j in layergroup) {
+                var layer = layergroup[j];
+                for (var k in layer._layers) {
+                    var featuregroup = layer._layers[k];
+                    if (featuregroup !== null && featuregroup._popup !== undefined) {
+                        var popstr = featuregroup.feature.properties.popup;
+                        if (arg) {
+                            var t = new Date();
+                            var dt = t.getTimezoneOffset();
+                        } else {
+                            var dt = 0;
+                        }
+                        popstr = popstr.replace('{dt}', dt);
+                        featuregroup.setPopupContent(popstr);
+                    }
                 }
             }
         }
