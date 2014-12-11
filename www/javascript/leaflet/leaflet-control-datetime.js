@@ -68,7 +68,7 @@ L.DatetimeSelector = L.Control.extend({
                         if (this.options.initialDatetime.getTime() == date.getTime()) {
                             select_index = i1;
                             if (this.options.callback != null) {
-                                this.options.callback(option.value);
+                                this.options.callback('datetime', option.value);
                             }
                         }
                     }
@@ -77,7 +77,7 @@ L.DatetimeSelector = L.Control.extend({
                     select_index = this._getNowIndex();
                     if (this.options.callback != null) {
                         if (select_index != null) {
-                            this.options.callback(selectList.options[select_index].value);
+                            this.options.callback('datetime', selectList.options[select_index].value);
                         }
                     }
                 }
@@ -128,6 +128,7 @@ L.DatetimeSelector = L.Control.extend({
                                 checked: "checked",
                                 "class": "leaflet-control-datetime-localtime-checkbox"
                              });
+                var callback = this.options.callback;
                 timecb.click(function(pEvent) {
                     var select = $('.leaflet-control-datetime-dateselect')[0];
                     var datetimes = select._instance.options.datetimes;
@@ -148,6 +149,10 @@ L.DatetimeSelector = L.Control.extend({
                             //select.options[i].text = datetimes[i].toUTCString();
                         }
                     }
+		    // callback
+		    if (callback && typeof callback == 'function') {
+                        callback('timezone', this.checked);
+		    }
                 });
                 timecb._instance = this;
                 var lbl = $('<label>');
@@ -225,7 +230,7 @@ L.DatetimeSelector = L.Control.extend({
 
 		// callback
 		if (this.options.callback && typeof this.options.callback == 'function') {
-			this.options.callback(date);
+			this.options.callback('datetime', date);
 		}
         },
 
