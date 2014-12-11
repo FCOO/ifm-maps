@@ -11,12 +11,12 @@
                 return new L.FLayer.Ecmwf._windSpeed('ECMWF/DXD/ECMWF_DXD_GLOBAL.nc', options);
 	};
 	L.FLayer.Ecmwf._windSpeed = function (dataset, options) {
-                var windoptions = {layers: 'U10M_V10M', cmap: 'Wind_ms_YRP_11colors'}
+                var windoptions = {layers: 'windspeed', cmap: 'Wind_ms_YRP_11colors'}
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a> / IFS';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=U10M_V10M&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Wind_ms_YRP_11colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=windspeed&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Wind_ms_YRP_11colors';
 		}
 		return layer;
 	};
@@ -26,7 +26,7 @@
                 return new L.FLayer.Ecmwf._windDirection('ECMWF/DXD/ECMWF_DXD_GLOBAL.nc', options);
 	};
 	L.FLayer.Ecmwf._windDirection = function (dataset, options) {
-                var windoptions = {layers: 'U10M:V10M', styles: 'black_arrowbarbs'}
+                var windoptions = {layers: 'U10:V10', styles: 'black_arrowbarbs'}
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);
 		return layer;

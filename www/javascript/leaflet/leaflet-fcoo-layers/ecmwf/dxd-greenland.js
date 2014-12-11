@@ -11,12 +11,12 @@
                 return new L.FLayer.Ecmwf._windSpeed('ECMWF/DXD/ECMWF_DXD_GREENLAND.nc', options);
 	};
 	L.FLayer.Ecmwf._windSpeed = function (dataset, options) {
-                var windoptions = {layers: 'U10M_V10M', cmap: 'Wind_ms_YRP_11colors'}
+                var windoptions = {layers: 'windspeed', cmap: 'Wind_ms_YRP_11colors'}
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a> / IFS';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=U10M_V10M&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Wind_ms_YRP_11colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=windspeed&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Wind_ms_YRP_11colors';
 		}
 		return layer;
 	};
@@ -26,7 +26,7 @@
                 return new L.FLayer.Ecmwf._windDirection('ECMWF/DXD/ECMWF_DXD_GREENLAND.nc', options);
 	};
 	L.FLayer.Ecmwf._windDirection = function (dataset, options) {
-                var windoptions = {layers: 'U10M:V10M', styles: 'black_arrowbarbs'}
+                var windoptions = {layers: 'U10:V10', styles: 'black_arrowbarbs'}
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);
 		return layer;
@@ -37,12 +37,12 @@
                 return new L.FLayer.Ecmwf._airTemperature('ECMWF/DXD/ECMWF_DXD_GREENLAND.nc', options);
 	};
 	L.FLayer.Ecmwf._airTemperature = function (dataset, options) {
-                var extraoptions = {layers: 'T2M', cmap: 'AirTempCold_C_BGYR_19colors'};
+                var extraoptions = {layers: 'TMP2', cmap: 'AirTempCold_C_BGYR_19colors'};
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a> / IFS';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=T2M&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=AirTempCold_C_BGYR_19colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=TMP2&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=AirTempCold_C_BGYR_19colors';
 		}
 		return layer;
 	};
@@ -52,7 +52,7 @@
                 return new L.FLayer.Ecmwf._seaLevelPressure('ECMWF/DXD/ECMWF_DXD_GREENLAND.nc', options);
 	};
 	L.FLayer.Ecmwf._seaLevelPressure = function (dataset, options) {
-                var extraoptions = {layers: 'MSL', 
+                var extraoptions = {layers: 'PRES', 
                                     cmap: 'SeaLevelPressure_hPa_BGYR_13colors',
                                     styles: 'contour'}
                 options = L.extend(options, extraoptions);
@@ -80,12 +80,12 @@
                 return new L.FLayer.Ecmwf._totalPrecipitation('ECMWF/DXD/ECMWF_DXD_GREENLAND.nc', options);
 	};
 	L.FLayer.Ecmwf._totalPrecipitation = function (dataset, options) {
-                var extraoptions = {layers: 'TP', cmap: 'Precip_mm_per_h_YRP_11colors'}
+                var extraoptions = {layers: 'precip', cmap: 'Precip_mm_per_h_YRP_11colors'}
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a> / IFS';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=TP&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Precip_mm_per_h_YRP_11colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=precip&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Precip_mm_per_h_YRP_11colors';
 		}
 		return layer;
 	};
