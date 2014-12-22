@@ -67,7 +67,7 @@
       }, 
       "type": "Feature", 
       "properties": {
-        "id": "Finsch", 
+        "id": "FinschOer", 
         "name": "Finsch \u00d8er"
       }
     }, 
@@ -81,7 +81,7 @@
       }, 
       "type": "Feature", 
       "properties": {
-        "id": "Foulke", 
+        "id": "FoulkeHavn", 
         "name": "Foulke Havn"
       }
     }, 
@@ -277,7 +277,7 @@
       }, 
       "type": "Feature", 
       "properties": {
-        "id": "Qaamarujuk", 
+        "id": "QaamarujukFjord", 
         "name": "Qaamarujuk Fjord (Maaramorillik)"
       }
     }, 
@@ -375,7 +375,7 @@
       }, 
       "type": "Feature", 
       "properties": {
-        "id": "Thank", 
+        "id": "ThankGod", 
         "name": "Thank God Harbour"
       }
     }, 
@@ -447,104 +447,6 @@
       "properties": {
         "id": "Zackenberg", 
         "name": "Zackenberg"
-      }
-    }, 
-    {
-      "geometry": {
-        "type": "Point", 
-        "coordinates": [
-          -20.233333333333334, 
-          74.3
-        ]
-      }, 
-      "type": "Feature", 
-      "properties": {
-        "id": "Daneborg", 
-        "name": "Daneborg"
-      }
-    }, 
-    {
-      "geometry": {
-        "type": "Point", 
-        "coordinates": [
-          -41.28333333333333, 
-          63.4
-        ]
-      }, 
-      "type": "Feature", 
-      "properties": {
-        "id": "Finnsbu", 
-        "name": "Finnsbu"
-      }
-    }, 
-    {
-      "geometry": {
-        "type": "Point", 
-        "coordinates": [
-          -18.05, 
-          75.43333333333334
-        ]
-      }, 
-      "type": "Feature", 
-      "properties": {
-        "id": "Kap", 
-        "name": "Kap Borgen"
-      }
-    }, 
-    {
-      "geometry": {
-        "type": "Point", 
-        "coordinates": [
-          -18.5, 
-          74.66666666666667
-        ]
-      }, 
-      "type": "Feature", 
-      "properties": {
-        "id": "Lille", 
-        "name": "Lille Pendulum"
-      }
-    }, 
-    {
-      "geometry": {
-        "type": "Point", 
-        "coordinates": [
-          -44.666666666666664, 
-          60.0
-        ]
-      }, 
-      "type": "Feature", 
-      "properties": {
-        "id": "Narsaq", 
-        "name": "Narsaq Kujalleq (Frederiksdal)"
-      }
-    }, 
-    {
-      "geometry": {
-        "type": "Point", 
-        "coordinates": [
-          -70.88333333333334, 
-          78.61666666666666
-        ]
-      }, 
-      "type": "Feature", 
-      "properties": {
-        "id": "Renselaer", 
-        "name": "Renselaer Havn"
-      }
-    }, 
-    {
-      "geometry": {
-        "type": "Point", 
-        "coordinates": [
-          -43.88333333333333, 
-          59.766666666666666
-        ]
-      }, 
-      "type": "Feature", 
-      "properties": {
-        "id": "Uummannarsuaq", 
-        "name": "Uummannarsuaq (Kap Farvel)"
       }
     }
   ]
