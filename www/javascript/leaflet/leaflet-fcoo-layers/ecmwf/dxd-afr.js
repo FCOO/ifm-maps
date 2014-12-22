@@ -8,7 +8,7 @@
 (function () {
 	L.FLayer.Ecmwf.windSpeed = function (options) {
                 options = L.extend(options, {attribution: 'Wind forecasts from <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>'});
-                return new L.FLayer.Ecmwf._windSpeed('ECMWF/DXD/ECMWF_DXD_AFR.nc', options);
+                return new L.FLayer.Ecmwf._windSpeed('ECMWF/DXD/MAPS_ECMWF_DXD_AFR.nc', options);
 	};
 	L.FLayer.Ecmwf._windSpeed = function (dataset, options) {
                 var windoptions = {layers: 'windspeed', cmap: 'Wind_ms_YRP_11colors'}
@@ -23,7 +23,7 @@
 
 	L.FLayer.Ecmwf.windDirection = function (options) {
                 options = L.extend(options, {attribution: 'Wind forecasts from <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>'});
-                return new L.FLayer.Ecmwf._windDirection('ECMWF/DXD/ECMWF_DXD_AFR.nc', options);
+                return new L.FLayer.Ecmwf._windDirection('ECMWF/DXD/MAPS_ECMWF_DXD_AFR.nc', options);
 	};
 	L.FLayer.Ecmwf._windDirection = function (dataset, options) {
                 var windoptions = {layers: 'U10:V10', styles: 'black_arrowbarbs'}
@@ -34,7 +34,7 @@
 
 	L.FLayer.Ecmwf.airTemperature = function (options) {
                 options = L.extend(options, {attribution: 'Temperature forecasts from <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>'});
-                return new L.FLayer.Ecmwf._airTemperature('ECMWF/DXD/ECMWF_DXD_AFR.nc', options);
+                return new L.FLayer.Ecmwf._airTemperature('ECMWF/DXD/MAPS_ECMWF_DXD_AFR.nc', options);
 	};
 	L.FLayer.Ecmwf._airTemperature = function (dataset, options) {
                 var extraoptions = {layers: 'TMP2', cmap: 'AirTempWarm_C_BGYR_19colors'};
@@ -49,7 +49,7 @@
 
 	L.FLayer.Ecmwf.seaLevelPressure = function (options) {
                 options = L.extend(options, {attribution: 'Air pressure forecasts from <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>'});
-                return new L.FLayer.Ecmwf._seaLevelPressure('ECMWF/DXD/ECMWF_DXD_AFR.nc', options);
+                return new L.FLayer.Ecmwf._seaLevelPressure('ECMWF/DXD/MAPS_ECMWF_DXD_AFR.nc', options);
 	};
 	L.FLayer.Ecmwf._seaLevelPressure = function (dataset, options) {
                 var extraoptions = {layers: 'PRES', 
@@ -62,7 +62,7 @@
 
 	L.FLayer.Ecmwf.totalCloudCover = function (options) {
                 options = L.extend(options, {attribution: 'Cloud cover forecasts from <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>'});
-                return new L.FLayer.Ecmwf._totalCloudCover('ECMWF/DXD/ECMWF_DXD_AFR.nc', options);
+                return new L.FLayer.Ecmwf._totalCloudCover('ECMWF/DXD/MAPS_ECMWF_DXD_AFR.nc', options);
 	};
 	L.FLayer.Ecmwf._totalCloudCover = function (dataset, options) {
                 var extraoptions = {layers: 'TCC', cmap: 'CloudCover_km_WGB_10colors'}
@@ -77,7 +77,7 @@
 
 	L.FLayer.Ecmwf.totalPrecipitation = function (options) {
                 options = L.extend(options, {attribution: 'Precipitation forecasts from <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>'});
-                return new L.FLayer.Ecmwf._totalPrecipitation('ECMWF/DXD/ECMWF_DXD_AFR.nc', options);
+                return new L.FLayer.Ecmwf._totalPrecipitation('ECMWF/DXD/MAPS_ECMWF_DXD_AFR.nc', options);
 	};
 	L.FLayer.Ecmwf._totalPrecipitation = function (dataset, options) {
                 var extraoptions = {layers: 'precip', cmap: 'Precip_mm_per_h_YRP_11colors'}
