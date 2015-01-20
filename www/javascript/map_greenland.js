@@ -89,8 +89,8 @@ function initMap() {
                 "seatemp": new L.FLayer.Noaa.sst({tileSize: tilesize, zIndex: 100}),
                 "salinity": new L.FLayer.Noaa.sss({tileSize: tilesize, zIndex: 100}),
             },
-            "stations": {
-                "Tidal stations": geojson,
+            "Point forecasts": {
+                "Tidal forecasts": geojson,
             },
             "boundaries": {
                 "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_" + tilesize + "_mercator_201411070000" + "/{z}/{x}/{y}.png",
