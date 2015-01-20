@@ -51,6 +51,8 @@ function getI18n(key, lang) {
 		//}
 		, da: {
 			  maps: 'Kort'
+                        , 'Home': 'Hjem'
+                        , 'Navigate to home page': 'Naviger til hjemmesiden'
 			, 'Background Maps': 'Baggrundskort'
 			, layers: 'Prognoseparametre'
 			, boundaries: 'Grænser'
@@ -128,7 +130,7 @@ function initBaseMaps(lang, tilesize) {
         maxZoom: 10,
         tileSize: tilesize,
         subdomains: subdomains,
-        attribution: 'FCOO - Danish Defence Centre for Operational Oceanography',
+        attribution: '<a href="' + location.protocol + '//fcoo.dk">Danish Defence Centre for Operational Oceanography</a>',
         continuousWorld: false
     });
 
@@ -378,7 +380,11 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
             });
         }
 
-	map.attributionControl.setPrefix("");
+        // Add link to homepage
+        map.addControl(L.control.homeButton({
+                text: getI18n('Home', localLang),
+                title: getI18n('Navigate to home page', localLang)
+        }));
 
         // Add language selector
 	map.addControl(L.languageSelector({

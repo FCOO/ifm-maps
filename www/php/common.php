@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/map.css" />
 	<link rel="stylesheet" type="text/css" href="../css/flag-icon.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/jquery-ui-1.11.2.custom/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-home.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-fcoo-layers.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-languageselector.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-control-datetime.css" />
@@ -37,6 +38,7 @@
 	<script src="../javascript/leaflet/Permalink.CategorizedLayer.js"></script>
 	<script src="../javascript/leaflet/Permalink.CategorizedOverlay.js"></script>
 	<script src="../javascript/leaflet/leaflet-flattrbutton.js"></script>
+	<script src="../javascript/leaflet/leaflet-home.js"></script>
 	<!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/excanvas.js"></script><![endif]-->
 	<!--[if lt IE 10]><script type="text/javascript" src="../javascript/polyfills/typedarray.js"></script><![endif]-->
 	<script src="../javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js"></script>
