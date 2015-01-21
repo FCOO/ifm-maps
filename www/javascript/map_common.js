@@ -55,6 +55,8 @@ function getI18n(key, lang) {
 			, 'Background Maps': 'Baggrundskort'
 			, 'Point forecasts': 'Punktprognoser'
                         , 'Tidal forecasts': 'Tidevandsprognoser'
+                        , 'Day and night': 'Dag og nat'
+                        , 'Daylight': 'Dagslys'
 			, layers: 'Prognoseparametre'
 			, boundaries: 'Grænser'
 			, places: 'Steder'
@@ -175,6 +177,9 @@ function changeDatetime(type, arg) {
                     if (timesteps !== null && timesteps.length > 1) {
                         layer.setParams({time: arg}, false);
                     }
+                } else if (layer.setTime !== undefined) {
+                    // Terminator instance
+                   layer.setTime(arg);
                 }
             }
         }

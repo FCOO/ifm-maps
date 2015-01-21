@@ -37,6 +37,7 @@
 	<script src="../javascript/leaflet/Permalink.js"></script>
 	<script src="../javascript/leaflet/Permalink.CategorizedLayer.js"></script>
 	<script src="../javascript/leaflet/Permalink.CategorizedOverlay.js"></script>
+	<script src="../javascript/leaflet/L.Terminator.js"></script>
 	<script src="../javascript/leaflet/leaflet-flattrbutton.js"></script>
 	<script src="../javascript/leaflet/leaflet-home.js"></script>
 	<!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/excanvas.js"></script><![endif]-->
