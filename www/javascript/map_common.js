@@ -408,6 +408,9 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
             var nkey = getI18n(key, localLang);
             overlayMaps[nkey] = {};
             for (var lkey in overlays[key]) {
+                 // Set English name for use in permalink
+                 overlays[key][lkey]._name_en = lkey;
+                 // Make translated overlay dict to be shown in menu
                  overlayMaps[nkey][getI18n(lkey, localLang)] = overlays[key][lkey];
             }
         }

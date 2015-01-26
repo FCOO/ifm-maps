@@ -21,9 +21,9 @@ L.Control.Permalink.include({
 
 	_update_overlay: function() {
 		if (!this.options.layers) return;
-		var overlayflags = this.options.layers.overlayFlags();
-		if (overlayflags && overlayflags != '') {
-			this._update({overlays: overlayflags});
+		var overlaynames = this.options.layers.overlayNames();
+		if (overlaynames && overlaynames != '') {
+			this._update({overlays: overlaynames});
 		}
 	},
 
@@ -35,7 +35,8 @@ L.Control.Permalink.include({
 });
 
 L.Control.CategorizedLayers.include({
-	setOverlays: function(overlayflags) {
+	setOverlays: function(overlaynames_str) {
+                var overlaynames = decodeURIComponent(overlaynames_str).split(',');
 		var layer, obj, idx=0;
 		for (var i in this._overlays) {
 			if (!this._overlays.hasOwnProperty(i))
@@ -46,12 +47,14 @@ L.Control.CategorizedLayers.include({
 				        continue;
 			        obj = layerGroup[j];
 			        if (obj._overlay) {
-				        // visible if not specified or flag==T
-				        var visible = (idx >= overlayflags.length || overlayflags[idx] == 'T');
-				        idx++;
+				        // visible if specified
+                                        var name = obj._category + '.' + obj._name_en;
+				        var visible = (overlaynames[idx] == name);
 				        if (!visible && this._map.hasLayer(obj)) {
+				                idx++;
 					        this._map.removeLayer(obj);
 				        } else if (visible && !this._map.hasLayer(obj)) {
+				                idx++;
 					        this._map.addLayer(obj);
 				        }
 			        }
@@ -60,8 +63,8 @@ L.Control.CategorizedLayers.include({
 	        this._update();
 	},
 
-	overlayFlags: function() {
-		var flags = '';
+	overlayNames: function() {
+		var names = '';
 		for (var i in this._overlays) {
 			if (!this._overlays.hasOwnProperty(i))
 				continue;
@@ -73,14 +76,16 @@ L.Control.CategorizedLayers.include({
 			        if (!obj._overlay) continue;
 			        if (obj._overlay) {
 				        if (this._map.hasLayer(obj)) {
-					        flags += 'T';
-				        } else {
-					        flags += 'F';
+                                                var name = obj._category + '.' + obj._name_en;
+                                                if (names.length > 0) {
+					            names += ',';
+				                }
+					        names += name;
 				        }
 			        }
 			}
 		}
-		return flags;
+		return names;
 	}
 });
 
