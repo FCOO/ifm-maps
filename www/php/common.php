@@ -31,6 +31,7 @@
         <script src="../javascript/noty-2.2.9/jquery.noty.packaged.js"></script>
         <script src="../javascript/polyfills/jquery.placeholder_v2.0.8.js"></script>
 	<script src="../javascript/date.js"></script>
+	<script src="../javascript/magellan.js"></script>
 	<script src="../javascript/moment-with-locales.min.js"></script>
 	<script src="../javascript/leaflet/leaflet-src.js"></script>
 	<script src="../javascript/leaflet/leaflet-categorized-layers.src.js"></script>

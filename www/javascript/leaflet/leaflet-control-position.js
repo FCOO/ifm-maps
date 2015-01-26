@@ -28,29 +28,13 @@ L.Control.Position = L.Control.extend({
 		var input_lon = this._input_lon = document.createElement('input');
                 input_lon.className = className + '-form-input-lon';
 		input_lon.name = "lon";
-                try {
-		    input_lon.type = "number";
-                } catch(err) {
-		    input_lon.type = "text";
-                }
-		input_lon.step = "any";
-                input_lon.min = -180.0;
-                input_lon.max = 180.0;
-                input_lon.required = true;
-                input_lon.placeholder = "Decimal longitude";
+		input_lon.type = "text";
+                input_lon.placeholder = "Longitude";
 		var input_lat = this._input_lat = document.createElement('input');
                 input_lat.className = className + '-form-input-lat';
-                try {
-		    input_lat.type = "number";
-                } catch(err) {
-		    input_lat.type = "text";
-                }
+		input_lat.type = "text";
 		input_lat.name = "lat";
-		input_lat.step = "any";
-                input_lat.min = -85.0;
-                input_lat.max = 85.0;
-                input_lat.required = true;
-                input_lat.placeholder = "Decimal latitude";
+                input_lat.placeholder = "Latitude";
 
 		var submit = document.createElement('input');
 		submit.type = "submit";
@@ -110,8 +94,28 @@ L.Control.Position = L.Control.extend({
 
     _position : function (event) {
         L.DomEvent.preventDefault(event);
-        var lon = parseFloat(this._input_lon.value);
-        var lat = parseFloat(this._input_lat.value);
+        try {
+            var lon = magellan(this._input_lon.value).longitude();
+            if (lon === null) {
+                throw new Error('Invalid longitude.');
+            }
+            lon = parseFloat(lon.toDD());
+        } catch(err) {
+            console.log(err);
+            var n = noty({text: err.message, type: "error"});
+            throw err;
+        }
+        try {
+            var lat = magellan(this._input_lat.value).latitude();
+            if (lat === null) {
+                throw new Error('Invalid latitude.');
+            }
+            lat = parseFloat(lat.toDD());
+        } catch(err) {
+            console.log(err);
+            var n = noty({text: err.message, type: "error"});
+            throw err;
+        }
         this._map.panTo([lat, lon]);
     },
 
