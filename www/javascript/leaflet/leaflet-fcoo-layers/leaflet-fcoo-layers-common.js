@@ -117,7 +117,7 @@ L.FLayer = L.TileLayer.WMS.extend({
                 if (load_tile) {
                         var url = L.TileLayer.WMS.prototype.getTileUrl.call(this, coords);
                 } else {
-                        var url = L.Util.emptyImageUrl;
+                        var url = "data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
                 }
                 return url;
         },
