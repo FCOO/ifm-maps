@@ -117,6 +117,12 @@ L.Control.Position = L.Control.extend({
             throw err;
         }
         this._map.panTo([lat, lon]);
+        _remove_marker = function(arg) {
+            this._map.removeLayer(arg.target);
+        }
+        this._marker = L.marker()
+        this._marker.on('click', _remove_marker);
+        this._marker.setLatLng([lat, lon]).addTo(this._map);
     },
 
      _expand: function () {
