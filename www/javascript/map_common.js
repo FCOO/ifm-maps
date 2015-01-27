@@ -55,8 +55,8 @@ function getI18n(key, lang) {
 			, 'Background Maps': 'Baggrundskort'
 			, 'Point forecasts': 'Punktprognoser'
                         , 'Tidal forecasts': 'Tidevandsprognoser'
-                        , 'Day and night': 'Dag og nat'
-                        , 'Daylight': 'Dagslys'
+                        , 'Celestial information': 'Himmellegemer'
+                        , 'Sun and Moon': 'Sol og Måne'
 			, layers: 'Prognoseparametre'
 			, boundaries: 'Grænser'
 			, places: 'Steder'
@@ -409,6 +409,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
             overlayMaps[nkey] = {};
             for (var lkey in overlays[key]) {
                  // Set English name for use in permalink
+                 overlays[key][lkey]._category_en = key;
                  overlays[key][lkey]._name_en = lkey;
                  // Make translated overlay dict to be shown in menu
                  overlayMaps[nkey][getI18n(lkey, localLang)] = overlays[key][lkey];
