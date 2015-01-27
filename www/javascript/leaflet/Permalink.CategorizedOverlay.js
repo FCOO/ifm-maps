@@ -48,7 +48,7 @@ L.Control.CategorizedLayers.include({
 			        obj = layerGroup[j];
 			        if (obj._overlay) {
 				        // visible if specified
-                                        var name = obj._category + '.' + obj._name_en;
+                                        var name = obj._category_en + '.' + obj._name_en;
 				        var visible = (overlaynames[idx] == name);
 				        if (!visible && this._map.hasLayer(obj)) {
 				                idx++;
@@ -76,7 +76,7 @@ L.Control.CategorizedLayers.include({
 			        if (!obj._overlay) continue;
 			        if (obj._overlay) {
 				        if (this._map.hasLayer(obj)) {
-                                                var name = obj._category + '.' + obj._name_en;
+                                                var name = obj._category_en + '.' + obj._name_en;
                                                 if (names.length > 0) {
 					            names += ',';
 				                }
