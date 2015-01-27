@@ -34,6 +34,18 @@ L.Terminator = L.Polygon.extend({
 	this.setLatLngs(latLng);
     },
 
+    onAdd: function(map) {
+        this._celestial = L.celestial({});
+        this._map.addControl(this._celestial);
+        L.Polygon.prototype.onAdd.call(this, map);
+
+    },
+
+    onRemove: function(map) {
+        this._map.removeControl(this._celestial);
+        L.Polygon.prototype.onRemove.call(this, map);
+    },
+
     setTime: function(date) {
         this.options.time = date;
 	var latLng = this._compute(date || null)

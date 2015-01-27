@@ -34,6 +34,9 @@
 	<script src="../javascript/magellan.js"></script>
 	<script src="../javascript/moment-with-locales.min.js"></script>
 	<script src="../javascript/leaflet/leaflet-src.js"></script>
+        <script src="../javascript/leaflet/leaflet-celestial/leaflet-celestial.js" charset="UTF-8"></script>
+        <script src="../javascript/leaflet/leaflet-celestial/celestial.js" charset="UTF-8"></script>
+        <script src="../javascript/leaflet/leaflet-celestial/moon-phase/riset.js" charset="UTF-8"></script>
 	<script src="../javascript/leaflet/leaflet-categorized-layers.src.js"></script>
 	<script src="../javascript/leaflet/Permalink.js"></script>
 	<script src="../javascript/leaflet/Permalink.CategorizedLayer.js"></script>

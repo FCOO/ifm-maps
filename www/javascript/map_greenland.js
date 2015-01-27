@@ -98,8 +98,8 @@ function initMap() {
                 "SAR": new L.tileLayer(fcoo_base + "tiles_SAR_" + tilesize + "_mercator_201411070000" + "/{z}/{x}/{y}.png",
        {maxZoom: 10, tileSize: tilesize, subdomains: subdomains, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + tilesize +".png"}),
             },
-            "Day and night": {
-                "Daylight": new L.Terminator(),
+            "Celestial information": {
+                "Sun and Moon": new L.Terminator(),
             }
         };
 
