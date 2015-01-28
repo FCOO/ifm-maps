@@ -11,7 +11,12 @@ function initMap() {
         "DMI": {
             "windspeed": new L.FLayer.Dmi.windSpeed({tileSize: tilesize, zIndex: 100}),
             "winddirection": new L.FLayer.Dmi.windDirection({tileSize: tilesize, zIndex: 200}),
-            "pressure": new L.FLayer.Dmi.seaLevelPressure({tileSize: tilesize, zIndex: 200})
+            "visibility":  new L.FLayer.Dmi.visibility({tileSize: tilesize, zIndex: 100}),
+            "pressure": new L.FLayer.Dmi.seaLevelPressure({tileSize: tilesize, zIndex: 200}),
+            "precip": new L.FLayer.Dmi.totalPrecipitation({tileSize: tilesize, zIndex: 100}),
+            "airtemp": new L.FLayer.Dmi.airTemperature({tileSize: tilesize, zIndex: 100}),
+            //"humidity": new L.FLayer.Dmi.humidity({tileSize: tilesize, zIndex: 100}),
+            "cloudcover": new L.FLayer.Dmi.totalCloudCover({tileSize: tilesize, zIndex: 100}),
         },
         "FCOO": {
             "waveperiod": new L.FLayer.Fcoo.wavePeriod({tileSize: tilesize, zIndex: 100}, 'Greenland'),
@@ -22,6 +27,7 @@ function initMap() {
             "windspeed": new L.FLayer.Ecmwf.windSpeed({tileSize: tilesize, zIndex: 100}),
             "winddirection": new L.FLayer.Ecmwf.windDirection({tileSize: tilesize, zIndex: 200}),
             "pressure": new L.FLayer.Ecmwf.seaLevelPressure({tileSize: tilesize, zIndex: 200}),
+            "precip": new L.FLayer.Ecmwf.totalPrecipitation({tileSize: tilesize, zIndex: 100}),
             "airtemp": new L.FLayer.Ecmwf.airTemperature({tileSize: tilesize, zIndex: 100}),
             "cloudcover": new L.FLayer.Ecmwf.totalCloudCover({tileSize: tilesize, zIndex: 100}),
             "waveperiod": new L.FLayer.Ecmwf.wavePeriod({tileSize: tilesize, zIndex: 100}),
@@ -38,6 +44,9 @@ function initMap() {
             "EEZ": new L.TileLayer(fcoo_base + "tiles_eez_" + tilesize + "_mercator_201411070000" + "/{z}/{x}/{y}.png",
 		 {maxZoom: 10, tileSize: tilesize, subdomains: subdomains, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + tilesize +".png"}),
         },
+        "Celestial information": {
+            "Sun and Moon": new L.Terminator(),
+        }
     }
     var minZoom = 2;
     var maxZoom = 10;

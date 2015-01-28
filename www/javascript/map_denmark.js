@@ -47,7 +47,12 @@ function initMap() {
             "DMI": {
                 "windspeed": new L.FLayer.Dmi.windSpeed({tileSize: tilesize, zIndex: 100}),
                 "winddirection": new L.FLayer.Dmi.windDirection({tileSize: tilesize, zIndex: 200}),
+                "visibility":  new L.FLayer.Dmi.visibility({tileSize: tilesize, zIndex: 100}),
                 "pressure": new L.FLayer.Dmi.seaLevelPressure({tileSize: tilesize, zIndex: 200}),
+                "precip": new L.FLayer.Dmi.totalPrecipitation({tileSize: tilesize, zIndex: 100}),
+                "airtemp": new L.FLayer.Dmi.airTemperature({tileSize: tilesize, zIndex: 100}),
+                //"humidity": new L.FLayer.Dmi.humidity({tileSize: tilesize, zIndex: 100}),
+                "cloudcover": new L.FLayer.Dmi.totalCloudCover({tileSize: tilesize, zIndex: 100}),
             },
             "FCOO - North Sea/Baltic Sea": {
                 "waveperiod": new L.FLayer.Fcoo.wavePeriod({tileSize: tilesize, zIndex: 100, foreground: landLayer}, 'NSBaltic'),
@@ -69,13 +74,27 @@ function initMap() {
 	        "seatemp": new L.FLayer.Fcoo.sst({tileSize: tilesize, zIndex: 101, foreground: landLayer}, 'idk'),
 	        "salinity": new L.FLayer.Fcoo.sss({tileSize: tilesize, zIndex: 101, foreground: landLayer}, 'idk'),
             },
+            "ECMWF": {
+                "windspeed": new L.FLayer.Ecmwf.windSpeed({tileSize: tilesize, zIndex: 100}),
+                "winddirection": new L.FLayer.Ecmwf.windDirection({tileSize: tilesize, zIndex: 200}),
+                "pressure": new L.FLayer.Ecmwf.seaLevelPressure({tileSize: tilesize, zIndex: 200}),
+                "precip": new L.FLayer.Ecmwf.totalPrecipitation({tileSize: tilesize, zIndex: 100}),
+                "airtemp": new L.FLayer.Ecmwf.airTemperature({tileSize: tilesize, zIndex: 100}),
+                "cloudcover": new L.FLayer.Ecmwf.totalCloudCover({tileSize: tilesize, zIndex: 100}),
+                "waveperiod": new L.FLayer.Ecmwf.wavePeriod({tileSize: tilesize, zIndex: 100}),
+                "waveheight": new L.FLayer.Ecmwf.waveHeight({tileSize: tilesize, zIndex: 100}),
+                "wavedirection": new L.FLayer.Ecmwf.waveDirection({tileSize: tilesize, zIndex: 200}),
+            },
             "boundaries": {
                 "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_" + tilesize + "_mercator_201411070000" + "/{z}/{x}/{y}.png",
 		     {maxZoom: 10, tileSize: tilesize, subdomains: subdomains, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + tilesize +".png"}),
             },
-            "stations": {
+            "Point forecasts": {
                 "Sea level": geojson,
             },
+            "Celestial information": {
+                "Sun and Moon": new L.Terminator(),
+            }
         }
 
         initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeolocation, useGeoMetoc);

@@ -19,6 +19,9 @@ function initMap() {
             "EEZ": new L.TileLayer(fcoo_base + "tiles_eez_" + tilesize + "_mercator_201411070000" + "/{z}/{x}/{y}.png",
 		 {maxZoom: 10, tileSize: tilesize, subdomains: subdomains, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + tilesize +".png"}),
         },
+        "Celestial information": {
+            "Sun and Moon": new L.Terminator(),
+        }
     }
     var minZoom = 2;
     var maxZoom = 10;

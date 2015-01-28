@@ -63,6 +63,7 @@ function initMap() {
                 "visibility":  new L.FLayer.Dmi.visibility({tileSize: tilesize, zIndex: 100}),
                 "iceconcentration": new L.FLayer.Dmi.iceConcentration({tileSize: tilesize, zIndex: 100}),
                 "pressure": new L.FLayer.Dmi.seaLevelPressure({tileSize: tilesize, zIndex: 200}),
+                "precip": new L.FLayer.Dmi.totalPrecipitation({tileSize: tilesize, zIndex: 100}),
                 "airtemp": new L.FLayer.Dmi.airTemperature({tileSize: tilesize, zIndex: 100}),
 //              "humidity": new L.FLayer.Dmi.humidity({tileSize: tilesize, zIndex: 100}),
                 "cloudcover": new L.FLayer.Dmi.totalCloudCover({tileSize: tilesize, zIndex: 100}),
