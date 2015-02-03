@@ -236,6 +236,7 @@ L.FLayer.Fcoo = new Object();
 L.FLayer.Dmi = new Object();
 L.FLayer.Ecmwf = new Object();
 L.FLayer.Noaa = new Object();
+L.FLayer.Impact = new Object();
 
 L.FLayerGroup = L.LayerGroup.extend({
         getTimesteps: function() {

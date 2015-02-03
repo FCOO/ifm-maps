@@ -13,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="../javascript/jquery-ui-1.11.2.custom/jquery-ui.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-home.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-fcoo-layers.css" />
+	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-languageselector.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-control-datetime.css" />
 	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/L.Control.MousePosition.css" />
@@ -47,6 +48,7 @@
 	<!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/excanvas.js"></script><![endif]-->
 	<!--[if lt IE 10]><script type="text/javascript" src="../javascript/polyfills/typedarray.js"></script><![endif]-->
 	<script src="../javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js"></script>
+	<script src="../javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js"></script>
 	<script src="../javascript/map_<?php echo $domain_id ?>.js"></script>
 	<script src="../javascript/leaflet/leaflet-languageselector.js"></script>
 	<script src="../javascript/leaflet/leaflet-control-datetime.js"></script>

@@ -1,0 +1,38 @@
+.ui-slider {
+    background: #E50000;
+}
+.ui-slider-range {
+    background: linear-gradient(to right, #3BF107, #ECE903, #E50000);
+}
+.slider-green {
+    float: left;
+    height: 100%;
+    width: 100%;
+    background: #3BF107;
+    border-radius: 0 4px 4px 0;
+}
+
+.fcoo-legend-image {
+    border: 0px;
+    height: 70px;
+    width: 250px;
+}
+
+.fcoo-legend-slider {
+    width: 90%;
+    margin-left: 5%:
+}
+
+.fcoo-legend-slider-info {
+    text-align: center;
+}
+
+.fcoo-legend-slider-info-input {
+    text-align: center;
+    border: 0;
+}
+
+.fcoo-legend-slider-div {
+    width: 90%;
+    margin-left: 5%:
+}
