@@ -13,23 +13,26 @@ L.FImpactLayer = L.FLayer.extend({
                     this.options.foreground.addTo(map);
                 }
                 var expr = this.options.baseexpr;
-                console.log(this.options);
-                for (var param in this.options.layers.split(':')) {
+                for (var param in this.options.legendParameters) {
+                    var values = this.options.legendParameters[param].slider_options.values;
+                    var minval = this.options.legendParameters[param].slider_options.min;
+                    var maxval = this.options.legendParameters[param].slider_options.max;
+                    var long_name = this.options.legendParameters[param].long_name;
+                    var units = this.options.legendParameters[param].units;
                     // Find y = a*x + b params
-                    var a = 80.0/(Math.abs(slider_div.slider("values", 1)) - Math.abs(slider_div.slider("values", 0)));
-                    var b = 90.0 - a*slider_div.slider("values", 1);
+                    var a = 80.0/(Math.abs(values[1]) - Math.abs(values[0]));
+                    var b = 90.0 - a*values[1];
                     if (b < 0) {
                         var sgn = '-';
                         b = -b;
                     } else {
                         var sgn = '+';
                     }
-                    adjustables[param] = [a, sgn + b];
-                    $("#" + param).val( long_name + ": " + param_consts[param][0] + " - " + param_consts[param][1] + " " + units);
-                    slider_green.css('width', 100*(slider_div.slider("values", 0) - slider_div.slider("option", "min"))/(slider_div.slider("option", "max") - slider_div.slider("option", "min")) +'%');
-                    expr = expr.replace('a_' + param, param_consts[param][0]).replace('+b_' + param, param_consts[param][1]);
+                    $("#" + param).val(long_name + ": " + Math.abs(values[0]) + " - " + Math.abs(values[1]) + " " + units);
+                    //slider_green.css('width', 100*(values[0] - minval)/(maxval - minval) +'%');
+                    expr = expr.replace('a_' + param, a).replace('+b_' + param, sgn + b);
                 }
-                myLayer.options.expr = expr;
+                this.wmsParams.expr = expr;
                 L.TileLayer.WMS.prototype.onAdd.call(this, map);
         },
 
@@ -108,7 +111,24 @@ L.FImpactLayer.LegendControl = L.Control.extend({
 			}
                         var colorbar = L.DomUtil.create('img', 'fcoo-legend-image', item)
                         colorbar.src = imgPath;
+                        var title = L.DomUtil.create('p', 'fcoo-legend-item-title', item);
+		        title.innerHTML = this._legendContainer[idx].layer._name;
                         var param_consts = {};
+                        for (var param in this._legendContainer[idx]['parameters']) {
+                            var values = this._legendContainer[idx]['parameters'][param].slider_options.values;
+                            var minval = this._legendContainer[idx]['parameters'][param].slider_options.min;
+                            var maxval = this._legendContainer[idx]['parameters'][param].slider_options.max;
+                            // Find y = a*x + b params
+                            var a = 80.0/(Math.abs(values[1]) - Math.abs(values[0]));
+                            var b = 90.0 - a*values[1];
+                            if (b < 0) {
+                                var sgn = '-';
+                                b = -b;
+                            } else {
+                                var sgn = '+';
+                            }
+                            param_consts[param] = [a, sgn + b];
+                        }
                         if (attribution != null) {
 			    var attrelem = L.DomUtil.create('p', '', item);
 			    attrelem.innerHTML = attribution;
@@ -142,23 +162,12 @@ L.FImpactLayer.LegendControl = L.Control.extend({
                                     for (var lparam in adjustables) {
                                         expr = expr.replace('a_' + lparam, adjustables[lparam][0]).replace('+b_' + lparam, adjustables[lparam][1]);
                                     }
-                                    myLayer.setParams({expr: expr});
+                                    myLayer.setParams({expr: expr}, false);
                                     slider_green.css('width', 100*(ui.values[0] - slider_div.slider("option", "min"))/(slider_div.slider("option", "max") - slider_div.slider("option", "min")) +'%');
                                 }
                             }
                             var slideroptions = L.extend(baseoptions, options['parameters'][param]['slider_options']);
                             slider_div.slider(slideroptions).append(slider_green);
-                            // Find y = a*x + b params
-                            var a = 80.0/(Math.abs(slider_div.slider("values", 1)) - Math.abs(slider_div.slider("values", 0)));
-                            var b = 90.0 - a*slider_div.slider("values", 1);
-                            if (b < 0) {
-                                var sgn = '-';
-                                b = -b;
-                            } else {
-                                var sgn = '+';
-                            }
-                            adjustables[param] = [a, sgn + b];
-                            $("#" + param).val( long_name + ": " + param_consts[param][0] + " - " + param_consts[param][1] + " " + units);
                             slider_green.css('width', 100*(slider_div.slider("values", 0) - slider_div.slider("option", "min"))/(slider_div.slider("option", "max") - slider_div.slider("option", "min")) +'%');
                         }
                         for (var param in this._legendContainer[idx]['parameters']) {

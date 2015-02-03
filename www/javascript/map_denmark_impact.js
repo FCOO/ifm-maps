@@ -27,7 +27,8 @@ function initMap() {
 
     var overlays = {
         "Impact": {
-            "Westland Super Lynx": new L.FLayer.Impact.helicopter({tileSize: tilesize, zIndex: 100}),
+            "Boarding operations": new L.FLayer.Impact.boarding({tileSize: tilesize, zIndex: 100}),
+            "Westland Super Lynx": new L.FLayer.Impact.helo_tol({tileSize: tilesize, zIndex: 100}),
         },
         "boundaries": {
             "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_" + tilesize + "_mercator_201411070000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: tilesize, subdomains: subdomains, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + tilesize +".png"}),

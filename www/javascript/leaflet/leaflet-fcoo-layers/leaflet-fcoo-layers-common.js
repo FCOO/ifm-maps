@@ -13,7 +13,7 @@ L.FLayer = L.TileLayer.WMS.extend({
 		layers: '',
 		styles: '',
 		format: 'image/png',
-                crs: L.CRS.EPSG3857,
+                //crs: L.CRS.EPSG3857,
 		transparent: true,
 	},
         defaultLegendParams: {
