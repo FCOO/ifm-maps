@@ -28,7 +28,7 @@ L.FImpactLayer = L.FLayer.extend({
                     } else {
                         var sgn = '+';
                     }
-                    $("#" + param).val(long_name + ": " + Math.abs(values[0]) + " - " + Math.abs(values[1]) + " " + units);
+                    $("#" + this._name + '_' + param).val(long_name + ": " + Math.abs(values[0]) + " - " + Math.abs(values[1]) + " " + units);
                     //slider_green.css('width', 100*(values[0] - minval)/(maxval - minval) +'%');
                     expr = expr.replace('a_' + param, a).replace('+b_' + param, sgn + b);
                 }
@@ -112,6 +112,7 @@ L.FImpactLayer.LegendControl = L.Control.extend({
                         var colorbar = L.DomUtil.create('img', 'fcoo-legend-image', item)
                         colorbar.src = imgPath;
                         var title = L.DomUtil.create('p', 'fcoo-legend-item-title', item);
+		        var name = this._legendContainer[idx].layer._name;
 		        title.innerHTML = this._legendContainer[idx].layer._name;
                         var param_consts = {};
                         for (var param in this._legendContainer[idx]['parameters']) {
@@ -134,10 +135,10 @@ L.FImpactLayer.LegendControl = L.Control.extend({
 			    attrelem.innerHTML = attribution;
                         }
   
-                        makeSlider = function(param, options, item, adjustables) {
+                        makeSlider = function(param, options, item, name, adjustables) {
                             var slider_outer = L.DomUtil.create('div', 'fcoo-legend-slider', item);
                             var slider_info = L.DomUtil.create('p', 'fcoo-legend-slider-info', slider_outer);
-                            $(slider_info).append('<input type="text" id="' + param + '" readonly class="fcoo-legend-slider-info-input"/>');
+                            $(slider_info).append('<input type="text" id="' + name + '_' + param + '" readonly class="fcoo-legend-slider-info-input"/>');
                             var slider_div = $(L.DomUtil.create('div', 'fcoo-legend-slider-div ui-slider-handle leaflet-control', item));
     
                             // Add slider for selecting parameters
@@ -147,7 +148,7 @@ L.FImpactLayer.LegendControl = L.Control.extend({
                             var slider_green = $('<div class="slider-green"></div>')
                             var baseoptions = {
                                 slide: function( event, ui ) {
-                                    $("#" + param).val(long_name + ": " + Math.abs(ui.values[0]) + " - " + Math.abs(ui.values[1]) + " " + units);
+                                    $("#" + name + '_' + param).val(long_name + ": " + Math.abs(ui.values[0]) + " - " + Math.abs(ui.values[1]) + " " + units);
                                     // Find y = a*x + b params
                                     var a = 80.0/(Math.abs(ui.values[1]) - Math.abs(ui.values[0]));
                                     var b = 90.0 - a*ui.values[1];
@@ -171,7 +172,7 @@ L.FImpactLayer.LegendControl = L.Control.extend({
                             slider_green.css('width', 100*(slider_div.slider("values", 0) - slider_div.slider("option", "min"))/(slider_div.slider("option", "max") - slider_div.slider("option", "min")) +'%');
                         }
                         for (var param in this._legendContainer[idx]['parameters']) {
-                            makeSlider(param, this._legendContainer[idx], item, param_consts);
+                            makeSlider(param, this._legendContainer[idx], item, name, param_consts);
                         }
 		}
 	}
