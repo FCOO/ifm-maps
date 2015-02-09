@@ -2,7 +2,8 @@
     background: #E50000;
 }
 .ui-slider-range {
-    background: linear-gradient(to right, #3BF107, #ECE903, #E50000);
+    /*background: linear-gradient(to right, #3BF107, #ECE903, #E50000);*/
+    background: #ECE903;
 }
 .slider-green {
     float: left;
@@ -23,13 +24,40 @@
     margin-left: 5%:
 }
 
+.fcoo-legend-item-title {
+    padding: 0px;
+    border: 0px;
+    margin: 2px;
+    width: 300px;
+}
+
+.fcoo-legend-slider-info-green {
+    background: #3BF107;
+    margin: 2px;
+}
+
+.fcoo-legend-slider-info-yellow {
+    background: #ECE903;
+    margin: 2px;
+}
+
+.fcoo-legend-slider-info-red {
+    background: #E50000;
+    margin: 2px;
+}
+
 .fcoo-legend-slider-info {
     text-align: center;
+    padding: 0px;
+    border: 0px;
+    margin: 2px;
 }
 
 .fcoo-legend-slider-info-input {
     text-align: center;
-    border: 0;
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
 }
 
 .fcoo-legend-slider-div {

@@ -49,6 +49,7 @@
 	<!--[if lt IE 10]><script type="text/javascript" src="../javascript/polyfills/typedarray.js"></script><![endif]-->
 	<script src="../javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js"></script>
 	<script src="../javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js"></script>
+	<script src="../javascript/leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js"></script>
 	<script src="../javascript/map_<?php echo $domain_id ?>.js"></script>
 	<script src="../javascript/leaflet/leaflet-languageselector.js"></script>
 	<script src="../javascript/leaflet/leaflet-control-datetime.js"></script>

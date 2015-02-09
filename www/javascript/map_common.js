@@ -18,7 +18,7 @@ function getI18n(key, lang) {
 	var i18n = {
 		en: {
 			  maps: 'Maps'
-			, layers: 'Forecast Parameters'
+			, layers: 'Layers'
 			, boundaries: 'Boundaries'
 			, places: 'Places'
 			, iceconcentration: 'Sea Ice Concentration'	
@@ -57,7 +57,7 @@ function getI18n(key, lang) {
                         , 'Tidal forecasts': 'Tidevandsprognoser'
                         , 'Celestial information': 'Himmellegemer'
                         , 'Sun and Moon': 'Sol og Måne'
-			, layers: 'Prognoseparametre'
+			, layers: 'Lag'
 			, boundaries: 'Grænser'
 			, places: 'Steder'
 			, iceconcentration: 'Havis (koncentration)'
