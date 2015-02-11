@@ -2,14 +2,14 @@
     background: #E50000;
 }
 .ui-slider-range {
-    /*background: linear-gradient(to right, #3BF107, #ECE903, #E50000);*/
+    /*background: linear-gradient(to right, #00CC00, #ECE903, #E50000);*/
     background: #ECE903;
 }
 .slider-green {
     float: left;
     height: 100%;
     width: 100%;
-    background: #3BF107;
+    background: #00CC00;
     border-radius: 0 4px 4px 0;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .fcoo-legend-slider-info-green {
-    background: #3BF107;
+    background: #00CC00;
     margin: 2px;
 }
 
