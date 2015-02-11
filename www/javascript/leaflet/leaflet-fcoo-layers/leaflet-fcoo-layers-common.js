@@ -13,7 +13,6 @@ L.FLayer = L.TileLayer.WMS.extend({
 		layers: '',
 		styles: '',
 		format: 'image/png',
-                crs: L.CRS.EPSG3857,
 		transparent: true,
 	},
         defaultLegendParams: {
@@ -236,6 +235,7 @@ L.FLayer.Fcoo = new Object();
 L.FLayer.Dmi = new Object();
 L.FLayer.Ecmwf = new Object();
 L.FLayer.Noaa = new Object();
+L.FLayer.Impact = new Object();
 
 L.FLayerGroup = L.LayerGroup.extend({
         getTimesteps: function() {
@@ -262,6 +262,7 @@ L.FLayer.LegendControl = L.Control.extend({
 		this._container.style.display = 'none';
 		this._legendCounter = 0;
 		this._legendContainer = new Array();
+                this._legendType = 'standard';
 	},
 
 	onAdd: function(map) {
