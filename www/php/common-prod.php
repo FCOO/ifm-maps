@@ -17,6 +17,5 @@
     <!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/jquery.xdomainrequest.min.js"></script><![endif]-->
     <!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/excanvas.js"></script><![endif]-->
     <!--[if lt IE 10]><script type="text/javascript" src="../javascript/polyfills/typedarray.js"></script><![endif]-->
-    <script>initMap();</script>
 </body>
 </html>

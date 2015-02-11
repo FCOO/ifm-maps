@@ -1,7 +1,7 @@
-/**
- * Initialize the map.
- */
-function initMap() {
+$(document).ready(function() {
+    /**
+     * Initialize the map.
+     */
     var tilesize = getTilesize();
     var subdomains = ["media01", "media02", "media03", "media04", "media05"];
     var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
@@ -38,4 +38,4 @@ function initMap() {
     var useGeoMetoc = false;
 
     initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeolocation, useGeoMetoc);
-}
+});

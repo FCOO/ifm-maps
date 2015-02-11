@@ -66,6 +66,5 @@ for($x=0; $x<$arrlength; $x++) {
   echo "        <script src=\"../javascript/leaflet/leaflet-fcoo-layers/$model_ids[$x]\"></script>";
 }
 ?>
-	<script>initMap();</script>
 </body>
 </html>

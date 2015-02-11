@@ -26,7 +26,7 @@
                             units: 'm',
                             sliderOptions: {
                                     range: true,
-                                    step: 0.5,
+                                    step: 0.25,
                                     min: 0,
                                     max: 10,
                                     values: [ 2.5, 4 ],
@@ -41,17 +41,7 @@
 	L.FLayer.Impact._replenishment = function (dataset, options) {
                 // Setup expression
                 var layers = Object.keys(options['legendParameters']).join(':');
-                var baseexpr = '';
-                for (var param in options['legendParameters']) {
-                    if (baseexpr == '') {
-                        baseexpr = 'a_' + param + '*' + param + '+b_' + param;
-                    } else {
-                        baseexpr = 'fmax(' + baseexpr + ',' + 'a_' + param + '*' + param + '+b_' + param + ')';
-                    }
-                }
-                baseexpr = 'fmin(100,fmax(0,' + baseexpr + '))';
                 var extraoptions = {layers: layers,
-                                    baseexpr: baseexpr,
                                     cmap: 'Green_Red_3colors'}
                 options = L.extend(options, extraoptions);
 		var layer = new L.FImpactLayer(dataset, options);
@@ -82,7 +72,7 @@
                             units: 'm',
                             sliderOptions: {
                                     range: true,
-                                    step: 0.5,
+                                    step: 0.25,
                                     min: 0,
                                     max: 6,
                                     values: [ 1.25, 2.5 ],
@@ -97,17 +87,7 @@
 	L.FLayer.Impact._boarding = function (dataset, options) {
                 // Setup expression
                 var layers = Object.keys(options['legendParameters']).join(':');
-                var baseexpr = '';
-                for (var param in options['legendParameters']) {
-                    if (baseexpr == '') {
-                        baseexpr = 'a_' + param + '*' + param + '+b_' + param;
-                    } else {
-                        baseexpr = 'fmax(' + baseexpr + ',' + 'a_' + param + '*' + param + '+b_' + param + ')';
-                    }
-                }
-                baseexpr = 'fmin(100,fmax(0,' + baseexpr + '))';
                 var extraoptions = {layers: layers,
-                                    baseexpr: baseexpr,
                                     cmap: 'Green_Red_3colors'}
                 options = L.extend(options, extraoptions);
 		var layer = new L.FImpactLayer(dataset, options);
@@ -138,7 +118,7 @@
                             units: 'm',
                             sliderOptions: {
                                     range: true,
-                                    step: 0.5,
+                                    step: 0.25,
                                     min: 0,
                                     max: 10,
                                     values: [ 2.5, 4 ],
@@ -164,17 +144,7 @@
 	L.FLayer.Impact._helo_tol = function (dataset, options) {
                 // Setup expression
                 var layers = Object.keys(options['legendParameters']).join(':');
-                var baseexpr = '';
-                for (var param in options['legendParameters']) {
-                    if (baseexpr == '') {
-                        baseexpr = 'a_' + param + '*' + param + '+b_' + param;
-                    } else {
-                        baseexpr = 'fmax(' + baseexpr + ',' + 'a_' + param + '*' + param + '+b_' + param + ')';
-                    }
-                }
-                baseexpr = 'fmin(100,fmax(0,' + baseexpr + '))';
                 var extraoptions = {layers: layers,
-                                    baseexpr: baseexpr,
                                     cmap: 'Green_Red_3colors'}
                 options = L.extend(options, extraoptions);
 		var layer = new L.FImpactLayer(dataset, options);
