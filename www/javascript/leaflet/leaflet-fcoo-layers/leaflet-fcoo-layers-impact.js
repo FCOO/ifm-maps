@@ -269,7 +269,6 @@ L.FImpactLayer.LegendControl = L.Control.extend({
         this._legendCounter = 0;
         this._legendContainer = new Array();
         this._legendType = 'impact';
-        this._settings = {};
         L.DomEvent.disableClickPropagation(this._container);
     },
 
