@@ -17,7 +17,7 @@
                 options = L.extend(options, loptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / ICE CHART';
+                        layer.options.legendAttribution = '<a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / ICE CHART';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=ice_concentration&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=IceConcentration_10colors';
 		}
 		return layer;

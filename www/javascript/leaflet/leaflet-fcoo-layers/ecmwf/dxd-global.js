@@ -15,7 +15,7 @@
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a> / IFS';
+                        layer.options.legendAttribution = '<a href="http://www.ecmwf.int" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a> / IFS';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=windspeed&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Wind_ms_YRP_11colors';
 		}
 		return layer;

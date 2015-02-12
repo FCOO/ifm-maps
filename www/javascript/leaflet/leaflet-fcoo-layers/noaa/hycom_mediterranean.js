@@ -17,7 +17,7 @@
                 options = L.extend(options, currentoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://noaa.gov" alt="National Oceanic and Atmospheric Administration">NOAA</a> / HYCOM';
+                        layer.options.legendAttribution = '<a href="http://noaa.gov" alt="National Oceanic and Atmospheric Administration">NOAA</a> / HYCOM';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=u_velocity_v_velocity&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Current_kn_GYR_11colors';
 		}
 		return layer;

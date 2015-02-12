@@ -28,7 +28,7 @@
                 var currentoptions = L.extend(currentoptions, options);
 		var layer = new L.FLayer(dataset, currentoptions);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
+                        layer.options.legendAttribution = '<a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=uu_vv&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Current_kn_GYR_11colors';
 		}
 		return layer;
@@ -84,7 +84,7 @@
                 elevationoptions = L.extend(elevationoptions, options);
 		var layer = new L.FLayer(dataset, elevationoptions);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
+                        layer.options.legendAttribution = '<a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=elev&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaLvl_m_BWR_20colors';
 		}
 		return layer;
@@ -114,7 +114,7 @@
                 extraoptions = L.extend(extraoptions, options);
                 var layer = new L.FLayer(dataset, extraoptions);
                 if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
+                        layer.options.legendAttribution = '<a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
                         layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=salt&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=PrSal_psu_GB_20colors';
                 }
                 return layer;
@@ -144,7 +144,7 @@
                 extraoptions = L.extend(extraoptions, options);
                 var layer = new L.FLayer(dataset, extraoptions);
                 if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
+                        layer.options.legendAttribution = '<a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / GETM';
                         layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=temp&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaTemp_C_BGYR_14colors';
                 }
                 return layer;

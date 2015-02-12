@@ -391,11 +391,17 @@ L.FLayer.LegendControl = L.Control.extend({
                             }
                         }
                         if (attribution != null) {
-                            leginner = leginner + '<br />' + attribution;
+                            var source = L.FLayer.Utils.getI18n('Source', 
+                                lang);
+                            leginner = leginner + '<br />' + source + ': '
+                                     + attribution;
                         }
                         if (last_modified != null) {
-                            leginner = leginner + '<br />Last updated: ' + 
-                                last_modified.utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z';
+                            var last_updated = L.FLayer.Utils.getI18n(
+                                'Last updated', lang);
+                            leginner = leginner + '<br />' + last_updated +
+                                ': ' +
+                                last_modified.utc().format('YYYY-MM-DDTHH:mm') + ' UTC';
                         }
 			item.innerHTML = leginner;
                         //var height = $(item).height();
@@ -444,7 +450,9 @@ L.FLayer.Utils.getI18n = function(key, lang) {
                           , 'Temp.': 'Temperature'
                 }
                 , da: {
-                          'Wave height': 'Bølgehøjde'
+                          'Source': 'Kilde'
+                          , 'Last updated': 'Sidst opdateret'
+                          , 'Wave height': 'Bølgehøjde'
                           , 'Mean wave period': 'Bølgeperiode'
                           , 'Vel.': 'Strøm (fart)'
                           , 'Elevation': 'Vandstand'

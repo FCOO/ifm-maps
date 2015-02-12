@@ -31,7 +31,7 @@
                 waveoptions = L.extend(waveoptions, options);
 		var layer = new L.FLayer(dataset, waveoptions);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / WW3';
+                        layer.options.legendAttribution = '<a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / WW3';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=u_v&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Hs_m_GBP_9colors';
 		}
 		return layer;
@@ -94,7 +94,7 @@
                 wms_opts = L.extend(wms_opts, options);
                 var layer = new L.FLayer(dataset, wms_opts);
                 if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / WW3';
+                        layer.options.legendAttribution = '<a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a> / WW3';
                         var params = L.extend({}, layer.defaultLegendParams);
                         params = L.extend(params, opts);
                         layer.options.legendImagePath = layer._fcootileurl + '?' + $.param(params);

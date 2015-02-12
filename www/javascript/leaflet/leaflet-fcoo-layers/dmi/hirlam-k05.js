@@ -15,7 +15,7 @@
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
+                        layer.options.legendAttribution = '<a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=VIS&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=AirVisibility_km_RYG_11colors';
 		}
 		return layer;
@@ -31,7 +31,7 @@
                 options = L.extend(options, windoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
+                        layer.options.legendAttribution = '<a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=windspeed&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Wind_ms_YRP_11colors';
 		}
 		return layer;
@@ -59,7 +59,7 @@
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
+                        layer.options.legendAttribution = '<a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=SPFH&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Humidity_kg_kg_WYR_7colors';
 		}
 		return layer;
@@ -75,7 +75,7 @@
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
+                        layer.options.legendAttribution = '<a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=TMP&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=AirTempCold_C_BGYR_19colors';
 		}
 		return layer;
@@ -93,7 +93,7 @@
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);
 		//if (layer.options.legendImagePath == null) {
-                        //layer.options.legendAttribution = 'Source: <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
+                        //layer.options.legendAttribution = '<a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
 			//layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=PRES&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaLevelPressure_hPa_BGYR_13colors';
 		//}
 		return layer;
@@ -109,7 +109,7 @@
                 options = L.extend(options, extraoptions);
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
+                        layer.options.legendAttribution = '<a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
 			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=TCDC&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=CloudCover_km_WGB_10colors';
 		}
 		return layer;
@@ -124,7 +124,7 @@
                 options = L.extend(options, extraoptions);
                 var layer = new L.FLayer(dataset, options);
                 if (layer.options.legendImagePath == null) {
-                        layer.options.legendAttribution = 'Source: <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
+                        layer.options.legendAttribution = '<a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> / HIRLAM / K05';
                         layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=precip&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=Precip_mm_per_h_YRP_11colors';
                 }
                 return layer;
