@@ -35,14 +35,14 @@ L.Terminator = L.Polygon.extend({
     },
 
     onAdd: function(map) {
-        this._celestial = L.celestial({});
-        this._map.addControl(this._celestial);
+        //this._celestial = L.celestial({});
+        //this._map.addControl(this._celestial);
         L.Polygon.prototype.onAdd.call(this, map);
 
     },
 
     onRemove: function(map) {
-        this._map.removeControl(this._celestial);
+        //this._map.removeControl(this._celestial);
         L.Polygon.prototype.onRemove.call(this, map);
     },
 
