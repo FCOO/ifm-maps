@@ -441,6 +441,7 @@ L.FLayer.Utils.getI18n = function(key, lang) {
         var i18n = {
                 en: {
                           'degC': '&deg;C'
+                          , 'Temp.': 'Temperature'
                 }
                 , da: {
                           'Wave height': 'Bølgehøjde'
@@ -448,6 +449,7 @@ L.FLayer.Utils.getI18n = function(key, lang) {
                           , 'Vel.': 'Strøm (fart)'
                           , 'Elevation': 'Vandstand'
                           , 'Temperature': 'Temperatur'
+                          , 'Temp.': 'Temperatur'
                           , 'Salinity': 'Salinitet'
                           , 'Wind speed': 'Vind (fart)'
                           , 'Total precipitation flux': 'Nedbør'
