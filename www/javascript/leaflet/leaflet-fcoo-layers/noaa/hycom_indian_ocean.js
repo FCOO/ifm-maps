@@ -18,7 +18,7 @@
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://noaa.gov" alt="National Oceanic and Atmospheric Administration">NOAA</a> / HYCOM';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=u_velocity_v_velocity&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=CurrentArctic_kn_GYR_9colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=u_velocity_v_velocity&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=CurrentArctic_kn_GYR_9colors';
 		}
 		return layer;
 	};
@@ -49,7 +49,7 @@
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://noaa.gov" alt="National Oceanic and Atmospheric Administration">NOAA</a> / HYCOM';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=sss&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=PrSalArctic_psu_GB_16colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=sss&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=PrSalArctic_psu_GB_16colors';
 		}
 		return layer;
 	};
@@ -65,7 +65,7 @@
 		var layer = new L.FLayer(dataset, options);
 		if (layer.options.legendImagePath == null) {
                         layer.options.legendAttribution = 'Source: <a href="http://noaa.gov" alt="National Oceanic and Atmospheric Administration">NOAA</a> / HYCOM';
-			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=sst&STYLES=horizontal&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaTemp_C_BGYR_14colors';
+			layer.options.legendImagePath = layer._fcootileurl + '?SERVICE=WMS&REQUEST=GetColorbar&VERSION=1.1.1&LAYERS=sst&STYLES=horizontal,nolabel&FORMAT=image%2Fpng&TRANSPARENT=false&CMAP=SeaTemp_C_BGYR_14colors';
 		}
 		return layer;
 	};

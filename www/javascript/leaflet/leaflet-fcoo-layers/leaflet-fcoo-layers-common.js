@@ -20,12 +20,13 @@ L.FLayer = L.TileLayer.WMS.extend({
                 request: 'GetColorbar',
                 version: '1.1.1',
                 layers: '',
-                styles: 'horizontal',
+                styles: 'horizontal,nolabel',
                 format: 'image/png',
                 transparent: false,
                 cmap: '',
         },
         options: {
+                language: 'en',
                 tileSize: 512,
                 opacity: 1.00,
                 subdomains: ['api01', 'api02', 'api03', 'api04', 'api05'],
@@ -71,6 +72,7 @@ L.FLayer = L.TileLayer.WMS.extend({
                   //dataType: ($.browser.msie) ? "text" : "xml", // text for IE, xml for the rest
                   async: true
                 });
+
 	},
 
         setParams: function (params, noRedraw) {
@@ -119,6 +121,33 @@ L.FLayer = L.TileLayer.WMS.extend({
                         var url = "data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
                 }
                 return url;
+        },
+
+        _error_metadata: function(jqXHR, textStatus, err) {
+                var msg = 'Failed getting web map metadata from ' + jqXHR.url;
+                var n = noty({text: msg, type: "error"});
+                throw new Error(msg);
+        },
+
+        _got_metadata: function(json, textStatus, jqXHR) {
+                if (this._legendControl != null) {
+                    try {
+                        var last_modified = json.last_modified;
+                        this._last_modified = moment(last_modified);
+                        var variable = json[this.options.layers.split(':')[0]];
+                        this._long_name = variable['long_name'];
+                        this._units = variable['units'];
+                        var legendId = this._legendId;
+                        this._legendControl._legendContainer[legendId].last_modified = this._last_modified;
+                        this._legendControl._legendContainer[legendId].long_name = this._long_name;
+                        this._legendControl._legendContainer[legendId].units = this._units;
+		        this._legendControl._redrawLegend();
+                    } catch (err) {
+                        console.log(err);
+                        var n = noty({text: err.message, type: "error"});
+                        throw err;
+                    }
+                }
         },
 
         _error_capabilities: function(jqXHR, textStatus, err) {
@@ -201,12 +230,37 @@ L.FLayer = L.TileLayer.WMS.extend({
 		this._map = map;
 		if (this.options.showLegend && this.options.legendImagePath != null) {
 			this._legendControl = this._getLegendControl();
-			this._legendId = this._legendControl.addLegend(this.options.legendImagePath, this.options.legendAttribution);
+			this._legendId = this._legendControl.addLegend(
+                            this.options.legendImagePath,
+                            this.options.legendAttribution,
+                            this._last_modified);
 		}
                 if (this.options.foreground != null) {
                     this.options.foreground.addTo(map);
                 }
 		L.TileLayer.WMS.prototype.onAdd.call(this, map);
+
+                if (this._legendControl != null) {
+                    $.ajax({
+                      url: this._fcootileurl,
+                      data: {
+                              SERVICE: 'WMS',
+                              REQUEST: 'GetMetadata',
+                              VERSION: this.wmsParams.version,
+                              ITEMS: 'last_modified,long_name,units',
+                              LAYERS: this.options.layers.split(':')[0],
+                            },
+                      context: this,
+                      error: this._error_metadata,
+                      success: this._got_metadata,
+                      beforeSend: function(jqXHR, settings) {
+                          jqXHR.url = settings.url;
+                      },
+                      cache: true,
+                      dataType: "json",
+                      async: true
+                    });
+                }
 	},
 
 	onRemove: function(map) {
@@ -224,7 +278,9 @@ L.FLayer = L.TileLayer.WMS.extend({
 
 	_getLegendControl: function() {
 		if (typeof this._map._fcoo_legendcontrol == 'undefined' || !this._map._fcoo_legendcontrol) {
-			this._map._fcoo_legendcontrol = new L.FLayer.LegendControl({position: this.options.legendPosition});
+			this._map._fcoo_legendcontrol = new L.FLayer.LegendControl(
+                            this._map, {position: this.options.legendPosition,
+                                        language: this.options.language});
 			this._map.addControl(this._map._fcoo_legendcontrol);
 		}
 		return this._map._fcoo_legendcontrol;
@@ -253,27 +309,30 @@ L.FLayerGroup = L.LayerGroup.extend({
 
 L.FLayer.LegendControl = L.Control.extend({
 	options: {
-		position: "bottomleft"
+		position: "bottomleft",
 	},
 
-	initialize: function(options) {
+	initialize: function(map, options) {
 		L.Util.setOptions(this, options);
+                this._map = map;
 		this._container = L.DomUtil.create('div', 'fcoo-legend-container');
 		this._container.style.display = 'none';
 		this._legendCounter = 0;
 		this._legendContainer = new Array();
                 this._legendType = 'standard';
+                this.options.language = getLocalLanguage();
 	},
 
 	onAdd: function(map) {
 		return this._container;
 	},
 
-	addLegend: function(legendImagePath, legendAttribution) {
+	addLegend: function(legendImagePath, legendAttribution, legendLastModified) {
 		var legendId = this._legendCounter++;
 	        var legendInfo = {
 		        imagePath: legendImagePath,
-		        attribution: legendAttribution
+		        attribution: legendAttribution,
+                        last_modified: legendLastModified
                 }
 		this._legendContainer[legendId] = legendInfo;
 		this._redrawLegend();
@@ -302,11 +361,16 @@ L.FLayer.LegendControl = L.Control.extend({
 		this._container.innerHTML = ''; // clear container
 		var isLeft = this.options.position.indexOf('left') !== -1;
 		var cssFloat = isLeft ? 'left' : 'right';
+                var lang = this.options.language;
                 //var window_height = $(window).height();
                 //var accumulated_height = 0;
 		for (var idx in this._legendContainer) {
 			var imgPath = this._legendContainer[idx]['imagePath'];
 			var attribution = this._legendContainer[idx]['attribution'];
+			var last_modified = this._legendContainer[idx]['last_modified'];
+			var long_name = this._legendContainer[idx]['long_name'];
+			var units = this._legendContainer[idx]['units'];
+                        units = L.FLayer.Utils.getI18n(units, lang);
 			var item = L.DomUtil.create('div', 'fcoo-legend-item', this._container);
 			item.style.cssFloat = cssFloat;
 			if (isLeft) {
@@ -314,9 +378,24 @@ L.FLayer.LegendControl = L.Control.extend({
 			} else {
 				item.style.marginLeft = '10px';
 			}
-                        var leginner = '<img src="' + imgPath + '" border="0" height="70" width="250" />';
+                        var leginner = '<img src="' + imgPath + '" border="0" height="50" width="250" />';
+                        if (long_name != null) {
+                            var long_name_cap =
+                                long_name.charAt(0).toUpperCase() +
+                                long_name.slice(1);
+                            long_name_cap = L.FLayer.Utils.getI18n(
+                                       long_name_cap, lang);
+                            leginner = leginner + '<br />' + long_name_cap;
+                            if (units != null) {
+                                leginner = leginner + ' [' + units + ']';
+                            }
+                        }
                         if (attribution != null) {
                             leginner = leginner + '<br />' + attribution;
+                        }
+                        if (last_modified != null) {
+                            leginner = leginner + '<br />Last updated: ' + 
+                                last_modified.utc().format('YYYY-MM-DDTHH:mm:ss') + 'Z';
                         }
 			item.innerHTML = leginner;
                         //var height = $(item).height();
@@ -343,7 +422,7 @@ L.FLayer.Utils = {
 			, temperature: 'Temperatur'
 			, temp_minmax: 'Temp. min/max'
 			, wind: 'Vind'
-			, gust: 'Vindstoed'
+			, gust: 'Vindstød'
 			, windforce: 'Vindstyrke'
 			, direction: 'Vindretning'
 			, humidity: 'Luftfugtighed'
@@ -351,6 +430,46 @@ L.FLayer.Utils = {
 		}
 	}
 };
+
+/**
+ * Internationalization of some texts used by the map.
+ * @param String key the key of the text item
+ * @param String lang the language id
+ * @return String the localized text item or the id if there's no translation found
+ */
+L.FLayer.Utils.getI18n = function(key, lang) {
+        var i18n = {
+                en: {
+                          'degC': '&deg;C'
+                }
+                , da: {
+                          'Wave height': 'Bølgehøjde'
+                          , 'Mean wave period': 'Bølgeperiode'
+                          , 'Vel.': 'Strøm (fart)'
+                          , 'Elevation': 'Vandstand'
+                          , 'Temperature': 'Temperatur'
+                          , 'Salinity': 'Salinitet'
+                          , 'Wind speed': 'Vind (fart)'
+                          , 'Total precipitation flux': 'Nedbør'
+                          , '2 metre temperature': '2 meter temperatur'
+                          , 'Total cloud cover': 'Skydække'
+                          , 'mm/hour': 'mm/time'
+                          , 'degC': '&deg;C'
+                          , 'knots': 'knob'
+                          , 'meters': 'meter'
+                }
+        };
+
+        if (typeof i18n[lang] != 'undefined'
+                        && typeof i18n[lang][key] != 'undefined') {
+                return  i18n[lang][key];
+        } else if (typeof i18n['en'] != 'undefined'
+                        && typeof i18n['en'][key] != 'undefined') {
+                return  i18n['en'][key];
+        }
+        return key;
+};
+
 
 L.CountingTileLayer = L.TileLayer.extend({
         initialize: function (url, options) {
