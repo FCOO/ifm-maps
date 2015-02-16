@@ -379,7 +379,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
             map.on('contextmenu', function(e) {
                 var lat = e.latlng.lat;
                 var lon = e.latlng.lng;
-                var url = 'http://metoc.fcoo.dk/text?x=_X_&y=_Y_&coastline=c';
+                var url = location.protocol + '//metoc.fcoo.dk/text?x=_X_&y=_Y_&coastline=c';
                 var win = window.open(url.replace('_X_', lon).replace('_Y_', lat), '_blank');
                 win.focus();
             });

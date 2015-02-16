@@ -26,8 +26,8 @@ $(document).ready(function() {
     var basemap = "FCOO Standard";
 
     //var link_template = "http://ifm.fcoo.dk/asp/oceanChart.asp?hindcastPeriod=12&forecastPeriod=24&width=500&height=350&id=__STATION__&paramId=SeaLvl&forecastMode=1";
-    var link_template = "http://chart.fcoo.dk/station_timeseries.asp?s=:003__STATION__:046SeaLvl:002DK:001DEFAULT:04d620:04e400:04f0:04a1:04b48:04i0:04c1:04g0:0641:05opopup";
-    $.getJSON("http://api.fcoo.dk/ifm-maps/json/Observations.json", function(data) {
+    var link_template = location.protocol + "//chart.fcoo.dk/station_timeseries.asp?s=:003__STATION__:046SeaLvl:002DK:001DEFAULT:04d620:04e400:04f0:04a1:04b48:04i0:04c1:04g0:0641:05opopup";
+    $.getJSON(location.protocol + "//api.fcoo.dk/ifm-maps/json/Observations.json", function(data) {
         var geojson = L.geoJson(data, {
             onEachFeature: function (feature, layer) {
                 layer.bindPopup('<img src="' + link_template.replace('__STATION__', feature.properties.id) + '" height="350" width="500" />', {maxWidth: 700, maxHeight: 600});

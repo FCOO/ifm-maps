@@ -7,7 +7,7 @@ $(document).ready(function() {
     var langs = ['da', 'en'];
     var basemap = "FCOO Standard";
     var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
-    var tidal_url_base = "http://api.fcoo.dk/tides?station={s}&start={t1}&end={t2}&nx=500&ny=350&lang={l}&tz={dt}";
+    var tidal_url_base = location.protocol + "//api.fcoo.dk/tides?station={s}&start={t1}&end={t2}&nx=500&ny=350&lang={l}&tz={dt}";
     var tidal_stations = "../json/tidal_stations_greenland.json";
     $.getJSON(tidal_stations, function(tidal_data) {
         var geojson = L.geoJson(tidal_data, {
