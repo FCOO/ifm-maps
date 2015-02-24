@@ -31,7 +31,6 @@
         <script src="../javascript/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
         <script src="../javascript/noty-2.2.9/jquery.noty.packaged.js"></script>
         <script src="../javascript/polyfills/jquery.placeholder_v2.0.8.js"></script>
-	<script src="../javascript/date.js"></script>
 	<script src="../javascript/magellan.js"></script>
 	<script src="../javascript/moment-with-locales.min.js"></script>
 	<script src="../javascript/leaflet/leaflet-src.js"></script>
@@ -43,7 +42,6 @@
 	<script src="../javascript/leaflet/Permalink.CategorizedLayer.js"></script>
 	<script src="../javascript/leaflet/Permalink.CategorizedOverlay.js"></script>
 	<script src="../javascript/leaflet/L.Terminator.js"></script>
-	<script src="../javascript/leaflet/leaflet-flattrbutton.js"></script>
 	<script src="../javascript/leaflet/leaflet-home.js"></script>
 	<!--[if lt IE 9]><script type="text/javascript" src="../javascript/polyfills/excanvas.js"></script><![endif]-->
 	<!--[if lt IE 10]><script type="text/javascript" src="../javascript/polyfills/typedarray.js"></script><![endif]-->
