@@ -15,11 +15,11 @@
 	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-position/leaflet-control-position.css" />
 	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-home/leaflet-control-home.css" />
 	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.css" />
-	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-fcoo-layers.css" />
-	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.css" />
-	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/leaflet-control-datetime.css" />
-	<link rel="stylesheet" type="text/css" href="../javascript/leaflet/L.Control.Print.css" />
-        <link rel="stylesheet" type="text/css" href="../javascript/leaflet/Control.OSMGeocoder.ifm-maps.css" />
+	<link rel="stylesheet" type="text/css" href="../leaflet/leaflet-fcoo-layers.css" />
+	<link rel="stylesheet" type="text/css" href="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.css" />
+	<link rel="stylesheet" type="text/css" href="../leaflet/leaflet-control-datetime.css" />
+	<link rel="stylesheet" type="text/css" href="../leaflet/L.Control.Print.css" />
+        <link rel="stylesheet" type="text/css" href="../leaflet/Control.OSMGeocoder.ifm-maps.css" />
 	<link rel="stylesheet" type="text/css" href="../css/ifm-maps.css" />
         <script>window.L_PREFER_CANVAS = true;</script>
 </head>
@@ -43,19 +43,19 @@
 	<script src="../bower_components/leaflet-control-position/leaflet-control-position.js"></script>
 	<script src="../bower_components/leaflet-control-home/leaflet-control-home.js"></script>
 	<script src="../bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.js"></script>
-	<script src="../javascript/leaflet/Permalink.CategorizedLayer.js"></script>
-	<script src="../javascript/leaflet/Permalink.CategorizedOverlay.js"></script>
-	<script src="../javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js"></script>
-	<script src="../javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js"></script>
-	<script src="../javascript/leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js"></script>
+	<script src="../leaflet/Permalink.CategorizedLayer.js"></script>
+	<script src="../leaflet/Permalink.CategorizedOverlay.js"></script>
+	<script src="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js"></script>
+	<script src="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js"></script>
+	<script src="../leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js"></script>
 	<script src="../javascript/map_<?php echo $domain_id ?>.js"></script>
-	<script src="../javascript/leaflet/leaflet-control-datetime.js"></script>
-	<script src="../javascript/leaflet/L.Control.Print.js"></script>
+	<script src="../leaflet/leaflet-control-datetime.js"></script>
+	<script src="../leaflet/L.Control.Print.js"></script>
         <script src="../javascript/map_common.js"></script>
 <?php
 $arrlength=count($model_ids);
 for($x=0; $x<$arrlength; $x++) {
-  echo "        <script src=\"../javascript/leaflet/leaflet-fcoo-layers/$model_ids[$x]\"></script>";
+  echo "        <script src=\"../leaflet/leaflet-fcoo-layers/$model_ids[$x]\"></script>";
 }
 ?>
 </body>

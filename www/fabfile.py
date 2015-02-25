@@ -38,11 +38,11 @@ env.cssfiles = ["bower_components/fontawesome/css/font-awesome.min.css",
                 "bower_components/leaflet-control-position/leaflet-control-position.css",
                 "bower_components/leaflet-control-home/leaflet-control-home.css",
                 "bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.css",
-                "javascript/leaflet/leaflet-fcoo-layers.css",
-                "javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.css",
-                "javascript/leaflet/leaflet-control-datetime.css",
-                "javascript/leaflet/L.Control.Print.css",
-                "javascript/leaflet/Control.OSMGeocoder.ifm-maps.css",
+                "leaflet/leaflet-fcoo-layers.css",
+                "leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.css",
+                "leaflet/leaflet-control-datetime.css",
+                "leaflet/L.Control.Print.css",
+                "leaflet/Control.OSMGeocoder.ifm-maps.css",
                 "css/ifm-maps.css"]
 env.cssfiles_extra = ["bower_components/jquery-ui/themes/ui-lightness/jquery-ui.min.css"]
 
@@ -60,13 +60,13 @@ env.jsfiles = ["bower_components/jquery-placeholder/jquery.placeholder.js",
                "bower_components/leaflet-control-position/leaflet-control-position.js",
                "bower_components/leaflet-control-home/leaflet-control-home.js",
                "bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.js",
-               "javascript/leaflet/Permalink.CategorizedLayer.js",
-               "javascript/leaflet/Permalink.CategorizedOverlay.js",
-               "javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js",
-               "javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js",
-               "javascript/leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js",
-               "javascript/leaflet/leaflet-control-datetime.js",
-               "javascript/leaflet/L.Control.Print.js",
+               "leaflet/Permalink.CategorizedLayer.js",
+               "leaflet/Permalink.CategorizedOverlay.js",
+               "leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js",
+               "leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js",
+               "leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js",
+               "leaflet/leaflet-control-datetime.js",
+               "leaflet/L.Control.Print.js",
                "javascript/map_common.js"]
 env.jsfiles_extra = ["bower_components/jquery/dist/jquery.min.js",
                      "bower_components/jquery-ui/jquery-ui.min.js",
@@ -114,7 +114,7 @@ def build_js(minify=True):
     for setup in env.setups:
         rfile = setup + '/index.php'
         setups[setup] = _extract_jsfiles(rfile)
-    jsmodels = 'javascript/leaflet/leaflet-fcoo-layers/%(model)s'
+    jsmodels = 'leaflet/leaflet-fcoo-layers/%(model)s'
     jsfiles = env.jsfiles
     jsfiles_min = env.jsfiles_extra
     for setup in setups:
@@ -125,7 +125,7 @@ def build_js(minify=True):
         jsmodels_setup = [jsmodels % {'model': model} for model in setups[setup]]
         jsfiles_setup += jsmodels_setup
         #local('mkdir %s/images' % (setup))
-        #local('cp javascript/leaflet/images/* %s/images/.' % (setup))
+        #local('cp leaflet/images/* %s/images/.' % (setup))
         #local('cp javascript/jquery-ui-1.11.2.custom/images/* %s/images/.' % (setup))
         jsfilestr = ' '.join(jsfiles_setup)
         jsfile = '%s/ifm-maps.js' % destdir
@@ -160,7 +160,7 @@ def build(minify=True):
     """
             print('Processing %s' % setup)
             run('mkdir www/%s/images' % (setup))
-            run('cp www/javascript/leaflet/images/* www/%s/images/.' % (setup))
+            run('cp www/leaflet/images/* www/%s/images/.' % (setup))
             run('cp www/javascript/jquery-ui-1.11.2.custom/images/* www/%s/images/.' % (setup))
             sed('www/php/common-prod.php',
                 'ifm-maps.css',
@@ -208,7 +208,7 @@ def clone(proj_dir, minify=True):
             webmap_url = '{s}.fcoo.dk/webmap-staging/{dataset}.wms'
         elif 'production' in env.roles:
             webmap_url = '{s}.fcoo.dk/webmap/{dataset}.wms'
-        sed('www/javascript/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js',
+        sed('www/leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js',
             'wms-dev01:8080/\{dataset\}.wms',
             webmap_url)
         
@@ -274,7 +274,7 @@ def clone(proj_dir, minify=True):
             run('mv -f www/%s/index.php www/%s/index-dev.php' % (setup, setup))
             run('mv -f www/%s/index-prod.php www/%s/index.php' % (setup, setup))
             run('mkdir www/%s/images' % (setup))
-            run('cp www/javascript/leaflet/images/* www/%s/images/.' % (setup))
+            run('cp www/leaflet/images/* www/%s/images/.' % (setup))
             run('cp www/javascript/jquery-ui-1.11.2.custom/images/* www/%s/images/.' % (setup))
             cssfilestr = ' '.join(cssfiles)
             jsfilestr = ' '.join(jsfiles_setup)
