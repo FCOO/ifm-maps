@@ -388,7 +388,8 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
         // Add link to homepage
         map.addControl(L.control.homeButton({
                 text: getI18n('Home', localLang),
-                title: getI18n('Navigate to home page', localLang)
+                title: getI18n('Navigate to home page', localLang),
+                href: location.protocol + '//fcoo.dk'
         }));
 
         // Add language selector

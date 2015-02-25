@@ -57,7 +57,7 @@ L.DatetimeSelector = L.Control.extend({
                     //option.text = date.toISOString().substr(0,16);
                     var locmoment = moment(date);
                     if (this.options.language != null) {
-                        locmoment.lang(this.options.language);
+                        locmoment.locale(this.options.language);
                     }
                     locmoment = locmoment.format('LLLL');
                     locmoment = locmoment.charAt(0).toUpperCase() + locmoment.slice(1);
@@ -135,7 +135,7 @@ L.DatetimeSelector = L.Control.extend({
 		    for (var i=0; i<datetimes.length; i++) {
                         var locmoment = moment(datetimes[i]);
                         if (select._instance.options.language != null) {
-                            locmoment.lang(select._instance.options.language);
+                            locmoment.locale(select._instance.options.language);
                         }
                         if (this.checked) {
                             //select.options[i].text = datetimes[i].toString().split(' (')[0];
@@ -143,7 +143,7 @@ L.DatetimeSelector = L.Control.extend({
                             locmoment = locmoment.charAt(0).toUpperCase() + locmoment.slice(1);
                             select.options[i].text = locmoment;
                         } else {
-                            locmoment = locmoment.zone('+0000').format('LLLL');
+                            locmoment = locmoment.utcOffset('+0000').format('LLLL');
                             locmoment = locmoment.charAt(0).toUpperCase() + locmoment.slice(1);
                             select.options[i].text = locmoment + ' GMT';
                             //select.options[i].text = datetimes[i].toUTCString();

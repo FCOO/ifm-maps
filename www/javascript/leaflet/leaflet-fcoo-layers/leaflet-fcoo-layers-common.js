@@ -78,7 +78,6 @@ L.FLayer = L.TileLayer.WMS.extend({
         setParams: function (params, noRedraw) {
                 L.extend(this.wmsParams, params);
                 if (!noRedraw) {
-                        this._abortLoading();
                         this.redraw();
                 }
                 return this;
