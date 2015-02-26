@@ -51,6 +51,8 @@
 	<script src="../javascript/map_<?php echo $domain_id ?>.js"></script>
 	<script src="../leaflet/leaflet-control-datetime.js"></script>
 	<script src="../leaflet/L.Control.Print.js"></script>
+        <script src="../javascript/lang.js"></script>
+        <script src="../javascript/url.js"></script>
         <script src="../javascript/map_common.js"></script>
 <?php
 $arrlength=count($model_ids);

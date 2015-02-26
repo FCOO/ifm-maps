@@ -70,6 +70,8 @@ env.jsfiles = ["bower_components/jquery-placeholder/jquery.placeholder.js",
                "leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js",
                "leaflet/leaflet-control-datetime.js",
                "leaflet/L.Control.Print.js",
+               "javascript/lang.js",
+               "javascript/url.js",
                "javascript/map_common.js",
                "javascript/map_%(setup)s.js"]
 
