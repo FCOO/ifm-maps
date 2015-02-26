@@ -137,6 +137,7 @@ def build_web():
     local('cp -r javascript dist/.')
     local('cp -r leaflet dist/.')
     local('cp -r bower_components dist/.')
+    local('cp -r css/ifm-maps.css dist/css/.')
     local('cp -r leaflet/images dist/css/.')
     local('cp -r bower_components/leaflet-control-home/images/* dist/css/images/.')
     local('cp -r bower_components/leaflet-control-position/images/* dist/css/images/.')
@@ -168,7 +169,7 @@ def build(minify=True):
     build_web()
 
 @_booleanize
-def deploy(minify=True):
+def deploy():
     """Deploy IFM Maps."""
     # Make deployment and configuration directory
     proj_dir = '/home/%s/DcooWare/ifm-maps-%s' % (env.user, env.now)
