@@ -67,7 +67,8 @@ env.jsfiles = ["bower_components/jquery-placeholder/jquery.placeholder.js",
                "leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js",
                "leaflet/leaflet-control-datetime.js",
                "leaflet/L.Control.Print.js",
-               "javascript/map_common.js"]
+               "javascript/map_common.js",
+               "javascript/map_%(setup)s.js"]
 env.jsfiles_extra = ["bower_components/jquery/dist/jquery.min.js",
                      "bower_components/jquery-ui/jquery-ui.min.js",
                      "bower_components/noty/js/noty/packaged/jquery.noty.packaged.js"]
@@ -95,17 +96,17 @@ def bower_install():
 
 @_booleanize
 def build_css(minify=True):
-    local('mkdir -p dist')
+    local('mkdir -p dist/css')
     cssfiles = ' '.join(env.cssfiles)
-    cssfile = 'dist/ifm-maps.css'
-    local('cat %s > %s' % (cssfiles, cssfile))
+    cssfile = 'dist/css/ifm-maps.css'
+    local('awk \'FNR==1{print ""}1\' %s > %s' % (cssfiles, cssfile))
     if minify:
         local('yui-compressor -o %s.new %s' % (cssfile, cssfile))
         local('mv %s.new %s' % (cssfile, cssfile))
     # Include files excluded from compression
     cssfiles = env.cssfiles_extra + [cssfile]
     cssfiles = ' '.join(cssfiles)
-    local('cat %s > tmp.css && mv tmp.css %s' % (cssfiles, cssfile))
+    local('awk \'FNR==1{print ""}1\' %s > tmp.css && mv tmp.css %s' % (cssfiles, cssfile))
 
 @_booleanize
 def build_js(minify=True):
@@ -129,17 +130,31 @@ def build_js(minify=True):
         #local('cp javascript/jquery-ui-1.11.2.custom/images/* %s/images/.' % (setup))
         jsfilestr = ' '.join(jsfiles_setup)
         jsfile = '%s/ifm-maps.js' % destdir
-        local('cat %s > %s' % (jsfilestr, jsfile))
+        local('awk \'FNR==1{print ""}1\' %s > %s' % (jsfilestr, jsfile))
         if minify:
             local('/usr/bin/node /usr/bin/uglifyjs -o %s %s' % (jsfile, jsfile))
         # Include previously compressed files
         jsfiles_all = jsfiles_min + [jsfile]
         jsfilestr = ' '.join(jsfiles_all)
-        local('cat %s > tmp.js && mv tmp.js %s' % (jsfilestr, jsfile))
+        local('awk \'FNR==1{print ""}1\' %s > tmp.js && mv tmp.js %s' % (jsfilestr, jsfile))
 
 @_booleanize
 def build_web():
     local('mkdir -p dist')
+    local('cp index.html dist/.')
+    local('cp -r php dist/.')
+    local('cp -r json dist/.')
+    local('cp -r javascript dist/.')
+    local('cp -r leaflet dist/.')
+    local('cp -r bower_components dist/.')
+    local('cp -r leaflet/images dist/css/.')
+    local('cp -r bower_components/leaflet-control-home/images/* dist/css/images/.')
+    local('cp -r bower_components/leaflet-control-position/images/* dist/css/images/.')
+    local('cp -r bower_components/leaflet-control-osm-geocoder/images/* dist/css/images/.')
+    local('cp -r bower_components/jquery-ui/themes/ui-lightness/images/* dist/css/images/.')
+    local('cp -r bower_components/flag-icon-css/flags dist/.')
+    local('cp -r bower_components/fontawesome/fonts dist/.')
+
     setups = {}
     for setup in env.setups:
         rfile = setup + '/index.php'
@@ -147,9 +162,12 @@ def build_web():
     for setup in setups:
         print('Processing %s' % setup)
         destdir = 'dist/%s' % setup
+        imagedir = '%s/images' % destdir
         local('mkdir -p %s' % destdir)
         local('cp %s/index.php %s/index-dev.php' % (setup, destdir))
         local('cp %s/index-prod.php %s/index.php' % (setup, destdir))
+        local('mkdir -p %s' % imagedir)
+        #local('cp leaflet/images/* %s/.' % imagedir)
 
 @_booleanize
 def build(minify=True):
@@ -159,8 +177,6 @@ def build(minify=True):
     build_web()
     """
             print('Processing %s' % setup)
-            run('mkdir www/%s/images' % (setup))
-            run('cp www/leaflet/images/* www/%s/images/.' % (setup))
             run('cp www/javascript/jquery-ui-1.11.2.custom/images/* www/%s/images/.' % (setup))
             sed('www/php/common-prod.php',
                 'ifm-maps.css',
