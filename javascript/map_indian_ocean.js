@@ -39,8 +39,7 @@ $(document).ready(function() {
     var zoom = 5;
     var lat = 0.0;
     var lon = 56.0;
-    var useGeolocation = false;
     var useGeoMetoc = false;
 
-    initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeolocation, useGeoMetoc);
+    initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
 });

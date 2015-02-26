@@ -19,7 +19,6 @@ $(document).ready(function() {
     var zoom = 6;
     var lat = 55.7;
     var lon = 11.1;
-    var useGeolocation = true;
     var useGeoMetoc = false;
 
     var langs = ['da', 'en'];
@@ -38,5 +37,5 @@ $(document).ready(function() {
             "Sun and Moon": new L.Terminator(),
         }
     }
-    initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeolocation, useGeoMetoc);
+    initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
 });

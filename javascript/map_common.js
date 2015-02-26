@@ -319,22 +319,10 @@ function getUrlParameters() {
 }
 
 /**
- * Callback for successful geolocation.
- * @var position Geolocated position
- */
-function foundLocation(position) {
-	if (typeof map != "undefined") {
-		var lat = position.coords.latitude;
-		var lon = position.coords.longitude;
-		map.setView(new L.LatLng(lat, lon), 8);
-	}
-}
-
-/**
  * Initialize the map.
  */
 function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, 
-                       lon, tilesize, useGeolocation, useGeoMetoc) {
+                       lon, tilesize, useGeoMetoc) {
 	var localLang = getLocalLanguage();
 
         // Initialize basemaps
@@ -361,7 +349,6 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
 		zoom = urlParams.zoom;
 		lat = urlParams.lat;
 		lon = urlParams.lon;
-		useGeolocation = false;
 	}
 
 	map = L.map('map', {

@@ -28,8 +28,7 @@ $(document).ready(function() {
     var zoom = 4;
     var lat = 56.0;
     var lon = 12.0;
-    var useGeolocation = true;
     var useGeoMetoc = false;
 
-    initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeolocation, useGeoMetoc);
+    initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
 });

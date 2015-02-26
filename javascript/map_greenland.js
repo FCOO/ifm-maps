@@ -109,8 +109,7 @@ $(document).ready(function() {
         var zoom = 6;
         var lat = 62.0;
         var lon = -45.0;
-        var useGeolocation = false;
         var useGeoMetoc = false;
-        initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeolocation, useGeoMetoc);
+        initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
     });
 });
