@@ -1,0 +1,30 @@
+{
+  "denmark": {
+    "name": "Denmark",
+    "js_includes": ["dmi/hirlam-ska.js", "fcoo/ww3.js", "fcoo/getm.js", "ecmwf/dxd-denmark.js", "ecmwf/dxp-denmark.js", "noaa/gfs.js", "impact/denmark.js"]
+  },
+  "faroe_islands": {
+    "name": "Faroe Islands",
+    "js_includes": ["dmi/hirlam-ska.js", "fcoo/ww3.js", "noaa/hycom_greenland.js", "ecmwf/dxd-greenland.js", "ecmwf/dxp-greenland.js"]
+  },
+  "global": {
+    "name": "Global",
+    "js_includes": ["ecmwf/dxd-global.js", "ecmwf/dxp-global.js"]
+  },
+  "greenland": {
+    "name": "Greenland",
+    "js_includes": ["dmi/hirlam-k05.js", "dmi/icechart.js", "fcoo/ww3.js", "noaa/hycom_greenland.js", "ecmwf/dxd-greenland.js", "ecmwf/dxp-greenland.js"]
+  },
+  "indian_ocean": {
+    "name": "Indian Ocean",
+    "js_includes": ["ecmwf/dxd-afr.js", "ecmwf/dxp-afr.js", "noaa/gfs.js", "noaa/hycom_indian_ocean.js"]
+  },
+  "mediterranean": {
+    "name": "Mediterranean",
+    "js_includes": ["dmi/hirlam-t15.js", "noaa/gfs.js", "noaa/hycom_mediterranean.js"]
+  },
+  "denmark_impact": {
+    "name": "Denmark",
+    "js_includes": ["impact/denmark.js"]
+  }
+}
