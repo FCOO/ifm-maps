@@ -1,15 +1,8 @@
 """
-Use Fabric for building and deploying IFM Maps.
+Use Fabric for building IFM Maps.
 
 Build:
   fab build
-
-Deployment:
-  Staging server:
-    fab -R staging deploy
-  Production server:
-    fab -R production deploy
-
 """
 import datetime, tempfile, shutil, os
 from distutils.util import strtobool
@@ -20,8 +13,6 @@ from fabric.contrib.project import rsync_project
 
 env.roledefs = {
     'local': ['localhost'],
-    'staging': ['ptest@ftp01:23'],
-    'production': ['prod@ftp01:23']
 }
 
 if not len(env.roles):
@@ -169,27 +160,6 @@ def build(minify=True):
     build_css(minify=minify)
     build_js(minify=minify)
     build_web()
-
-@_booleanize
-def deploy():
-    """Deploy IFM Maps."""
-    # Make deployment and configuration directory
-    proj_dir = '/home/%s/DcooWare/ifm-maps-%s' % (env.user, env.now)
-    rsync_project(local_dir='dist/*', remote_dir=proj_dir)
-    with cd(proj_dir):
-        if 'staging' in env.roles:
-            webmap_url = '{s}.fcoo.dk/webmap-staging/{dataset}.wms'
-        elif 'production' in env.roles:
-            webmap_url = '{s}.fcoo.dk/webmap/{dataset}.wms'
-        sed('leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js',
-            'wms-dev01:8080/\{dataset\}.wms',
-            webmap_url)
-
-    # Change production symlink to point to new directory
-    sym_dir = '/home/%s/ifm-maps' % env.user
-    if exists(sym_dir):
-        run('rm %s' % sym_dir)
-    run('ln -s %s %s' % (proj_dir, sym_dir))
 
 def _extract_jsfiles(rfile):
     """Returns a list of javascript files used in a php index file."""
