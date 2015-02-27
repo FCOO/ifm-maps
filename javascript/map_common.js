@@ -300,6 +300,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
                 if (urlParams.hidecontrols == "true") {
                     visibility = "hidden";
                 }
+                console.log(dates);
                 var datetimeControl = L.datetimeSelector({
                         title: getI18n('datetime', localLang),
                         datetimes: dates,

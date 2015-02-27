@@ -21,28 +21,31 @@ if not len(env.roles):
 env.setups = ['greenland', 'faroe_islands', 'denmark', 
               'mediterranean', 'indian_ocean', 'global']
 
-env.cssfiles = ["bower_components/fontawesome/css/font-awesome.min.css",
+env.cssfiles = ["bower_components/fontawesome/css/font-awesome.css",
                 "bower_components/leaflet/dist/leaflet.css",
                 "bower_components/Leaflet.MousePosition/src/L.Control.MousePosition.css",
                 "bower_components/leaflet-languageselector/leaflet-languageselector.css",
                 "bower_components/leaflet-control-osm-geocoder/Control.OSMGeocoder.css",
                 "bower_components/leaflet.locatecontrol/dist/L.Control.Locate.css",
-                "bower_components/flag-icon-css/css/flag-icon.min.css",
+                "bower_components/flag-icon-css/css/flag-icon.css",
                 "bower_components/leaflet-control-position/leaflet-control-position.css",
                 "bower_components/leaflet-control-home/leaflet-control-home.css",
                 "bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.css",
+                "bower_components/leaflet-control-datetime/leaflet-control-datetime.css",
                 "leaflet/leaflet-fcoo-layers.css",
                 "leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.css",
-                "leaflet/leaflet-control-datetime.css",
                 "leaflet/L.Control.Print.css",
                 "leaflet/Control.OSMGeocoder.ifm-maps.css",
                 "css/ifm-maps.css"]
 
 env.cssfiles_extra = ["bower_components/jquery-ui/themes/ui-lightness/jquery-ui.min.css"]
 
-env.jsfiles = ["bower_components/jquery-placeholder/jquery.placeholder.js",
+env.jsfiles = ["bower_components/jquery/dist/jquery.js",
+               "bower_components/jquery-ui/jquery-ui.js",
+               "bower_components/noty/js/noty/packaged/jquery.noty.packaged.js",
+               "bower_components/jquery-placeholder/jquery.placeholder.js",
                "bower_components/magellan/magellan.js",
-               "bower_components/moment/min/moment-with-locales.min.js",
+               "bower_components/moment/min/moment-with-locales.js",
                "bower_components/leaflet/dist/leaflet-src.js",
                "bower_components/leaflet-plugins/control/Permalink.js",
                "bower_components/leaflet-languageselector/leaflet-languageselector.js",
@@ -54,21 +57,22 @@ env.jsfiles = ["bower_components/jquery-placeholder/jquery.placeholder.js",
                "bower_components/leaflet-control-position/leaflet-control-position.js",
                "bower_components/leaflet-control-home/leaflet-control-home.js",
                "bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.js",
+               "bower_components/leaflet-control-datetime/leaflet-control-datetime.js",
                "leaflet/Permalink.CategorizedLayer.js",
                "leaflet/Permalink.CategorizedOverlay.js",
                "leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js",
                "leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js",
                "leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js",
-               "leaflet/leaflet-control-datetime.js",
                "leaflet/L.Control.Print.js",
                "javascript/lang.js",
                "javascript/url.js",
                "javascript/map_common.js",
                "javascript/map_%(setup)s.js"]
 
-env.jsfiles_extra = ["bower_components/jquery/dist/jquery.min.js",
-                     "bower_components/jquery-ui/jquery-ui.min.js",
-                     "bower_components/noty/js/noty/packaged/jquery.noty.packaged.js"]
+env.jsfiles_extra = []
+#env.jsfiles_extra = ["bower_components/jquery/dist/jquery.min.js",
+#                     "bower_components/jquery-ui/jquery-ui.min.js",
+#                     "bower_components/noty/js/noty/packaged/jquery.noty.packaged.js"]
 
 env.now = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
 

@@ -25,16 +25,18 @@
   },
   "denmark_impact": {
     "name": "Denmark",
+    "langs": ['da', 'en']
     "map": {
       "basemap": "FCOO Standard",
       "lat": 55.7,
       "lon": 11.1,
       "zoom": 6,
       "minZoom": 5,
-      "maxZoom": 10,
-      "useGeoMetoc": false,
-      "langs": ['da', 'en']
-    }
+      "maxZoom": 10
+    },
+    "layers": {
+      "geoMetoc": false
+    },
     "js_includes": ["impact/denmark.js"]
   }
 }
