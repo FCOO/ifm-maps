@@ -480,26 +480,3 @@ L.FLayer.Utils.getI18n = function(key, lang) {
         return key;
 };
 
-
-L.CountingTileLayer = L.TileLayer.extend({
-        initialize: function (url, options) {
-                this._counter = 0;
-		L.TileLayer.prototype.initialize.call(this, url, options);
-        },
-	addTo: function(map) {
-                this._map = map;
-                this._counter += 1;
-                if (this._counter < 2) {
-		    L.TileLayer.prototype.addTo.call(this, map);
-                }
-	},
-	removeFrom: function(map) {
-                this._map = map;
-                this._counter -= 1;
-                if (this._counter < 1) {
-		        L.TileLayer.prototype.removeFrom.call(this, map);
-                }
-	},
-
-});
-

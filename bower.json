@@ -34,7 +34,8 @@
     "leaflet-control-home": "https://github.com/jblarsen/leaflet-control-home.git",
     "leaflet-categorized-layers": "https://github.com/robbiet480/leaflet-categorized-layers.git#master",
     "leaflet": "https://github.com/jblarsen/Leaflet.git#master",
-    "leaflet-control-datetime": "https://github.com/jblarsen/leaflet-control-datetime.git"
+    "leaflet-control-datetime": "https://github.com/jblarsen/leaflet-control-datetime.git",
+    "leaflet-tilelayer-counting": "https://github.com/jblarsen/leaflet-tilelayer-counting.git"
   },
   "resolutions": {
     "fontawesome": "~4.3.0"

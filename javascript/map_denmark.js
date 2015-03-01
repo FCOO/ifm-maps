@@ -5,7 +5,7 @@ $(document).ready(function() {
     var tilesize = getTilesize();
     var subdomains = ["media01", "media02", "media03", "media04", "media05"];
     var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
-    var landLayer = new L.CountingTileLayer(fcoo_base + "tiles_frgrnd_" + tilesize + "_mercator_201411070000/{z}/{x}/{y}.png", {
+    var landLayer = new L.TileLayer.Counting(fcoo_base + "tiles_frgrnd_" + tilesize + "_mercator_201411070000/{z}/{x}/{y}.png", {
         maxZoom: 10,
         tileSize: tilesize,
         subdomains: subdomains,
