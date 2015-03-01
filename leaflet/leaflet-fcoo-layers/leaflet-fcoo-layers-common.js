@@ -138,9 +138,9 @@ L.FLayer = L.TileLayer.WMS.extend({
                         this._long_name = variable['long_name'];
                         this._units = variable['units'];
                         var legendId = this._legendId;
-                        this._legendControl._legendContainer[legendId].last_modified = this._last_modified;
-                        this._legendControl._legendContainer[legendId].long_name = this._long_name;
-                        this._legendControl._legendContainer[legendId].units = this._units;
+                        this._legendControl.legendOptions[legendId].lastUpdated = this._last_modified;
+                        this._legendControl.legendOptions[legendId].longName = this._long_name;
+                        this._legendControl.legendOptions[legendId].units = this._units;
 		        this._legendControl._redrawLegend();
                     } catch (err) {
                         console.log(err);
@@ -230,10 +230,13 @@ L.FLayer = L.TileLayer.WMS.extend({
 		this._map = map;
 		if (this.options.showLegend && this.options.legendImagePath != null) {
 			this._legendControl = this._getLegendControl();
+                        var legendOptions = {
+                            'imageUrl': this.options.legendImagePath,
+                            'attribution': this.options.legendAttribution,
+                            'lastUpdated': this._last_modified
+                        }
 			this._legendId = this._legendControl.addLegend(
-                            this.options.legendImagePath,
-                            this.options.legendAttribution,
-                            this._last_modified);
+                            legendOptions);
 		}
                 if (this.options.foreground != null) {
                     this.options.foreground.addTo(map);
@@ -278,7 +281,7 @@ L.FLayer = L.TileLayer.WMS.extend({
 
 	_getLegendControl: function() {
 		if (typeof this._map._fcoo_legendcontrol == 'undefined' || !this._map._fcoo_legendcontrol) {
-			this._map._fcoo_legendcontrol = new L.FLayer.LegendControl(
+			this._map._fcoo_legendcontrol = new L.Control.Legend(
                             this._map, {position: this.options.legendPosition,
                                         language: this.options.language});
 			this._map.addControl(this._map._fcoo_legendcontrol);
@@ -306,177 +309,3 @@ L.FLayerGroup = L.LayerGroup.extend({
                  });
         },
 });
-
-L.FLayer.LegendControl = L.Control.extend({
-	options: {
-		position: "bottomleft",
-	},
-
-	initialize: function(map, options) {
-		L.Util.setOptions(this, options);
-                this._map = map;
-		this._container = L.DomUtil.create('div', 'fcoo-legend-container');
-		this._container.style.display = 'none';
-		this._legendCounter = 0;
-		this._legendContainer = new Array();
-                this._legendType = 'standard';
-                this.options.language = getLocalLanguage();
-	},
-
-	onAdd: function(map) {
-		return this._container;
-	},
-
-	addLegend: function(legendImagePath, legendAttribution, legendLastModified) {
-		var legendId = this._legendCounter++;
-	        var legendInfo = {
-		        imagePath: legendImagePath,
-		        attribution: legendAttribution,
-                        last_modified: legendLastModified
-                }
-		this._legendContainer[legendId] = legendInfo;
-		this._redrawLegend();
-		this._container.style.display = 'block';
-		return legendId;
-	},
-
-	removeLegend: function(legendId) {
-		if (typeof this._legendContainer[legendId] != 'undefined') {
-			delete this._legendContainer[legendId];
-		}
-		// reset counter if no legend is in collection
-		var containerEmpty = true;
-		for (var idx in this._legendContainer) {
-			containerEmpty = false;
-			break;
-		}
-		if (containerEmpty) {
-			this._legendCounter = 0;
-			this._container.style.display = 'none';
-		}
-		this._redrawLegend();
-	},
-
-	_redrawLegend: function() {
-		this._container.innerHTML = ''; // clear container
-		var isLeft = this.options.position.indexOf('left') !== -1;
-		var cssFloat = isLeft ? 'left' : 'right';
-                var lang = this.options.language;
-                //var window_height = $(window).height();
-                //var accumulated_height = 0;
-		for (var idx in this._legendContainer) {
-			var imgPath = this._legendContainer[idx]['imagePath'];
-			var attribution = this._legendContainer[idx]['attribution'];
-			var last_modified = this._legendContainer[idx]['last_modified'];
-			var long_name = this._legendContainer[idx]['long_name'];
-			var units = this._legendContainer[idx]['units'];
-                        units = L.FLayer.Utils.getI18n(units, lang);
-			var item = L.DomUtil.create('div', 'fcoo-legend-item', this._container);
-			item.style.cssFloat = cssFloat;
-			if (isLeft) {
-				item.style.marginRight = '10px';
-			} else {
-				item.style.marginLeft = '10px';
-			}
-                        var leginner = '<img src="' + imgPath + '" border="0" height="50" width="250" />';
-                        if (long_name != null) {
-                            var long_name_cap =
-                                long_name.charAt(0).toUpperCase() +
-                                long_name.slice(1);
-                            long_name_cap = L.FLayer.Utils.getI18n(
-                                       long_name_cap, lang);
-                            leginner = leginner + '<br />' + long_name_cap;
-                            if (units != null) {
-                                leginner = leginner + ' [' + units + ']';
-                            }
-                        }
-                        if (attribution != null) {
-                            var source = L.FLayer.Utils.getI18n('Source', 
-                                lang);
-                            leginner = leginner + '<br />' + source + ': '
-                                     + attribution;
-                        }
-                        if (last_modified != null) {
-                            var last_updated = L.FLayer.Utils.getI18n(
-                                'Last updated', lang);
-                            leginner = leginner + '<br />' + last_updated +
-                                ': ' +
-                                last_modified.utc().format('YYYY-MM-DDTHH:mm') + ' UTC';
-                        }
-			item.innerHTML = leginner;
-                        //var height = $(item).height();
-			var br = L.DomUtil.create('br', '', this._container);
-		}
-	}
-});
-
-L.FLayer.Utils = {
-	i18n: {
-		en: {
-			fcoolinktitle: 'Details at FCOO'
-			, temperature: 'Temperature'
-			, temp_minmax: 'Temp. min/max'
-			, wind: 'Wind'
-			, gust: 'Gust'
-			, windforce: 'Wind Force'
-			, direction: 'Direction'
-			, humidity: 'Humidity'
-			, pressure: 'Pressure'
-		},
-		da: {
-			fcoolinktitle: 'Detaljer ved FCOO'
-			, temperature: 'Temperatur'
-			, temp_minmax: 'Temp. min/max'
-			, wind: 'Vind'
-			, gust: 'Vindstød'
-			, windforce: 'Vindstyrke'
-			, direction: 'Vindretning'
-			, humidity: 'Luftfugtighed'
-			, pressure: 'Lufttryk'
-		}
-	}
-};
-
-/**
- * Internationalization of some texts used by the map.
- * @param String key the key of the text item
- * @param String lang the language id
- * @return String the localized text item or the id if there's no translation found
- */
-L.FLayer.Utils.getI18n = function(key, lang) {
-        var i18n = {
-                en: {
-                          'degC': '&deg;C'
-                          , 'Temp.': 'Temperature'
-                }
-                , da: {
-                          'Source': 'Kilde'
-                          , 'Last updated': 'Sidst opdateret'
-                          , 'Wave height': 'Bølgehøjde'
-                          , 'Mean wave period': 'Bølgeperiode'
-                          , 'Vel.': 'Strøm (fart)'
-                          , 'Elevation': 'Vandstand'
-                          , 'Temperature': 'Temperatur'
-                          , 'Temp.': 'Temperatur'
-                          , 'Salinity': 'Salinitet'
-                          , 'Wind speed': 'Vind (fart)'
-                          , 'Total precipitation flux': 'Nedbør'
-                          , '2 metre temperature': '2 meter temperatur'
-                          , 'Total cloud cover': 'Skydække'
-                          , 'mm/hour': 'mm/time'
-                          , 'degC': '&deg;C'
-                          , 'knots': 'knob'
-                          , 'meters': 'meter'
-                }
-        };
-
-        if (typeof i18n[lang] != 'undefined'
-                        && typeof i18n[lang][key] != 'undefined') {
-                return  i18n[lang][key];
-        } else if (typeof i18n['en'] != 'undefined'
-                        && typeof i18n['en'][key] != 'undefined') {
-                return  i18n['en'][key];
-        }
-        return key;
-};
-

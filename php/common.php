@@ -16,6 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-home/leaflet-control-home.css" />
 	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.css" />
 	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-datetime/leaflet-control-datetime.css" />
+	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-legend/leaflet-control-legend.css" />
 	<link rel="stylesheet" type="text/css" href="../leaflet/leaflet-fcoo-layers.css" />
 	<link rel="stylesheet" type="text/css" href="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.css" />
 	<link rel="stylesheet" type="text/css" href="../leaflet/L.Control.Print.css" />
@@ -45,6 +46,7 @@
 	<script src="../bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.js"></script>
 	<script src="../bower_components/leaflet-control-datetime/leaflet-control-datetime.js"></script>
 	<script src="../bower_components/leaflet-tilelayer-counting/leaflet-tilelayer-counting.js"></script>
+	<script src="../bower_components/leaflet-control-legend/leaflet-control-legend.js"></script>
 	<script src="../leaflet/Permalink.CategorizedLayer.js"></script>
 	<script src="../leaflet/Permalink.CategorizedOverlay.js"></script>
 	<script src="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js"></script>
