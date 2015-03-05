@@ -66,3 +66,25 @@ function getUrlParameters() {
 	}
 	return vars;
 }
+
+/*
+ * Returns tilesize, possibly from url parameter. Default is 512.
+ */
+function getTilesize() {
+    var urlParams = getUrlParameters();
+    var tilesize;
+    if (typeof urlParams.tilesize != "undefined") {
+        tilesize = parseInt(urlParams.tilesize, 10);
+        // Allowed values:
+        if ([256, 512, 1024].indexOf(tilesize) == -1) {
+            tilesize = 512;
+            var msg = "Invalid tile size specified (must be 256, 512 or 1024)";
+            var n = noty({text: msg, type: "error"});
+            throw new Error(msg);
+        }
+    } else {
+        // Default value
+        tilesize = 512;
+    }
+    return tilesize;
+};

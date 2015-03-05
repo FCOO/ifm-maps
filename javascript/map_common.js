@@ -5,12 +5,6 @@
  * Author: http://www.openstreetmap.org/user/Zartbitter
  */
 
-// Map is a global variable
-var map;
-
-// And so is overlayMaps until we get around to making it local...
-var overlayMaps = {};
-
 /**
  * Initialize the map.
  */
@@ -197,6 +191,8 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
         var dt_check = 10; // How often to check
         var dt_max = 30000; // When to give up
         var dt_current = 0;
+        var callback_obj = new DatetimeCallback(overlayMaps);
+        var callback = callback_obj.changeDatetime;
         function checkTimesteps() {
             var dates = getTimeSteps(overlayMaps);
             if (dates !== null) {
@@ -208,7 +204,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
                         title: getI18n('datetime', localLang),
                         datetimes: dates,
                         language: localLang,
-                        callback: changeDatetime,
+                        callback: callback,
                         visibility: visibility,
                         initialDatetime: initial_datetime,
                         vertical: false,
@@ -295,57 +291,65 @@ function initBaseMaps(lang, tilesize) {
     return {baseMaps: baseMaps, topLayer: topLayer};
 }
 
-/**
- * Called when something is updated in the datetime selector. If
- * type is 'datetime' all overlays with timesteps will be updated
- * with a new time. If type is 'timezone' all GeoJSON overlays with 
- * popups containing '{t}' in their inner HTML gets that replaced.
- * FIXME: This controller should not directly modify HTML
- *
- * @param type string
- * @param arg date|boolean
+/*
+ * We encapsulate the changeDatetime callback in an object to produce
+ * a closure for overlays.
  */
-function changeDatetime(type, arg) {
-    if (type == 'datetime') {
-        for (var i in overlayMaps) {
-            // FIXME: Should not use global variable "overlayMaps"
-            var layergroup = overlayMaps[i];
-            for (var j in layergroup) {
-                var layer = layergroup[j];
-                if (layer.getTimesteps !== undefined) {
-                    var timesteps = layer.getTimesteps();
-                    if (timesteps !== null && timesteps.length > 1) {
-                        layer.setParams({time: arg}, false);
-                    }
-                } else if (layer.setTime !== undefined) {
-                    // L.Terminator instance has a setTime method
-                    layer.setTime(arg);
-                }
-            }
-        }
-    } else if (type == 'timezone') {
-        for (var i in overlayMaps) {
-            var layergroup = overlayMaps[i];
-            for (var j in layergroup) {
-                var layer = layergroup[j];
-                for (var k in layer._layers) {
-                    var featuregroup = layer._layers[k];
-                    if (featuregroup !== null && featuregroup._popup !== undefined) {
-                        var popstr = featuregroup.feature.properties.popup;
-                        if (arg) {
-                            var t = new Date();
-                            var dt = t.getTimezoneOffset();
-                        } else {
-                            var dt = 0;
+DatetimeCallback = function(overlays) {
+    /**
+     * Called when something is updated in the datetime selector. If
+     * type is 'datetime' all overlays with timesteps will be updated
+     * with a new time. If type is 'timezone' all GeoJSON overlays with 
+     * popups containing '{t}' in their inner HTML gets that replaced.
+     *
+     * @param type string
+     * @param arg date|boolean
+     */
+    this.changeDatetime = function(type, arg) {
+        var myOverlays = overlays;
+        if (type == 'datetime') {
+            for (var i in overlays) {
+                var layergroup = overlays[i];
+                for (var j in layergroup) {
+                    var layer = layergroup[j];
+                    if (layer.getTimesteps !== undefined) {
+                        var timesteps = layer.getTimesteps();
+                        if (timesteps !== null && timesteps.length > 1) {
+                            layer.setParams({time: arg}, false);
                         }
-                        popstr = popstr.replace('{dt}', dt);
-                        featuregroup.setPopupContent(popstr);
+                    } else if (layer.setTime !== undefined) {
+                        // L.Terminator instance has a setTime method
+                        layer.setTime(arg);
+                    }
+                }
+            }
+        } else if (type == 'timezone') {
+            for (var i in overlays) {
+                var layergroup = overlays[i];
+                for (var j in layergroup) {
+                    var layer = layergroup[j];
+                    for (var k in layer._layers) {
+                        var featuregroup = layer._layers[k];
+                        if (featuregroup !== null && featuregroup._popup !== undefined) {
+                            if (featuregroup.feature.properties.popup !== undefined) {
+                                var popstr = featuregroup.feature.properties.popup;
+                                console.log(featuregroup.feature.properties);
+                                if (arg) {
+                                    var t = new Date();
+                                    var dt = t.getTimezoneOffset();
+                                } else {
+                                    var dt = 0;
+                                }
+                                popstr = popstr.replace('{dt}', dt);
+                                featuregroup.setPopupContent(popstr);
+                            }
+                        }
                     }
                 }
             }
         }
-    }
-};
+    };
+}
 
 function dateArrayUnique(array) {
     var a = array.concat();
@@ -388,26 +392,4 @@ function getTimeSteps(overlayMaps) {
         }
     }
     return outdates;
-};
-
-/*
- * Returns tilesize, possibly from url parameter. Default is 512.
- */
-function getTilesize() {
-    var urlParams = getUrlParameters();
-    var tilesize;
-    if (typeof urlParams.tilesize != "undefined") {
-        tilesize = parseInt(urlParams.tilesize, 10);
-        // Allowed values:
-        if ([256, 512, 1024].indexOf(tilesize) == -1) {
-            tilesize = 512;
-            var msg = "Invalid tile size specified (must be 256, 512 or 1024)";
-            var n = noty({text: msg, type: "error"});
-            throw new Error(msg);
-        }
-    } else {
-        // Default value
-        tilesize = 512;
-    }
-    return tilesize;
 };
