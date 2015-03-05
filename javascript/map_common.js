@@ -1,11 +1,4 @@
 /**
- * This file is licensed under Creative Commons Zero (CC0)
- * http://creativecommons.org/publicdomain/zero/1.0/
- *
- * Author: http://www.openstreetmap.org/user/Zartbitter
- */
-
-/**
  * Initialize the map.
  */
 function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, 

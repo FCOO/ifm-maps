@@ -36,7 +36,8 @@
     "leaflet": "https://github.com/jblarsen/Leaflet.git#master",
     "leaflet-control-datetime": "https://github.com/jblarsen/leaflet-control-datetime.git",
     "leaflet-tilelayer-counting": "https://github.com/jblarsen/leaflet-tilelayer-counting.git",
-    "leaflet-control-legend": "https://github.com/jblarsen/leaflet-control-legend.git"
+    "leaflet-control-legend": "https://github.com/jblarsen/leaflet-control-legend.git",
+    "leaflet-tilelayer-wms-fcoo": "https://github.com/jblarsen/leaflet-tilelayer-wms-fcoo.git"
   },
   "resolutions": {
     "fontawesome": "~4.3.0"
