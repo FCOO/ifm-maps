@@ -333,7 +333,6 @@ DatetimeCallback = function(overlays) {
                         if (featuregroup !== null && featuregroup._popup !== undefined) {
                             if (featuregroup.feature.properties.popup !== undefined) {
                                 var popstr = featuregroup.feature.properties.popup;
-                                console.log(featuregroup.feature.properties);
                                 if (arg) {
                                     var t = new Date();
                                     var dt = t.getTimezoneOffset();
