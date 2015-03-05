@@ -40,6 +40,7 @@
     "leaflet-tilelayer-wms-fcoo": "https://github.com/jblarsen/leaflet-tilelayer-wms-fcoo.git"
   },
   "resolutions": {
+    "leaflet": "master",
     "fontawesome": "~4.3.0"
   },
   "moduleType": [
