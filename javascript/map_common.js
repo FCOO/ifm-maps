@@ -305,8 +305,8 @@ DatetimeCallback = function(overlays) {
                 var layergroup = overlays[i];
                 for (var j in layergroup) {
                     var layer = layergroup[j];
-                    if (layer.getTimesteps !== undefined) {
-                        var timesteps = layer.getTimesteps();
+                    if (layer.timesteps !== undefined) {
+                        var timesteps = layer.timesteps;
                         if (timesteps !== null && timesteps.length > 1) {
                             layer.setParams({time: arg}, false);
                         }
@@ -365,8 +365,8 @@ function getTimeSteps(overlayMaps) {
         var category = overlayMaps[i];
         for (var j in category) {
             overlay = category[j];
-            if (overlay.getTimesteps !== undefined) {
-                var dates = overlay.getTimesteps();
+            if (overlay.timesteps !== undefined) {
+                var dates = overlay.timesteps;
                 if (dates !== null) {
                     // We ignore static fields
                     if (dates.length > 1) {

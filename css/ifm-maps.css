@@ -26,3 +26,29 @@ html, body, #map {
 	position: relative;
         z-index: 9999;
 }
+
+/*@media screen {
+    html { width:8.5in; }
+    body { font: 9pt/1.5 Arial, sans-serif; }
+}*/
+
+@media print {
+    body {
+        size: A4 landscape;
+    }
+    @page {
+        /*size: A4;*/
+        size: landscape;
+        margin: 0;
+    }
+    * {
+        overflow: visible !important;
+        position: relative;
+    }
+    .hide-on-print {
+        visibility: hidden;
+    }
+    .show-on-print {
+        visibility: visible;
+    }
+}

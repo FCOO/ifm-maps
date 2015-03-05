@@ -17,8 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.css" />
 	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-datetime/leaflet-control-datetime.css" />
 	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-legend/leaflet-control-legend.css" />
-	<link rel="stylesheet" type="text/css" href="../leaflet/leaflet-fcoo-layers.css" />
-	<link rel="stylesheet" type="text/css" href="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.css" />
+	<!---<link rel="stylesheet" type="text/css" href="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.css" />-->
 	<link rel="stylesheet" type="text/css" href="../leaflet/L.Control.Print.css" />
         <link rel="stylesheet" type="text/css" href="../leaflet/Control.OSMGeocoder.ifm-maps.css" />
 	<link rel="stylesheet" type="text/css" href="../css/ifm-maps.css" />
@@ -47,21 +46,16 @@
 	<script src="../bower_components/leaflet-control-datetime/leaflet-control-datetime.js"></script>
 	<script src="../bower_components/leaflet-tilelayer-counting/leaflet-tilelayer-counting.js"></script>
 	<script src="../bower_components/leaflet-control-legend/leaflet-control-legend.js"></script>
+	<script src="../bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-model.js"></script>
+	<script src="../bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-fcoo.js"></script>
 	<script src="../leaflet/Permalink.CategorizedLayer.js"></script>
 	<script src="../leaflet/Permalink.CategorizedOverlay.js"></script>
-	<script src="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js"></script>
-	<script src="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js"></script>
-	<script src="../leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js"></script>
+	<!---<script src="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js"></script>-->
+	<!---<script src="../leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js"></script>-->
 	<script src="../javascript/map_<?php echo $domain_id ?>.js"></script>
 	<script src="../leaflet/L.Control.Print.js"></script>
         <script src="../javascript/lang.js"></script>
         <script src="../javascript/url.js"></script>
         <script src="../javascript/map_common.js"></script>
-<?php
-$arrlength=count($model_ids);
-for($x=0; $x<$arrlength; $x++) {
-  echo "        <script src=\"../leaflet/leaflet-fcoo-layers/$model_ids[$x]\"></script>";
-}
-?>
 </body>
 </html>
