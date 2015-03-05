@@ -32,7 +32,7 @@
     "Leaflet.Terminator": "https://github.com/joergdietrich/Leaflet.Terminator.git",
     "leaflet-control-position": "https://github.com/jblarsen/leaflet-control-position.git",
     "leaflet-control-home": "https://github.com/jblarsen/leaflet-control-home.git",
-    "leaflet-categorized-layers": "https://github.com/robbiet480/leaflet-categorized-layers.git#master",
+    "leaflet-categorized-layers": "https://github.com/jblarsen/leaflet-categorized-layers.git#master",
     "leaflet": "https://github.com/jblarsen/Leaflet.git#master",
     "leaflet-control-datetime": "https://github.com/jblarsen/leaflet-control-datetime.git",
     "leaflet-tilelayer-counting": "https://github.com/jblarsen/leaflet-tilelayer-counting.git",
