@@ -2,33 +2,31 @@ $(document).ready(function() {
     /**
      * Initialize the map.
      */
-    var tilesize = getTilesize();
-    var subdomains = ["media01", "media02", "media03", "media04", "media05"];
-    var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
-    var langs = ['da', 'en'];
     var basemap = "FCOO Standard";
+    var store = new L.Control.FcooLayerStore;
     var overlays = {
         "DMI": {
-            "windspeed": new L.FLayer.Dmi.windSpeed({tileSize: tilesize, zIndex: 100}),
-            "winddirection": new L.FLayer.Dmi.windDirection({tileSize: tilesize, zIndex: 200}),
-            "pressure": new L.FLayer.Dmi.seaLevelPressure({tileSize: tilesize, zIndex: 200}),
-            "airtemp": new L.FLayer.Dmi.airTemperature({tileSize: tilesize, zIndex: 100}),
-//            "humidity": new L.FLayer.Dmi.humidity({tileSize: tilesize, zIndex: 100}),
-            "cloudcover": new L.FLayer.Dmi.totalCloudCover({tileSize: tilesize, zIndex: 100})
+            "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/T15', 'parameter': 'windSpeed'}),
+            "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/T15', 'parameter': 'windDirection'}),
+            "pressure": store.getLayer({'dataset': 'DMI/HIRLAM/T15', 'parameter': 'seaLevelPressure'}),
+            "airtemp": store.getLayer({'dataset': 'DMI/HIRLAM/T15', 'parameter': 'airTemperature'}),
+            "cloudcover": store.getLayer({'dataset': 'DMI/HIRLAM/T15', 'parameter': 'totalCloudCover'}),
         },
         "NOAA": {
-            "currentspeed": new L.FLayer.Noaa.currentSpeed({tileSize: tilesize, zIndex: 100}),
-            "currentdirection": new L.FLayer.Noaa.currentDirection({tileSize: tilesize, zIndex: 200}),
-//            "visibility":  new L.FLayer.Noaa.visibility({tileSize: tilesize, zIndex: 100})
-        },
+            "currentspeed": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'currentSpeed'}),
+            "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'currentDirection'}),
+            "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'sst'}),
+            "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'sss'})
+        }, 
         "boundaries": {
-            "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_" + tilesize + "_mercator_201411070000" + "/{z}/{x}/{y}.png",
-		 {maxZoom: 10, tileSize: tilesize, subdomains: subdomains, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + tilesize +".png"}),
+            "EEZ": store.EEZ
         },
         "Celestial information": {
-            "Sun and Moon": new L.Terminator(),
+            "Sun and Moon": store.solarTerminator
         }
     }
+    var tilesize = getTilesize();
+    var langs = ['da', 'en'];
     var minZoom = 2;
     var maxZoom = 10;
     var zoom = 8;

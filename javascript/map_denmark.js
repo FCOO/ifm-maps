@@ -3,28 +3,17 @@ $(document).ready(function() {
      * Initialize the map.
      */
     var tilesize = getTilesize();
-    var subdomains = ["media01", "media02", "media03", "media04", "media05"];
-    var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
-    var landLayer = new L.TileLayer.Counting(fcoo_base + "tiles_frgrnd_" + tilesize + "_mercator_201411070000/{z}/{x}/{y}.png", {
-        maxZoom: 10,
-        tileSize: tilesize,
-        subdomains: subdomains,
-        zIndex: 1000,
-        continuousWorld: false,
-        errorTileUrl: fcoo_base + "empty_" + tilesize + ".png"
-    });
+    var store = new L.Control.FcooLayerStore;
 
+    var langs = ['da', 'en'];
     var minZoom = 5;
     var maxZoom = 10;
     var zoom = 6;
     var lat = 55.7;
     var lon = 11.1;
     var useGeoMetoc = false;
-
-    var langs = ['da', 'en'];
     var basemap = "FCOO Standard";
 
-    //var link_template = "http://ifm.fcoo.dk/asp/oceanChart.asp?hindcastPeriod=12&forecastPeriod=24&width=500&height=350&id=__STATION__&paramId=SeaLvl&forecastMode=1";
     var link_template = location.protocol + "//chart.fcoo.dk/station_timeseries.asp?s=:003__STATION__:046SeaLvl:002DK:001DEFAULT:04d620:04e400:04f0:04a1:04b48:04i0:04c1:04g0:0641:05opopup";
     $.getJSON(location.protocol + "//api.fcoo.dk/ifm-maps/json/Observations.json", function(data) {
         var geojson = L.geoJson(data, {
@@ -44,57 +33,55 @@ $(document).ready(function() {
         });
         var overlays = {
             "DMI": {
-                "windspeed": new L.FLayer.Dmi.windSpeed({tileSize: tilesize, zIndex: 100}),
-                "winddirection": new L.FLayer.Dmi.windDirection({tileSize: tilesize, zIndex: 200}),
-                "visibility":  new L.FLayer.Dmi.visibility({tileSize: tilesize, zIndex: 100}),
-                "pressure": new L.FLayer.Dmi.seaLevelPressure({tileSize: tilesize, zIndex: 200}),
-                "precip": new L.FLayer.Dmi.totalPrecipitation({tileSize: tilesize, zIndex: 100}),
-                "airtemp": new L.FLayer.Dmi.airTemperature({tileSize: tilesize, zIndex: 100}),
-                //"humidity": new L.FLayer.Dmi.humidity({tileSize: tilesize, zIndex: 100}),
-                "cloudcover": new L.FLayer.Dmi.totalCloudCover({tileSize: tilesize, zIndex: 100}),
+                "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windSpeed'}),
+                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection'}),
+                "visibility": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'visibility'}),
+                "pressure": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'seaLevelPressure'}),
+                "precip": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'totalPrecipitation'}),
+                "airtemp": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'airTemperature'}),
+                "cloudcover": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'totalCloudCover'}),
             },
             "FCOO - North Sea/Baltic Sea": {
-                "waveperiod": new L.FLayer.Fcoo.wavePeriod({tileSize: tilesize, zIndex: 100, foreground: landLayer}, 'NSBaltic'),
-                "waveheight": new L.FLayer.Fcoo.waveHeight({tileSize: tilesize, zIndex: 100, foreground: landLayer}, 'NSBaltic'),
-	        "wavedirection": new L.FLayer.Fcoo.waveDirection({tileSize: tilesize, zIndex: 200, foreground: landLayer}, 'NSBaltic'),
-                "currentspeed": new L.FLayer.Fcoo.currentSpeed({tileSize: tilesize, zIndex: 100, foreground: landLayer}, 'nsbalt'),
-                "currentdirection": new L.FLayer.Fcoo.currentDirection({tileSize: tilesize, zIndex: 200, foreground: landLayer}, 'nsbalt'),
-	        "elev": new L.FLayer.Fcoo.elevation({tileSize: tilesize, zIndex: 100, foreground: landLayer}, 'nsbalt'),
-	        "seatemp": new L.FLayer.Fcoo.sst({tileSize: tilesize, zIndex: 100, foreground: landLayer}, 'nsbalt'),
-	        "salinity": new L.FLayer.Fcoo.sss({tileSize: tilesize, zIndex: 100, foreground: landLayer}, 'nsbalt'),
+                "waveperiod": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'wavePeriod'}),
+                "waveheight": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'waveHeight'}),
+                "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'waveDirection'}),
+                "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'currentSpeed'}),
+                "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'currentDirection'}),
+	        "elev": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'seaLevel'}),
+	        "seatemp": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'sst'}),
+	        "salinity": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'sss'})
             },
             "FCOO - Danish Waters": {
-                "waveperiod": new L.FLayer.Fcoo.wavePeriod({tileSize: tilesize, zIndex: 100, foreground: landLayer}, 'DKinner'),
-                "waveheight": new L.FLayer.Fcoo.waveHeight({tileSize: tilesize, zIndex: 101, foreground: landLayer}, 'DKinner'),
-	        "wavedirection": new L.FLayer.Fcoo.waveDirection({tileSize: tilesize, zIndex: 201, foreground: landLayer}, 'DKinner'),
-                "currentspeed": new L.FLayer.Fcoo.currentSpeed({tileSize: tilesize, zIndex: 101, foreground: landLayer}, 'idk'),
-                "currentdirection": new L.FLayer.Fcoo.currentDirection({tileSize: tilesize, zIndex: 201, foreground: landLayer}, 'idk'),
-	        "elev": new L.FLayer.Fcoo.elevation({tileSize: tilesize, zIndex: 101, foreground: landLayer}, 'idk'),
-	        "seatemp": new L.FLayer.Fcoo.sst({tileSize: tilesize, zIndex: 101, foreground: landLayer}, 'idk'),
-	        "salinity": new L.FLayer.Fcoo.sss({tileSize: tilesize, zIndex: 101, foreground: landLayer}, 'idk'),
+                "waveperiod": store.getLayer({'dataset': 'FCOO/WW3/DKINNER', 'parameter': 'wavePeriod'}),
+                "waveheight": store.getLayer({'dataset': 'FCOO/WW3/DKINNER', 'parameter': 'waveHeight'}),
+                "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/DKINNER', 'parameter': 'waveDirection'}),
+                "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'currentSpeed'}),
+                "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'currentDirection'}),
+	        "elev": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'seaLevel'}),
+	        "seatemp": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'sst'}),
+	        "salinity": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'sss'})
             },
             "ECMWF": {
-                "windspeed": new L.FLayer.Ecmwf.windSpeed({tileSize: tilesize, zIndex: 100}),
-                "winddirection": new L.FLayer.Ecmwf.windDirection({tileSize: tilesize, zIndex: 200}),
-                "pressure": new L.FLayer.Ecmwf.seaLevelPressure({tileSize: tilesize, zIndex: 200}),
-                "precip": new L.FLayer.Ecmwf.totalPrecipitation({tileSize: tilesize, zIndex: 100}),
-                "airtemp": new L.FLayer.Ecmwf.airTemperature({tileSize: tilesize, zIndex: 100}),
-                "cloudcover": new L.FLayer.Ecmwf.totalCloudCover({tileSize: tilesize, zIndex: 100}),
-                "waveperiod": new L.FLayer.Ecmwf.wavePeriod({tileSize: tilesize, zIndex: 100}),
-                "waveheight": new L.FLayer.Ecmwf.waveHeight({tileSize: tilesize, zIndex: 100}),
-                "wavedirection": new L.FLayer.Ecmwf.waveDirection({tileSize: tilesize, zIndex: 200}),
-            },
-            "boundaries": {
-                "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_" + tilesize + "_mercator_201411070000" + "/{z}/{x}/{y}.png",
-		     {maxZoom: 10, tileSize: tilesize, subdomains: subdomains, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + tilesize +".png"}),
+                "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windSpeed'}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection'}),
+                "pressure": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'seaLevelPressure'}),
+                "precip": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'totalPrecipitation'}),
+                "airtemp": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'airTemperature'}),
+                "cloudcover": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'totalCloudCover'}),
+                "waveperiod": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'wavePeriod'}),
+                "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'waveHeight'}),
+                "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'waveDirection'})
             },
             "Point forecasts": {
                 "Sea level": geojson,
             },
+            "boundaries": {
+                "EEZ": store.EEZ,
+            },
             "Celestial information": {
-                "Sun and Moon": new L.Terminator(),
+                "Sun and Moon": store.solarTerminator
             }
-        }
+        };
 
         initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
     });
