@@ -1,3 +1,4 @@
 *.swp
 *.pyc
-www/bower_components
+bower_components
+fabfile_deploy.py
