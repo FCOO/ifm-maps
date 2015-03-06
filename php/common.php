@@ -18,7 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-datetime/leaflet-control-datetime.css" />
 	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-legend/leaflet-control-legend.css" />
 	<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-forecast-print/leaflet-control-forecast-print.css" />
-	<!---<link rel="stylesheet" type="text/css" href="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.css" />-->
+	<link rel="stylesheet" type="text/css" href="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.css" />
         <link rel="stylesheet" type="text/css" href="../leaflet/Control.OSMGeocoder.ifm-maps.css" />
 	<link rel="stylesheet" type="text/css" href="../css/ifm-maps.css" />
         <script>window.L_PREFER_CANVAS = true;</script>
@@ -51,8 +51,9 @@
 	<script src="../bower_components/leaflet-control-forecast-print/leaflet-control-forecast-print.js"></script>
 	<script src="../leaflet/Permalink.CategorizedLayer.js"></script>
 	<script src="../leaflet/Permalink.CategorizedOverlay.js"></script>
-	<!---<script src="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js"></script>-->
-	<!---<script src="../leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js"></script>-->
+	<script src="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js"></script>
+	<script src="../leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js"></script>
+	<script src="../leaflet/leaflet-fcoo-layers/impact/denmark.js"></script>
 	<script src="../javascript/map_<?php echo $domain_id ?>.js"></script>
         <script src="../javascript/lang.js"></script>
         <script src="../javascript/url.js"></script>

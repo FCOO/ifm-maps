@@ -2,28 +2,32 @@
  * A JavaScript library for using Danish Defence Center for Operational Oceanography's (FCOO)
  * Web Map Service layers without hassle.
  */
-L.FImpactLayer = L.FLayer.extend({
+L.FImpactLayer = L.TileLayer.WMS.Fcoo.extend({
     //baseUrl: "http://wms-dev01:8080/{dataset}.wms",
     baseUrl: location.protocol + "//{s}.fcoo.dk/webmap/impact/{dataset}.wms",
 
     onAdd: function(map) {
         L.TileLayer.WMS.prototype.onAdd.call(this, map);
         this._map = map;
-        if (this.options.showLegend && this.options.legendImagePath != null) {
-            this._legendControl = this._getLegendControl();
-            this._legendId = this._legendControl.addLegend(this, 
-                this.options.legendParameters, 
-                this.options.legendImagePath,
-                this.options.legendAttribution);
-        }
+        // Create or get LegendControl if it already exists
+        this._legendControl = this._getLegendControl();
+        // Add this layer legend to the LegendControl
+        this._legendId = this._legendControl.addLegend(this, this.legendParams);
+        // Add foreground layer if specified
         if (this.options.foreground != null) {
             this.options.foreground.addTo(map);
         }
     },
 
+    /*
+     * Make an impact layer control instead of the default legend control.
+     */
     _getLegendControl: function() {
         if (typeof this._map._fcoo_legendcontrol == 'undefined' || !this._map._fcoo_legendcontrol) {
-            this._map._fcoo_legendcontrol = new L.FImpactLayer.LegendControl({position: this.options.legendPosition});
+            this._map._fcoo_legendcontrol = new L.FImpactLayer.LegendControl({
+                position: this.legendParams.position,
+                language: this.options.language
+            });
             this._map.addControl(this._map._fcoo_legendcontrol);
         }
         return this._map._fcoo_legendcontrol;
@@ -160,7 +164,6 @@ L.LegendParameter = L.Control.extend({
 L.LegendLayer = L.Control.extend({
     options: {
         name: null,
-        image: null,
         attribution: null,
         layer: null,
     },
@@ -280,19 +283,19 @@ L.FImpactLayer.LegendControl = L.Control.extend({
         return this._container;
     },
 
-    addLegend: function(layer, legendParameters, legendImagePath, legendAttribution) {
+    //addLegend: function(layer, legendParameters, legendImagePath, legendAttribution) {
+    addLegend: function(layer, options) {
         var legendId = this._legendCounter++;
         var legendLayer = new L.LegendLayer(this._map, this._container, {
             layer: layer,
-            image: legendImagePath,
-            attribution: legendAttribution
+            attribution: options.attribution
         });
-        for (param in legendParameters) {
+        for (param in options.parameters) {
             var paramOptions = $.extend({
-                                         shortname: param,
-                                         layer: layer
-                                        },
-                                        legendParameters[param]);
+                shortname: param,
+                layer: layer
+            },
+            options.parameters[param]);
             legendLayer.addParameter(paramOptions);
         }
         this._legendContainer[legendId] = legendLayer;

@@ -26,9 +26,9 @@ $(document).ready(function() {
 
     var overlays = {
         "Impact": {
-            "Boarding": new L.FLayer.Impact.boarding({tileSize: tilesize, zIndex: 100, foreground: landLayer}),
-            "Helicopter": new L.FLayer.Impact.helo_tol({tileSize: tilesize, zIndex: 100, foreground: landLayer}),
-            "Replenishment": new L.FLayer.Impact.replenishment({tileSize: tilesize, zIndex: 100, foreground: landLayer}),
+            "Boarding": new L.FImpactLayer.boarding({tileSize: tilesize, zIndex: 100, foreground: landLayer}),
+            "Helicopter": new L.FImpactLayer.helo_tol({tileSize: tilesize, zIndex: 100, foreground: landLayer}),
+            "Replenishment": new L.FImpactLayer.replenishment({tileSize: tilesize, zIndex: 100, foreground: landLayer}),
         },
         "boundaries": {
             "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_" + tilesize + "_mercator_201411070000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: tilesize, subdomains: subdomains, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + tilesize +".png"}),
