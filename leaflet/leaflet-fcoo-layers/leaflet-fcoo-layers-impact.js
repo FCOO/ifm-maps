@@ -3,7 +3,7 @@
  * Web Map Service layers without hassle.
  */
 L.FImpactLayer = L.TileLayer.WMS.Fcoo.extend({
-    //baseUrl: "http://wms-dev01:8080/{dataset}.wms",
+    //baseUrl: "http://wms-dev01.fcoo.dk:8080/{dataset}.wms",
     baseUrl: location.protocol + "//{s}.fcoo.dk/webmap/impact/{dataset}.wms",
 
     onAdd: function(map) {

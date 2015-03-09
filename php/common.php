@@ -54,6 +54,7 @@
 	<script src="../leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js"></script>
 	<script src="../leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js"></script>
 	<script src="../leaflet/leaflet-fcoo-layers/impact/denmark.js"></script>
+	<script src="../leaflet/leaflet-fcoo-layers/impact/greenland.js"></script>
 	<script src="../javascript/map_<?php echo $domain_id ?>.js"></script>
         <script src="../javascript/lang.js"></script>
         <script src="../javascript/url.js"></script>

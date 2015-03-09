@@ -19,7 +19,8 @@ if not len(env.roles):
     env.roles = ["local"]
 
 env.setups = ['greenland', 'faroe_islands', 'denmark', 
-              'mediterranean', 'indian_ocean', 'global']
+              'mediterranean', 'indian_ocean', 'denmark_impact',
+              'greenland_impact']
 
 env.cssfiles = ["bower_components/fontawesome/css/font-awesome.css",
                 "bower_components/leaflet/dist/leaflet.css",
@@ -33,9 +34,8 @@ env.cssfiles = ["bower_components/fontawesome/css/font-awesome.css",
                 "bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.css",
                 "bower_components/leaflet-control-datetime/leaflet-control-datetime.css",
                 "bower_components/leaflet-control-legend/leaflet-control-legend.css",
-                "leaflet/leaflet-fcoo-layers.css",
+                "bower_components/leaflet-control-forecast-print/leaflet-control-forecast-print.css",
                 "leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.css",
-                "leaflet/L.Control.Print.css",
                 "leaflet/Control.OSMGeocoder.ifm-maps.css",
                 "css/ifm-maps.css"]
 
@@ -61,12 +61,15 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "bower_components/leaflet-control-datetime/leaflet-control-datetime.js",
                "bower_components/leaflet-tilelayer-counting/leaflet-tilelayer-counting.js",
                "bower_components/leaflet-control-legend/leaflet-control-legend.js",
+               "bower_components/leaflet-control-forecast-print/leaflet-control-forecast-print.js",
+               "bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-model.js",
+               "bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-fcoo.js",
                "leaflet/Permalink.CategorizedLayer.js",
                "leaflet/Permalink.CategorizedOverlay.js",
-               "leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-common.js",
                "leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js",
+               "leaflet/leaflet-fcoo-layers/impact/denmark.js",
+               "leaflet/leaflet-fcoo-layers/impact/greenland.js",
                "leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js",
-               "leaflet/L.Control.Print.js",
                "javascript/lang.js",
                "javascript/url.js",
                "javascript/map_common.js",
@@ -104,20 +107,13 @@ def build_css(minify=True):
 @_booleanize
 def build_js(minify=True):
     local('mkdir -p dist')
-    setups = {}
-    for setup in env.setups:
-        rfile = setup + '/index.php'
-        setups[setup] = _extract_jsfiles(rfile)
-    jsmodels = 'leaflet/leaflet-fcoo-layers/%(model)s'
     jsfiles = env.jsfiles
     jsfiles_min = env.jsfiles_extra
-    for setup in setups:
+    for setup in env.setups:
         print('Processing %s' % setup)
         destdir = 'dist/%s' % setup
         local('mkdir -p %s' % destdir)
         jsfiles_setup = [f % {'setup': setup} for f in jsfiles]
-        jsmodels_setup = [jsmodels % {'model': model} for model in setups[setup]]
-        jsfiles_setup += jsmodels_setup
         jsfilestr = ' '.join(jsfiles_setup)
         jsfile = '%s/ifm-maps_%s.js' % (destdir, env.now)
         local('awk \'FNR==1{print ""}1\' %s > %s' % (jsfilestr, jsfile))
@@ -146,11 +142,7 @@ def build_web():
     local('cp -r bower_components/flag-icon-css/flags dist/.')
     local('cp -r bower_components/fontawesome/fonts dist/.')
 
-    setups = {}
     for setup in env.setups:
-        rfile = setup + '/index.php'
-        setups[setup] = _extract_jsfiles(rfile)
-    for setup in setups:
         print('Processing %s' % setup)
         destdir = 'dist/%s' % setup
         local('mkdir -p %s' % destdir)
@@ -167,17 +159,3 @@ def build(minify=True):
     build_css(minify=minify)
     build_js(minify=minify)
     build_web()
-
-def _extract_jsfiles(rfile):
-    """Returns a list of javascript files used in a php index file."""
-    output = local("grep '\$model_ids = array' %s" % rfile, capture=True)
-    print output
-    lines = output.split('\n')
-    for line in lines:
-        if line.startswith('$model_ids = array'):
-            array = line.split('=')[1].strip()
-            imps = array.lstrip('array(').rstrip(');')
-            js_includes = [imp.strip().strip('"') for imp in imps.split(',')]
-            return js_includes
-    raise RuntimeError("Could not find php array containing model id's")
-

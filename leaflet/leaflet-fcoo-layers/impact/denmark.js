@@ -6,8 +6,8 @@
  */
 
 (function () {
-    L.FImpactLayer.replenishment = function(options) {
-        var dataset = 'FCOO/MERGED/impact.nc';
+    L.FImpactLayer.replenishment_dk = function(options) {
+        var dataset = 'FCOO/MERGED/impact_dk.nc';
         options = L.extend(options, {
             attribution: 'Based on forecasts from <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a>',
         });
@@ -45,8 +45,8 @@
         return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
     };
 
-    L.FImpactLayer.boarding = function (options) {
-        var dataset = 'FCOO/MERGED/impact.nc';
+    L.FImpactLayer.boarding_dk = function (options) {
+        var dataset = 'FCOO/MERGED/impact_dk.nc';
         options = L.extend(options, {
             attribution: 'Based on forecasts from <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a>',
         });
@@ -82,8 +82,8 @@
         return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
     };
 
-    L.FImpactLayer.helo_tol = function (options) {
-        var dataset = 'FCOO/MERGED/impact.nc';
+    L.FImpactLayer.helo_tol_dk = function (options) {
+        var dataset = 'FCOO/MERGED/impact_dk.nc';
         options = L.extend(options, {
             attribution: 'Based on forecasts from <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a>',
         });
@@ -113,13 +113,13 @@
                 },
                 VIS: {
                     longname: 'Visibility',
-                    units: 'm',
+                    units: 'km',
                     sliderOptions: {
                             range: true,
-                            step: 100,
-                            min: -6000,
+                            step: 0.1,
+                            min: -6,
                             max: 0,
-                            values: [ -4000, -2000 ],
+                            values: [ -4, -2 ],
                     }
                 }
             }
