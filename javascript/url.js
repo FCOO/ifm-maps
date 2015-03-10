@@ -1,6 +1,7 @@
 "use strict";
 /*jslint browser: true*/
 /*global noty*/
+/*exported updateURLParameter, getTilesize*/
 
 /**
  * This file contains methods for handling URLs

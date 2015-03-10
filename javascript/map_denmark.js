@@ -24,6 +24,7 @@ $(document).ready(function () {
             onEachFeature: function (feature, layer) {
                 layer.bindPopup('<img src="' + link_template.replace('__STATION__', feature.properties.id) + '" height="350" width="500" />', {maxWidth: 700, maxHeight: 600});
             },
+            /*jshint unused: true*/
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, {
                            radius: 5,
@@ -34,6 +35,7 @@ $(document).ready(function () {
                            fillOpacity: 0.8
                 });
             }
+            /*jshint unused: false*/
         });
         var overlays = {
             "DMI": {

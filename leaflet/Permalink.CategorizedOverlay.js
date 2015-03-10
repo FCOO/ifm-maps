@@ -1,3 +1,6 @@
+"use strict";
+/*global L*/
+
 /**
  * This file is licensed under Creative Commons Zero (CC0)
  * http://creativecommons.org/publicdomain/zero/1.0/
@@ -11,7 +14,7 @@ L.Control.Permalink.include({
 		this.on('add', this._onadd_overlay, this);
 	},
 
-	_onadd_overlay: function(e) {
+	_onadd_overlay: function() {
 		this._map.on('layeradd', this._update_overlay, this);
 		this._map.on('layerremove', this._update_overlay, this);
 		//this._map.on('overlayadd', this._update_overlay, this);
@@ -36,31 +39,31 @@ L.Control.Permalink.include({
 
 L.Control.CategorizedLayers.include({
 	setOverlays: function(overlaynames_str) {
-                var overlaynames = decodeURIComponent(overlaynames_str).split(',');
-		var layer, obj, idx=0;
+        var overlaynames = decodeURIComponent(overlaynames_str).split(',');
+		var obj, idx=0;
 		for (var i in this._overlays) {
 			if (!this._overlays.hasOwnProperty(i))
 				continue;
-                        var layerGroup = this._overlays[i];
-		        for (var j in layerGroup) {
-			        if (!layerGroup.hasOwnProperty(j))
-				        continue;
-			        obj = layerGroup[j];
-			        if (obj._overlay) {
-				        // visible if specified
-                                        var name = obj._category_en + '.' + obj._name_en;
-				        var visible = (overlaynames[idx] == name);
-				        if (!visible && this._map.hasLayer(obj)) {
-				                idx++;
-					        this._map.removeLayer(obj);
-				        } else if (visible && !this._map.hasLayer(obj)) {
-				                idx++;
-					        this._map.addLayer(obj);
-				        }
+            var layerGroup = this._overlays[i];
+		    for (var j in layerGroup) {
+			    if (!layerGroup.hasOwnProperty(j))
+			        continue;
+			    obj = layerGroup[j];
+			    if (obj._overlay) {
+			        // visible if specified
+                    var name = obj._category_en + '.' + obj._name_en;
+			        var visible = (overlaynames[idx] == name);
+			        if (!visible && this._map.hasLayer(obj)) {
+			                idx++;
+				        this._map.removeLayer(obj);
+			        } else if (visible && !this._map.hasLayer(obj)) {
+			                idx++;
+				        this._map.addLayer(obj);
 			        }
 		        }
+		    }
 		}
-	        this._update();
+	    this._update();
 	},
 
 	overlayNames: function() {

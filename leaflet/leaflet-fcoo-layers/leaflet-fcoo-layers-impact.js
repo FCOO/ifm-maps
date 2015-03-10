@@ -1,3 +1,7 @@
+"use strict";
+/*jslint browser: true*/
+/*global $, L*/
+
 /**
  * A JavaScript library for using Danish Defence Center for Operational Oceanography's (FCOO)
  * Web Map Service layers without hassle.
@@ -125,7 +129,7 @@ L.LegendParameter = L.Control.extend({
         var myMap = this._map; // Used in closure below
 
         var baseoptions = {
-            slide: function(event, ui) {
+            slide: function(e, ui) {
                 myParam.options.sliderOptions.values = ui.values;
                 if (ui.values[0] > 0) {
                     opr1 = '<';
@@ -155,7 +159,7 @@ L.LegendParameter = L.Control.extend({
         $(container).append(slider_container);
 
         // Make it possible to enable/disable parameter
-        $('#fcoo-legend-slider-enabled-' + containerName + '_' + sname).on("click", function (e) {
+        $('#fcoo-legend-slider-enabled-' + containerName + '_' + sname).on("click", function () {
             myParam.options.enabled = !myParam.options.enabled;
             myMap.fire('legendupdate');
         });
@@ -220,18 +224,13 @@ L.LegendLayer = L.Control.extend({
             delete this._parameterContainer[parameterId];
         }
         // reset counter if no parameter is in collection
-        var containerEmpty = true;
-        for (var idx in this._legendContainer) {
-            containerEmpty = false;
-            break;
-        }
-        if (containerEmpty) {
+        if (this._legendContainer.length === 0) {
             this._legendCounter = 0;
             this._container.style.display = 'none';
         }
     },
 
-    _redrawLegendLayer: function(position) {
+    _redrawLegendLayer: function() {
         var isLeft = this.options.position.indexOf('left') !== -1;
         var cssFloat = isLeft ? 'left' : 'right';
         var attribution = this.options.attribution;
@@ -250,7 +249,6 @@ L.LegendLayer = L.Control.extend({
             var attrelem = L.DomUtil.create('p', '', item);
             attrelem.innerHTML = attribution;
         }
-        var mymap = this._map;
   
         $(this._container).append(item);
 
@@ -312,12 +310,7 @@ L.FImpactLayer.LegendControl = L.Control.extend({
             delete this._legendContainer[legendId];
         }
         // reset counter if no legend is in collection
-        var containerEmpty = true;
-        for (var idx in this._legendContainer) {
-            containerEmpty = false;
-            break;
-        }
-        if (containerEmpty) {
+        if (this._legendContainer.length === 0) {
             this._legendCounter = 0;
             this._container.style.display = 'none';
         }

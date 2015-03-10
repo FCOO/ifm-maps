@@ -1,6 +1,7 @@
 "use strict";
 /*jslint browser: true*/
 /*global $, L, noty, getLocalLanguage, getI18n, getUrlParameters, changeLanguage*/
+/*exported initCommonMap*/
 
 /**
  * Initialize the map.
@@ -132,7 +133,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
     }));
 
     // Add length scale control
-    var scaleControl = L.control.scale().addTo(map);
+    L.control.scale().addTo(map);
 
     // Add permanent link control
     map.addControl(new L.Control.Permalink({layers: layerControl, useAnchor: false, position: 'bottomright'}));
@@ -226,7 +227,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
                 setTimeout(function (){checkTimesteps();}, dt_check);
             } else {
                 var msg = "Timeout encountered while getting timesteps";
-                var n = noty({text: msg, type: "error"});
+                noty({text: msg, type: "error"});
                 throw new Error(msg);
             }
         }
@@ -240,23 +241,23 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
  */
 function initBaseMaps(lang, tilesize) {
     // Construct OpenStreetMaps layer
-    var standard = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        tileSize: 256,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors</a>'
-    });
+    //var standard = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //maxZoom: 18,
+        //tileSize: 256,
+        //attribution: '&copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors</a>'
+    //});
 
     // Construct MapQuest layer
-    var mapquestUrl = "http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
-        mapquestSubDomains = ["otile1","otile2","otile3","otile4"],
-        mapquestAttrib = 'Data, imagery and map information provided by ' +
-            '<a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, ' +
-            '<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and ' +
-            '<a href="http://wiki.openstreetmap.org/wiki/Contributors" target="_blank">contributors</a>. ' +
-            'Data: <a href="http://wiki.openstreetmap.org/wiki/Open_Database_License" target="_blank">ODbL</a>, ' +
-            'Map: <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>',
-        mapquest = new L.TileLayer(mapquestUrl, {maxZoom: 18, tileSize: 256, attribution: mapquestAttrib, subdomains: mapquestSubDomains
-    });
+    //var mapquestUrl = "http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
+        //mapquestSubDomains = ["otile1","otile2","otile3","otile4"],
+        //mapquestAttrib = 'Data, imagery and map information provided by ' +
+            //'<a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, ' +
+            //'<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and ' +
+            //'<a href="http://wiki.openstreetmap.org/wiki/Contributors" target="_blank">contributors</a>. ' +
+            //'Data: <a href="http://wiki.openstreetmap.org/wiki/Open_Database_License" target="_blank">ODbL</a>, ' +
+            //'Map: <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>',
+        //mapquest = new L.TileLayer(mapquestUrl, {maxZoom: 18, tileSize: 256, attribution: mapquestAttrib, subdomains: mapquestSubDomains
+    //});
 
     // Construct ESRI World Imagery layer
     var esri = L.tileLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.jpg", {

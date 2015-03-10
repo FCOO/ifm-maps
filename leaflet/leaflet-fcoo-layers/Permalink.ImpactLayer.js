@@ -1,4 +1,6 @@
-//#include "Permalink.js
+"use strict";
+/*jslint browser: true*/
+/*global $, L*/
 
 L.Control.Permalink.include({
     initialize_legend: function() {
@@ -39,7 +41,7 @@ L.Control.CategorizedLayers.include({
             layerGroup,
             values,
             enabled;
-        var overlaynames = decodeURIComponent(overlaynames_str).split(',');
+        //var overlaynames = decodeURIComponent(overlaynames_str).split(',');
         var legendoverlays = decodeURIComponent(legends).split(';');
         var legendhash = {};
         for (i in legendoverlays) {
@@ -70,7 +72,7 @@ L.Control.CategorizedLayers.include({
                 legendhash[layerGroup][layer][param].enabled = enabled;
             }
         }
-        var idx=0;
+        //var idx=0;
         for (i in this._overlays) {
             if (!this._overlays.hasOwnProperty(i))
                     continue;
@@ -81,8 +83,8 @@ L.Control.CategorizedLayers.include({
                     obj = layerGroup[j];
                     if (obj._overlay) {
                         // visible if specified
-                        var name = obj._category_en + '.' + obj._name_en;
-                        var visible = (overlaynames[idx] == name);
+                        //var name = obj._category_en + '.' + obj._name_en;
+                        //var visible = (overlaynames[idx] == name);
                         if (legendhash.hasOwnProperty(obj._category_en)) {
                             if (legendhash[obj._category_en].hasOwnProperty(obj._name_en)) {
                                 var mysettings = legendhash[obj._category_en][obj._name_en];

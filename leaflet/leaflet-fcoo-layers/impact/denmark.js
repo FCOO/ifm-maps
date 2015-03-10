@@ -1,3 +1,6 @@
+"use strict";
+/*global L*/
+
 /**
  * A JavaScript library for using Danish Defence Center for Operational Oceanography's (FCOO)
  * METOC impact forecast layers leaflet based maps without hassle.

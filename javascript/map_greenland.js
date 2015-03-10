@@ -1,6 +1,6 @@
 "use strict";
 /*jslint browser: true*/
-/*global $, L, initCommonMap, getTilesize, Lang.getLocalLanguage*/
+/*global $, L, initCommonMap, getTilesize, getLocalLanguage*/
 
 $(document).ready(function () {
     /**
@@ -8,10 +8,8 @@ $(document).ready(function () {
      */
     var popstr;
     var tilesize = getTilesize();
-    var subdomains = ["media01", "media02", "media03", "media04", "media05"];
     var langs = ['da', 'en'];
     var basemap = "FCOO Standard";
-    var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
     var tidal_url_base = location.protocol + "//api.fcoo.dk/tides?station={s}&start={t1}&end={t2}&nx=500&ny=350&lang={l}&tz={dt}";
     var tidal_stations = "../json/tidal_stations_greenland.json";
     $.getJSON(tidal_stations, function (tidal_data) {
@@ -49,6 +47,7 @@ $(document).ready(function () {
                 layer.bindPopup(popstr,
                                 {maxWidth: 700, maxHeight: 600});
             },
+            /*jshint unused: true*/
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, {
                            radius: 5,
@@ -59,6 +58,7 @@ $(document).ready(function () {
                            fillOpacity: 0.8
                 });
             }
+            /*jshint unused: true*/
         });
     
         var store = new L.Control.FcooLayerStore();
