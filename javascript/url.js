@@ -1,3 +1,6 @@
+"use strict";
+/*jslint browser: true*/
+
 /**
  * This file contains methods for handling URLs
  */
@@ -11,45 +14,49 @@
  * @return String the changed URL
  */
 function updateURLParameter(url, param, paramVal) {
-	var theAnchor = null;
-	var newAdditionalURL = "";
-	var tempArray = url.split("?");
-	var baseURL = tempArray[0];
-	var additionalURL = tempArray[1];
-	var temp = "";
+    var theAnchor = null,
+        newAdditionalURL = "",
+        tempArray = url.split("?"),
+        baseURL = tempArray[0],
+        additionalURL = tempArray[1],
+        temp = "",
+        tmpAnchor,
+        theParams,
+        i,
+        rowsText;
 
-	if (additionalURL) {
-		var tmpAnchor = additionalURL.split("#");
-		var theParams = tmpAnchor[0];
-		theAnchor = tmpAnchor[1];
-		if(theAnchor) {
-			additionalURL = theParams;
-		}
+    if (additionalURL) {
+        tmpAnchor = additionalURL.split("#");
+        theParams = tmpAnchor[0];
+        theAnchor = tmpAnchor[1];
+        if (theAnchor) {
+            additionalURL = theParams;
+        }
 
-		tempArray = additionalURL.split("&");
+        tempArray = additionalURL.split("&");
 
-		for (i=0; i<tempArray.length; i++) {
-			if(tempArray[i].split('=')[0] != param) {
-				newAdditionalURL += temp + tempArray[i];
-				temp = "&";
-			}
-		}        
-	} else {
-		var tmpAnchor = baseURL.split("#");
-		var theParams = tmpAnchor[0];
-		theAnchor  = tmpAnchor[1];
+        for (i = 0; i < tempArray.length; i = i + 1) {
+            if (tempArray[i].split('=')[0] !== param) {
+                newAdditionalURL += temp + tempArray[i];
+                temp = "&";
+            }
+        }
+    } else {
+        tmpAnchor = baseURL.split("#");
+        theParams = tmpAnchor[0];
+        theAnchor  = tmpAnchor[1];
 
-		if(theParams) {
-			baseURL = theParams;
-		}
-	}
+        if (theParams) {
+            baseURL = theParams;
+        }
+    }
 
-	if(theAnchor) {
-		paramVal += "#" + theAnchor;
-	}
+    if (theAnchor) {
+        paramVal += "#" + theAnchor;
+    }
 
-	var rows_txt = temp + "" + param + "=" + paramVal;
-	return baseURL + "?" + newAdditionalURL + rows_txt;
+    rowsText = temp + param + "=" + paramVal;
+    return baseURL + "?" + newAdditionalURL + rowsText;
 }
 
 /**
@@ -57,29 +64,33 @@ function updateURLParameter(url, param, paramVal) {
  * @return Array List of URL parameters key-value indexed
  */
 function getUrlParameters() {
-	var vars = [], hash;
-	var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-	for(var i=0; i<hashes.length; i++) {
-		hash = hashes[i].split('=');
-		vars.push(hash[0]);
-		vars[hash[0]] = hash[1];
-	}
-	return vars;
+    var vars = [],
+        hash,
+        hashes,
+        i;
+    hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (i = 0; i < hashes.length; i = i + 1) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
 }
 
 /*
  * Returns tilesize, possibly from url parameter. Default is 512.
  */
 function getTilesize() {
-    var urlParams = getUrlParameters();
-    var tilesize;
-    if (typeof urlParams.tilesize != "undefined") {
+    var urlParams = getUrlParameters(),
+        tilesize,
+        msg;
+    if (urlParams.tilesize !== undefined) {
         tilesize = parseInt(urlParams.tilesize, 10);
         // Allowed values:
-        if ([256, 512, 1024].indexOf(tilesize) == -1) {
+        if ([256, 512, 1024].indexOf(tilesize) === -1) {
             tilesize = 512;
-            var msg = "Invalid tile size specified (must be 256, 512 or 1024)";
-            var n = noty({text: msg, type: "error"});
+            msg = "Invalid tile size specified (must be 256, 512 or 1024)";
+            noty({text: msg, type: "error"});
             throw new Error(msg);
         }
     } else {
@@ -87,4 +98,4 @@ function getTilesize() {
         tilesize = 512;
     }
     return tilesize;
-};
+}
