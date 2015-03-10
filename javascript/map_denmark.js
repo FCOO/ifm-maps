@@ -1,4 +1,8 @@
-$(document).ready(function() {
+"use strict";
+/*jslint browser: true*/
+/*global $, L*/
+
+$(document).ready(function () {
     /**
      * Initialize the map.
      */
@@ -15,7 +19,7 @@ $(document).ready(function() {
     var basemap = "FCOO Standard";
 
     var link_template = location.protocol + "//chart.fcoo.dk/station_timeseries.asp?s=:003__STATION__:046SeaLvl:002DK:001DEFAULT:04d620:04e400:04f0:04a1:04b48:04i0:04c1:04g0:0641:05opopup";
-    $.getJSON(location.protocol + "//api.fcoo.dk/ifm-maps/json/Observations.json", function(data) {
+    $.getJSON(location.protocol + "//api.fcoo.dk/ifm-maps/json/Observations.json", function (data) {
         var geojson = L.geoJson(data, {
             onEachFeature: function (feature, layer) {
                 layer.bindPopup('<img src="' + link_template.replace('__STATION__', feature.properties.id) + '" height="350" width="500" />', {maxWidth: 700, maxHeight: 600});
@@ -47,9 +51,9 @@ $(document).ready(function() {
                 "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'waveDirection'}),
                 "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'currentSpeed'}),
                 "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'currentDirection'}),
-	        "elev": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'seaLevel'}),
-	        "seatemp": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'sst'}),
-	        "salinity": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'sss'})
+            "elev": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'seaLevel'}),
+            "seatemp": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'sst'}),
+            "salinity": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'sss'})
             },
             "FCOO - Danish Waters": {
                 "waveperiod": store.getLayer({'dataset': 'FCOO/WW3/DKINNER', 'parameter': 'wavePeriod'}),
@@ -57,9 +61,9 @@ $(document).ready(function() {
                 "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/DKINNER', 'parameter': 'waveDirection'}),
                 "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'currentSpeed'}),
                 "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'currentDirection'}),
-	        "elev": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'seaLevel'}),
-	        "seatemp": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'sst'}),
-	        "salinity": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'sss'})
+            "elev": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'seaLevel'}),
+            "seatemp": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'sst'}),
+            "salinity": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'sss'})
             },
             "ECMWF": {
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windSpeed'}),

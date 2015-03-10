@@ -1,4 +1,8 @@
-$(document).ready(function() {
+"use strict";
+/*jslint browser: true*/
+/*global $, L*/
+
+$(document).ready(function () {
     /**
      * Initialize the map.
      */

@@ -1,223 +1,238 @@
+"use strict";
+/*jslint browser: true*/
+/*global $, L, getLocalLanguage*/
+
 /**
  * Initialize the map.
  */
-function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, 
+function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
                        lon, tilesize, useGeoMetoc) {
-	var localLang = getLocalLanguage();
+    var localLang,
+        tmplayers,
+        baseMaps,
+        topLayer,
+        lang,
+        lang2,
+        all_languages,
+        languages,
+        urlParams,
+        map;
+    localLang = getLocalLanguage();
 
-        // Initialize basemaps
-        var tmplayers = initBaseMaps(localLang, tilesize);
-        var baseMaps = tmplayers.baseMaps;
-        var topLayer = tmplayers.topLayer;
+    // Initialize basemaps
+    tmplayers = initBaseMaps(localLang, tilesize);
+    baseMaps = tmplayers.baseMaps;
+    topLayer = tmplayers.topLayer;
 
-        // List of languages to select from
-	var all_languages = [L.langObject('da', '<button class="flag-icon flag-icon-dk"></button>'),
-			     L.langObject('fo', '<button class="flag-icon flag-icon-fo"></button>'),
-			     L.langObject('en', '<button class="flag-icon flag-icon-gb"></button>')];
+    // List of languages to select from
+    all_languages = [L.langObject('da', '<button class="flag-icon flag-icon-dk"></button>'),
+                     L.langObject('fo', '<button class="flag-icon flag-icon-fo"></button>'),
+                     L.langObject('en', '<button class="flag-icon flag-icon-gb"></button>')];
 
-        // Select languages that are specified in langs
-        languages = [];
-        for (lang in langs) {
-            for (lang2 in all_languages) {
-                if (langs[lang] == all_languages[lang2].id) {
-                    languages[languages.length] = all_languages[lang2];
-                }
+    // Select languages that are specified in langs
+    languages = [];
+    for (lang in langs) {
+        for (lang2 in all_languages) {
+            if (langs[lang] === all_languages[lang2].id) {
+                languages[languages.length] = all_languages[lang2];
             }
         }
+    }
 
-        // Retrieve URL parameters
-	var urlParams = getUrlParameters();
-	if (typeof urlParams.zoom != "undefined" && typeof urlParams.lat != "undefined" && typeof urlParams.lon != "undefined") {
-		zoom = urlParams.zoom;
-		lat = urlParams.lat;
-		lon = urlParams.lon;
-	}
+    // Retrieve URL parameters
+    urlParams = getUrlParameters();
+    if (urlParams.zoom !== undefined && urlParams.lat !== undefined && urlParams.lon !== undefined) {
+        zoom = urlParams.zoom;
+        lat = urlParams.lat;
+        lon = urlParams.lon;
+    }
 
-        // Construct map
-	map = L.map('map', {
-		center: new L.LatLng(lat, lon), zoom: zoom,
-                zoomAnimation: true, // There is a bug with layer hiding when enabled
-                minZoom: minZoom,
-                maxZoom: maxZoom,
-                //crs: L.CRS.EPSG4326,
-                crs: L.CRS.EPSG3857,
-		layers: [baseMaps[Object.keys(baseMaps)[0]][basemap]]
-	});
-	map.attributionControl.setPrefix("");
+    // Construct map
+    map = L.map('map', {
+        center: new L.LatLng(lat, lon),
+        zoom: zoom,
+        zoomAnimation: true, // There is a bug with layer hiding when enabled
+        minZoom: minZoom,
+        maxZoom: maxZoom,
+        //crs: L.CRS.EPSG4326,
+        crs: L.CRS.EPSG3857,
+        layers: [baseMaps[Object.keys(baseMaps)[0]][basemap]]
+    });
+    map.attributionControl.setPrefix("");
 
-        // Optionally use FCOO Geolocated METOC service (on right click)
-        if (useGeoMetoc) {
-            map.on('contextmenu', function(e) {
-                var lat = e.latlng.lat;
-                var lon = e.latlng.lng;
-                var url = location.protocol + '//metoc.fcoo.dk/text?x=_X_&y=_Y_&coastline=c';
-                var win = window.open(url.replace('_X_', lon).replace('_Y_', lat), '_blank');
-                win.focus();
-            });
-        }
+    // Optionally use FCOO Geolocated METOC service (on right click)
+    if (useGeoMetoc) {
+        map.on('contextmenu', function (e) {
+            var lat = e.latlng.lat;
+            var lon = e.latlng.lng;
+            var url = location.protocol + '//metoc.fcoo.dk/text?x=_X_&y=_Y_&coastline=c';
+            var win = window.open(url.replace('_X_', lon).replace('_Y_', lat), '_blank');
+            win.focus();
+        });
+    }
 
-        // Add link to homepage
-        map.addControl(L.control.homeButton({
-                text: getI18n('Home', localLang),
-                title: getI18n('Navigate to home page', localLang),
-                href: location.protocol + '//fcoo.dk'
-        }));
+    // Add link to homepage
+    map.addControl(L.control.homeButton({
+        text: getI18n('Home', localLang),
+        title: getI18n('Navigate to home page', localLang),
+        href: location.protocol + '//fcoo.dk'
+    }));
 
         // Add language selector
-	map.addControl(L.languageSelector({
-		languages: languages,
-		callback: changeLanguage,
-		initialLanguage: localLang,
-		hideSelected: false,
-		vertical: false,
-                useAnchor: false,
-                position: 'topright'
-	}));
+    map.addControl(L.languageSelector({
+        languages: languages,
+        callback: changeLanguage,
+        initialLanguage: localLang,
+        hideSelected: false,
+        vertical: false,
+        useAnchor: false,
+        position: 'topright'
+    }));
 
-        // Add base layers and overlays to map
-        overlayMaps = [];
-        for (var key in overlays) {
-            var nkey = getI18n(key, localLang);
-            overlayMaps[nkey] = {};
-            for (var lkey in overlays[key]) {
-                 // Set English name for use in permalink
-                 overlays[key][lkey]._category_en = key;
-                 overlays[key][lkey]._name_en = lkey;
-                 // Make translated overlay dict to be shown in menu
-                 overlayMaps[nkey][getI18n(lkey, localLang)] = overlays[key][lkey];
+    // Add base layers and overlays to map
+    var overlayMaps = [];
+    for (var key in overlays) {
+        var nkey = getI18n(key, localLang);
+        overlayMaps[nkey] = {};
+        for (var lkey in overlays[key]) {
+            // Set English name for use in permalink
+            overlays[key][lkey]._category_en = key;
+            overlays[key][lkey]._name_en = lkey;
+            // Make translated overlay dict to be shown in menu
+            overlayMaps[nkey][getI18n(lkey, localLang)] = overlays[key][lkey];
+        }
+    }
+
+    // Add foreground layer (land contours, names, ...)
+    topLayer.addTo(map)
+
+    // Add layer control
+    var opts = {collapsed: false,
+                groupsCollapsed: true, 
+                collapseActiveGroups: true, 
+                autoZIndex: false,
+                position: "topright"};
+    var layerControl = (new L.Control.CategorizedLayers(baseMaps, overlayMaps, 
+                        opts)).addTo(map);
+
+    // Add locator control
+    map.addControl(L.control.locate({
+        locateOptions: {maxZoom: maxZoom},
+        strings: {
+            title: getI18n("Show me where I am", localLang),
+            popup: getI18n("You are within {distance} {unit} from this point", localLang),
+            outsideMapBoundsMsg: getI18n("You seem located outside the boundaries of the map", localLang)
+        }
+    }));
+
+    // Add geocoder control
+    map.addControl(new L.Control.OSMGeocoder({
+        position: 'topleft',
+        text: getI18n('Locate', localLang)
+    }));
+
+    // Add length scale control
+    var scaleControl = L.control.scale().addTo(map);
+
+    // Add permanent link control
+    map.addControl(new L.Control.Permalink({layers: layerControl, useAnchor: false, position: 'bottomright'}));
+
+    // Add position control
+    map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomright'}));
+
+    // patch layer control to add some titles
+    var patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
+    patch.innerHTML = getI18n('layers', localLang); // 'TileLayers';
+    layerControl._form.children[2].parentNode.insertBefore(patch, layerControl._form.children[2]);
+
+    patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
+    patch.innerHTML = getI18n('maps', localLang); // 'Maps';
+    layerControl._form.children[0].parentNode.insertBefore(patch, layerControl._form.children[0]);
+
+    // Add text input position control
+    map.addControl(new L.Control.Position({position: 'topleft', collapsed: true}));
+
+    // Add print control
+    map.addControl(L.Control.print({}));
+
+    // Make sure that these controls are hidden on print
+    $(".leaflet-control-layers").addClass("hide-on-print");
+    $(".leaflet-control-zoom").addClass("hide-on-print");
+    $(".leaflet-control-locate").addClass("hide-on-print");
+    $(".leaflet-control-geocoder").addClass("hide-on-print");
+    $(".leaflet-control-position").addClass("hide-on-print");
+    $(".leaflet-control-print").addClass("hide-on-print");
+    $(".leaflet-control-mouseposition").addClass("hide-on-print");
+    $(".leaflet-control-permalink").addClass("hide-on-print");
+
+    // Hide all controls if hidecontrols in query string
+    if (urlParams.hidecontrols == "true") {
+        $(".leaflet-control-layers").css("visibility", "hidden");
+        $(".leaflet-control-zoom").css("visibility", "hidden");
+        $(".leaflet-control-locate").css("visibility", "hidden");
+        $(".leaflet-control-geocoder").css("visibility", "hidden");
+        $(".leaflet-control-position").css("visibility", "hidden");
+        $(".leaflet-control-print").css("visibility", "hidden");
+        $(".leaflet-control-mouseposition").css("visibility", "hidden");
+        $(".leaflet-control-permalink").css("visibility", "hidden");
+    }
+
+    // Add custom title (unescaped and sanitized) - used for print
+    if (urlParams.title !== undefined) {
+        var title = $("<p>" + unescape(urlParams.title) + "</p>").text();
+        title = "<p class='fcoo-title'>" + title + "</p>";
+        $('#map').prepend(title);
+    }
+
+    // Initialize datetime control with this time if in URL
+    var initial_datetime;
+    if (urlParams.datetime !== undefined) {
+        initial_datetime = new Date(urlParams.datetime);
+    } else {
+        initial_datetime = null;
+    }
+
+    // Add datetime control. This is done when the overlays have been
+    // properly initialized (they retrieve the current timesteps in
+    // the forecast files asynchronously, so we have to wait until
+    // they are ready).
+    var dt_check = 10; // How often to check
+    var dt_max = 30000; // When to give up
+    var dt_current = 0;
+    var callback_obj = new DatetimeCallback(overlayMaps);
+    var callback = callback_obj.changeDatetime;
+    function checkTimesteps() {
+        var dates = getTimeSteps(overlayMaps);
+        if (dates !== null) {
+            var visibility = "visible";
+            if (urlParams.hidecontrols == "true") {
+                visibility = "hidden";
             }
-        }
-
-        // Add foreground layer (land contours, names, ...)
-        topLayer.addTo(map)
-
-	// Add layer control
-        var opts = {collapsed: false,
-                    groupsCollapsed: true, 
-                    collapseActiveGroups: true, 
-                    autoZIndex: false,
-                    position: "topright"};
-	var layerControl = (new L.Control.CategorizedLayers(baseMaps, overlayMaps, 
-                            opts)).addTo(map);
-
-        // Add locator control
-        map.addControl(L.control.locate({
-            locateOptions: {maxZoom: maxZoom},
-            strings: {
-                title: getI18n("Show me where I am", localLang),
-                popup: getI18n("You are within {distance} {unit} from this point", localLang),
-                outsideMapBoundsMsg: getI18n("You seem located outside the boundaries of the map", localLang)
-            }
-        }));
-
-        // Add geocoder control
-        map.addControl(new L.Control.OSMGeocoder({
-            position: 'topleft',
-            text: getI18n('Locate', localLang)
-        }));
-
-        // Add length scale control
-        var scaleControl = L.control.scale().addTo(map);
-
-        // Add permanent link control
-	map.addControl(new L.Control.Permalink({layers: layerControl, useAnchor: false, position: 'bottomright'}));
-
-        // Add position control
-        map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomright'}));
-
-	// patch layer control to add some titles
-	var patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
-	patch.innerHTML = getI18n('layers', localLang); // 'TileLayers';
-	layerControl._form.children[2].parentNode.insertBefore(patch, layerControl._form.children[2]);
-
-	patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
-	patch.innerHTML = getI18n('maps', localLang); // 'Maps';
-	layerControl._form.children[0].parentNode.insertBefore(patch, layerControl._form.children[0]);
-
-        // Add text input position control
-        map.addControl(new L.Control.Position({position: 'topleft', collapsed: true}));
-
-        // Add print control
-        map.addControl(L.Control.print({}));
-
-        // Make sure that these controls are hidden on print
-        $(".leaflet-control-layers").addClass("hide-on-print");
-        $(".leaflet-control-zoom").addClass("hide-on-print");
-        $(".leaflet-control-locate").addClass("hide-on-print");
-        $(".leaflet-control-geocoder").addClass("hide-on-print");
-        $(".leaflet-control-position").addClass("hide-on-print");
-        $(".leaflet-control-print").addClass("hide-on-print");
-        $(".leaflet-control-mouseposition").addClass("hide-on-print");
-        $(".leaflet-control-permalink").addClass("hide-on-print");
-
-        // Hide all controls if hidecontrols in query string
-        if (urlParams.hidecontrols == "true") {
-            $(".leaflet-control-layers").css("visibility", "hidden");
-            $(".leaflet-control-zoom").css("visibility", "hidden");
-            $(".leaflet-control-locate").css("visibility", "hidden");
-            $(".leaflet-control-geocoder").css("visibility", "hidden");
-            $(".leaflet-control-position").css("visibility", "hidden");
-            $(".leaflet-control-print").css("visibility", "hidden");
-            $(".leaflet-control-mouseposition").css("visibility", "hidden");
-            $(".leaflet-control-permalink").css("visibility", "hidden");
-        }
-
-        // Add custom title (unescaped and sanitized) - used for print
-        if (typeof urlParams.title != "undefined") {
-            var title = $("<p>" + unescape(urlParams.title) + "</p>").text();
-            title = "<p class='fcoo-title'>" + title + "</p>";
-            $('#map').prepend(title);
-        }
-
-        // Initialize datetime control with this time if in URL
-        var initial_datetime;
-        if (typeof urlParams.datetime != "undefined") {
-            initial_datetime = new Date(urlParams.datetime);
+            new L.Control.Datetime({
+                    title: getI18n('datetime', localLang),
+                    datetimes: dates,
+                    language: localLang,
+                    callback: callback,
+                    visibility: visibility,
+                    initialDatetime: initial_datetime,
+                    vertical: false,
+                    position: 'topright'
+            }).addTo(map);
+            // Make sure that overlays are updated
+            map.fire("overlayadd");
         } else {
-            initial_datetime = null;
-        }
-
-        // Add datetime control. This is done when the overlays have been
-        // properly initialized (they retrieve the current timesteps in
-        // the forecast files asynchronously, so we have to wait until
-        // they are ready).
-        var dt_check = 10; // How often to check
-        var dt_max = 30000; // When to give up
-        var dt_current = 0;
-        var callback_obj = new DatetimeCallback(overlayMaps);
-        var callback = callback_obj.changeDatetime;
-        function checkTimesteps() {
-            var dates = getTimeSteps(overlayMaps);
-            if (dates !== null) {
-                var visibility = "visible";
-                if (urlParams.hidecontrols == "true") {
-                    visibility = "hidden";
-                }
-                new L.Control.Datetime({
-                        title: getI18n('datetime', localLang),
-                        datetimes: dates,
-                        language: localLang,
-                        callback: callback,
-                        visibility: visibility,
-                        initialDatetime: initial_datetime,
-                        vertical: false,
-                        position: 'topright'
-                }).addTo(map);
-                // Make sure that overlays are updated
-                map.fire("overlayadd");
+            if (dt_current <= dt_max) {
+                dt_current += dt_check;
+                setTimeout(function (){checkTimesteps()}, dt_check);
             } else {
-                if (dt_current <= dt_max) {
-                    dt_current += dt_check;
-                    setTimeout(function(){checkTimesteps()}, dt_check);
-                } else {
-                    var msg = "Timeout encountered while getting timesteps";
-                    var n = noty({text: msg, type: "error"});
-                    throw new Error(msg);
-                }
+                var msg = "Timeout encountered while getting timesteps";
+                var n = noty({text: msg, type: "error"});
+                throw new Error(msg);
             }
         }
-        setTimeout(function(){checkTimesteps()}, dt_check);
-        return map;
+    }
+    setTimeout(function (){checkTimesteps()}, dt_check);
+    return map;
 }
 
 /**
@@ -288,7 +303,7 @@ function initBaseMaps(lang, tilesize) {
  * We encapsulate the changeDatetime callback in an object to produce
  * a closure for overlays.
  */
-DatetimeCallback = function(overlays) {
+function DatetimeCallback(overlays) {
     /**
      * Called when something is updated in the datetime selector. If
      * type is 'datetime' all overlays with timesteps will be updated
@@ -298,7 +313,7 @@ DatetimeCallback = function(overlays) {
      * @param type string
      * @param arg date|boolean
      */
-    this.changeDatetime = function(type, arg) {
+    this.changeDatetime = function (type, arg) {
         var myOverlays = overlays;
         if (type == 'datetime') {
             for (var i in overlays) {
@@ -358,6 +373,7 @@ function dateArrayUnique(array) {
  * Get time steps from a hash of overlays.
  */
 function getTimeSteps(overlayMaps) {
+    var overlay;
     var date_min = new Date(8640000000000000)
     var date_max = new Date(-8640000000000000)
     var outdates = [];
@@ -372,7 +388,7 @@ function getTimeSteps(overlayMaps) {
                     if (dates.length > 1) {
                         if (dates[0] < date_min || dates[dates.length-1] > date_max) {
                             outdates = dateArrayUnique(outdates.concat(dates));
-                            outdates.sort(function(a,b){
+                            outdates.sort(function (a,b){
                                 return a - b;
                             });
                         }

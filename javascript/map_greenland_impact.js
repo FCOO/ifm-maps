@@ -1,7 +1,12 @@
-$(document).ready(function() {
+"use strict";
+/*jslint browser: true*/
+/*global $, L*/
+
+$(document).ready(function () {
     /**
      * Initialize the map.
      */
+    var popstr;
     var tilesize = getTilesize();
     var subdomains = ["media01", "media02", "media03", "media04", "media05"];
     var langs = ['da', 'en'];
@@ -9,7 +14,7 @@ $(document).ready(function() {
     var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
     var tidal_url_base = location.protocol + "//api.fcoo.dk/tides?station={s}&start={t1}&end={t2}&nx=500&ny=350&lang={l}&tz={dt}";
     var tidal_stations = "../json/tidal_stations_greenland.json";
-    $.getJSON(tidal_stations, function(tidal_data) {
+    $.getJSON(tidal_stations, function (tidal_data) {
         var geojson = L.geoJson(tidal_data, {
             onEachFeature: function (feature, layer) {
                 var t1 = new Date();
