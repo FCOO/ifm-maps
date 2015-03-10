@@ -1,3 +1,4 @@
+(function (){
 "use strict";
 /*jslint browser: true*/
 /*global $, L*/
@@ -150,4 +151,4 @@ L.Control.CategorizedLayers.include({
         return names;
     }
 });
-
+})();

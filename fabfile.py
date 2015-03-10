@@ -160,6 +160,7 @@ def build_web():
 @_booleanize
 def build(minify=True):
     """Minify, concatenate and build distributable files for IFM Maps."""
+    jshint()
     local('rm -rf dist')
     build_css(minify=minify)
     build_js(minify=minify)

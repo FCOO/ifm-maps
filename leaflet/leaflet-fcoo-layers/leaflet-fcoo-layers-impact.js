@@ -1,3 +1,4 @@
+(function (){
 "use strict";
 /*jslint browser: true*/
 /*global $, L*/
@@ -347,3 +348,4 @@ L.FImpactLayer.LegendControl = L.Control.extend({
         }
     }
 });
+})();

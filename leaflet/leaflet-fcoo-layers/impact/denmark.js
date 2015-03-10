@@ -1,14 +1,13 @@
-"use strict";
-/*global L*/
-
-/**
- * A JavaScript library for using Danish Defence Center for Operational Oceanography's (FCOO)
- * METOC impact forecast layers leaflet based maps without hassle.
- *
- * This file contains abstractions for showing impact layers for Denmark.
- */
-
 (function () {
+    "use strict";
+    /*global L*/
+
+    /**
+     * A JavaScript library for using Danish Defence Center for Operational Oceanography's (FCOO)
+     * METOC impact forecast layers leaflet based maps without hassle.
+     *
+     * This file contains abstractions for showing impact layers for Denmark.
+     */
     L.FImpactLayer.replenishment_dk = function(options) {
         var dataset = 'FCOO/MERGED/impact_dk.nc';
         options = L.extend(options, {
