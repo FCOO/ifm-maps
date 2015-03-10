@@ -14,7 +14,7 @@ L.FImpactLayer = L.TileLayer.WMS.Fcoo.extend({
         // Add this layer legend to the LegendControl
         this._legendId = this._legendControl.addLegend(this, this.legendParams);
         // Add foreground layer if specified
-        if (this.options.foreground != null) {
+        if (this.options.foreground !== null) {
             this.options.foreground.addTo(map);
         }
     },
@@ -68,8 +68,8 @@ L.LegendParameter = L.Control.extend({
                            .replace('x', this.options.shortname);
             } else {
                 // Special handling of case where slider values equal
-                expr = '50*sign(' + this.options.shortname + '-' 
-                     + values[0] +') + 50';
+                expr = '50*sign(' + this.options.shortname + '-' +
+                       values[0] +') + 50';
             }
         } else {
             expr = expr.replace('a*x+b', '0*' + this.options.shortname);
@@ -79,35 +79,37 @@ L.LegendParameter = L.Control.extend({
 
     _redrawLegendParameter: function(container, containerName) {
         // Initialize slider text
+        var opr1,
+            opr2;
         var sname = this.options.shortname;
         var lname = this.options.longname;
         var units = this.options.units;
         var slideroptions = this.options.sliderOptions;
         var values = slideroptions.values;
         if (values[0] > 0) {
-            var opr1 = '<'
-            var opr2 = '>'
+            opr1 = '<';
+            opr2 = '>';
         } else {
-            var opr1 = '>'
-            var opr2 = '<'
+            opr1 = '>';
+            opr2 = '<';
         }
 
         // Add slider for selecting parameters
         var slider_container = L.DomUtil.create('div', 'fcoo-legend-slider');
         var slider_info = L.DomUtil.create('p', 'fcoo-legend-slider-info', slider_container);
-        var slider_check = $('<input type="checkbox" id="fcoo-legend-slider-enabled-'
-                             + containerName + '_' + sname + 
-                             '" name="fcoo-legend-slider-enabled-'
-                             + containerName + '_' + sname + 
+        var slider_check = $('<input type="checkbox" id="fcoo-legend-slider-enabled-' +
+                             containerName + '_' + sname + 
+                             '" name="fcoo-legend-slider-enabled-' +
+                             containerName + '_' + sname + 
                              '" class="fcoo-legend-slider-enabled">');
         slider_check.attr('checked', this.options.enabled);
         $(slider_info).append(slider_check);
         slider_info.innerHTML += lname + ": ";
-        var $slider_info_green = $('<span id="fcoo-legend-slider-info-green-' 
-                              + containerName + '_' + sname + 
+        var $slider_info_green = $('<span id="fcoo-legend-slider-info-green-' +
+                              containerName + '_' + sname + 
                               '" class="fcoo-legend-slider-info-green"></span>');
-        var $slider_info_red = $('<span id="fcoo-legend-slider-info-red-' 
-                              + containerName + '_' + sname +
+        var $slider_info_red = $('<span id="fcoo-legend-slider-info-red-' +
+                              containerName + '_' + sname +
                               '" class="fcoo-legend-slider-info-red"></span>');
         $(slider_info).append($slider_info_green);
         $(slider_info).append($slider_info_red);
@@ -116,7 +118,7 @@ L.LegendParameter = L.Control.extend({
         slider_div.attr("id", "fcoo-legend-slider-div-" + 
                         containerName + "_" + sname);
    
-        var slider_green = $('<div class="slider-green"></div>')
+        var slider_green = $('<div class="slider-green"></div>');
         $slider_info_green.html(opr1 + ' ' + Math.abs(values[0]) + " " + units);
         $slider_info_red.html(opr2 + ' ' + Math.abs(values[1]) + " " + units);
         var myParam = this; // Used in closure below
@@ -126,11 +128,11 @@ L.LegendParameter = L.Control.extend({
             slide: function(event, ui) {
                 myParam.options.sliderOptions.values = ui.values;
                 if (ui.values[0] > 0) {
-                    var opr1 = '<'
-                    var opr2 = '>'
+                    opr1 = '<';
+                    opr2 = '>';
                 } else {
-                    var opr1 = '>'
-                    var opr2 = '<'
+                    opr1 = '>';
+                    opr2 = '<';
                 }
                 $slider_info_green.html(opr1 + ' ' + Math.abs(ui.values[0]) + " " + units);
                 $slider_info_red.html(opr2 + ' ' + Math.abs(ui.values[1]) + " " + units);
@@ -141,12 +143,12 @@ L.LegendParameter = L.Control.extend({
                     slider_div.slider("option", "min")) +'%');
                 myMap.fire('legendupdate');
             }
-        }
+        };
         var my_slideroptions = $.extend(baseoptions, slideroptions);
         slider_div.slider(my_slideroptions).append(slider_green);
         slider_green.css('width', 100*(slider_div.slider("values", 0) - 
-                                       slider_div.slider("option", "min"))
-                                     /(slider_div.slider("option", "max") - 
+                                       slider_div.slider("option", "min")) /
+                                      (slider_div.slider("option", "max") - 
                                        slider_div.slider("option", "min")) +
                                        '%');
 
@@ -173,7 +175,7 @@ L.LegendLayer = L.Control.extend({
         this._map = map;
         this._container = container;
         this._parameterCounter = 0;
-        this._parameterContainer = new Array();
+        this._parameterContainer = [];
         this._map.on('legendupdate', this._updateExpression, this);
     },
 
@@ -200,10 +202,10 @@ L.LegendLayer = L.Control.extend({
     },
 
     _updateExpression: function() {
-        var expr = ''
+        var expr = '';
         for (var idx in this._parameterContainer) {
             var paramExpr = this._parameterContainer[idx]._getExpression();
-            if (expr == '') {
+            if (expr === '') {
                 expr = paramExpr;
             } else {
                 expr = 'fmax(' + expr + ',' + paramExpr + ')';
@@ -244,7 +246,7 @@ L.LegendLayer = L.Control.extend({
         var name = this.options.layer._name;
         title.innerHTML = name;
 
-        if (attribution != null) {
+        if (attribution !== null) {
             var attrelem = L.DomUtil.create('p', '', item);
             attrelem.innerHTML = attribution;
         }
@@ -273,7 +275,7 @@ L.FImpactLayer.LegendControl = L.Control.extend({
         this._container = L.DomUtil.create('div', 'fcoo-legend-container');
         //this._container.style.display = 'none';
         this._legendCounter = 0;
-        this._legendContainer = new Array();
+        this._legendContainer = [];
         this._legendType = 'impact';
         L.DomEvent.disableClickPropagation(this._container);
     },
@@ -285,6 +287,7 @@ L.FImpactLayer.LegendControl = L.Control.extend({
 
     //addLegend: function(layer, legendParameters, legendImagePath, legendAttribution) {
     addLegend: function(layer, options) {
+        var param;
         var legendId = this._legendCounter++;
         var legendLayer = new L.LegendLayer(this._map, this._container, {
             layer: layer,

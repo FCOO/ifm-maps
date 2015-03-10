@@ -1,6 +1,6 @@
 "use strict";
 /*jslint browser: true*/
-/*global $, L, initCommonMap, getTilesize, getLocalLanguage*/
+/*global $, L, initCommonMap, getTilesize, Lang.getLocalLanguage*/
 
 $(document).ready(function () {
     /**

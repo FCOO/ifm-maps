@@ -38,10 +38,10 @@
                     }
                 }
             }
-        }
+        };
         var layers = Object.keys(legendParams.parameters).join(':');
         var wmsParams = {layers: layers,
-                         cmap: 'Green_Red_3colors'}
+                         cmap: 'Green_Red_3colors'};
         return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
     };
 
@@ -77,10 +77,10 @@
                     }
                 }
             }
-        }
+        };
         var layers = Object.keys(legendParams.parameters).join(':');
         var wmsParams = {layers: layers,
-                         cmap: 'Green_Red_3colors'}
+                         cmap: 'Green_Red_3colors'};
         return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
     };
 
@@ -116,10 +116,10 @@
                     }
                 }
             }
-        }
+        };
         var layers = Object.keys(legendParams.parameters).join(':');
         var wmsParams = {layers: layers,
-                         cmap: 'Green_Red_3colors'}
+                         cmap: 'Green_Red_3colors'};
         return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
     };
 
@@ -155,10 +155,10 @@
                     }
                 }
             }
-        }
+        };
         var layers = Object.keys(legendParams.parameters).join(':');
         var wmsParams = {layers: layers,
-                         cmap: 'Green_Red_3colors'}
+                         cmap: 'Green_Red_3colors'};
         return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
     };
 
@@ -192,10 +192,10 @@
                     }
                 }
             }
-        }
+        };
         var layers = Object.keys(legendParams.parameters).join(':');
         var wmsParams = {layers: layers,
-                         cmap: 'Green_Red_3colors'}
+                         cmap: 'Green_Red_3colors'};
         return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
     };
 
@@ -240,10 +240,10 @@
                     }
                 }
             }
-        }
+        };
         var layers = Object.keys(legendParams.parameters).join(':');
         var wmsParams = {layers: layers,
-                         cmap: 'Green_Red_3colors'}
+                         cmap: 'Green_Red_3colors'};
         return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
     };
 }());

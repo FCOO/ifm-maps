@@ -19,7 +19,7 @@ L.Control.Permalink.include({
     _update_legend: function() {
         if (!this.options.layers) return;
         var legends = this.options.layers.legendNames();
-        if (legends && legends != '') {
+        if (legends && legends !== '') {
             this._update({legends: legends});
         }
     },
@@ -35,20 +35,24 @@ L.Control.Permalink.include({
 
 L.Control.CategorizedLayers.include({
     chooseLegends: function(overlaynames_str, legends) {
+        var layer, obj, i, j,
+            layerGroup,
+            values,
+            enabled;
         var overlaynames = decodeURIComponent(overlaynames_str).split(',');
         var legendoverlays = decodeURIComponent(legends).split(';');
         var legendhash = {};
-        for (var i in legendoverlays) {
+        for (i in legendoverlays) {
             var tmp = legendoverlays[i].split(',');
-            for (var j in tmp) {
+            for (j in tmp) {
                 var tmp2 = tmp[j].split('(');
                 //var tmp2 = tmp[j].split('.');
                 var layerComponent = tmp2[0].split('.');
-                var values = tmp2[1].replace(')', '').split('_');
-                var enabled = values[2];
+                values = tmp2[1].replace(')', '').split('_');
+                enabled = values[2];
                 values = values.slice(0, 2);
-                var layerGroup = layerComponent[0];
-                var layer = layerComponent[1];
+                layerGroup = layerComponent[0];
+                layer = layerComponent[1];
                 var param = layerComponent[2];
 
                 // For some browsers, `attr` is undefined; for others,
@@ -61,17 +65,17 @@ L.Control.CategorizedLayers.include({
                 if (typeof attr === typeof undefined || attr === false) {
                     legendhash[layerGroup][layer] = {};
                 }
-                legendhash[layerGroup][layer][param] = {}
-                legendhash[layerGroup][layer][param]['values'] = values;
-                legendhash[layerGroup][layer][param]['enabled'] = enabled
+                legendhash[layerGroup][layer][param] = {};
+                legendhash[layerGroup][layer][param].values = values;
+                legendhash[layerGroup][layer][param].enabled = enabled;
             }
         }
-        var layer, obj, idx=0;
-        for (var i in this._overlays) {
+        var idx=0;
+        for (i in this._overlays) {
             if (!this._overlays.hasOwnProperty(i))
                     continue;
-                var layerGroup = this._overlays[i];
-                for (var j in layerGroup) {
+                layerGroup = this._overlays[i];
+                for (j in layerGroup) {
                     if (!layerGroup.hasOwnProperty(j))
                         continue;
                     obj = layerGroup[j];
@@ -83,16 +87,16 @@ L.Control.CategorizedLayers.include({
                             if (legendhash[obj._category_en].hasOwnProperty(obj._name_en)) {
                                 var mysettings = legendhash[obj._category_en][obj._name_en];
                                 for (var k in mysettings) {
-                                    var enabled = (mysettings[k].enabled === "true");
-                                    var values =  $.map(mysettings[k].values, parseFloat);
+                                    enabled = (mysettings[k].enabled === "true");
+                                    values =  $.map(mysettings[k].values, parseFloat);
                                     var mylegends = obj._legendControl._legendContainer;
                                     for (var ii in mylegends) {
                                         if (mylegends[ii].options.layer === obj) {
                                             for (var iii in mylegends[ii]._parameterContainer) {
                                                 var myparam = mylegends[ii]._parameterContainer[iii];
                                                 if (myparam.options.shortname == k) {
-                                                     myparam.options['enabled'] = enabled;
-                                                     myparam.options.sliderOptions['values'] = values;
+                                                     myparam.options.enabled = enabled;
+                                                     myparam.options.sliderOptions.values = values;
                                                 }
                                             }
                                         }

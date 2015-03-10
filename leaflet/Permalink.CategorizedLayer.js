@@ -40,10 +40,10 @@ L.Control.Permalink.include({
 //L.Control.Layers.include({
 L.Control.CategorizedLayers.include({
 	chooseBaseLayer: function(name) {
-                //console.log('Choosing baselayer');
-		var layer, obj;
-                var baseLayers = this._layers[Object.keys(this._layers)[0]];
-		for (var i in baseLayers) {
+        //console.log('Choosing baselayer');
+		var layer, obj, i;
+        var baseLayers = this._layers[Object.keys(this._layers)[0]];
+		for (i in baseLayers) {
 			if (!baseLayers.hasOwnProperty(i))
 				continue;
 			obj = baseLayers[i];
@@ -53,14 +53,14 @@ L.Control.CategorizedLayers.include({
 		if (!layer || this._map.hasLayer(layer))
 			return;
 
-		for (var i in baseLayers) {
+		for (i in baseLayers) {
 			if (!baseLayers.hasOwnProperty(i))
 				continue;
 			obj = baseLayers[i];
 			if (!obj._overlay && this._map.hasLayer(obj))
-				this._map.removeLayer(obj)
+				this._map.removeLayer(obj);
 		}
-		this._map.addLayer(layer)
+		this._map.addLayer(layer);
 		this._update();
 	},
 

@@ -22,7 +22,7 @@ L.Control.Permalink.include({
 	_update_overlay: function() {
 		if (!this.options.layers) return;
 		var overlaynames = this.options.layers.overlayNames();
-		if (overlaynames && overlaynames != '') {
+		if (overlaynames && overlaynames !== '') {
 			this._update({overlays: overlaynames});
 		}
 	},
