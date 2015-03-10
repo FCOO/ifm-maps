@@ -129,7 +129,9 @@ L.LegendParameter = L.Control.extend({
         var myMap = this._map; // Used in closure below
 
         var baseoptions = {
+            /*jshint unused: true*/
             slide: function(e, ui) {
+            /*jshint unused: false*/
                 myParam.options.sliderOptions.values = ui.values;
                 if (ui.values[0] > 0) {
                     opr1 = '<';

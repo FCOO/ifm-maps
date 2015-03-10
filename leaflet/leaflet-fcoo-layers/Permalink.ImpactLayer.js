@@ -11,7 +11,7 @@ L.Control.Permalink.include({
         this.on('add', this._onadd_legend, this);
     },
 
-    _onadd_legend: function(e) {
+    _onadd_legend: function() {
         this._map.on('layeradd', this._update_legend, this);
         this._map.on('layerremove', this._update_legend, this);
         this._map.on('legendupdate', this._update_legend, this);
@@ -36,7 +36,9 @@ L.Control.Permalink.include({
 });
 
 L.Control.CategorizedLayers.include({
+    /*jshint unused: true*/
     chooseLegends: function(overlaynames_str, legends) {
+    /*jshint unused: false*/
         var layer, obj, i, j,
             layerGroup,
             values,

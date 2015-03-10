@@ -93,17 +93,7 @@ def _booleanize(func):
 @_booleanize
 def jshint():
     """Executes jshint on JS files."""
-    err = False
-    try:
-        local('jshint --show-non-errors javascript/.')
-    except:
-        err = True
-    try:
-        local('jshint --show-non-errors leaflet/.')
-    except:
-        err = True
-    if err:
-        raise SystemExit('jshint errors encountered')
+    local('jshint --show-non-errors javascript/. leaflet/.')
 
 @_booleanize
 def build_css(minify=True):
