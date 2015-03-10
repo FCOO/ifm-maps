@@ -1,13 +1,13 @@
 "use strict";
 /*jslint browser: true*/
-/*global $, L*/
+/*global $, L, initCommonMap, getTilesize*/
 
 $(document).ready(function () {
     /**
      * Initialize the map.
      */
     var tilesize = getTilesize();
-    var store = new L.Control.FcooLayerStore;
+    var store = new L.Control.FcooLayerStore();
 
     var langs = ['da', 'en'];
     var minZoom = 5;

@@ -1,5 +1,6 @@
 "use strict";
 /*jslint browser: true*/
+/*global noty*/
 
 /**
  * This file contains methods for handling URLs

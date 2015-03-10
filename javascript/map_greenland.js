@@ -1,6 +1,6 @@
 "use strict";
 /*jslint browser: true*/
-/*global $, L*/
+/*global $, L, initCommonMap, getTilesize, getLocalLanguage*/
 
 $(document).ready(function () {
     /**
@@ -29,21 +29,21 @@ $(document).ready(function () {
                 t2.setUTCMinutes(0);
                 t2.setUTCSeconds(0);
                 t2.setUTCMilliseconds(0);
-                t1 = t1.toISOString()
-                t2 = t2.toISOString()
+                t1 = t1.toISOString();
+                t2 = t2.toISOString();
                 var tidal_url = tidal_url_base.replace('{s}', feature.properties.id);
-                var tidal_url = tidal_url.replace('{t1}', t1);
-                var tidal_url = tidal_url.replace('{t2}', t2);
+                tidal_url = tidal_url.replace('{t1}', t1);
+                tidal_url = tidal_url.replace('{t2}', t2);
                 var lang = getLocalLanguage();
-                var tidal_url = tidal_url.replace('{l}', lang);
-                var popups = {}
-                popups['en'] = '<h2>Tidal forecast for ' + feature.properties.name + '</h2><img src="' + tidal_url + '" height="350" width="500" /><p>Tidal forecasts from <a href="http://dmi.dk">DMI</a>. Tidal tables can be found <a href="http://www.dmi.dk/en/groenland/hav/tidevandstabeller-groenland/">here</a>.</p>';
-                popups['da'] = '<h2>Tidevandsprognose for ' + feature.properties.name + '</h2><img src="' + tidal_url + '" height="350" width="500" /><p>Tidevandsprognoser fra <a href="http://dmi.dk">DMI</a>. Tidevandstabeller kan findes <a href="http://www.dmi.dk/groenland/hav/tidevandstabeller-groenland/">her</a>.</p>';
+                tidal_url = tidal_url.replace('{l}', lang);
+                var popups = {};
+                popups.en = '<h2>Tidal forecast for ' + feature.properties.name + '</h2><img src="' + tidal_url + '" height="350" width="500" /><p>Tidal forecasts from <a href="http://dmi.dk">DMI</a>. Tidal tables can be found <a href="http://www.dmi.dk/en/groenland/hav/tidevandstabeller-groenland/">here</a>.</p>';
+                popups.da = '<h2>Tidevandsprognose for ' + feature.properties.name + '</h2><img src="' + tidal_url + '" height="350" width="500" /><p>Tidevandsprognoser fra <a href="http://dmi.dk">DMI</a>. Tidevandstabeller kan findes <a href="http://www.dmi.dk/groenland/hav/tidevandstabeller-groenland/">her</a>.</p>';
                 if (typeof popups[lang] != 'undefined') {
                     popstr = popups[lang];
                 } else {
-                    popstr = popups['en'];
-                };
+                    popstr = popups.en;
+                }
                 feature.properties.popup = popstr;
                 popstr = popstr.replace('{dt}', dt);
                 layer.bindPopup(popstr,
@@ -61,7 +61,7 @@ $(document).ready(function () {
             }
         });
     
-        var store = new L.Control.FcooLayerStore;
+        var store = new L.Control.FcooLayerStore();
         var overlays = {
             "DMI": {
                 "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windSpeed'}),

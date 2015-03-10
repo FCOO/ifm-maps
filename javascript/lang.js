@@ -1,5 +1,6 @@
 "use strict";
 /*jslint browser: true*/
+/*global updateURLParameter*/
 
 /**
  * This file contains internationalization and localization related methods.

@@ -1,13 +1,13 @@
 "use strict";
 /*jslint browser: true*/
-/*global $, L*/
+/*global $, L, initCommonMap, getTilesize*/
 
 $(document).ready(function () {
     /**
      * Initialize the map.
      */
     var basemap = "FCOO Standard";
-    var store = new L.Control.FcooLayerStore;
+    var store = new L.Control.FcooLayerStore();
     var overlays = {
         "ECMWF": {
             "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windSpeed'}),
@@ -35,7 +35,7 @@ $(document).ready(function () {
         "places": {
             "DBPedia (experimental)": L.dbPediaLayer({lang: 'en', includeCities: true, minZoom: 8}),
         }
-    }
+    };
 
     var tilesize = getTilesize();
     var langs = ['da', 'en'];

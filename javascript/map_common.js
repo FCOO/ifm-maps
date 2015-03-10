@@ -1,6 +1,6 @@
 "use strict";
 /*jslint browser: true*/
-/*global $, L, getLocalLanguage*/
+/*global $, L, noty, getLocalLanguage, getI18n, getUrlParameters, changeLanguage*/
 
 /**
  * Initialize the map.
@@ -104,7 +104,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
     }
 
     // Add foreground layer (land contours, names, ...)
-    topLayer.addTo(map)
+    topLayer.addTo(map);
 
     // Add layer control
     var opts = {collapsed: false,
@@ -179,7 +179,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
 
     // Add custom title (unescaped and sanitized) - used for print
     if (urlParams.title !== undefined) {
-        var title = $("<p>" + unescape(urlParams.title) + "</p>").text();
+        var title = $("<p>" + window.unescape(urlParams.title) + "</p>").text();
         title = "<p class='fcoo-title'>" + title + "</p>";
         $('#map').prepend(title);
     }
@@ -223,7 +223,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
         } else {
             if (dt_current <= dt_max) {
                 dt_current += dt_check;
-                setTimeout(function (){checkTimesteps()}, dt_check);
+                setTimeout(function (){checkTimesteps();}, dt_check);
             } else {
                 var msg = "Timeout encountered while getting timesteps";
                 var n = noty({text: msg, type: "error"});
@@ -231,7 +231,7 @@ function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
             }
         }
     }
-    setTimeout(function (){checkTimesteps()}, dt_check);
+    setTimeout(function (){checkTimesteps();}, dt_check);
     return map;
 }
 
@@ -249,12 +249,12 @@ function initBaseMaps(lang, tilesize) {
     // Construct MapQuest layer
     var mapquestUrl = "http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
         mapquestSubDomains = ["otile1","otile2","otile3","otile4"],
-        mapquestAttrib = 'Data, imagery and map information provided by '
-            + '<a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, '
-            + '<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and '
-            + '<a href="http://wiki.openstreetmap.org/wiki/Contributors" target="_blank">contributors</a>. '
-            + 'Data: <a href="http://wiki.openstreetmap.org/wiki/Open_Database_License" target="_blank">ODbL</a>, '
-            + 'Map: <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>',
+        mapquestAttrib = 'Data, imagery and map information provided by ' +
+            '<a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, ' +
+            '<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and ' +
+            '<a href="http://wiki.openstreetmap.org/wiki/Contributors" target="_blank">contributors</a>. ' +
+            'Data: <a href="http://wiki.openstreetmap.org/wiki/Open_Database_License" target="_blank">ODbL</a>, ' +
+            'Map: <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>',
         mapquest = new L.TileLayer(mapquestUrl, {maxZoom: 18, tileSize: 256, attribution: mapquestAttrib, subdomains: mapquestSubDomains
     });
 
@@ -314,14 +314,23 @@ function DatetimeCallback(overlays) {
      * @param arg date|boolean
      */
     this.changeDatetime = function (type, arg) {
-        var myOverlays = overlays;
+        var i, j, k,
+            myOverlays,
+            layergroup,
+            layer,
+            timesteps,
+            featuregroup,
+            popstr,
+            t,
+            dt;
+        myOverlays = overlays;
         if (type == 'datetime') {
-            for (var i in overlays) {
-                var layergroup = overlays[i];
-                for (var j in layergroup) {
-                    var layer = layergroup[j];
+            for (i in overlays) {
+                layergroup = overlays[i];
+                for (j in layergroup) {
+                    layer = layergroup[j];
                     if (layer.timesteps !== undefined) {
-                        var timesteps = layer.timesteps;
+                        timesteps = layer.timesteps;
                         if (timesteps !== null && timesteps.length > 1) {
                             layer.setParams({time: arg}, false);
                         }
@@ -332,20 +341,20 @@ function DatetimeCallback(overlays) {
                 }
             }
         } else if (type == 'timezone') {
-            for (var i in overlays) {
-                var layergroup = overlays[i];
-                for (var j in layergroup) {
-                    var layer = layergroup[j];
-                    for (var k in layer._layers) {
-                        var featuregroup = layer._layers[k];
+            for (i in overlays) {
+                layergroup = overlays[i];
+                for (j in layergroup) {
+                    layer = layergroup[j];
+                    for (k in layer._layers) {
+                        featuregroup = layer._layers[k];
                         if (featuregroup !== null && featuregroup._popup !== undefined) {
                             if (featuregroup.feature.properties.popup !== undefined) {
-                                var popstr = featuregroup.feature.properties.popup;
+                                popstr = featuregroup.feature.properties.popup;
                                 if (arg) {
-                                    var t = new Date();
-                                    var dt = t.getTimezoneOffset();
+                                    t = new Date();
+                                    dt = t.getTimezoneOffset();
                                 } else {
-                                    var dt = 0;
+                                    dt = 0;
                                 }
                                 popstr = popstr.replace('{dt}', dt);
                                 featuregroup.setPopupContent(popstr);
@@ -367,15 +376,15 @@ function dateArrayUnique(array) {
         }
     }
     return a;
-};
+}
 
 /**
  * Get time steps from a hash of overlays.
  */
 function getTimeSteps(overlayMaps) {
     var overlay;
-    var date_min = new Date(8640000000000000)
-    var date_max = new Date(-8640000000000000)
+    var date_min = new Date(8640000000000000);
+    var date_max = new Date(-8640000000000000);
     var outdates = [];
     for (var i in overlayMaps) {
         var category = overlayMaps[i];
@@ -400,4 +409,4 @@ function getTimeSteps(overlayMaps) {
         }
     }
     return outdates;
-};
+}

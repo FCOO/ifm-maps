@@ -1,6 +1,6 @@
 "use strict";
 /*jslint browser: true*/
-/*global $, L*/
+/*global $, L, initCommonMap, getTilesize*/
 
 $(document).ready(function () {
     /**
@@ -40,6 +40,6 @@ $(document).ready(function () {
         "Celestial information": {
             "Solar Terminator": new L.Terminator(),
         }
-    }
+    };
     initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
 });

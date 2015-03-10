@@ -1,6 +1,6 @@
 "use strict";
 /*jslint browser: true*/
-/*global $, L*/
+/*global $, L, initCommonMap, getTilesize*/
 
 $(document).ready(function () {
     /**
@@ -8,7 +8,7 @@ $(document).ready(function () {
      */
     var tilesize = getTilesize();
     var basemap = "FCOO Standard";
-    var store = new L.Control.FcooLayerStore;
+    var store = new L.Control.FcooLayerStore();
     var overlays = {
         "DMI": {
             "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windSpeed'}),

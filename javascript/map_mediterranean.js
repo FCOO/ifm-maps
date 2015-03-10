@@ -1,13 +1,13 @@
 "use strict";
 /*jslint browser: true*/
-/*global $, L*/
+/*global $, L, initCommonMap, getTilesize*/
 
 $(document).ready(function () {
     /**
      * Initialize the map.
      */
     var basemap = "FCOO Standard";
-    var store = new L.Control.FcooLayerStore;
+    var store = new L.Control.FcooLayerStore();
     var overlays = {
         "DMI": {
             "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/T15', 'parameter': 'windSpeed'}),
@@ -28,7 +28,7 @@ $(document).ready(function () {
         "Celestial information": {
             "Sun and Moon": store.solarTerminator
         }
-    }
+    };
     var tilesize = getTilesize();
     var langs = ['da', 'en'];
     var minZoom = 2;
