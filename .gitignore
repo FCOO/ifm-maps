@@ -1,4 +1,5 @@
 *.swp
 *.pyc
 bower_components
+dist
 fabfile_deploy.py
