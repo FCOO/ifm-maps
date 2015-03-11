@@ -18,9 +18,13 @@ env.roledefs = {
 if not len(env.roles):
     env.roles = ["local"]
 
-env.setups = ['greenland', 'faroe_islands', 'denmark', 
-              'mediterranean', 'indian_ocean', 'denmark_impact',
-              'greenland_impact']
+env.setups = {'greenland': 'Greenland',
+              'faroe_islands': 'Faroe Islands',
+              'denmark': 'Denmark', 
+              'mediterranean': 'Mediterranean',
+              'indian_ocean': 'Indian Ocean',
+              'denmark_impact': 'Denmark',
+              'greenland_impact': 'Greenland'}
 
 env.cssfiles = ["bower_components/fontawesome/css/font-awesome.css",
                 "bower_components/leaflet/dist/leaflet.css",
@@ -73,7 +77,7 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "javascript/lang.js",
                "javascript/url.js",
                "javascript/map_common.js",
-               "javascript/map_%(setup)s.js"]
+               "javascript/setup.js"]
 
 env.jsfiles_extra = []
 #env.jsfiles_extra = ["bower_components/jquery/dist/jquery.min.js",
@@ -114,26 +118,23 @@ def build_js(minify=True):
     local('mkdir -p dist')
     jsfiles = env.jsfiles
     jsfiles_min = env.jsfiles_extra
-    for setup in env.setups:
-        print('Processing %s' % setup)
-        destdir = 'dist/%s' % setup
-        local('mkdir -p %s' % destdir)
-        jsfiles_setup = [f % {'setup': setup} for f in jsfiles]
-        jsfilestr = ' '.join(jsfiles_setup)
-        jsfile = '%s/ifm-maps_%s.js' % (destdir, env.now)
-        local('awk \'FNR==1{print ""}1\' %s > %s' % (jsfilestr, jsfile))
-        if minify:
-            local('/usr/bin/node /usr/bin/uglifyjs -o %s %s' % (jsfile, jsfile))
-        # Include previously compressed files
-        jsfiles_all = jsfiles_min + [jsfile]
-        jsfilestr = ' '.join(jsfiles_all)
-        local('awk \'FNR==1{print ""}1\' %s > tmp.js && mv tmp.js %s' % (jsfilestr, jsfile))
+    destdir = 'dist/javascript'
+    local('mkdir -p %s' % destdir)
+    jsfilestr = ' '.join(jsfiles)
+    jsfile = '%s/ifm-maps_%s.js' % (destdir, env.now)
+    local('awk \'FNR==1{print ""}1\' %s > %s' % (jsfilestr, jsfile))
+    if minify:
+        local('/usr/bin/node /usr/bin/uglifyjs -o %s %s' % (jsfile, jsfile))
+    # Include previously compressed files
+    jsfiles_all = jsfiles_min + [jsfile]
+    jsfilestr = ' '.join(jsfiles_all)
+    local('awk \'FNR==1{print ""}1\' %s > tmp.js && mv tmp.js %s' % (jsfilestr, jsfile))
 
 @_booleanize
 def build_web():
     local('mkdir -p dist')
     local('cp index.html dist/.')
-    local('cp -r php dist/.')
+    local('cp -r www dist/.')
     local('cp -r json dist/.')
     local('cp -r javascript dist/.')
     local('cp -r leaflet dist/.')
@@ -148,15 +149,20 @@ def build_web():
     local('cp -r bower_components/flag-icon-css/flags dist/.')
     local('cp -r bower_components/fontawesome/fonts dist/.')
 
-    for setup in env.setups:
+    # Modify html files to use time stamped css and js files
+    local('sed -i s/ifm-maps.css/ifm-maps_%s.css/ dist/www/index-prod.html' % env.now)
+    local('sed -i s/ifm-maps.js/ifm-maps_%s.js/ dist/www/index-prod.html' % env.now)
+
+    # Make index.html files for each domain
+    for setup, name in env.setups.iteritems():
         print('Processing %s' % setup)
         destdir = 'dist/%s' % setup
         local('mkdir -p %s' % destdir)
-        local('cp %s/index.php %s/index-dev.php' % (setup, destdir))
-        local('cp %s/index-prod.php %s/index.php' % (setup, destdir))
-        local('sed -i s/ifm-maps.css/ifm-maps_%s.css/ dist/php/common-prod.php' % env.now)
-        local('sed -i s/ifm-maps.js/ifm-maps_%s.js/ dist/php/common-prod.php' % env.now)
-
+        local('cp dist/www/index.html %s/index-dev.html' % (destdir))
+        local('cp dist/www/index-prod.html %s/index.html' % (destdir))
+        local("sed -i 's/\${domain}/%s/' %s/index.html" % (name, destdir))
+        local("sed -i 's/denmark/%s/' %s/index.html" % (setup, destdir))
+        local("sed -i 's/denmark/%s/' %s/index-dev.html" % (setup, destdir))
 
 @_booleanize
 def build(minify=True):
