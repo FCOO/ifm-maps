@@ -144,6 +144,7 @@ def build_web():
     local('cp -r bower_components/leaflet-control-position/images/* dist/css/images/.')
     local('cp -r bower_components/leaflet-control-osm-geocoder/images/* dist/css/images/.')
     local('cp -r bower_components/jquery-ui/themes/ui-lightness/images/* dist/css/images/.')
+    local('cp -r bower_components/leaflet-control-forecast-print/images/printer.png dist/css/images/.')
     local('cp -r bower_components/flag-icon-css/flags dist/.')
     local('cp -r bower_components/fontawesome/fonts dist/.')
 
