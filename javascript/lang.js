@@ -56,7 +56,7 @@
                 'Point forecasts': 'Punktprognoser',
                 'Tidal forecasts': 'Tidevandsprognoser',
                 'Celestial information': 'Himmellegemer',
-                'Sun and Moon': 'Sol og Måne',
+                'Solar Terminator': 'Dag og nat',
                 layers: 'Lag',
                 boundaries: 'Grænser',
                 places: 'Steder',

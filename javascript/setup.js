@@ -37,7 +37,7 @@
                     "EEZ": new L.tileLayer(fcoo_base + "tiles_EEZ_" + tilesize + "_mercator_201411070000" + "/{z}/{x}/{y}.png", {maxZoom: 10, tileSize: tilesize, subdomains: subdomains, zIndex: 200, continuousWorld: false, errorTileUrl: fcoo_base + "empty_" + tilesize +".png"}),
                 },
                 "Celestial information": {
-                    "Solar Terminator": new L.Terminator(),
+                    "Solar Terminator": store.solarTerminator
                 }
             };
             initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
@@ -114,7 +114,7 @@
                         "EEZ": store.EEZ,
                     },
                     "Celestial information": {
-                        "Sun and Moon": store.solarTerminator
+                        "Solar Terminator": store.solarTerminator
                     }
                 };
                 initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
@@ -156,7 +156,7 @@
                     "EEZ": store.EEZ,
                 },
                 "Celestial information": {
-                    "Sun and Moon": store.solarTerminator
+                    "Solar Terminator": store.solarTerminator
                 }
             };
             langs = ['da', 'fo', 'en'];
@@ -285,7 +285,7 @@
                         "SAR": store.SAR
                     },
                     "Celestial information": {
-                        "Sun and Moon": store.solarTerminator
+                        "Solar Terminator": store.solarTerminator
                     }
                 };
 
@@ -319,7 +319,7 @@
                     "EEZ": store.EEZ
                 },
                 "Celestial information": {
-                    "Sun and Moon": store.solarTerminator
+                    "Solar Terminator": store.solarTerminator
                 },
                 "places": {
                     "DBPedia (experimental)": L.dbPediaLayer({lang: 'en', includeCities: true, minZoom: 8}),
@@ -350,7 +350,7 @@
                     "EEZ": store.EEZ
                 },
                 "Celestial information": {
-                    "Sun and Moon": store.solarTerminator
+                    "Solar Terminator": store.solarTerminator
                 }
             };
             minZoom = 2;

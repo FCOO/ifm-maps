@@ -29,7 +29,7 @@
     "moment": "~2.9.0",
     "noty": "~2.3.4",
     "typedarray": "http://inexorabletash.github.io/polyfill/typedarray.js",
-    "Leaflet.Terminator": "https://github.com/joergdietrich/Leaflet.Terminator.git",
+    "Leaflet.Terminator": "https://github.com/jblarsen/Leaflet.Terminator.git",
     "leaflet-control-position": "https://github.com/jblarsen/leaflet-control-position.git",
     "leaflet-control-home": "https://github.com/jblarsen/leaflet-control-home.git",
     "leaflet-categorized-layers": "https://github.com/jblarsen/leaflet-categorized-layers.git#master",
