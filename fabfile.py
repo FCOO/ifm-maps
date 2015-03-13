@@ -43,7 +43,8 @@ env.cssfiles = ["bower_components/fontawesome/css/font-awesome.css",
                 "leaflet/Control.OSMGeocoder.ifm-maps.css",
                 "css/ifm-maps.css"]
 
-env.cssfiles_extra = ["bower_components/jquery-ui/themes/ui-lightness/jquery-ui.min.css"]
+env.cssfiles_min = ["bower_components/jquery-ui/themes/ui-lightness/jquery-ui.min.css"]
+env.cssfiles_src = ["bower_components/jquery-ui/themes/ui-lightness/jquery-ui.css"]
 
 env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "bower_components/jquery-ui/jquery-ui.js",
@@ -57,7 +58,7 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "bower_components/Leaflet.MousePosition/src/L.Control.MousePosition.js",
                "bower_components/leaflet-control-osm-geocoder/Control.OSMGeocoder.js",
                "bower_components/Leaflet.dbpediaLayer/dist/leaflet.dbpedialayer.js",
-               "bower_components/leaflet.locatecontrol/dist/L.Control.Locate.min.js",
+               "bower_components/leaflet.locatecontrol/src/L.Control.Locate.js",
                "bower_components/Leaflet.Terminator/L.Terminator.js",
                "bower_components/leaflet-control-position/leaflet-control-position.js",
                "bower_components/leaflet-control-home/leaflet-control-home.js",
@@ -104,14 +105,17 @@ def build_css(minify=True):
     local('mkdir -p dist/css')
     cssfiles = ' '.join(env.cssfiles)
     cssfile = 'dist/css/ifm-maps_%s.css' % env.now
+    cssfile_min = 'dist/css/ifm-maps_min_%s.css' % env.now
     local('awk \'FNR==1{print ""}1\' %s > %s' % (cssfiles, cssfile))
     if minify:
-        local('yui-compressor -o %s.new %s' % (cssfile, cssfile))
-        local('mv %s.new %s' % (cssfile, cssfile))
+        local('yui-compressor -o %s %s' % (cssfile_min, cssfile))
     # Include files excluded from compression
-    cssfiles = env.cssfiles_extra + [cssfile]
+    cssfiles = env.cssfiles_src + [cssfile]
     cssfiles = ' '.join(cssfiles)
     local('awk \'FNR==1{print ""}1\' %s > tmp.css && mv tmp.css %s' % (cssfiles, cssfile))
+    cssfiles = env.cssfiles_min + [cssfile_min]
+    cssfiles = ' '.join(cssfiles)
+    local('awk \'FNR==1{print ""}1\' %s > tmp.css && mv tmp.css %s' % (cssfiles, cssfile_min))
 
 @_booleanize
 def build_js(minify=True):
@@ -122,13 +126,17 @@ def build_js(minify=True):
     local('mkdir -p %s' % destdir)
     jsfilestr = ' '.join(jsfiles)
     jsfile = '%s/ifm-maps_%s.js' % (destdir, env.now)
+    jsfile_min = '%s/ifm-maps_min_%s.js' % (destdir, env.now)
     local('awk \'FNR==1{print ""}1\' %s > %s' % (jsfilestr, jsfile))
     if minify:
-        local('/usr/bin/node /usr/bin/uglifyjs -o %s %s' % (jsfile, jsfile))
+        local('/usr/bin/node /usr/bin/uglifyjs -o %s %s' % (jsfile_min, jsfile))
     # Include previously compressed files
     jsfiles_all = jsfiles_min + [jsfile]
     jsfilestr = ' '.join(jsfiles_all)
     local('awk \'FNR==1{print ""}1\' %s > tmp.js && mv tmp.js %s' % (jsfilestr, jsfile))
+    jsfiles_all = jsfiles_min + [jsfile_min]
+    jsfilestr = ' '.join(jsfiles_all)
+    local('awk \'FNR==1{print ""}1\' %s > tmp.js && mv tmp.js %s' % (jsfilestr, jsfile_min))
 
 @_booleanize
 def build_web():
@@ -136,11 +144,12 @@ def build_web():
     local('cp index.html dist/.')
     local('cp -r www dist/.')
     local('cp -r json dist/.')
-    local('cp -r javascript dist/.')
-    local('cp -r leaflet dist/.')
-    local('cp -r bower_components dist/.')
-    local('cp -r css/ifm-maps.css dist/css/.')
+    #local('cp -r javascript dist/.')
+    #local('cp -r leaflet dist/.')
+    #local('cp -r bower_components dist/.')
+    #local('cp -r css/ifm-maps.css dist/css/.')
     local('cp -r leaflet/images dist/css/.')
+    local('cp bower_components/typedarray/index.js dist/javascript/typedarray.js')
     local('cp -r bower_components/leaflet-control-home/images/* dist/css/images/.')
     local('cp -r bower_components/leaflet-control-position/images/* dist/css/images/.')
     local('cp -r bower_components/leaflet-control-osm-geocoder/images/* dist/css/images/.')
@@ -150,19 +159,26 @@ def build_web():
     local('cp -r bower_components/fontawesome/fonts dist/.')
 
     # Modify html files to use time stamped css and js files
-    local('sed -i s/ifm-maps.css/ifm-maps_%s.css/ dist/www/index-prod.html' % env.now)
-    local('sed -i s/ifm-maps.js/ifm-maps_%s.js/ dist/www/index-prod.html' % env.now)
+    local('cp dist/www/index-prod.html dist/www/index-dev.html')
+    local('sed -i s/ifm-maps.css/ifm-maps_min_%s.css/ dist/www/index-prod.html' % env.now)
+    local('sed -i s/ifm-maps.js/ifm-maps_min_%s.js/ dist/www/index-prod.html' % env.now)
+    local('sed -i s/ifm-maps.css/ifm-maps_%s.css/ dist/www/index-dev.html' % env.now)
+    local('sed -i s/ifm-maps.js/ifm-maps_%s.js/ dist/www/index-dev.html' % env.now)
 
     # Make index.html files for each domain
     for setup, name in env.setups.iteritems():
         print('Processing %s' % setup)
         destdir = 'dist/%s' % setup
         local('mkdir -p %s' % destdir)
-        local('cp dist/www/index.html %s/index-dev.html' % (destdir))
         local('cp dist/www/index-prod.html %s/index.html' % (destdir))
+        local('cp dist/www/index-dev.html %s/index-dev.html' % (destdir))
         local("sed -i 's/\${domain}/%s/' %s/index.html" % (name, destdir))
         local("sed -i 's/denmark/%s/' %s/index.html" % (setup, destdir))
+        local("sed -i 's/\${domain}/%s/' %s/index-dev.html" % (name, destdir))
         local("sed -i 's/denmark/%s/' %s/index-dev.html" % (setup, destdir))
+
+    # Remove original index files
+    local('rm -rf dist/www')
 
 @_booleanize
 def build(minify=True):
