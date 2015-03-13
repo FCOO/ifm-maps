@@ -13,7 +13,8 @@
         var lon;
         var overlays;
         var tilesize = getTilesize();
-        var store = new L.Control.FcooLayerStore();
+        var lang = getLocalLanguage();
+        var store = new L.Control.FcooLayerStore({language: lang});
         var subdomains = ["media01", "media02", "media03", "media04", "media05"];
         var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
         var landLayer = store.foreground;
@@ -218,7 +219,6 @@
                         var tidal_url = tidal_url_base.replace('{s}', feature.properties.id);
                         tidal_url = tidal_url.replace('{t1}', t1);
                         tidal_url = tidal_url.replace('{t2}', t2);
-                        var lang = getLocalLanguage();
                         tidal_url = tidal_url.replace('{l}', lang);
                         var popups = {};
                         popups.en = '<h2>Tidal forecast for ' + feature.properties.name + '</h2><img src="' + tidal_url + '" height="350" width="500" /><p>Tidal forecasts from <a href="http://dmi.dk">DMI</a>. Tidal tables can be found <a href="http://www.dmi.dk/en/groenland/hav/tidevandstabeller-groenland/">here</a>.</p>';
