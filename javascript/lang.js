@@ -57,6 +57,7 @@
                 'Tidal forecasts': 'Tidevandsprognoser',
                 'Celestial information': 'Himmellegemer',
                 'Solar Terminator': 'Dag og nat',
+                'Firing areas': 'Skydeområder',
                 layers: 'Lag',
                 boundaries: 'Grænser',
                 places: 'Steder',
