@@ -54,6 +54,7 @@
                 'Navigate to home page': 'Naviger til hjemmesiden',
                 'Background Maps': 'Baggrundskort',
                 'Point forecasts': 'Punktprognoser',
+                'Static layers': 'Statiske lag',
                 'Tidal forecasts': 'Tidevandsprognoser',
                 'Celestial information': 'Himmellegemer',
                 'Solar Terminator': 'Dag og nat',

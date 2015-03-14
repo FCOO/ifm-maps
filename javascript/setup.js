@@ -34,12 +34,12 @@
                     "Helicopter": new L.FImpactLayer.helo_tol_dk({tileSize: tilesize, zIndex: 100, foreground: landLayer}),
                     "Replenishment": new L.FImpactLayer.replenishment_dk({tileSize: tilesize, zIndex: 100, foreground: landLayer}),
                 },
-                "boundaries": {
-                    "EEZ": store.EEZ,
-                    "Firing areas": store.firingAreas
-                },
                 "Celestial information": {
                     "Solar Terminator": store.solarTerminator
+                },
+                "Static layers": {
+                    "EEZ": store.EEZ,
+                    "Firing areas": store.firingAreas
                 }
             };
             initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
@@ -112,12 +112,12 @@
                     "Point forecasts": {
                         "Sea level": geojson,
                     },
-                    "boundaries": {
-                        "EEZ": store.EEZ,
-                        "Firing areas": store.firingAreas
-                    },
                     "Celestial information": {
                         "Solar Terminator": store.solarTerminator
+                    },
+                    "Static layers": {
+                        "EEZ": store.EEZ,
+                        "Firing areas": store.firingAreas
                     }
                 };
                 initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
@@ -155,11 +155,11 @@
                     "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sst'}),
                     "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sss'})
                 }, 
-                "boundaries": {
-                    "EEZ": store.EEZ,
-                },
                 "Celestial information": {
                     "Solar Terminator": store.solarTerminator
+                },
+                "Static layers": {
+                    "EEZ": store.EEZ,
                 }
             };
             langs = ['da', 'fo', 'en'];
@@ -181,12 +181,12 @@
                     "Helicopter": new L.FImpactLayer.helo_tol_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Replenishment": new L.FImpactLayer.replenishment_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
-                "boundaries": {
-                    "EEZ": store.EEZ,
-                    "SAR": store.SAR
-                },
                 "Celestial information": {
                     "Solar Terminator": store.solarTerminator
+                },
+                "Static layers": {
+                    "EEZ": store.EEZ,
+                    "SAR": store.SAR
                 }
             };
             minZoom = 2;
@@ -282,12 +282,12 @@
                     "Point forecasts": {
                         "Tidal forecasts": geojson
                     },
-                    "boundaries": {
-                        "EEZ": store.EEZ,
-                        "SAR": store.SAR
-                    },
                     "Celestial information": {
                         "Solar Terminator": store.solarTerminator
+                    },
+                    "Static layers": {
+                        "EEZ": store.EEZ,
+                        "SAR": store.SAR
                     }
                 };
 
@@ -317,14 +317,12 @@
                     "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'sst'}),
                     "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'sss'})
                 }, 
-                "boundaries": {
-                    "EEZ": store.EEZ
-                },
                 "Celestial information": {
                     "Solar Terminator": store.solarTerminator
                 },
-                "places": {
-                    "DBPedia (experimental)": L.dbPediaLayer({lang: 'en', includeCities: true, minZoom: 8}),
+                "Static layers": {
+                    "EEZ": store.EEZ,
+                    "DBPedia (experimental)": L.dbPediaLayer({lang: 'en', includeCities: true, minZoom: 8})
                 }
             };
             minZoom = 4;
@@ -348,11 +346,11 @@
                     "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'sst'}),
                     "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'sss'})
                 }, 
-                "boundaries": {
-                    "EEZ": store.EEZ
-                },
                 "Celestial information": {
                     "Solar Terminator": store.solarTerminator
+                },
+                "Static layers": {
+                    "EEZ": store.EEZ
                 }
             };
             minZoom = 2;
