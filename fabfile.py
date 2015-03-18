@@ -24,7 +24,8 @@ env.setups = {'greenland': 'Greenland',
               'mediterranean': 'Mediterranean',
               'indian_ocean': 'Indian Ocean',
               'denmark_impact': 'Denmark',
-              'greenland_impact': 'Greenland'}
+              'greenland_impact': 'Greenland',
+              'indian_ocean_impact': 'Indian Ocean'}
 
 env.cssfiles = ["bower_components/fontawesome/css/font-awesome.css",
                 "bower_components/leaflet/dist/leaflet.css",
@@ -74,6 +75,7 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "leaflet/leaflet-fcoo-layers/leaflet-fcoo-layers-impact.js",
                "leaflet/leaflet-fcoo-layers/impact/denmark.js",
                "leaflet/leaflet-fcoo-layers/impact/greenland.js",
+               "leaflet/leaflet-fcoo-layers/impact/indian_ocean.js",
                "leaflet/leaflet-fcoo-layers/Permalink.ImpactLayer.js",
                "javascript/lang.js",
                "javascript/url.js",
