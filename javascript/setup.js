@@ -33,6 +33,8 @@
                     "RAS": new L.FImpactLayer.replenishment_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Boarding": new L.FImpactLayer.boarding_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "UAV": new L.FImpactLayer.uav_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic1": new L.FImpactLayer.generic_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic2": new L.FImpactLayer.generic_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
                 "External Ops (ECMWF)": {
                     "Skiff": new L.FImpactLayer.skiff_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -41,6 +43,8 @@
                     "Fishing:500GT": new L.FImpactLayer.fishingboat_500_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:1000GT": new L.FImpactLayer.fishingboat_1000_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:2500GT": new L.FImpactLayer.fishingboat_2500_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic1": new L.FImpactLayer.generic_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic2": new L.FImpactLayer.generic_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
                 "Internal Ops (DMI/FCOO)": {
                     "Helo": new L.FImpactLayer.helo_tol_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -49,6 +53,8 @@
                     "RAS": new L.FImpactLayer.replenishment_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Boarding": new L.FImpactLayer.boarding_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "UAV": new L.FImpactLayer.uav_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic1": new L.FImpactLayer.generic_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic2": new L.FImpactLayer.generic_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
                 "External Ops (DMI/FCOO)": {
                     "Skiff": new L.FImpactLayer.skiff_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -57,6 +63,8 @@
                     "Fishing:500GT": new L.FImpactLayer.fishingboat_500_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:1000GT": new L.FImpactLayer.fishingboat_1000_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:2500GT": new L.FImpactLayer.fishingboat_2500_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic1": new L.FImpactLayer.generic_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic2": new L.FImpactLayer.generic_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
                 "Celestial information": {
                     "Solar Terminator": store.solarTerminator
@@ -202,6 +210,8 @@
                     "RAS": new L.FImpactLayer.replenishment_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Boarding": new L.FImpactLayer.boarding_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "UAV": new L.FImpactLayer.uav_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic1": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic2": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
                 "External Ops (ECMWF)": {
                     "Skiff": new L.FImpactLayer.skiff_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -210,6 +220,8 @@
                     "Fishing:500GT": new L.FImpactLayer.fishingboat_500_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:1000GT": new L.FImpactLayer.fishingboat_1000_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:2500GT": new L.FImpactLayer.fishingboat_2500_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic1": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic2": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
                 "Internal Ops (DMI/FCOO)": {
                     "Helo": new L.FImpactLayer.helo_tol_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -218,6 +230,8 @@
                     "RAS": new L.FImpactLayer.replenishment_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Boarding": new L.FImpactLayer.boarding_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "UAV": new L.FImpactLayer.uav_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic1": new L.FImpactLayer.generic_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic2": new L.FImpactLayer.generic_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
                 "External Ops (DMI/FCOO)": {
                     "Skiff": new L.FImpactLayer.skiff_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -226,6 +240,8 @@
                     "Fishing:500GT": new L.FImpactLayer.fishingboat_500_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:1000GT": new L.FImpactLayer.fishingboat_1000_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:2500GT": new L.FImpactLayer.fishingboat_2500_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic1": new L.FImpactLayer.generic_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic2": new L.FImpactLayer.generic_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
                 "Celestial information": {
                     "Solar Terminator": store.solarTerminator
@@ -386,6 +402,8 @@
                     "RAS": new L.FImpactLayer.replenishment_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Boarding": new L.FImpactLayer.boarding_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "UAV": new L.FImpactLayer.uav_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic1": new L.FImpactLayer.generic_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic2": new L.FImpactLayer.generic_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
                 "External Ops (ECMWF)": {
                     "Skiff": new L.FImpactLayer.skiff_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -394,6 +412,8 @@
                     "Fishing:500GT": new L.FImpactLayer.fishingboat_500_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:1000GT": new L.FImpactLayer.fishingboat_1000_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:2500GT": new L.FImpactLayer.fishingboat_2500_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic1": new L.FImpactLayer.generic_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                    "Generic2": new L.FImpactLayer.generic_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
                 "Celestial information": {
                     "Solar Terminator": store.solarTerminator

@@ -459,4 +459,64 @@
                          cmap: 'Green_Red_3colors'};
         return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
     };
+
+    L.FImpactLayer.generic_ecmwf_io = function (options) {
+        var dataset = 'FCOO/IMPACT/IMPACT_ECMWF_AFR_v005C.nc';
+        options = L.extend(options, {
+            attribution: 'Based on forecasts from <a href="http://ecmwf.org.dk" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>',
+        });
+        var legendParams = {
+            parameters: {
+                windspeed: {
+                    longname: 'Wind speed',
+                    units: 'm/s',
+                    sliderOptions: {
+                            range: true,
+                            step: 1,
+                            min: 0,
+                            max: 50,
+                            values: [ 15, 25 ],
+                    }
+                },
+                SWH: {
+                    longname: 'Significant wave height',
+                    units: 'm',
+                    sliderOptions: {
+                            range: true,
+                            step: 0.5,
+                            min: 0,
+                            max: 16,
+                            values: [ 3, 5 ],
+                    }
+                },
+                CBH: {
+                    longname: 'Cloud base height',
+                    units: 'm',
+                    sliderOptions: {
+                            range: true,
+                            step: 20,
+                            min: -1000,
+                            max: 0,
+                            values: [ -200, -100 ],
+                    }
+                },
+                precip: {
+                    longname: 'Precipitation',
+                    units: 'mm/h',
+                    sliderOptions: {
+                            range: true,
+                            step: 0.5,
+                            min: 0,
+                            max: 50,
+                            values: [ 4, 16 ],
+                    }
+                }
+            }
+        };
+        var layers = Object.keys(legendParams.parameters).join(':');
+        var wmsParams = {layers: layers,
+                         cmap: 'Green_Red_3colors'};
+        return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
+    };
+
 }());
