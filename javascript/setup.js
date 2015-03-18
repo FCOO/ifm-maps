@@ -15,9 +15,6 @@
         var tilesize = getTilesize();
         var lang = getLocalLanguage();
         var store = new L.Control.FcooLayerStore({language: lang});
-        var subdomains = ["media01", "media02", "media03", "media04", "media05"];
-        var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
-        var landLayer = store.foreground;
         var basemap = "FCOO Standard";
         var langs = ['da', 'en'];
         var useGeoMetoc = false;
