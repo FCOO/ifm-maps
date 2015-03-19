@@ -28,18 +28,18 @@ L.FImpactLayer = L.TileLayer.WMS.Fcoo.extend({
      * Make an impact layer control instead of the default legend control.
      */
     _getLegendControl: function() {
-        if (typeof this._map._fcoo_legendcontrol == 'undefined' || !this._map._fcoo_legendcontrol) {
-            this._map._fcoo_legendcontrol = new L.FImpactLayer.LegendControl({
+        if (typeof this._map._fcoo_impactlegendcontrol == 'undefined' || !this._map._fcoo_impactlegendcontrol) {
+            this._map._fcoo_impactlegendcontrol = new L.FImpactLayer.LegendControl({
                 position: this.legendParams.position,
                 language: this.options.language
             });
-            this._map.addControl(this._map._fcoo_legendcontrol);
+            this._map.addControl(this._map._fcoo_impactlegendcontrol);
         }
-        return this._map._fcoo_legendcontrol;
+        return this._map._fcoo_impactlegendcontrol;
     }
 });
 
-L.LegendParameter = L.Control.extend({
+L.ImpactLegendParameter = L.Control.extend({
     options: {
         shortname: null,
         longname:  null,
@@ -176,7 +176,7 @@ L.LegendParameter = L.Control.extend({
 
 });
 
-L.LegendLayer = L.Control.extend({
+L.ImpactLegendLayer = L.Control.extend({
     options: {
         name: null,
         attribution: null,
@@ -211,7 +211,7 @@ L.LegendLayer = L.Control.extend({
     addParameter: function(param_options) {
         var parameterId = this._parameterCounter++;
         this._parameterContainer[parameterId] =
-            new L.LegendParameter(this._map, param_options);
+            new L.ImpactLegendParameter(this._map, param_options);
     },
 
     _updateExpression: function() {
@@ -299,7 +299,7 @@ L.FImpactLayer.LegendControl = L.Control.extend({
     addLegend: function(layer, options) {
         var param;
         var legendId = this._legendCounter++;
-        var legendLayer = new L.LegendLayer(this._map, this._container, {
+        var legendLayer = new L.ImpactLegendLayer(this._map, this._container, {
             layer: layer,
             attribution: options.attribution
         });
