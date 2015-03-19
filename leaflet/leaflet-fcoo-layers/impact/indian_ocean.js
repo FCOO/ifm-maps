@@ -423,7 +423,7 @@
                          cmap: 'Green_Red_3colors'};
         return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
     };
-    L.FImpactLayer.fishingboat_2500_ecmwf_io = function (options) {
+    L.FImpactLayer.fishingboat_2000_ecmwf_io = function (options) {
         var dataset = 'FCOO/IMPACT/IMPACT_ECMWF_AFR_v005C.nc';
         options = L.extend(options, {
             attribution: 'Based on forecasts from <a href="http://ecmwf.org.dk" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>',

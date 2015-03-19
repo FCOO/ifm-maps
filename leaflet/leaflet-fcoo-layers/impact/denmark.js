@@ -423,7 +423,7 @@
                          cmap: 'Green_Red_3colors'};
         return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
     };
-    L.FImpactLayer.fishingboat_2500_ecmwf_dk = function (options) {
+    L.FImpactLayer.fishingboat_2000_ecmwf_dk = function (options) {
         var dataset = 'FCOO/IMPACT/IMPACT_ECMWF_DENMARK_v005C.nc';
         options = L.extend(options, {
             attribution: 'Based on forecasts from <a href="http://ecmwf.org.dk" alt="European Centre for Medium-Range Weather Forecasts">ECMWF</a>',
@@ -989,7 +989,7 @@
                          cmap: 'Green_Red_3colors'};
         return new L.FImpactLayer(dataset, wmsParams, legendParams, options);
     };
-    L.FImpactLayer.fishingboat_2500_dk = function (options) {
+    L.FImpactLayer.fishingboat_2000_dk = function (options) {
         var dataset = 'FCOO/IMPACT/IMPACT_DMI_FCOO_DENMARK_v005C.nc';
         options = L.extend(options, {
             attribution: 'Based on forecasts from <a href="http://dmi.dk" alt="Danish Meteorological Institute">DMI</a> and <a href="http://fcoo.dk" alt="Danish Defence Center for Operational Oceanography">FCOO</a>'
