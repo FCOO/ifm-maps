@@ -73,8 +73,13 @@ L.LegendParameter = L.Control.extend({
                            .replace('x', this.options.shortname);
             } else {
                 // Special handling of case where slider values equal
-                expr = '50*sign(' + this.options.shortname + '-' +
-                       values[0] +') + 50';
+                if (values[0] >= 0) {
+                    expr = '50*sign(' + this.options.shortname + '-' +
+                           Math.abs(values[0]) +') + 50';
+                } else {
+                    expr = '50*sign(' + Math.abs(values[0]) + '-' + 
+                           this.options.shortname +') + 50';
+                }
             }
         } else {
             expr = expr.replace('a*x+b', '0*' + this.options.shortname);
