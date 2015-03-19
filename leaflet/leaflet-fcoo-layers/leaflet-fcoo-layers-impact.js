@@ -82,7 +82,8 @@ L.LegendParameter = L.Control.extend({
                 }
             }
         } else {
-            expr = expr.replace('a*x+b', '0*' + this.options.shortname);
+            //expr = expr.replace('a*x+b', '0*' + this.options.shortname);
+            expr = expr.replace('a*x+b', '');
         }
         return expr;
     },
@@ -219,12 +220,15 @@ L.LegendLayer = L.Control.extend({
             var paramExpr = this._parameterContainer[idx]._getExpression();
             if (expr === '') {
                 expr = paramExpr;
-            } else {
+            } else if (paramExpr !== '') {
                 expr = 'fmax(' + expr + ',' + paramExpr + ')';
             }
         }
-        expr = 'fmin(100,fmax(0,' + expr + '))';
-        this.options.layer.setParams({expr: expr}, false);
+        // Only update if at least one parameter is enabled
+        if (expr !== '') {
+            expr = 'fmin(100,fmax(0,' + expr + '))';
+            this.options.layer.setParams({expr: expr}, false);
+        }
     },
 
     removeParameter: function(parameterId) {
