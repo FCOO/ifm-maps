@@ -1,7 +1,7 @@
 (function (){
     "use strict";
     /*jslint browser: true*/
-    /*global $, L, noty, getLocalLanguage, getI18n, getUrlParameters, changeLanguage*/
+    /*global $, L, noty, getLocalLanguage, getI18n, getUrlParameters, changeLanguage, updateURLParameter*/
     /*exported initCommonMap*/
 
     /**
@@ -344,6 +344,7 @@
                     }
                 }
             } else if (type == 'timezone') {
+                //window.location.href = updateURLParameter(window.location.href, 'localtime', arg);
                 for (i in overlays) {
                     layergroup = overlays[i];
                     for (j in layergroup) {
