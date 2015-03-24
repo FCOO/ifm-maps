@@ -26,7 +26,7 @@
             lat = 55.7;
             lon = 11.1;
             overlays = {
-                "Internal Ops (ECMWF)": {
+                "Internal Ops [ECMWF]": {
                     "Helo": new L.FImpactLayer.helo_tol_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "RHIB": new L.FImpactLayer.rhib_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "LCP": new L.FImpactLayer.lcp_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -36,7 +36,7 @@
                     "Generic1": new L.FImpactLayer.generic_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Generic2": new L.FImpactLayer.generic_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground})
                 },
-                "External Ops (ECMWF)": {
+                "External Ops [ECMWF]": {
                     "Skiff": new L.FImpactLayer.skiff_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Dhow": new L.FImpactLayer.dhow_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:120GT": new L.FImpactLayer.fishingboat_120_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -46,7 +46,7 @@
                     "Generic1": new L.FImpactLayer.generic_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Generic2": new L.FImpactLayer.generic_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground})
                 },
-                "Internal Ops (DMI/FCOO)": {
+                "Internal Ops [DMI/FCOO]": {
                     "Helo": new L.FImpactLayer.helo_tol_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "RHIB": new L.FImpactLayer.rhib_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "LCP": new L.FImpactLayer.lcp_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -56,7 +56,7 @@
                     "Generic1": new L.FImpactLayer.generic_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Generic2": new L.FImpactLayer.generic_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground})
                 },
-                "External Ops (DMI/FCOO)": {
+                "External Ops [DMI/FCOO]": {
                     "Skiff": new L.FImpactLayer.skiff_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Dhow": new L.FImpactLayer.dhow_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:120GT": new L.FImpactLayer.fishingboat_120_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -224,7 +224,7 @@
             initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
         } else if (domain === 'greenland_impact') {
             overlays = {
-                "Internal Ops (ECMWF)": {
+                "Internal Ops [ECMWF]": {
                     "Helo": new L.FImpactLayer.helo_tol_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "RHIB": new L.FImpactLayer.rhib_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "LCP": new L.FImpactLayer.lcp_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -234,7 +234,7 @@
                     "Generic1": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Generic2": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
-                "External Ops (ECMWF)": {
+                "External Ops [ECMWF]": {
                     "Skiff": new L.FImpactLayer.skiff_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Dhow": new L.FImpactLayer.dhow_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:120GT": new L.FImpactLayer.fishingboat_120_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -244,7 +244,7 @@
                     "Generic1": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Generic2": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
-                "Internal Ops (DMI/FCOO)": {
+                "Internal Ops [DMI/FCOO]": {
                     "Helo": new L.FImpactLayer.helo_tol_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "RHIB": new L.FImpactLayer.rhib_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "LCP": new L.FImpactLayer.lcp_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -254,7 +254,7 @@
                     "Generic1": new L.FImpactLayer.generic_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Generic2": new L.FImpactLayer.generic_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
-                "External Ops (DMI/FCOO)": {
+                "External Ops [DMI/FCOO]": {
                     "Skiff": new L.FImpactLayer.skiff_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Dhow": new L.FImpactLayer.dhow_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:120GT": new L.FImpactLayer.fishingboat_120_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -434,7 +434,7 @@
             initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
         } else if (domain === 'indian_ocean_impact') {
             overlays = {
-                "Internal Ops (ECMWF)": {
+                "Internal Ops [ECMWF]": {
                     "Helo": new L.FImpactLayer.helo_tol_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "RHIB": new L.FImpactLayer.rhib_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "LCP": new L.FImpactLayer.lcp_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -444,7 +444,7 @@
                     "Generic1": new L.FImpactLayer.generic_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Generic2": new L.FImpactLayer.generic_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 },
-                "External Ops (ECMWF)": {
+                "External Ops [ECMWF]": {
                     "Skiff": new L.FImpactLayer.skiff_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Dhow": new L.FImpactLayer.dhow_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                     "Fishing:120GT": new L.FImpactLayer.fishingboat_120_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
