@@ -38,7 +38,8 @@
     "leaflet-tilelayer-counting": "https://github.com/jblarsen/leaflet-tilelayer-counting.git",
     "leaflet-control-legend": "https://github.com/jblarsen/leaflet-control-legend.git",
     "leaflet-tilelayer-wms-fcoo": "https://github.com/jblarsen/leaflet-tilelayer-wms-fcoo.git",
-    "leaflet-control-forecast-print": "https://github.com/jblarsen/leaflet-control-forecast-print.git"
+    "leaflet-control-forecast-print": "https://github.com/jblarsen/leaflet-control-forecast-print.git",
+    "jQuery-ajaxTransport-XDomainRequest": "https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest.git#~1.0.4"
   },
   "resolutions": {
     "leaflet": "master",

@@ -152,6 +152,7 @@ def build_web():
     #local('cp -r css/ifm-maps.css dist/css/.')
     local('cp -r leaflet/images dist/css/.')
     local('cp bower_components/typedarray/index.js dist/javascript/typedarray.js')
+    local('cp bower_components/jQuery-ajaxTransport-XDomainRequest/jquery.xdomainrequest.min.js dist/javascript/jquery.xdomainrequest.min.js')
     local('cp -r bower_components/leaflet-control-home/images/* dist/css/images/.')
     local('cp -r bower_components/leaflet-control-position/images/* dist/css/images/.')
     local('cp -r bower_components/leaflet-control-osm-geocoder/images/* dist/css/images/.')
