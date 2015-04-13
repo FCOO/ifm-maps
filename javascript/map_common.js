@@ -160,6 +160,7 @@
         // Make sure that these controls are hidden on print
         $(".leaflet-control-layers").addClass("hide-on-print");
         $(".leaflet-control-zoom").addClass("hide-on-print");
+        $(".leaflet-control-home").addClass("hide-on-print");
         $(".leaflet-control-locate").addClass("hide-on-print");
         $(".leaflet-control-geocoder").addClass("hide-on-print");
         $(".leaflet-control-position").addClass("hide-on-print");
@@ -171,6 +172,7 @@
         if (urlParams.hidecontrols == "true") {
             $(".leaflet-control-layers").css("visibility", "hidden");
             $(".leaflet-control-zoom").css("visibility", "hidden");
+            $(".leaflet-control-home").css("visibility", "hidden");
             $(".leaflet-control-locate").css("visibility", "hidden");
             $(".leaflet-control-geocoder").css("visibility", "hidden");
             $(".leaflet-control-position").css("visibility", "hidden");
