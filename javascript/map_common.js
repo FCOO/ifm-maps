@@ -8,7 +8,7 @@
      * Initialize the map.
      */
     function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
-                           lon, tilesize, useGeoMetoc) {
+                           lon, tilesize, enablePrint, useGeoMetoc) {
         var localLang,
             tmplayers,
             baseMaps,
@@ -155,7 +155,9 @@
         map.addControl(new L.Control.Position({position: 'topleft', collapsed: true}));
 
         // Add print control
-        map.addControl(L.Control.print({}));
+        if (enablePrint) {
+            map.addControl(L.Control.print({}));
+        }
 
         // Make sure that these controls are hidden on print
         $(".leaflet-control-layers").addClass("hide-on-print");
@@ -164,7 +166,9 @@
         $(".leaflet-control-locate").addClass("hide-on-print");
         $(".leaflet-control-geocoder").addClass("hide-on-print");
         $(".leaflet-control-position").addClass("hide-on-print");
-        $(".leaflet-control-print").addClass("hide-on-print");
+        if (enablePrint) {
+            $(".leaflet-control-print").addClass("hide-on-print");
+        }
         $(".leaflet-control-mouseposition").addClass("hide-on-print");
         $(".leaflet-control-permalink").addClass("hide-on-print");
 
@@ -176,7 +180,9 @@
             $(".leaflet-control-locate").css("visibility", "hidden");
             $(".leaflet-control-geocoder").css("visibility", "hidden");
             $(".leaflet-control-position").css("visibility", "hidden");
-            $(".leaflet-control-print").css("visibility", "hidden");
+            if (enablePrint) {
+                $(".leaflet-control-print").css("visibility", "hidden");
+            }
             $(".leaflet-control-mouseposition").css("visibility", "hidden");
             $(".leaflet-control-permalink").css("visibility", "hidden");
         }

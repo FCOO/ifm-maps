@@ -18,6 +18,7 @@
         var basemap = "FCOO Standard";
         var langs = ['da', 'en'];
         var useGeoMetoc = false;
+        var enablePrint = true;
 
         if (domain === 'denmark_impact') {
             minZoom = 5;
@@ -95,13 +96,14 @@
                     "Firing areas": store.firingAreas
                 }
             };
-            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
         } else if (domain === 'denmark') {
             minZoom = 5;
             maxZoom = 10;
             zoom = 6;
             lat = 55.7;
             lon = 11.1;
+            enablePrint = false;
             var link_template = location.protocol + "//chart.fcoo.dk/station_timeseries.asp?s=:003__STATION__:046SeaLvl:002DK:001DEFAULT:04d620:04e400:04f0:04a1:04b48:04i0:04c1:04g0:0641:05opopup";
             $.getJSON(location.protocol + "//api.fcoo.dk/ifm-maps/json/Observations.json", function (data) {
                 var geojson = L.geoJson(data, {
@@ -173,7 +175,7 @@
                         "Firing areas": store.firingAreas
                     }
                 };
-                initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
+                initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
             });
         } else if (domain === 'faroe_islands') {
             overlays = {
@@ -221,7 +223,7 @@
             zoom = 7;
             lat = 61.5;
             lon = -6.0;
-            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
         } else if (domain === 'greenland_impact') {
             overlays = {
                 "Internal Ops [ECMWF]": {
@@ -295,7 +297,7 @@
             zoom = 6;
             lat = 62.0;
             lon = -45.0;
-            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
         } else if (domain === 'greenland') {
             var popstr;
             var tidal_url_base = location.protocol + "//api.fcoo.dk/tides?station={s}&start={t1}&end={t2}&nx=500&ny=350&lang={l}&tz={dt}";
@@ -397,7 +399,7 @@
                 zoom = 6;
                 lat = 62.0;
                 lon = -45.0;
-                initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
+                initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
             });
         } else if (domain === 'indian_ocean') {
             overlays = {
@@ -431,7 +433,7 @@
             zoom = 5;
             lat = 0.0;
             lon = 56.0;
-            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
         } else if (domain === 'indian_ocean_impact') {
             overlays = {
                 "Internal Ops [ECMWF]": {
@@ -478,7 +480,7 @@
             zoom = 5;
             lat = 0.0;
             lon = 56.0;
-            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
         } else if (domain === 'mediterranean') {
             overlays = {
                 "DMI": {
@@ -506,7 +508,7 @@
             zoom = 8;
             lat = 35.5;
             lon = 33.9;
-            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, useGeoMetoc);
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
         } else {
             throw new Error('Valid domain not specified: ' + domain);
         }
