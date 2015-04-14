@@ -52,3 +52,15 @@ html, body, #map {
         visibility: visible;
     }
 }
+
+@media only screen and (max-device-height: 100px) {
+    .hide-on-small {
+        visibility: hidden;
+        display: none;
+    }
+    .show-on-small {
+        visibility: visible;
+        display: block;
+    }
+}
+
