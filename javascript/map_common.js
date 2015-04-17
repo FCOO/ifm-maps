@@ -20,6 +20,8 @@
             urlParams,
             map;
         localLang = getLocalLanguage();
+        var mq = window.matchMedia('screen and (max-width: 640px)');
+        var mobile = mq.matches;
 
         // Initialize basemaps
         tmplayers = initBaseMaps(localLang, tilesize);
@@ -109,13 +111,23 @@
         topLayer.addTo(map);
 
         // Add layer control
-        var opts = {collapsed: false,
+        var collapsed = false;
+        if (mobile) {
+            collapsed = true;
+        }
+        var opts = {collapsed: collapsed,
                     groupsCollapsed: true, 
                     collapseActiveGroups: true, 
                     autoZIndex: false,
                     position: "topright"};
         var layerControl = (new L.Control.CategorizedLayers(baseMaps, overlayMaps, 
                             opts)).addTo(map);
+
+        // Add permanent link control
+        map.addControl(new L.Control.Permalink({layers: layerControl, useAnchor: false, position: 'bottomright'}));
+
+        // Add position control
+        map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomright'}));
 
         // Add locator control
         map.addControl(L.control.locate({
@@ -135,12 +147,6 @@
 
         // Add length scale control
         L.control.scale().addTo(map);
-
-        // Add permanent link control
-        map.addControl(new L.Control.Permalink({layers: layerControl, useAnchor: false, position: 'bottomright'}));
-
-        // Add position control
-        map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomright'}));
 
         // patch layer control to add some titles
         var patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
@@ -187,6 +193,20 @@
             $(".leaflet-control-permalink").css("visibility", "hidden");
         }
 
+        // Make sure that these controls are hidden on mobile devices
+        if (mobile) {
+            $(".leaflet-languageselector-control").addClass("hide-on-small");
+            $(".leaflet-control-zoom").addClass("hide-on-small");
+            $(".leaflet-control-home").addClass("hide-on-small");
+            $(".leaflet-control-locate").addClass("hide-on-small");
+            $(".leaflet-control-attribution").addClass("hide-on-small");
+            $(".leaflet-control-scale").addClass("hide-on-small");
+            $(".leaflet-control-geocoder").addClass("hide-on-small");
+            $(".leaflet-control-position").addClass("hide-on-small");
+            $(".leaflet-control-print").addClass("hide-on-small");
+            $(".leaflet-control-mouseposition").addClass("hide-on-small");
+        }
+
         // Add custom title (unescaped and sanitized) - used for print
         if (urlParams.title !== undefined) {
             var title = $("<p>" + window.unescape(urlParams.title) + "</p>").text();
@@ -211,6 +231,10 @@
         var dt_current = 0;
         var callback_obj = new DatetimeCallback(overlayMaps);
         var callback = callback_obj.changeDatetime;
+        var datetime_pos = 'topright';
+        if (mobile) {
+            datetime_pos = 'bottomleft';
+        }
         function checkTimesteps() {
             var dates = getTimeSteps(overlayMaps);
             if (dates !== null) {
@@ -223,10 +247,11 @@
                         datetimes: dates,
                         language: localLang,
                         callback: callback,
+                        mobile: mobile,
                         visibility: visibility,
                         initialDatetime: initial_datetime,
                         vertical: false,
-                        position: 'topright'
+                        position: datetime_pos
                 }).addTo(map);
                 // Make sure that overlays are updated
                 map.fire("overlayadd");
