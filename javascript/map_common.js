@@ -130,14 +130,20 @@
         map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomright'}));
 
         // Add locator control
-        map.addControl(L.control.locate({
-            locateOptions: {maxZoom: maxZoom},
+        var locator = L.control.locate({
+            locateOptions: {maxZoom: maxZoom, enableHighAccuracy: true},
             strings: {
                 title: getI18n("Show me where I am", localLang),
                 popup: getI18n("You are within {distance} {unit} from this point", localLang),
                 outsideMapBoundsMsg: getI18n("You seem located outside the boundaries of the map", localLang)
             }
-        }));
+        });
+        map.addControl(locator);
+
+        // Always use geolocation if on mobile
+        if (mobile) {
+            locator.start();
+        }
 
         // Add geocoder control
         map.addControl(new L.Control.OSMGeocoder({
