@@ -99,6 +99,12 @@
             position: 'topright'
         }));
 
+        // Remove Solar Terminator from overlays if on mobile
+        // to save battery + does not work on all mobiles
+        if (mobile && overlays.hasOwnProperty("Celestial information")) {
+            delete overlays["Celestial information"];
+        }
+        
         // Add base layers and overlays to map
         var overlayMaps = [];
         for (var key in overlays) {
