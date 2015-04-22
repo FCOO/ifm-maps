@@ -21,7 +21,7 @@
         var enablePrint = true;
 
         if (domain === 'denmark_impact') {
-            minZoom = 5;
+            minZoom = 4;
             maxZoom = 10;
             zoom = 6;
             lat = 55.7;
@@ -101,7 +101,7 @@
             };
             initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
         } else if (domain === 'denmark') {
-            minZoom = 5;
+            minZoom = 4;
             maxZoom = 10;
             zoom = 6;
             lat = 55.7;
@@ -226,7 +226,7 @@
                 }
             };
             langs = ['da', 'fo', 'en'];
-            minZoom = 2;
+            minZoom = 3;
             maxZoom = 10;
             zoom = 7;
             lat = 61.5;
@@ -302,7 +302,7 @@
                     "SAR": store.SAR
                 }
             };
-            minZoom = 2;
+            minZoom = 3;
             maxZoom = 10;
             zoom = 6;
             lat = 62.0;
@@ -406,7 +406,7 @@
                     }
                 };
 
-                minZoom = 2;
+                minZoom = 3;
                 maxZoom = 10;
                 zoom = 6;
                 lat = 62.0;
@@ -517,7 +517,7 @@
                     "EEZ": store.EEZ
                 }
             };
-            minZoom = 2;
+            minZoom = 3;
             maxZoom = 10;
             zoom = 8;
             lat = 35.5;
