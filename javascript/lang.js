@@ -57,6 +57,7 @@
                 'Point forecasts': 'Punktprognoser',
                 'Static layers': 'Statiske lag',
                 'Tidal forecasts': 'Tidevandsprognoser',
+                'Sea level': 'Vandstand',
                 'Celestial information': 'Himmellegemer',
                 'Solar Terminator': 'Dag og nat',
                 'Firing areas': 'Skydeområder',

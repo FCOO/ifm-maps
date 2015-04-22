@@ -20,8 +20,14 @@
             urlParams,
             map;
         localLang = getLocalLanguage();
-        var mq = window.matchMedia('screen and (max-width: 640px)');
-        var mobile = mq.matches;
+        var mobile;
+        if (mediaQueriesSupported()) {
+            var mq = window.matchMedia('screen and (max-width: 640px)');
+            mobile = mq.matches;
+        } else {
+            // Then we are probably on mobile
+            mobile = true;
+        }
 
         // Initialize basemaps
         tmplayers = initBaseMaps(localLang, tilesize);
@@ -131,18 +137,24 @@
 
         // Add locator control
         var locator = L.control.locate({
-            locateOptions: {maxZoom: maxZoom, enableHighAccuracy: true},
+            locateOptions: {maxZoom: maxZoom},
             strings: {
                 title: getI18n("Show me where I am", localLang),
                 popup: getI18n("You are within {distance} {unit} from this point", localLang),
                 outsideMapBoundsMsg: getI18n("You seem located outside the boundaries of the map", localLang)
-            }
+            },
+            onLocationError: function(err) {
+                noty({text: err.message, type: 'information', timeout: 1000});
+            },
+
         });
         map.addControl(locator);
 
-        // Always use geolocation if on mobile
-        if (mobile) {
-            locator.start();
+        // Use geolocation if on mobile if position and zoom not given in URL
+        if (urlParams.zoom === undefined || urlParams.lat === undefined || urlParams.lon === undefined) {
+            if (mobile) {
+                //locator.start();
+            }
         }
 
         // Add geocoder control
@@ -205,7 +217,7 @@
             $(".leaflet-control-zoom").addClass("hide-on-small");
             $(".leaflet-control-home").addClass("hide-on-small");
             $(".leaflet-control-locate").addClass("hide-on-small");
-            $(".leaflet-control-attribution").addClass("hide-on-small");
+            $(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("hide-on-small");
             $(".leaflet-control-scale").addClass("hide-on-small");
             $(".leaflet-control-geocoder").addClass("hide-on-small");
             $(".leaflet-control-position").addClass("hide-on-small");
@@ -453,4 +465,9 @@
         }
         return outdates;
     }
+
+    function mediaQueriesSupported() {
+            return (typeof window.matchMedia != "undefined" || typeof window.msMatchMedia != "undefined");
+    }
+
 })();
