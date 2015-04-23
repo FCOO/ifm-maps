@@ -20,13 +20,10 @@
             urlParams,
             map;
         localLang = getLocalLanguage();
-        var mobile;
+        var mobile = false;
         if (mediaQueriesSupported()) {
             var mq = window.matchMedia('screen and (max-width: 640px)');
             mobile = mq.matches;
-        } else {
-            // Then we are probably on mobile
-            mobile = true;
         }
 
         // Initialize basemaps
@@ -98,6 +95,12 @@
             useAnchor: false,
             position: 'topright'
         }));
+
+        // Remove Solar Terminator from overlays if on mobile
+        // to save battery + does not work on all mobiles
+        if (mobile && overlays.hasOwnProperty("Celestial information")) {
+            delete overlays["Celestial information"];
+        }
 
         // Add base layers and overlays to map
         var overlayMaps = [];
