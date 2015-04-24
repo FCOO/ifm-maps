@@ -241,7 +241,7 @@
             var res = window.unescape(urlParams.datetime).split('T');
             var res1 = res[0].split('-');
             var res2 = res[1].split(':');
-            initial_datetime = new Date(res1[0], res1[1], res1[2], res2[0], res2[1], res2[2]);
+            initial_datetime = new Date(res1[0], res1[1]-1, res1[2], res2[0], res2[1], res2[2]);
             //initial_datetime = new Date(window.unescape(urlParams.datetime));
         } else {
             initial_datetime = null;
