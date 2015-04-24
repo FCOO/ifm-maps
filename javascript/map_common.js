@@ -238,7 +238,7 @@
         // Initialize datetime control with this time if in URL
         var initial_datetime;
         if (urlParams.datetime !== undefined) {
-            initial_datetime = new Date(urlParams.datetime);
+            initial_datetime = new Date(window.unescape(urlParams.datetime));
         } else {
             initial_datetime = null;
         }
