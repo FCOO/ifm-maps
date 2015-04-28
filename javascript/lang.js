@@ -69,7 +69,7 @@
                 winddirection: 'Vindretning',
                 waveperiod: 'Bølgeperiode',
                 waveheight: 'Bølgehøjde',
-                seastate: 'Sø',
+                seastate: 'Sea State',
                 wavedirection: 'Bølgeretning',
                 currentspeed: 'Strøm (fart)',
                 currentdirection: 'Strømretning',
