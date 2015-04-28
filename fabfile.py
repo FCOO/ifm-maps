@@ -177,6 +177,7 @@ def build_web():
         local('cp dist/www/index-prod.html %s/index.html' % (destdir))
         local('cp dist/www/index-dev.html %s/index-dev.html' % (destdir))
         local("sed -i 's/\${domain}/%s/' %s/index.html" % (name, destdir))
+        local("sed -i 's/\${version}/%s/' %s/index.html" % (env.now, destdir))
         local("sed -i 's/denmark/%s/' %s/index.html" % (setup, destdir))
         local("sed -i 's/\${domain}/%s/' %s/index-dev.html" % (name, destdir))
         local("sed -i 's/denmark/%s/' %s/index-dev.html" % (setup, destdir))

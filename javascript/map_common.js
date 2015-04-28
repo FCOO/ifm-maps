@@ -65,7 +65,7 @@
             crs: L.CRS.EPSG3857,
             layers: [baseMaps[Object.keys(baseMaps)[0]][basemap]]
         });
-        map.attributionControl.setPrefix("");
+        map.attributionControl.setPrefix("<a href='https://fcoo.dk/ifmmaps/'>Version: " + version + "</a>");
 
         // Optionally use FCOO Geolocated METOC service (on right click)
         if (useGeoMetoc) {
