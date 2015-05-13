@@ -65,7 +65,11 @@
             crs: L.CRS.EPSG3857,
             layers: [baseMaps[Object.keys(baseMaps)[0]][basemap]]
         });
-        map.attributionControl.setPrefix("<a href='https://fcoo.dk/ifmmaps/'>Version: " + version + "</a>");
+        if (version !== undefined) {
+            map.attributionControl.setPrefix("<a href='" + location.protocol + "//fcoo.dk/ifm-maps/'>IFM Maps version: " + version + "</a>");
+        } else {
+            map.attributionControl.setPrefix("");
+        }
 
         // Optionally use FCOO Geolocated METOC service (on right click)
         if (useGeoMetoc) {
@@ -393,7 +397,7 @@
                         if (layer.timesteps !== undefined) {
                             timesteps = layer.timesteps;
                             if (timesteps !== null && timesteps.length > 1) {
-                                layer.setParams({time: arg}, false);
+                                layer.setParams({time: arg}, false, true);
                             }
                         } else if (layer.setTime !== undefined) {
                             // L.Terminator instance has a setTime method

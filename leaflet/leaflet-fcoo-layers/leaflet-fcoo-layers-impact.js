@@ -227,7 +227,7 @@ L.ImpactLegendLayer = L.Control.extend({
         // Only update if at least one parameter is enabled
         if (expr !== '') {
             expr = 'fmin(100,fmax(0,' + expr + '))';
-            this.options.layer.setParams({expr: expr}, false);
+            this.options.layer.setParams({expr: expr}, false, true);
         }
     },
 
