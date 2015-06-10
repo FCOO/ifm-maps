@@ -8,7 +8,7 @@
  * Web Map Service layers without hassle.
  */
 L.FImpactLayer = L.TileLayer.WMS.Fcoo.extend({
-    //baseUrl: "http://wms-dev01.fcoo.dk:8080/{dataset}.wms",
+    //baseUrl: "http://webmap-dev01.fcoo.dk:8080/{dataset}.wms",
     baseUrl: location.protocol + "//{s}.fcoo.dk/webmap/impact/{dataset}.wms",
 
     onAdd: function(map) {
@@ -139,7 +139,6 @@ L.ImpactLegendParameter = L.Control.extend({
             /*jshint unused: true*/
             slide: function(e, ui) {
             /*jshint unused: false*/
-                myParam.options.sliderOptions.values = ui.values;
                 if (ui.values[0] > 0) {
                     opr1 = '<';
                     opr2 = '>';
@@ -154,6 +153,9 @@ L.ImpactLegendParameter = L.Control.extend({
                     slider_div.slider("option", "min"))/
                    (slider_div.slider("option", "max") - 
                     slider_div.slider("option", "min")) +'%');
+            },
+            change: function(e, ui) {
+                myParam.options.sliderOptions.values = ui.values;
                 myMap.fire('legendupdate');
             }
         };
