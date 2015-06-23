@@ -27,13 +27,13 @@ env.setups = {'greenland': 'Greenland',
               'greenland_impact': 'Greenland',
               'indian_ocean_impact': 'Indian Ocean'}
 
-env.cssfiles = ["bower_components/fontawesome/css/font-awesome.css",
+env.cssfiles = ["bower_components/leaflet-control-datetime/fontello/css/fontello.css",
                 "bower_components/leaflet/dist/leaflet.css",
                 "bower_components/Leaflet.MousePosition/src/L.Control.MousePosition.css",
                 "bower_components/leaflet-languageselector/leaflet-languageselector.css",
                 "bower_components/leaflet-control-osm-geocoder/Control.OSMGeocoder.css",
                 "bower_components/leaflet.locatecontrol/dist/L.Control.Locate.css",
-                "bower_components/flag-icon-css/css/flag-icon.css",
+                "external/flag-icon-css/css/flag-icon.css",
                 "bower_components/leaflet-control-position/leaflet-control-position.css",
                 "bower_components/leaflet-control-home/leaflet-control-home.css",
                 "bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.css",
@@ -161,8 +161,8 @@ def build_web():
     local('cp -r bower_components/leaflet-control-osm-geocoder/images/* dist/css/images/.')
     local('cp -r external/jquery-ui-1.11.4.custom/images/* dist/css/images/.')
     local('cp -r bower_components/leaflet-control-forecast-print/images/printer.png dist/css/images/.')
-    local('cp -r bower_components/flag-icon-css/flags dist/.')
-    local('cp -r bower_components/fontawesome/fonts dist/.')
+    local('cp -r external/flag-icon-css/flags dist/.')
+    local('cp -r bower_components/leaflet-control-datetime/fontello/font dist/.')
 
     # Modify html files to use time stamped css and js files
     local('cp dist/www/index-prod.html dist/www/index-dev.html')

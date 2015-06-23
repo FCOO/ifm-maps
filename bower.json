@@ -18,7 +18,6 @@
     "Leaflet.MousePosition": "https://github.com/ardhi/Leaflet.MousePosition.git",
     "Leaflet.dbpediaLayer": "https://github.com/kr1/Leaflet.dbpediaLayer.git",
     "flag-icon-css": "~0.6.5",
-    "fontawesome": "~4.3.0",
     "jquery-placeholder": "~2.1.1",
     "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
     "leaflet-languageselector": "https://github.com/buche/leaflet-languageselector.git",
@@ -42,7 +41,6 @@
   },
   "resolutions": {
     "leaflet": "master",
-    "fontawesome": "~4.3.0"
   },
   "moduleType": [
     "es6"
