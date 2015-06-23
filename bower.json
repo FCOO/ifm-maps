@@ -20,7 +20,6 @@
     "flag-icon-css": "~0.6.5",
     "fontawesome": "~4.3.0",
     "jquery-placeholder": "~2.1.1",
-    "jquery-ui": "~1.11.3",
     "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
     "leaflet-languageselector": "https://github.com/buche/leaflet-languageselector.git",
     "leaflet-plugins": "https://github.com/shramov/leaflet-plugins.git#~1.2.1",

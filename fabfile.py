@@ -44,11 +44,13 @@ env.cssfiles = ["bower_components/fontawesome/css/font-awesome.css",
                 "leaflet/Control.OSMGeocoder.ifm-maps.css",
                 "css/ifm-maps.css"]
 
-env.cssfiles_min = ["bower_components/jquery-ui/themes/ui-lightness/jquery-ui.min.css"]
-env.cssfiles_src = ["bower_components/jquery-ui/themes/ui-lightness/jquery-ui.css"]
+env.cssfiles_min = ["external/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css",
+                    "external/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css"]
+env.cssfiles_src = ["external/jquery-ui-1.11.4.custom/jquery-ui.structure.css",
+                    "external/jquery-ui-1.11.4.custom/jquery-ui.theme.css"]
 
 env.jsfiles = ["bower_components/jquery/dist/jquery.js",
-               "bower_components/jquery-ui/jquery-ui.js",
+               "external/jquery-ui-1.11.4.custom/jquery-ui.js",
                "bower_components/noty/js/noty/packaged/jquery.noty.packaged.js",
                "bower_components/jquery-placeholder/jquery.placeholder.js",
                "bower_components/magellan/magellan.js",
@@ -157,7 +159,7 @@ def build_web():
     local('cp -r bower_components/leaflet-control-home/images/* dist/css/images/.')
     local('cp -r bower_components/leaflet-control-position/images/* dist/css/images/.')
     local('cp -r bower_components/leaflet-control-osm-geocoder/images/* dist/css/images/.')
-    local('cp -r bower_components/jquery-ui/themes/ui-lightness/images/* dist/css/images/.')
+    local('cp -r external/jquery-ui-1.11.4.custom/images/* dist/css/images/.')
     local('cp -r bower_components/leaflet-control-forecast-print/images/printer.png dist/css/images/.')
     local('cp -r bower_components/flag-icon-css/flags dist/.')
     local('cp -r bower_components/fontawesome/fonts dist/.')
