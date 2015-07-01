@@ -8,12 +8,14 @@
 </head>
 <body>
     <div id="map"></div>
+    <script>
+        var version = '${version}';
+        // The domain variable is used to determine which setup to use
+        var domain = '${domain}'; // Default
+    </script>
     <script src="../javascript/ifm-maps.js"></script>
     <script>window.L_PREFER_CANVAS = true;</script>
     <!--[if lt IE 10]><script type="text/javascript" src="../javascript/typedarray.js"></script><![endif]-->
     <!--[if lt IE 10]><script type="text/javascript" src="../javascript/jquery.xdomainrequest.min.js"></script><![endif]-->
-    <script>
-        var version = '${version}';
-    </script>
 </body>
 </html>

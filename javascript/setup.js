@@ -1,14 +1,13 @@
 (function (){
     "use strict";
     /*jslint browser: true*/
-    /*global $, L, initCommonMap, getTilesize, getLocalLanguage, domain*/
+    /*global $, L, initCommonMap, getTilesize, getLocalLanguage */
 
     /**
      * Initialize the map.
      */
     var urlParams = getUrlParameters();
     // The domain variable is used to determine which setup to use
-    var domain = 'denmark'; // Default
     if (urlParams.domain !== undefined) {
         domain = urlParams.domain;
     }
@@ -18,6 +17,7 @@
     var lat;
     var lon;
     var overlays;
+    var proxy;
     var tilesize = getTilesize();
     var lang = getLocalLanguage();
     var store = new L.Control.FcooLayerStore({language: lang});
@@ -28,7 +28,7 @@
 
     if (domain === 'denmark_impact') {
         minZoom = 4;
-        maxZoom = 10;
+        maxZoom = 12;
         zoom = 6;
         lat = 55.7;
         lon = 11.1;
@@ -107,54 +107,56 @@
         };
     } else if (domain === 'denmark') {
         minZoom = 4;
-        maxZoom = 10;
+        maxZoom = 12;
         zoom = 6;
         lat = 55.7;
         lon = 11.1;
         enablePrint = false;
+        proxy = WmsAjaxProxy;
+
         overlays = {
             "DMI": {
-                "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windSpeed'}),
-                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection'}),
-                //"visibility": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'visibility'}),
-                "pressure": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'seaLevelPressure'}),
-                //"precip": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'totalPrecipitation'}),
-                //"airtemp": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'airTemperature'}),
-                //"cloudcover": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'totalCloudCover'}),
+                "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
+                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
+                //"visibility": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'visibility', 'options': {ajaxProxy: proxy}}),
+                "pressure": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
+                //"precip": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'totalPrecipitation', 'options': {ajaxProxy: proxy}}),
+                //"airtemp": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'airTemperature', 'options': {ajaxProxy: proxy}}),
+                //"cloudcover": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'totalCloudCover', 'options': {ajaxProxy: proxy}}),
             },
             "FCOO - North Sea/Baltic Sea": {
-                "waveperiod": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'wavePeriod'}),
-                "waveheight": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'waveHeight'}),
-                "seastate": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'seaState'}),
-                "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'waveDirection'}),
-                "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'currentSpeed'}),
-                "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'currentDirection'}),
-                "elev": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'seaLevel'}),
-                "seatemp": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'sst'}),
-                "salinity": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'sss'})
+                "waveperiod": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'wavePeriod', 'options': {ajaxProxy: proxy}}),
+                "waveheight": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
+                "seastate": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
+                "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
+                "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
+                "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
+                "elev": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'seaLevel', 'options': {ajaxProxy: proxy}}),
+                "seatemp": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'sst', 'options': {ajaxProxy: proxy}}),
+                "salinity": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC', 'parameter': 'sss', 'options': {ajaxProxy: proxy}})
             },
             "FCOO - Danish Waters": {
-                "waveperiod": store.getLayer({'dataset': 'FCOO/WW3/DKINNER', 'parameter': 'wavePeriod'}),
-                "waveheight": store.getLayer({'dataset': 'FCOO/WW3/DKINNER', 'parameter': 'waveHeight'}),
-                "seastate": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'seaState'}),
-                "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/DKINNER', 'parameter': 'waveDirection'}),
-                "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'currentSpeed'}),
-                "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'currentDirection'}),
-                "elev": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'seaLevel'}),
-                "seatemp": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'sst'}),
-                "salinity": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'sss'})
+                "waveperiod": store.getLayer({'dataset': 'FCOO/WW3/DKINNER', 'parameter': 'wavePeriod', 'options': {ajaxProxy: proxy}}),
+                "waveheight": store.getLayer({'dataset': 'FCOO/WW3/DKINNER', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
+                "seastate": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
+                "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/DKINNER', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
+                "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
+                "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
+                "elev": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'seaLevel', 'options': {ajaxProxy: proxy}}),
+                "seatemp": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'sst', 'options': {ajaxProxy: proxy}}),
+                "salinity": store.getLayer({'dataset': 'FCOO/GETM/DKINNER', 'parameter': 'sss', 'options': {ajaxProxy: proxy}})
             },
             "ECMWF": {
-                "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windSpeed'}),
-                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection'}),
-                "pressure": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'seaLevelPressure'}),
-                "precip": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'totalPrecipitation'}),
-                "airtemp": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'airTemperature'}),
-                "cloudcover": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'totalCloudCover'}),
-                "waveperiod": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'wavePeriod'}),
-                "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'waveHeight'}),
-                "seastate": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'seaState'}),
-                "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'waveDirection'})
+                "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
+                "pressure": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
+                "precip": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'totalPrecipitation', 'options': {ajaxProxy: proxy}}),
+                "airtemp": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'airTemperature', 'options': {ajaxProxy: proxy}}),
+                "cloudcover": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'totalCloudCover', 'options': {ajaxProxy: proxy}}),
+                "waveperiod": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'wavePeriod', 'options': {ajaxProxy: proxy}}),
+                "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
+                "seastate": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
+                "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}})
             },
             "Point forecasts": {
                 "Sea level": undefined,
@@ -167,6 +169,7 @@
                 "Firing areas": store.firingAreas
             }
         };
+        proxy.doAjax();
     } else if (domain === 'faroe_islands') {
         overlays = {
             "DMI": {
@@ -211,7 +214,7 @@
         };
         langs = ['da', 'fo', 'en'];
         minZoom = 3;
-        maxZoom = 10;
+        maxZoom = 12;
         zoom = 7;
         lat = 61.5;
         lon = -6.0;
@@ -286,13 +289,13 @@
             }
         };
         minZoom = 3;
-        maxZoom = 10;
+        maxZoom = 12;
         zoom = 6;
         lat = 62.0;
         lon = -45.0;
     } else if (domain === 'greenland') {
         minZoom = 3;
-        maxZoom = 10;
+        maxZoom = 12;
         zoom = 6;
         lat = 62.0;
         lon = -45.0;
@@ -371,7 +374,7 @@
             }
         };
         minZoom = 4;
-        maxZoom = 10;
+        maxZoom = 12;
         zoom = 5;
         lat = 0.0;
         lon = 56.0;
@@ -418,7 +421,7 @@
             }
         };
         minZoom = 4;
-        maxZoom = 10;
+        maxZoom = 12;
         zoom = 5;
         lat = 0.0;
         lon = 56.0;
@@ -445,7 +448,7 @@
             }
         };
         minZoom = 3;
-        maxZoom = 10;
+        maxZoom = 12;
         zoom = 8;
         lat = 35.5;
         lon = 33.9;

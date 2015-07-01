@@ -330,10 +330,10 @@
 
         // Construct FCOO background layer
         var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
-        var subdomains = ["media01", "media02", "media03", "media04", "media05"];
-        var tile_bckgrnd_date = "201502240000";
+        var subdomains = ["tiles01", "tiles02", "tiles03", "tiles04"];
+        var tile_bckgrnd_date = "201504270000";
         var fcoo = L.tileLayer(fcoo_base + "tiles_bckgrnd_" + tilesize + "_mercator_kort1_" + tile_bckgrnd_date + "/{z}/{x}/{y}.png", {
-            maxZoom: 10,
+            maxZoom: 12,
             tileSize: tilesize,
             subdomains: subdomains,
             attribution: '<a href="' + location.protocol + '//fcoo.dk">Danish Defence Centre for Operational Oceanography</a>',
@@ -351,9 +351,9 @@
         };
 
         // Construct FCOO foreground/top layer
-        var tile_top_date = "201502240000";
+        var tile_top_date = "201504270000";
         var topLayer = L.tileLayer(fcoo_base + "tiles_top_" + tilesize + "_mercator_" + tile_top_date + "/{z}/{x}/{y}.png", {
-            maxZoom: 10,
+            maxZoom: 12,
             tileSize: tilesize,
             subdomains: subdomains,
             zIndex: 1001,

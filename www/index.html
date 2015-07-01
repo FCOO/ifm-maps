@@ -26,6 +26,11 @@
 </head>
 <body>
     <div id="map"></div>
+    <script>
+        var version = 'development';
+        // The domain variable is used to determine which setup to use
+        var domain = 'denmark'; // Default
+    </script>
     <!--[if lt IE 10]><script type="text/javascript" src="../bower_components/typedarray/index.js"></script><![endif]-->
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <!--[if lt IE 10]><script type="text/javascript" src="../bower_components/jQuery-ajaxTransport-XDomainRequest/jquery.xdomainrequest.min.js"></script><![endif]-->
@@ -50,6 +55,7 @@
     <script src="../bower_components/leaflet-control-legend/leaflet-control-legend.js"></script>
     <script src="../bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-model.js"></script>
     <script src="../bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-fcoo.js"></script>
+    <script src="../bower_components/leaflet-tilelayer-wms-fcoo/wms-ajax-proxy.js"></script>
     <script src="../bower_components/leaflet-control-forecast-print/leaflet-control-forecast-print.js"></script>
     <script src="../leaflet/Permalink.CategorizedLayer.js"></script>
     <script src="../leaflet/Permalink.CategorizedOverlay.js"></script>
@@ -62,8 +68,5 @@
     <script src="../javascript/url.js"></script>
     <script src="../javascript/map_common.js"></script>
     <script src="../javascript/setup.js"></script>
-    <script>
-        var version = 'development';
-    </script>
 </body>
 </html>
