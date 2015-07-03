@@ -86,7 +86,8 @@
         map.addControl(L.control.homeButton({
             text: getI18n('Home', localLang),
             title: getI18n('Navigate to home page', localLang),
-            href: location.protocol + '//fcoo.dk'
+            href: location.protocol + '//fcoo.dk',
+            icon: 'icon-home'
         }));
 
             // Add language selector
@@ -150,6 +151,8 @@
                 popup: getI18n("You are within {distance} {unit} from this point", localLang),
                 outsideMapBoundsMsg: getI18n("You seem located outside the boundaries of the map", localLang)
             },
+            icon: 'icon-location',
+            iconLoading: 'icon-spinner',
             onLocationError: function(err) {
                 noty({text: err.message, type: 'information', timeout: 1000});
             },
@@ -167,7 +170,39 @@
         // Add geocoder control
         map.addControl(new L.Control.OSMGeocoder({
             position: 'topleft',
-            text: getI18n('Locate', localLang)
+            text: getI18n('Locate', localLang),
+            callback: function (results) {
+                if (results.length == 0) {
+                    console.log("ERROR: didn't find a result");
+                    return;
+                }
+                var bbox = results[0].boundingbox,
+                first = new L.LatLng(bbox[0], bbox[2]),
+                second = new L.LatLng(bbox[1], bbox[3]),
+                bounds = new L.LatLngBounds([first, second]);
+                this._map.fitBounds(bounds);
+                // Add marker
+                var lat = results[0].lat;
+                var lon = results[0].lon;
+                var title = results[0].display_name;
+                var _remove_marker = function(arg) {
+                    this._map.removeLayer(arg.target);
+                }
+                if (this._marker !== undefined) {
+                    this._map.removeLayer(this._marker);
+                }
+                this._marker = L.circleMarker([lat, lon], {
+                    color: '#136AEC',
+                    fillColor: '#2A93EE',
+                    fillOpacity: 0.7,
+                    weight: 2,
+                    opacity: 0.9,
+                    radius: 5,
+                    title: title
+                });
+                this._marker.on('click', _remove_marker);
+                this._marker.addTo(this._map);
+            }
         }));
 
         // Add length scale control
@@ -183,11 +218,17 @@
         layerControl._form.children[0].parentNode.insertBefore(patch, layerControl._form.children[0]);
 
         // Add text input position control
-        map.addControl(new L.Control.Position({position: 'topleft', collapsed: true}));
+        map.addControl(new L.Control.Position({
+            position: 'topleft',
+            collapsed: true,
+            icon: 'icon-target',
+        }));
 
         // Add print control
         if (enablePrint) {
-            map.addControl(L.Control.print({}));
+            map.addControl(L.Control.print({
+                icon: 'icon-print',
+            }));
         }
 
         // Make sure that these controls are hidden on print
