@@ -172,7 +172,7 @@
             position: 'topleft',
             text: getI18n('Locate', localLang),
             callback: function (results) {
-                if (results.length == 0) {
+                if (results.length === 0) {
                     console.log("ERROR: didn't find a result");
                     return;
                 }
@@ -187,7 +187,7 @@
                 var title = results[0].display_name;
                 var _remove_marker = function(arg) {
                     this._map.removeLayer(arg.target);
-                }
+                };
                 if (this._marker !== undefined) {
                     this._map.removeLayer(this._marker);
                 }
