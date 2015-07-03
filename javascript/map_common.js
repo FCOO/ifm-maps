@@ -129,19 +129,27 @@
         if (mobile) {
             collapsed = true;
         }
-        var opts = {collapsed: collapsed,
-                    groupsCollapsed: true, 
-                    collapseActiveGroups: true, 
-                    autoZIndex: false,
-                    position: "topright"};
+        var opts = {
+            collapsed: collapsed,
+            groupsCollapsed: true, 
+            collapseActiveGroups: true, 
+            autoZIndex: false,
+            position: "topright"
+        };
         var layerControl = (new L.Control.CategorizedLayers(baseMaps, overlayMaps, 
                             opts)).addTo(map);
 
-        // Add permanent link control
-        map.addControl(new L.Control.Permalink({layers: layerControl, useAnchor: false, position: 'bottomright'}));
-
         // Add position control
         map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomright'}));
+
+        // Add permanent link control
+        map.addControl(new L.Control.Permalink({
+            layers: layerControl,
+            useAnchor: true,
+            useLocation: true,
+            position: 'bottomright'
+        }));
+        $(".leaflet-control-permalink").css("visibility", "hidden");
 
         // Add locator control
         var locator = L.control.locate({
@@ -256,7 +264,6 @@
                 $(".leaflet-control-print").css("visibility", "hidden");
             }
             $(".leaflet-control-mouseposition").css("visibility", "hidden");
-            $(".leaflet-control-permalink").css("visibility", "hidden");
         }
 
         // Make sure that these controls are hidden on mobile devices

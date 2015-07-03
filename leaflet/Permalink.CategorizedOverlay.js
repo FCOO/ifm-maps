@@ -54,12 +54,15 @@
                         // visible if specified
                         var name = obj._category_en + '.' + obj._name_en;
                         var visible = (overlaynames[idx] == name);
+                        if (visible) {
+                            idx++;
+                        }
                         if (!visible && this._map.hasLayer(obj)) {
-                                idx++;
+                            idx++;
                             this._map.removeLayer(obj);
                         } else if (visible && !this._map.hasLayer(obj)) {
-                                idx++;
                             this._map.addLayer(obj);
+                        } else {
                         }
                     }
                 }
@@ -72,21 +75,21 @@
             for (var i in this._overlays) {
                 if (!this._overlays.hasOwnProperty(i))
                     continue;
-                            var layerGroup = this._overlays[i];
-                    for (var j in layerGroup) {
-                        if (!layerGroup.hasOwnProperty(j))
-                            continue;
-                        var obj = layerGroup[j];
-                        if (!obj._overlay) continue;
-                        if (obj._overlay) {
-                            if (this._map.hasLayer(obj)) {
-                                                    var name = obj._category_en + '.' + obj._name_en;
-                                                    if (names.length > 0) {
-                                    names += ',';
-                                    }
-                                names += name;
+                var layerGroup = this._overlays[i];
+                for (var j in layerGroup) {
+                    if (!layerGroup.hasOwnProperty(j))
+                        continue;
+                    var obj = layerGroup[j];
+                    if (!obj._overlay) continue;
+                    if (obj._overlay) {
+                        if (this._map.hasLayer(obj)) {
+                            var name = obj._category_en + '.' + obj._name_en;
+                            if (names.length > 0) {
+                                names += ',';
                             }
+                            names += name;
                         }
+                    }
                 }
             }
             return names;
