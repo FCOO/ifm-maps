@@ -146,10 +146,10 @@
         map.addControl(new L.Control.Permalink({
             layers: layerControl,
             useAnchor: true,
-            useLocation: true,
+            useLocation: false,
             position: 'bottomright'
         }));
-        $(".leaflet-control-permalink").css("visibility", "hidden");
+        //$(".leaflet-control-permalink").css("visibility", "hidden");
 
         // Add locator control
         var locator = L.control.locate({
