@@ -23,12 +23,19 @@
             }
         },
 
-        _start_locator: function() {
+        _start_locator: function(e) {
             this._update({locate: true});
         },
 
-        _stop_locator: function() {
-            this._update({locate: false});
+        _stop_locator: function(e) {
+            this._update({
+                locate: false,
+                follow: true
+            });
+            // We want the locator to start with following on if enabled again
+            if (e.options.follow === false) {
+                e.options.follow = true;
+            }
         },
 
         _start_following: function() {

@@ -143,9 +143,9 @@
         map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomright'}));
 
         // Add locator control
-        var follow = false;
-        if (urlParams.follow === "true") {
-            follow = true;
+        var follow = true;
+        if (urlParams.follow === "false") {
+            follow = false;
         }
         var locator = L.control.locate({
             locateOptions: {maxZoom: 10},
