@@ -142,18 +142,15 @@
         // Add position control
         map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomright'}));
 
-        // Add permanent link control
-        map.addControl(new L.Control.Permalink({
-            layers: layerControl,
-            useAnchor: true,
-            useLocation: false,
-            position: 'bottomright'
-        }));
-        //$(".leaflet-control-permalink").css("visibility", "hidden");
-
         // Add locator control
+        var follow = false;
+        if (urlParams.follow === "true") {
+            follow = true;
+        }
         var locator = L.control.locate({
-            locateOptions: {maxZoom: maxZoom},
+            locateOptions: {maxZoom: 10},
+            follow: follow,
+            stopFollowingOnDrag: true,
             strings: {
                 title: getI18n("Show me where I am", localLang),
                 popup: getI18n("You are within {distance} {unit} from this point", localLang),
@@ -167,13 +164,20 @@
 
         });
         map.addControl(locator);
-
-        // Use geolocation if on mobile if position and zoom not given in URL
-        if (urlParams.zoom === undefined || urlParams.lat === undefined || urlParams.lon === undefined) {
-            if (mobile) {
-                //locator.start();
-            }
+        // Enable geolocation if locate query string parameter is true
+        if (urlParams.locate === "true") {
+            locator.start();
         }
+
+        // Add permanent link control
+        map.addControl(new L.Control.Permalink({
+            layers: layerControl,
+            locator: locator,
+            useAnchor: true,
+            useLocation: false,
+            position: 'bottomright'
+        }));
+        //$(".leaflet-control-permalink").css("visibility", "hidden");
 
         // Add geocoder control
         map.addControl(new L.Control.OSMGeocoder({
@@ -404,7 +408,7 @@
             maxZoom: 12,
             tileSize: tilesize,
             subdomains: subdomains,
-            zIndex: 1001,
+            zIndex: 1000,
             continuousWorld: false,
             errorTileUrl: fcoo_base + "empty_" + tilesize + ".png"
         });

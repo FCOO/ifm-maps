@@ -57,6 +57,8 @@
                 'Point forecasts': 'Punktprognoser',
                 'Static layers': 'Statiske lag',
                 'Tidal forecasts': 'Tidevandsprognoser',
+                'Short range forecasts': 'Korte prognoser',
+                'Medium range forecasts': 'Mellemlange prognoser',
                 'Sea level': 'Vandstand',
                 'Celestial information': 'Himmellegemer',
                 'Solar Terminator': 'Dag og nat',
