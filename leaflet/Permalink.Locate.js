@@ -53,7 +53,7 @@
             var options = {
                 locate: this._active,
                 follow: this._following
-            }
+            };
             return options;
         }
     });
