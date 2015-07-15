@@ -24,13 +24,13 @@
         },
 
         _start_locator: function(e) {
-            this._update({locate: true});
+            this._update({locate: "true"});
         },
 
         _stop_locator: function(e) {
             this._update({
-                locate: false,
-                follow: true
+                locate: "false",
+                follow: "true"
             });
             // We want the locator to start with following on if enabled again
             if (e.options.follow === false) {
@@ -39,11 +39,11 @@
         },
 
         _start_following: function() {
-            this._update({follow: true});
+            this._update({follow: "true"});
         },
 
         _stop_following: function() {
-            this._update({follow: false});
+            this._update({follow: "false"});
         }
     });
 
@@ -51,8 +51,8 @@
     L.Control.Locate.include({
         getState: function() {
             var options = {
-                locate: this._active,
-                follow: this._following
+                locate: String(this._active),
+                follow: String(this._following)
             };
             return options;
         }

@@ -149,6 +149,7 @@
         }
         var locator = L.control.locate({
             locateOptions: {maxZoom: 10},
+            position: 'topleft',
             follow: follow,
             stopFollowingOnDrag: true,
             strings: {
@@ -168,16 +169,6 @@
         if (urlParams.locate === "true") {
             locator.start();
         }
-
-        // Add permanent link control
-        map.addControl(new L.Control.Permalink({
-            layers: layerControl,
-            locator: locator,
-            useAnchor: true,
-            useLocation: false,
-            position: 'bottomright'
-        }));
-        //$(".leaflet-control-permalink").css("visibility", "hidden");
 
         // Add geocoder control
         map.addControl(new L.Control.OSMGeocoder({
@@ -275,7 +266,6 @@
             $(".leaflet-languageselector-control").addClass("hide-on-small");
             $(".leaflet-control-zoom").addClass("hide-on-small");
             $(".leaflet-control-home").addClass("hide-on-small");
-            $(".leaflet-control-locate").addClass("hide-on-small");
             $(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("hide-on-small");
             $(".leaflet-control-scale").addClass("hide-on-small");
             $(".leaflet-control-geocoder").addClass("hide-on-small");
@@ -334,6 +324,16 @@
                         vertical: false,
                         position: datetime_pos
                 }).addTo(map);
+                // Add permanent link control
+                map.addControl(new L.Control.Permalink({
+                    layers: layerControl,
+                    locator: locator,
+                    useAnchor: true,
+                    useLocation: false,
+                    position: 'bottomright'
+                }));
+        //$(".leaflet-control-permalink").css("visibility", "hidden");
+
                 // Make sure that overlays are updated
                 map.fire("overlayadd");
             } else {
@@ -389,7 +389,8 @@
             tileSize: tilesize,
             subdomains: subdomains,
             attribution: '<a href="' + location.protocol + '//fcoo.dk">Danish Defence Centre for Operational Oceanography</a>',
-            continuousWorld: false
+            continuousWorld: false,
+            updateInterval: 50
         });
 
         // Put background layers into hash for easy consumption by layer control
@@ -410,6 +411,7 @@
             subdomains: subdomains,
             zIndex: 1000,
             continuousWorld: false,
+            updateInterval: 50,
             errorTileUrl: fcoo_base + "empty_" + tilesize + ".png"
         });
 
