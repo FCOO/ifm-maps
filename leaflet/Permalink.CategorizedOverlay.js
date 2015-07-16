@@ -85,14 +85,14 @@
                         if (this._map.hasLayer(obj)) {
                             var name = obj._category_en + '.' + obj._name_en;
                             if (names.length > 0) {
-                                names += ',';
+                                names += '%2C';
                             }
                             names += name;
                         }
                     }
                 }
             }
-            return encodeURIComponent(names);
+            return names;
         }
     });
 })();
