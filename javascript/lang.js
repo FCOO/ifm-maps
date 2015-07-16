@@ -56,6 +56,7 @@
                 'Background Maps': 'Baggrundskort',
                 'Point forecasts': 'Punktprognoser',
                 'Static layers': 'Statiske lag',
+                'Forecasts': 'Prognoser',
                 'Tidal forecasts': 'Tidevandsprognoser',
                 'Short range forecasts': 'Korte prognoser',
                 'Medium range forecasts': 'Mellemlange prognoser',

@@ -148,7 +148,7 @@
             follow = false;
         }
         var locator = L.control.locate({
-            locateOptions: {maxZoom: 10},
+            locateOptions: {maxZoom: 10, enableHighAccuracy: false},
             position: 'topleft',
             follow: follow,
             stopFollowingOnDrag: true,
@@ -329,7 +329,7 @@
                     layers: layerControl,
                     locator: locator,
                     useAnchor: true,
-                    useLocation: false,
+                    useLocation: true,
                     position: 'bottomright'
                 }));
         //$(".leaflet-control-permalink").css("visibility", "hidden");
