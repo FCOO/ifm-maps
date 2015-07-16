@@ -92,7 +92,7 @@
                     }
                 }
             }
-            return names;
+            return encodeURIComponent(names);
         }
     });
 })();
