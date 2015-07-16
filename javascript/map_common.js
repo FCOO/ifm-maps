@@ -22,7 +22,7 @@
         localLang = getLocalLanguage();
         var mobile = false;
         if (mediaQueriesSupported()) {
-            var mq = window.matchMedia('screen and (max-width: 640px)');
+            var mq = window.matchMedia('screen and (max-width: 640px), screen and (max-height: 640px)');
             mobile = mq.matches;
         }
 
