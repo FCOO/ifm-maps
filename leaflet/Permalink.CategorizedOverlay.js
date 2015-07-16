@@ -26,9 +26,7 @@
         _update_overlay: function() {
             if (!this.options.layers) return;
             var overlaynames = this.options.layers.overlayNames();
-            if (overlaynames && overlaynames !== '') {
-                this._update({overlays: overlaynames});
-            }
+            this._update({overlays: overlaynames});
         },
 
         _set_overlays: function(e) {
