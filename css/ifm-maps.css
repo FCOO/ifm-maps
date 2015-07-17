@@ -61,7 +61,7 @@ html, body, #map {
     }
 }
 
-/*@media only screen and (max-device-height: 100px) {*/
+@media screen and (max-width: 640px), screen and (max-height: 640px) {
     .hide-on-small {
         visibility: hidden;
         display: none;
@@ -70,5 +70,4 @@ html, body, #map {
         visibility: visible;
         display: block;
     }
-/*//}*/
-
+}

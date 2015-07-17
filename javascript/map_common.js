@@ -262,17 +262,15 @@
         }
 
         // Make sure that these controls are hidden on mobile devices
-        if (mobile) {
-            $(".leaflet-languageselector-control").addClass("hide-on-small");
-            $(".leaflet-control-zoom").addClass("hide-on-small");
-            $(".leaflet-control-home").addClass("hide-on-small");
-            $(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("hide-on-small");
-            $(".leaflet-control-scale").addClass("hide-on-small");
-            $(".leaflet-control-geocoder").addClass("hide-on-small");
-            $(".leaflet-control-position").addClass("hide-on-small");
-            $(".leaflet-control-print").addClass("hide-on-small");
-            $(".leaflet-control-mouseposition").addClass("hide-on-small");
-        }
+        $(".leaflet-languageselector-control").addClass("hide-on-small");
+        $(".leaflet-control-zoom").addClass("hide-on-small");
+        $(".leaflet-control-home").addClass("hide-on-small");
+        $(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("hide-on-small");
+        $(".leaflet-control-scale").addClass("hide-on-small");
+        $(".leaflet-control-geocoder").addClass("hide-on-small");
+        $(".leaflet-control-position").addClass("hide-on-small");
+        $(".leaflet-control-print").addClass("hide-on-small");
+        $(".leaflet-control-mouseposition").addClass("hide-on-small");
 
         // Add custom title (unescaped and sanitized) - used for print
         if (urlParams.title !== undefined) {
@@ -313,7 +311,7 @@
                 if (urlParams.hidecontrols == "true") {
                     visibility = "hidden";
                 }
-                new L.Control.Datetime({
+                var datetimeControl = (new L.Control.Datetime({
                         title: getI18n('datetime', localLang),
                         datetimes: dates,
                         language: localLang,
@@ -323,7 +321,7 @@
                         initialDatetime: initial_datetime,
                         vertical: false,
                         position: datetime_pos
-                }).addTo(map);
+                })).addTo(map);
                 // Add permanent link control
                 map.addControl(new L.Control.Permalink({
                     layers: layerControl,
@@ -336,6 +334,38 @@
 
                 // Make sure that overlays are updated
                 map.fire("overlayadd");
+
+                // Dynamic responsive design
+                if (mediaQueriesSupported()) {
+                    mq.addListener(function (){
+                        /*
+                        // Modify layer control
+                        var my_mobile = mq.matches;
+                        layerControl.options.collapsed = my_mobile;
+                        map.removeControl(layerControl);
+                        layerControl.addTo(map);
+
+                        // Replace datetime control
+                        map.removeControl(datetimeControl);
+                        var datetime_pos = 'topright';
+                        if (my_mobile) {
+                            datetime_pos = 'bottomleft';
+                        }
+                        // TODO: Need to set new initial time and local time setting
+                        datetimeControl = (new L.Control.Datetime({
+                            title: getI18n('datetime', localLang),
+                            datetimes: dates,
+                            language: localLang,
+                            callback: callback,
+                            mobile: my_mobile,
+                            visibility: visibility,
+                            initialDatetime: initial_datetime,
+                            vertical: false,
+                            position: datetime_pos
+                        })).addTo(map);
+                        */
+                    });
+                }
             } else {
                 if (dt_current <= dt_max) {
                     dt_current += dt_check;
