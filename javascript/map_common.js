@@ -127,7 +127,7 @@
         // Add layer control
         var collapsed = true;
         if (large) {
-            var collapsed = false;
+            collapsed = false;
         }
         var opts = {
             collapsed: collapsed,
@@ -302,7 +302,7 @@
         var callback = callback_obj.changeDatetime;
         var datetime_pos = 'bottomleft';
         if (large) {
-            var datetime_pos = 'topright';
+            datetime_pos = 'topright';
         }
         function checkTimesteps() {
             var dates = getTimeSteps(overlayMaps);
