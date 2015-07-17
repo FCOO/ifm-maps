@@ -20,10 +20,10 @@
             urlParams,
             map;
         localLang = getLocalLanguage();
-        var mobile = false;
+        var large = false;
         if (mediaQueriesSupported()) {
-            var mq = window.matchMedia('screen and (max-width: 640px), screen and (max-height: 640px)');
-            mobile = mq.matches;
+            var mq = window.matchMedia('screen and (min-width: 641px) and (min-height: 641px)');
+            large = mq.matches;
         }
 
         // Initialize basemaps
@@ -101,9 +101,9 @@
             position: 'topright'
         }));
 
-        // Remove Solar Terminator from overlays if on mobile
+        // Remove Solar Terminator from overlays if on small units
         // to save battery + does not work on all mobiles
-        if (mobile && overlays.hasOwnProperty("Celestial information")) {
+        if (!large && overlays.hasOwnProperty("Celestial information")) {
             delete overlays["Celestial information"];
         }
 
@@ -125,9 +125,9 @@
         topLayer.addTo(map);
 
         // Add layer control
-        var collapsed = false;
-        if (mobile) {
-            collapsed = true;
+        var collapsed = true;
+        if (large) {
+            var collapsed = false;
         }
         var opts = {
             collapsed: collapsed,
@@ -261,16 +261,16 @@
             $(".leaflet-control-mouseposition").css("visibility", "hidden");
         }
 
-        // Make sure that these controls are hidden on mobile devices
-        $(".leaflet-languageselector-control").addClass("hide-on-small");
-        $(".leaflet-control-zoom").addClass("hide-on-small");
-        $(".leaflet-control-home").addClass("hide-on-small");
-        $(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("hide-on-small");
-        $(".leaflet-control-scale").addClass("hide-on-small");
-        $(".leaflet-control-geocoder").addClass("hide-on-small");
-        $(".leaflet-control-position").addClass("hide-on-small");
-        $(".leaflet-control-print").addClass("hide-on-small");
-        $(".leaflet-control-mouseposition").addClass("hide-on-small");
+        // Make sure that these controls are hidden on small devices
+        $(".leaflet-languageselector-control").addClass("show-on-large");
+        $(".leaflet-control-zoom").addClass("show-on-large");
+        $(".leaflet-control-home").addClass("show-on-large");
+        $(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("show-on-large");
+        $(".leaflet-control-scale").addClass("show-on-large");
+        $(".leaflet-control-geocoder").addClass("show-on-large");
+        $(".leaflet-control-position").addClass("show-on-large");
+        $(".leaflet-control-print").addClass("show-on-large");
+        $(".leaflet-control-mouseposition").addClass("show-on-large");
 
         // Add custom title (unescaped and sanitized) - used for print
         if (urlParams.title !== undefined) {
@@ -300,9 +300,9 @@
         var dt_current = 0;
         var callback_obj = new DatetimeCallback(overlayMaps);
         var callback = callback_obj.changeDatetime;
-        var datetime_pos = 'topright';
-        if (mobile) {
-            datetime_pos = 'bottomleft';
+        var datetime_pos = 'bottomleft';
+        if (large) {
+            var datetime_pos = 'topright';
         }
         function checkTimesteps() {
             var dates = getTimeSteps(overlayMaps);
@@ -316,7 +316,6 @@
                         datetimes: dates,
                         language: localLang,
                         callback: callback,
-                        mobile: mobile,
                         visibility: visibility,
                         initialDatetime: initial_datetime,
                         vertical: false,
@@ -330,7 +329,7 @@
                     useLocation: true,
                     position: 'bottomright'
                 }));
-        //$(".leaflet-control-permalink").css("visibility", "hidden");
+                //$(".leaflet-control-permalink").css("visibility", "hidden");
 
                 // Make sure that overlays are updated
                 map.fire("overlayadd");
@@ -338,32 +337,29 @@
                 // Dynamic responsive design
                 if (mediaQueriesSupported()) {
                     mq.addListener(function (){
-                        /*
                         // Modify layer control
-                        var my_mobile = mq.matches;
-                        layerControl.options.collapsed = my_mobile;
+                        var large = mq.matches;
+                        layerControl.options.collapsed = !large;
                         map.removeControl(layerControl);
                         layerControl.addTo(map);
 
-                        // Replace datetime control
-                        map.removeControl(datetimeControl);
-                        var datetime_pos = 'topright';
-                        if (my_mobile) {
-                            datetime_pos = 'bottomleft';
+                        // Move datetime control
+                        var $datetimeElem = $('.leaflet-control-datetime');
+                        $datetimeElem.detach();
+                        var $container = $('.leaflet-bottom.leaflet-left');
+                        if (large) {
+                            $container = $('.leaflet-top.leaflet-right');
                         }
-                        // TODO: Need to set new initial time and local time setting
-                        datetimeControl = (new L.Control.Datetime({
-                            title: getI18n('datetime', localLang),
-                            datetimes: dates,
-                            language: localLang,
-                            callback: callback,
-                            mobile: my_mobile,
-                            visibility: visibility,
-                            initialDatetime: initial_datetime,
-                            vertical: false,
-                            position: datetime_pos
-                        })).addTo(map);
-                        */
+                        $container.append($datetimeElem);
+
+                        // Move legends
+                        var $legendContainer = $('.fcoo-legend-container');
+                        $legendContainer.detach();
+                        $container = $('.leaflet-top.leaflet-left');
+                        if (large) {
+                            $container = $('.leaflet-bottom.leaflet-left');
+                        }
+                        $container.append($legendContainer);
                     });
                 }
             } else {

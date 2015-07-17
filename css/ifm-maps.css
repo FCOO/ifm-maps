@@ -61,12 +61,12 @@ html, body, #map {
     }
 }
 
-@media screen and (max-width: 640px), screen and (max-height: 640px) {
-    .hide-on-small {
-        visibility: hidden;
-        display: none;
-    }
-    .show-on-small {
+.show-on-large {
+    visibility: hidden;
+    display: none;
+}
+@media screen and (min-width: 641px) and (min-height: 641px) {
+    .show-on-large {
         visibility: visible;
         display: block;
     }
