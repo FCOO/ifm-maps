@@ -139,9 +139,9 @@ L.Control.CategorizedLayers.include({
                                     settings[k] = obj._category_en + '.' + settings[k];
                                 }
                                 if (names.length > 0) {
-                                    names += ';';
+                                    names += '%3B';
                                 }
-                                names += settings.join(',');
+                                names += settings.join('%2C');
                             }
                         }
                     }
