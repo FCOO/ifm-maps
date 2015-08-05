@@ -432,6 +432,30 @@
     }
 
     $(document).ready(function () {
+                $.soap({
+                    url: 'http://api.fcoo.dk/msi/ws/warning?wsdl',
+                    method: 'getActiveWarning',
+                    appendMethodToURL: false,
+                    soap12: true,
+                    data: {
+                    },
+                
+                    success: function (soapResponse, ee, eee) {
+                        // do stuff with soapResponse
+                        // if you want to have the response as JSON use soapResponse.toJSON();
+                        // or soapResponse.toString() to get XML string
+                        // or soapResponse.toXML() to get XML DOM
+                        console.log(SOAPResponse.toXML());
+                        console.log(ee);
+                        console.log(eee);
+                    },
+                    error: function (SOAPResponse, ee, eee) {
+                        // show error
+                        console.log(SOAPResponse.toXML());
+                        console.log(ee);
+                        console.log(eee);
+                    }
+                });
         if (domain === 'denmark_impact') {
             initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
         } else if (domain === 'denmark') {
