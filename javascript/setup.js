@@ -433,11 +433,12 @@
 
     $(document).ready(function () {
                 $.soap({
-                    url: 'http://api.fcoo.dk/msi/ws/warning?wsdl',
-                    method: 'getActiveWarning',
+                    url: 'http://api.fcoo.dk/msi/ws/warning',
+                    method: 'getActiveWarningCountry',
                     appendMethodToURL: false,
                     soap12: true,
                     data: {
+                        arg0: 'DK'
                     },
                 
                     success: function (soapResponse, ee, eee) {
@@ -445,13 +446,13 @@
                         // if you want to have the response as JSON use soapResponse.toJSON();
                         // or soapResponse.toString() to get XML string
                         // or soapResponse.toXML() to get XML DOM
-                        console.log(SOAPResponse.toXML());
+                        console.log(soapResponse.toJSON());
                         console.log(ee);
                         console.log(eee);
                     },
-                    error: function (SOAPResponse, ee, eee) {
+                    error: function (soapResponse, ee, eee) {
                         // show error
-                        console.log(SOAPResponse.toXML());
+                        console.log(soapResponse.toJSON());
                         console.log(ee);
                         console.log(eee);
                     }
