@@ -35,6 +35,22 @@ html, body, #map {
         font-size: 18px;
 }
 
+.msi p {
+    margin: 0;
+}
+.msi h4 {
+    margin-top: 3px;
+    margin-bottom: 6px;
+}
+.msi h5 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.msi hr {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
 /*@media screen {
     html { width:8.5in; }
     body { font: 9pt/1.5 Arial, sans-serif; }

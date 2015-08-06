@@ -82,6 +82,183 @@
             });
         }
 
+        // Add MSI information
+        $.soap({
+            url: 'http://api.fcoo.dk/msi/ws/warning',
+            method: 'mes:getActiveWarningCountry',
+            appendMethodToURL: false,
+            soap12: false,
+            SOAPAction: "",
+            noPrefix: true,
+            data: {
+                arg0: 'DK'
+            },
+            namespaceQualifier: 'mes',
+            namespaceURL: 'http://message.webservice.core.msiedit.frv.dk/', 
+        
+            success: function (soapResponse) {
+                var activeWarnings = soapResponse.toJSON()['Body']['getActiveWarningCountryResponse']['return']['item']
+                var geojson = {};
+                geojson['type'] = 'FeatureCollection';
+                geojson['features'] = [];
+                for (var k in activeWarnings) {
+                  var item = activeWarnings[k];
+                  var newFeature = {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": item.locationType,
+                      "coordinates": [parseFloat(item.points.point.longitude),
+                                      parseFloat(item.points.point.latitude)]
+                    },
+                    "properties": {
+                      "areaEnglish": item.areaEnglish,
+                      "created": item.created,
+                      "encText": item.encText,
+                      "id": item.id,
+                      "messageId": item.messageId,
+                      "navWarning": item.navWarning,
+                      "organisation": item.organisation,
+                      "subarea": item.subarea,
+                      "updated": item.updated,
+                      "validFrom": item.validFrom
+                    }
+                  }
+                  geojson['features'].push(newFeature);
+                }
+                var popup_template = '<div class="msi"><h4>{title}</h4><p>{body}</p><hr/><p>Created: {created}</p><p>Updated: {updated}</p><p>Valid from: {validFrom}</p><hr/><p>Main area: {areaEnglish}</p><p>Subarea: {subarea}</p><hr/><p>Longitude: {longitude}</p><p>Latitude: {latitude}</p></div>';
+                var lgeojson = L.geoJson(geojson, {
+                    onEachFeature: function (feature, layer) {
+                        var innerhtml = popup_template.replace('{title}', feature.properties.encText);
+                        var innerhtml = innerhtml.replace('{body}', feature.properties.navWarning);
+                        var innerhtml = innerhtml.replace('{created}', feature.properties.created);
+                        var innerhtml = innerhtml.replace('{updated}', feature.properties.updated);
+                        var innerhtml = innerhtml.replace('{validFrom}', feature.properties.validFrom);
+                        var innerhtml = innerhtml.replace('{areaEnglish}', feature.properties.areaEnglish);
+                        var innerhtml = innerhtml.replace('{subarea}', feature.properties.subarea);
+                        var innerhtml = innerhtml.replace('{longitude}', feature.geometry.coordinates[0]);
+                        var innerhtml = innerhtml.replace('{latitude}', feature.geometry.coordinates[1]);
+                        layer.bindPopup(innerhtml, {maxWidth: 350, maxHeight: 600});
+                    },
+                    /*jshint unused: true*/
+                    pointToLayer: function (feature, latlng) {
+                        return L.circleMarker(latlng, {
+                                   radius: 8,
+                                   fillColor: "red",
+                                   color: "#111",
+                                   weight: 1,
+                                   opacity: 1,
+                                   fillOpacity: 0.8
+                        });
+                    }
+                    /*jshint unused: false*/
+                });
+                map.addLayer(lgeojson);
+            },
+            error: function (soapResponse) {
+                // show error
+                console.log(soapResponse.toJSON());
+            }
+        });
+
+        // Add firing warnings
+        $.soap({
+            url: 'http://api.fcoo.dk/ws_fwarn/services/DamsaFwarn',
+            method: 'ActiveAreas',
+            appendMethodToURL: false,
+            soap12: false,
+            SOAPAction: "",
+            noPrefix: false,
+            data: {
+                language: 'english'
+            },
+            namespaceQualifier: 'fwar',
+            namespaceURL: 'http://frv.dk/dataexchange/damsa/fwarn/', 
+        
+            success: function (soapResponse) {
+                var activeAreas = [soapResponse.toJSON()['Body']['ActiveAreasResponse']['area']];
+                for (var k in activeAreas) {
+                    var item = activeAreas[k];
+                    $.soap({
+                        url: 'http://api.fcoo.dk/ws_fwarn/services/DamsaFwarn',
+                        method: 'StaticAreaInfo',
+                        appendMethodToURL: false,
+                        soap12: false,
+                        SOAPAction: "",
+                        noPrefix: false,
+                        data: {
+                            language: 'danish',
+                            areaId: item.areaId
+                        },
+                        namespaceQualifier: 'fwar',
+                        namespaceURL: 'http://frv.dk/dataexchange/damsa/fwarn/', 
+                
+                        success: function (soapResponse) {
+                            var areaInfo = [soapResponse.toJSON()['Body']['StaticAreaInfoResponse']['areaInfo']][0];
+                            var newFeature = {
+                                "type": "Feature",
+                                "geometry": {
+                                    "type": "Polygon",
+                                    "coordinates": [[]]
+                                },
+                                "properties": {
+                                    "areaId": item.areaId,
+                                    "name": item.name,
+                                    "staticInfoLastModified": item.staticInfoLastModified,
+                                    "textInfo": areaInfo.info.textInfo,
+                                    "warnings": item.warnings
+                                }
+                            }
+                            for (var k in areaInfo.polygon.geoPoint) {
+                                var point = areaInfo.polygon.geoPoint[k];
+                                var coords = [parseFloat(point.lon),
+                                              parseFloat(point.lat)]
+                                newFeature.geometry.coordinates[0].push(coords);
+                            }
+                            console.log(newFeature);
+                            var popup_template = '<div class="msi"><h4>Firing exercise at {title}</h4><p>Publication time: {publicationTime}</p><p>Warning start time: {warningStartTime}</p><p>Warning end time: {warningEndTime}</p><hr/><p>{body}</p></div>';
+                            var lgeojson = L.geoJson(newFeature, {
+                                onEachFeature: function (feature, layer) {
+                                    var innerhtml = popup_template.replace('{title}', feature.properties.name);
+                                    var innerhtml = innerhtml.replace('{publicationTime}', feature.properties.warnings.publicationTime);
+                                    var innerhtml = innerhtml.replace('{warningStartTime}', feature.properties.warnings.warningStartTime);
+                                    var innerhtml = innerhtml.replace('{warningEndTime}', feature.properties.warnings.warningEndTime);
+                                    var body = '';
+                                    for (var kk in feature.properties.textInfo) {
+                                        var text = feature.properties.textInfo[kk];
+                                        body += '<h5>' + text.header + '</h5>';
+                                        for (var ii in text.text) {
+                                            var txt = text.text[ii];
+                                            if (txt.length != 0) {
+                                                body += '<p>' + txt + '</p>';
+                                            }
+                                        }
+                                    } 
+                                    var innerhtml = innerhtml.replace('{body}', body);
+                                    layer.bindPopup(innerhtml, {maxWidth: 350, maxHeight: 600});
+                                },
+                                "style": {
+                                    weight: 2,
+                                    color: "red",
+                                    opacity: 1,
+                                    fillColor: "red",
+                                    fillOpacity: 0.8
+                                }
+                            });
+                            map.addLayer(lgeojson);
+                        },
+                        error: function (soapResponse) {
+                            // show error
+                            console.log(soapResponse.toJSON());
+                        }
+                    });
+                }
+            },
+            error: function (soapResponse) {
+                // show error
+                console.log(soapResponse.toJSON());
+            }
+        });
+
         // Add link to homepage
         map.addControl(L.control.homeButton({
             text: getI18n('Home', localLang),
