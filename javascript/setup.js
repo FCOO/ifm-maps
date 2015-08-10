@@ -25,6 +25,7 @@
     var langs = ['da', 'en'];
     var useGeoMetoc = false;
     var enablePrint = true;
+    var enableWarnings = false;
 
     if (domain === 'denmark_impact') {
         minZoom = 4;
@@ -112,6 +113,7 @@
         lat = 55.7;
         lon = 11.1;
         enablePrint = false;
+        enableWarnings = true;
         proxy = WmsAjaxProxy;
 
         overlays = {
@@ -433,7 +435,7 @@
 
     $(document).ready(function () {
         if (domain === 'denmark_impact') {
-            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
         } else if (domain === 'denmark') {
             var link_template = location.protocol + "//chart.fcoo.dk/station_timeseries.asp?s=:003__STATION__:046SeaLvl:002DK:001DEFAULT:04d620:04e400:04f0:04a1:04b48:04i0:04c1:04g0:0641:05opopup";
             $.getJSON("../json/Observations.json", function (data) {
@@ -455,12 +457,12 @@
                     /*jshint unused: false*/
                 });
                 overlays["Point forecasts"]["Sea level"] = geojson;
-                initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
+                initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
             });
         } else if (domain === 'faroe_islands') {
-            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
         } else if (domain === 'greenland_impact') {
-            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
         } else if (domain === 'greenland') {
             var popstr;
             var tidal_url_base = location.protocol + "//api.fcoo.dk/tides?station={s}&start={t1}&end={t2}&nx=500&ny=350&lang={l}&tz={dt}";
@@ -513,14 +515,14 @@
                     /*jshint unused: true*/
                 });
                 overlays["Point forecasts"]["Tidal forecasts"] = geojson;
-                initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
+                initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
             });
         } else if (domain === 'indian_ocean') {
-            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
         } else if (domain === 'indian_ocean_impact') {
-            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
         } else if (domain === 'mediterranean') {
-            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, useGeoMetoc);
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
         } else {
             throw new Error('Valid domain not specified: ' + domain);
         }
