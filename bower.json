@@ -21,7 +21,7 @@
     "jquery-placeholder": "~2.1.1",
     "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
     "leaflet-languageselector": "https://github.com/buche/leaflet-languageselector.git",
-    "leaflet-plugins": "https://github.com/jblarsen/leaflet-plugins.git",
+    "leaflet-plugins": "https://github.com/jblarsen/leaflet-plugins.git#master",
     "leaflet-locatecontrol": "https://github.com/jblarsen/leaflet-locatecontrol.git",
     "magellan": "https://github.com/dbarbalato/magellan.git#master",
     "moment": "~2.9.0",
