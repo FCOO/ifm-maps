@@ -390,64 +390,25 @@
      * Initialize base maps
      */
     function initBaseMaps(lang, tilesize) {
-        // Construct OpenStreetMaps layer
-        //var standard = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            //maxZoom: 18,
-            //tileSize: 256,
-            //attribution: '&copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors</a>'
-        //});
-
-        // Construct MapQuest layer
-        //var mapquestUrl = "http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
-            //mapquestSubDomains = ["otile1","otile2","otile3","otile4"],
-            //mapquestAttrib = 'Data, imagery and map information provided by ' +
-                //'<a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, ' +
-                //'<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and ' +
-                //'<a href="http://wiki.openstreetmap.org/wiki/Contributors" target="_blank">contributors</a>. ' +
-                //'Data: <a href="http://wiki.openstreetmap.org/wiki/Open_Database_License" target="_blank">ODbL</a>, ' +
-                //'Map: <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>',
-            //mapquest = new L.TileLayer(mapquestUrl, {maxZoom: 18, tileSize: 256, attribution: mapquestAttrib, subdomains: mapquestSubDomains
-        //});
-
         // Construct ESRI World Imagery layer
         var esri = L.tileLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.jpg", {
             maxZoom: 18, tileSize: 256, attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         });
 
         // Construct FCOO background layer
-        var fcoo_base = location.protocol + "//{s}.fcoo.dk/tiles/";
-        var subdomains = ["tiles01", "tiles02", "tiles03", "tiles04"];
-        var tile_bckgrnd_date = "201504270000";
-        var fcoo = L.tileLayer(fcoo_base + "tiles_bckgrnd_" + tilesize + "_mercator_kort1_" + tile_bckgrnd_date + "/{z}/{x}/{y}.png", {
-            maxZoom: 12,
-            tileSize: tilesize,
-            subdomains: subdomains,
-            attribution: '<a href="' + location.protocol + '//fcoo.dk">Danish Defence Centre for Operational Oceanography</a>',
-            continuousWorld: false,
-            updateInterval: 50
-        });
+        var store = new L.Control.FcooLayerStore({language: lang});
+        var fcoo = store.background;
 
         // Put background layers into hash for easy consumption by layer control
         var bgstring = getI18n("Background Maps", lang);
         var baseMaps = {};
         baseMaps[bgstring] = {
             "FCOO Standard": fcoo,
-            //"OSM Standard": standard,
-            //"Mapquest Open": mapquest,
             "ESRI Aerial": esri
         };
 
         // Construct FCOO foreground/top layer
-        var tile_top_date = "201504270000";
-        var topLayer = L.tileLayer(fcoo_base + "tiles_top_" + tilesize + "_mercator_" + tile_top_date + "/{z}/{x}/{y}.png", {
-            maxZoom: 12,
-            tileSize: tilesize,
-            subdomains: subdomains,
-            zIndex: 1000,
-            continuousWorld: false,
-            updateInterval: 50,
-            errorTileUrl: fcoo_base + "empty_" + tilesize + ".png"
-        });
+        var topLayer = store.top;
 
         return {baseMaps: baseMaps, topLayer: topLayer};
     }
