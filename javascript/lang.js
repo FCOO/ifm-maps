@@ -57,7 +57,7 @@
                 'Point forecasts': 'Punktprognoser',
                 'Static layers': 'Statiske lag',
                 'Forecasts': 'Prognoser',
-                'Tidal forecasts': 'Tidevandsprognoser',
+                'Tidal predictions': 'Tidevandsprognoser',
                 'Short range forecasts': 'Korte prognoser',
                 'Medium range forecasts': 'Mellemlange prognoser',
                 'Sea level': 'Vandstand',

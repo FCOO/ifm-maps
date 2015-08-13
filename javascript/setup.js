@@ -316,7 +316,7 @@
                 "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sss'})
             }, 
             "Point forecasts": {
-                "Tidal forecasts": undefined
+                "Tidal predictions": undefined
             },
             "Celestial information": {
                 "Solar Terminator": store.solarTerminator
@@ -489,7 +489,7 @@
                         tidal_url = tidal_url.replace('{t2}', t2);
                         tidal_url = tidal_url.replace('{l}', lang);
                         var popups = {};
-                        popups.en = '<h2>Tidal forecast for ' + feature.properties.name + '</h2><img src="' + tidal_url + '" height="350" width="500" /><p>Tidal forecasts from <a href="http://dmi.dk">DMI</a>. Tidal tables can be found <a href="http://www.dmi.dk/en/groenland/hav/tidevandstabeller-groenland/">here</a>.</p>';
+                        popups.en = '<h2>Tidal predictions for ' + feature.properties.name + '</h2><img src="' + tidal_url + '" height="350" width="500" /><p>Tidal predictions from <a href="http://dmi.dk">DMI</a>. Tidal tables can be found <a href="http://www.dmi.dk/en/groenland/hav/tidevandstabeller-groenland/">here</a>.</p>';
                         popups.da = '<h2>Tidevandsprognose for ' + feature.properties.name + '</h2><img src="' + tidal_url + '" height="350" width="500" /><p>Tidevandsprognoser fra <a href="http://dmi.dk">DMI</a>. Tidevandstabeller kan findes <a href="http://www.dmi.dk/groenland/hav/tidevandstabeller-groenland/">her</a>.</p>';
                         if (typeof popups[lang] != 'undefined') {
                             popstr = popups[lang];
@@ -514,7 +514,7 @@
                     },
                     /*jshint unused: true*/
                 });
-                overlays["Point forecasts"]["Tidal forecasts"] = geojson;
+                overlays["Point forecasts"]["Tidal predictions"] = geojson;
                 initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
             });
         } else if (domain === 'indian_ocean') {
