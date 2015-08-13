@@ -165,6 +165,57 @@
             }
         };
         proxy.doAjax();
+    } else if (domain === 'faroe_islands_impact') {
+        overlays = {
+            "Medium range forecasts - Own Ops": {
+                "Helo": new L.FImpactLayer.helo_tol_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "RHIB": new L.FImpactLayer.rhib_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "LCP": new L.FImpactLayer.lcp_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "RAS": new L.FImpactLayer.replenishment_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Boarding": new L.FImpactLayer.boarding_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "UAV": new L.FImpactLayer.uav_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Generic1": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Generic2": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+            },
+            "Medium range forecasts - Adversary Ops": {
+                "Skiff": new L.FImpactLayer.skiff_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Dhow": new L.FImpactLayer.dhow_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Fishing:120GT": new L.FImpactLayer.fishingboat_120_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Fishing:500GT": new L.FImpactLayer.fishingboat_500_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Fishing:1000GT": new L.FImpactLayer.fishingboat_1000_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Fishing:2000GT": new L.FImpactLayer.fishingboat_2000_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Generic1": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Generic2": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+            },
+            "Medium range forecasts": {
+                "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windSpeed'}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection'}),
+                "pressure": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'seaLevelPressure'}),
+                "precip": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'totalPrecipitation'}),
+                "airtemp": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'airTemperature'}),
+                "cloudcover": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'totalCloudCover'}),
+                "waveperiod": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'wavePeriod'}),
+                "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'waveHeight'}),
+                "seastate": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'seaState'}),
+                "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'waveDirection'}),
+                "currentspeed": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentSpeed'}),
+                "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection'}),
+                "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sst'}),
+                "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sss'})
+            }, 
+            "Celestial information": {
+                "Solar Terminator": store.solarTerminator
+            },
+            "Static layers": {
+                "EEZ": store.EEZ,
+            }
+        };
+        langs = ['da', 'en'];
+        minZoom = 3;
+        maxZoom = 12;
+        zoom = 7;
+        lat = 61.5;
+        lon = -6.0;
     } else if (domain === 'faroe_islands') {
         overlays = {
             "Short range forecasts": {
@@ -481,7 +532,7 @@
                 overlays["Point forecasts"]["Sea level"] = geojson;
                 initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
             });
-        } else if (domain === 'faroe_islands') {
+        } else if (domain === 'faroe_islands' || domain === 'faroe_islands_impact') {
             initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
         } else if (domain === 'greenland' || domain === 'greenland_impact') {
             var popstr;
