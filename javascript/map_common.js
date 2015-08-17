@@ -98,7 +98,7 @@
             icon: 'icon-home'
         }));
 
-            // Add language selector
+        // Add language selector
         map.addControl(L.languageSelector({
             languages: languages,
             callback: changeLanguage,
