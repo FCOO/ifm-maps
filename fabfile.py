@@ -24,6 +24,7 @@ env.setups = {'greenland': 'Greenland',
               'mediterranean': 'Mediterranean',
               'indian_ocean': 'Indian Ocean',
               'denmark_impact': 'Denmark',
+              'denmark_impact_land': 'Denmark',
               'greenland_impact': 'Greenland',
               'indian_ocean_impact': 'Indian Ocean'}
 
