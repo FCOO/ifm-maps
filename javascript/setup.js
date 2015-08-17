@@ -21,6 +21,7 @@
     var tilesize = getTilesize();
     var lang = getLocalLanguage();
     var store = new L.Control.FcooLayerStore({language: lang});
+    var istore = new L.Control.ImpactLayerStore({language: lang});
     var basemap = "FCOO Standard";
     var langs = ['da', 'en'];
     var useGeoMetoc = false;
@@ -33,26 +34,27 @@
         zoom = 6;
         lat = 55.7;
         lon = 11.1;
+        var stdOpts = {ajaxProxy: proxy, foreground: store.foreground}
         overlays = {
             "Short range forecasts - Own Ops": {
-                "Helo": new L.FImpactLayer.helo_tol_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "RHIB": new L.FImpactLayer.rhib_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "LCP": new L.FImpactLayer.lcp_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "RAS": new L.FImpactLayer.replenishment_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Boarding": new L.FImpactLayer.boarding_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "UAV": new L.FImpactLayer.uav_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic1": new L.FImpactLayer.generic_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic2": new L.FImpactLayer.generic_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground})
+                "Helo": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'helo', 'options': stdOpts}),
+                "RHIB": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'RHIB', 'options': stdOpts}),
+                "LCP": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'LCP', 'options': stdOpts}),
+                "RAS": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'RAS', 'options': stdOpts}),
+                "Boarding": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'boarding', 'options': stdOpts}),
+                "UAV": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'UAV', 'options': stdOpts}),
+                "Generic1": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'generic', 'options': stdOpts}),
+                "Generic2": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'generic', 'options': stdOpts})
             },
             "Short range forecasts - Adversary Ops": {
-                "Skiff": new L.FImpactLayer.skiff_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Dhow": new L.FImpactLayer.dhow_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:120GT": new L.FImpactLayer.fishingboat_120_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:500GT": new L.FImpactLayer.fishingboat_500_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:1000GT": new L.FImpactLayer.fishingboat_1000_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:2000GT": new L.FImpactLayer.fishingboat_2000_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic1": new L.FImpactLayer.generic_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic2": new L.FImpactLayer.generic_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground})
+                "Skiff": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'skiff', 'options': stdOpts}),
+                "Dhow": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'dhow', 'options': stdOpts}),
+                "Fishing:120GT": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'fishingboat_120', 'options': stdOpts}),
+                "Fishing:500GT": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'fishingboat_500', 'options': stdOpts}),
+                "Fishing:1000GT": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'fishingboat_1000', 'options': stdOpts}),
+                "Fishing:2000GT": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'fishingboat_2000', 'options': stdOpts}),
+                "Generic1": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'generic', 'options': {ajaxProxy: proxy}}),
+                "Generic2": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'generic', 'options': {ajaxProxy: proxy}})
             },
             "Short range forecasts": {
                 "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
@@ -73,24 +75,24 @@
                 "salinity": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'sss', 'options': {ajaxProxy: proxy}})
             },
             "Medium range forecasts - Own Ops": {
-                "Helo": new L.FImpactLayer.helo_tol_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "RHIB": new L.FImpactLayer.rhib_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "LCP": new L.FImpactLayer.lcp_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "RAS": new L.FImpactLayer.replenishment_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Boarding": new L.FImpactLayer.boarding_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "UAV": new L.FImpactLayer.uav_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic1": new L.FImpactLayer.generic_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic2": new L.FImpactLayer.generic_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground})
+                "Helo": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'helo', 'options': stdOpts}),
+                "RHIB": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'RHIB', 'options': stdOpts}),
+                "LCP": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'LCP', 'options': stdOpts}),
+                "RAS": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'RAS', 'options': stdOpts}),
+                "Boarding": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'boarding', 'options': stdOpts}),
+                "UAV": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'UAV', 'options': stdOpts}),
+                "Generic1": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'generic', 'options': stdOpts}),
+                "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'generic', 'options': stdOpts})
             },
             "Medium range forecasts - Adversary Ops": {
-                "Skiff": new L.FImpactLayer.skiff_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Dhow": new L.FImpactLayer.dhow_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:120GT": new L.FImpactLayer.fishingboat_120_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:500GT": new L.FImpactLayer.fishingboat_500_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:1000GT": new L.FImpactLayer.fishingboat_1000_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:2000GT": new L.FImpactLayer.fishingboat_2000_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic1": new L.FImpactLayer.generic_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic2": new L.FImpactLayer.generic_ecmwf_dk({tileSize: tilesize, zIndex: 100, foreground: store.foreground})
+                "Skiff": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'skiff', 'options': stdOpts}),
+                "Dhow": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'dhow', 'options': stdOpts}),
+                "Fishing:120GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'fishingboat_120', 'options': stdOpts}),
+                "Fishing:500GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'fishingboat_500', 'options': stdOpts}),
+                "Fishing:1000GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'fishingboat_1000', 'options': stdOpts}),
+                "Fishing:2000GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'fishingboat_2000', 'options': stdOpts}),
+                "Generic1": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'generic', 'options': {ajaxProxy: proxy}}),
+                "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'generic', 'options': {ajaxProxy: proxy}})
             },
             "Medium range forecasts": {
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
@@ -103,6 +105,51 @@
                 "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
                 "seastate": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
                 "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}})
+            },
+            "Celestial information": {
+                "Solar Terminator": store.solarTerminator
+            },
+            "Static layers": {
+                "EEZ": store.EEZ,
+                "Firing areas": store.firingAreas
+            }
+        };
+    } else if (domain === 'denmark_impact_land') {
+        minZoom = 4;
+        maxZoom = 12;
+        zoom = 6;
+        lat = 55.7;
+        lon = 11.1;
+        var stdOpts = {ajaxProxy: proxy}
+        overlays = {
+            "Impact forecasts": {
+                "NBC Smoke": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'nbc_smoke', 'options': stdOpts}),
+                "Personnel Land": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'personnel_land', 'options': stdOpts}),
+                "Personnel Airborne": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'personnel_airborne', 'options': stdOpts}),
+                "Cross Country Manoeuvres": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'cross_country_manoeuvres', 'options': stdOpts}),
+                "Bridging": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'bridging', 'options': stdOpts}),
+                "Armor Gun Sighting": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'armor_gun_sighting', 'options': stdOpts}),
+                "Paradrop": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'paradrop', 'options': stdOpts}),
+                "Artillery": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'artillery', 'options': stdOpts}),
+                "Air Defence": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'air_defence', 'options': stdOpts}),
+            },
+            "Forecasts": {
+                "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
+                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
+                "visibility": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'visibility', 'options': {ajaxProxy: proxy}}),
+                "pressure": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
+                "precip": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'totalPrecipitation', 'options': {ajaxProxy: proxy}}),
+                "airtemp": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'airTemperature', 'options': {ajaxProxy: proxy}}),
+                "cloudcover": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'totalCloudCover', 'options': {ajaxProxy: proxy}}),
+                "waveperiod": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'wavePeriod', 'options': {ajaxProxy: proxy}}),
+                "waveheight": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
+                "seastate": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
+                "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
+                "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
+                "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
+                "elev": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'seaLevel', 'options': {ajaxProxy: proxy}}),
+                "seatemp": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'sst', 'options': {ajaxProxy: proxy}}),
+                "salinity": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'sss', 'options': {ajaxProxy: proxy}})
             },
             "Celestial information": {
                 "Solar Terminator": store.solarTerminator
@@ -166,26 +213,27 @@
         };
         proxy.doAjax();
     } else if (domain === 'faroe_islands_impact') {
+        var stdOpts = {ajaxProxy: proxy, foreground: store.foreground}
         overlays = {
             "Medium range forecasts - Own Ops": {
-                "Helo": new L.FImpactLayer.helo_tol_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "RHIB": new L.FImpactLayer.rhib_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "LCP": new L.FImpactLayer.lcp_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "RAS": new L.FImpactLayer.replenishment_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Boarding": new L.FImpactLayer.boarding_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "UAV": new L.FImpactLayer.uav_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic1": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic2": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Helo": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'helo', 'options': stdOpts}),
+                "RHIB": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'RHIB', 'options': stdOpts}),
+                "LCP": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'LCP', 'options': stdOpts}),
+                "RAS": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'RAS', 'options': stdOpts}),
+                "Boarding": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'boarding', 'options': stdOpts}),
+                "UAV": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'UAV', 'options': stdOpts}),
+                "Generic1": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': stdOpts}),
+                "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': stdOpts})
             },
             "Medium range forecasts - Adversary Ops": {
-                "Skiff": new L.FImpactLayer.skiff_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Dhow": new L.FImpactLayer.dhow_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:120GT": new L.FImpactLayer.fishingboat_120_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:500GT": new L.FImpactLayer.fishingboat_500_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:1000GT": new L.FImpactLayer.fishingboat_1000_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:2000GT": new L.FImpactLayer.fishingboat_2000_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic1": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic2": new L.FImpactLayer.generic_ecmwf_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Skiff": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'skiff', 'options': stdOpts}),
+                "Dhow": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'dhow', 'options': stdOpts}),
+                "Fishing:120GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'fishingboat_120', 'options': stdOpts}),
+                "Fishing:500GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'fishingboat_500', 'options': stdOpts}),
+                "Fishing:1000GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'fishingboat_1000', 'options': stdOpts}),
+                "Fishing:2000GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'fishingboat_2000', 'options': stdOpts}),
+                "Generic1": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': {ajaxProxy: proxy}}),
+                "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': {ajaxProxy: proxy}})
             },
             "Medium range forecasts": {
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windSpeed'}),
@@ -261,7 +309,28 @@
         lat = 61.5;
         lon = -6.0;
     } else if (domain === 'greenland_impact') {
+        var stdOpts = {ajaxProxy: proxy, foreground: store.foreground}
         overlays = {
+            "Short range forecasts - Own Ops": {
+                "Helo": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'helo', 'options': stdOpts}),
+                "RHIB": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'RHIB', 'options': stdOpts}),
+                "LCP": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'LCP', 'options': stdOpts}),
+                "RAS": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'RAS', 'options': stdOpts}),
+                "Boarding": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'boarding', 'options': stdOpts}),
+                "UAV": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'UAV', 'options': stdOpts}),
+                "Generic1": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'generic', 'options': stdOpts}),
+                "Generic2": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'generic', 'options': stdOpts})
+            },
+            "Short range forecasts - Adversary Ops": {
+                "Skiff": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'skiff', 'options': stdOpts}),
+                "Dhow": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'dhow', 'options': stdOpts}),
+                "Fishing:120GT": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'fishingboat_120', 'options': stdOpts}),
+                "Fishing:500GT": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'fishingboat_500', 'options': stdOpts}),
+                "Fishing:1000GT": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'fishingboat_1000', 'options': stdOpts}),
+                "Fishing:2000GT": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'fishingboat_2000', 'options': stdOpts}),
+                "Generic1": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'generic', 'options': {ajaxProxy: proxy}}),
+                "Generic2": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'generic', 'options': {ajaxProxy: proxy}})
+            },
             "Short range forecasts - Own Ops": {
                 "Helo": new L.FImpactLayer.helo_tol_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
                 "RHIB": new L.FImpactLayer.rhib_gl({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
@@ -428,26 +497,27 @@
         lat = 0.0;
         lon = 56.0;
     } else if (domain === 'indian_ocean_impact') {
+        var stdOpts = {ajaxProxy: proxy, foreground: store.foreground}
         overlays = {
             "Forecasts - Own Ops": {
-                "Helo": new L.FImpactLayer.helo_tol_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "RHIB": new L.FImpactLayer.rhib_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "LCP": new L.FImpactLayer.lcp_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "RAS": new L.FImpactLayer.replenishment_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Boarding": new L.FImpactLayer.boarding_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "UAV": new L.FImpactLayer.uav_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic1": new L.FImpactLayer.generic_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic2": new L.FImpactLayer.generic_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Helo": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'helo', 'options': stdOpts}),
+                "RHIB": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'RHIB', 'options': stdOpts}),
+                "LCP": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'LCP', 'options': stdOpts}),
+                "RAS": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'RAS', 'options': stdOpts}),
+                "Boarding": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'boarding', 'options': stdOpts}),
+                "UAV": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'UAV', 'options': stdOpts}),
+                "Generic1": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': stdOpts}),
+                "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': stdOpts})
             },
             "Forecasts - Adversary Ops": {
-                "Skiff": new L.FImpactLayer.skiff_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Dhow": new L.FImpactLayer.dhow_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:120GT": new L.FImpactLayer.fishingboat_120_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:500GT": new L.FImpactLayer.fishingboat_500_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:1000GT": new L.FImpactLayer.fishingboat_1000_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Fishing:2000GT": new L.FImpactLayer.fishingboat_2000_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic1": new L.FImpactLayer.generic_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
-                "Generic2": new L.FImpactLayer.generic_ecmwf_io({tileSize: tilesize, zIndex: 100, foreground: store.foreground}),
+                "Skiff": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'skiff', 'options': stdOpts}),
+                "Dhow": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'dhow', 'options': stdOpts}),
+                "Fishing:120GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'fishingboat_120', 'options': stdOpts}),
+                "Fishing:500GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'fishingboat_500', 'options': stdOpts}),
+                "Fishing:1000GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'fishingboat_1000', 'options': stdOpts}),
+                "Fishing:2000GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'fishingboat_2000', 'options': stdOpts}),
+                "Generic1": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': {ajaxProxy: proxy}}),
+                "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': {ajaxProxy: proxy}})
             },
             "Forecasts": {
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windSpeed'}),
@@ -507,7 +577,7 @@
     }
 
     $(document).ready(function () {
-        if (domain === 'denmark_impact') {
+        if (domain === 'denmark_impact' || domain === 'denmark_impact_land') {
             initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
         } else if (domain === 'denmark') {
             var link_template = location.protocol + "//chart.fcoo.dk/station_timeseries.asp?s=:003__STATION__:046SeaLvl:002DK:001DEFAULT:04d620:04e400:04f0:04a1:04b48:04i0:04c1:04g0:0641:05opopup";
