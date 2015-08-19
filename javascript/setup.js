@@ -32,7 +32,7 @@
     if (domain === 'denmark_impact') {
         minZoom = 4;
         maxZoom = 12;
-        zoom = 6;
+        zoom = 7;
         lat = 55.7;
         lon = 11.1;
         stdOpts = {ajaxProxy: proxy, foreground: store.foreground};
@@ -163,7 +163,7 @@
     } else if (domain === 'denmark') {
         minZoom = 4;
         maxZoom = 12;
-        zoom = 6;
+        zoom = 7;
         lat = 55.7;
         lon = 11.1;
         enablePrint = false;
