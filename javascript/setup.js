@@ -123,7 +123,7 @@
         lon = 11.1;
         stdOpts = {ajaxProxy: proxy};
         overlays = {
-            "Impact forecasts": {
+            "Impacts": {
                 "NBC Smoke": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'nbc_smoke', 'options': stdOpts}),
                 "Personnel Land": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'personnel_land', 'options': stdOpts}),
                 "Personnel Airborne": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'personnel_airborne', 'options': stdOpts}),
