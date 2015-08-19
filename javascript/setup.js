@@ -37,7 +37,7 @@
         lon = 11.1;
         stdOpts = {ajaxProxy: proxy, foreground: store.foreground};
         overlays = {
-            "Short range forecasts - Own Ops": {
+            "Short range impacts - Own Ops": {
                 "Helo": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'helo', 'options': stdOpts}),
                 "RHIB": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'RHIB', 'options': stdOpts}),
                 "LCP": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'LCP', 'options': stdOpts}),
@@ -47,7 +47,7 @@
                 "Generic1": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'generic', 'options': stdOpts}),
                 "Generic2": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'generic', 'options': stdOpts})
             },
-            "Short range forecasts - Adversary Ops": {
+            "Short range impacts - Adversary Ops": {
                 "Skiff": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'skiff', 'options': stdOpts}),
                 "Dhow": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'dhow', 'options': stdOpts}),
                 "Fishing:120GT": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'fishingboat_120', 'options': stdOpts}),
@@ -75,7 +75,7 @@
                 "seatemp": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'sst', 'options': {ajaxProxy: proxy}}),
                 "salinity": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'sss', 'options': {ajaxProxy: proxy}})
             },
-            "Medium range forecasts - Own Ops": {
+            "Medium range impacts - Own Ops": {
                 "Helo": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'helo', 'options': stdOpts}),
                 "RHIB": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'RHIB', 'options': stdOpts}),
                 "LCP": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'LCP', 'options': stdOpts}),
@@ -85,7 +85,7 @@
                 "Generic1": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'generic', 'options': stdOpts}),
                 "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'generic', 'options': stdOpts})
             },
-            "Medium range forecasts - Adversary Ops": {
+            "Medium range impacts - Adversary Ops": {
                 "Skiff": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'skiff', 'options': stdOpts}),
                 "Dhow": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'dhow', 'options': stdOpts}),
                 "Fishing:120GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'fishingboat_120', 'options': stdOpts}),
@@ -216,7 +216,7 @@
     } else if (domain === 'faroe_islands_impact') {
         stdOpts = {ajaxProxy: proxy, foreground: store.foreground};
         overlays = {
-            "Medium range forecasts - Own Ops": {
+            "Medium range impacts - Own Ops": {
                 "Helo": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'helo', 'options': stdOpts}),
                 "RHIB": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'RHIB', 'options': stdOpts}),
                 "LCP": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'LCP', 'options': stdOpts}),
@@ -226,7 +226,7 @@
                 "Generic1": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': stdOpts}),
                 "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': stdOpts})
             },
-            "Medium range forecasts - Adversary Ops": {
+            "Medium range impacts - Adversary Ops": {
                 "Skiff": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'skiff', 'options': stdOpts}),
                 "Dhow": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'dhow', 'options': stdOpts}),
                 "Fishing:120GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'fishingboat_120', 'options': stdOpts}),
@@ -312,7 +312,7 @@
     } else if (domain === 'greenland_impact') {
         stdOpts = {ajaxProxy: proxy, foreground: store.foreground};
         overlays = {
-            "Short range forecasts - Own Ops": {
+            "Short range impacts - Own Ops": {
                 "Helo": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'helo', 'options': stdOpts}),
                 "RHIB": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'RHIB', 'options': stdOpts}),
                 "LCP": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'LCP', 'options': stdOpts}),
@@ -322,7 +322,7 @@
                 "Generic1": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'generic', 'options': stdOpts}),
                 "Generic2": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'generic', 'options': stdOpts})
             },
-            "Short range forecasts - Adversary Ops": {
+            "Short range impacts - Adversary Ops": {
                 "Skiff": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'skiff', 'options': stdOpts}),
                 "Dhow": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'dhow', 'options': stdOpts}),
                 "Fishing:120GT": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'fishingboat_120', 'options': stdOpts}),
@@ -346,7 +346,7 @@
                 "seastate": store.getLayer({'dataset': 'FCOO/WW3/ARCTIC', 'parameter': 'seaState'}),
                 "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/ARCTIC', 'parameter': 'waveDirection'})
             },
-            "Medium range forecasts - Own Ops": {
+            "Medium range impacts - Own Ops": {
                 "Helo": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'helo', 'options': stdOpts}),
                 "RHIB": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'RHIB', 'options': stdOpts}),
                 "LCP": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'LCP', 'options': stdOpts}),
@@ -356,7 +356,7 @@
                 "Generic1": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': stdOpts}),
                 "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': stdOpts})
             },
-            "Medium range forecasts - Adversary Ops": {
+            "Medium range impacts - Adversary Ops": {
                 "Skiff": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'skiff', 'options': stdOpts}),
                 "Dhow": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'dhow', 'options': stdOpts}),
                 "Fishing:120GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'fishingboat_120', 'options': stdOpts}),
@@ -480,7 +480,7 @@
     } else if (domain === 'indian_ocean_impact') {
         stdOpts = {ajaxProxy: proxy, foreground: store.foreground};
         overlays = {
-            "Forecasts - Own Ops": {
+            "Impacts - Own Ops": {
                 "Helo": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/AFR', 'parameter': 'helo', 'options': stdOpts}),
                 "RHIB": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/AFR', 'parameter': 'RHIB', 'options': stdOpts}),
                 "LCP": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/AFR', 'parameter': 'LCP', 'options': stdOpts}),
@@ -490,7 +490,7 @@
                 "Generic1": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/AFR', 'parameter': 'generic', 'options': stdOpts}),
                 "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/AFR', 'parameter': 'generic', 'options': stdOpts})
             },
-            "Forecasts - Adversary Ops": {
+            "Impacts - Adversary Ops": {
                 "Skiff": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/AFR', 'parameter': 'skiff', 'options': stdOpts}),
                 "Dhow": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/AFR', 'parameter': 'dhow', 'options': stdOpts}),
                 "Fishing:120GT": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/AFR', 'parameter': 'fishingboat_120', 'options': stdOpts}),
