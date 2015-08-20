@@ -26,6 +26,7 @@ env.setups = {'greenland': 'Greenland',
               'denmark_impact': 'Denmark',
               'denmark_impact_land': 'Denmark',
               'greenland_impact': 'Greenland',
+              'faroe_islands_impact': 'Faroe Islands',
               'indian_ocean_impact': 'Indian Ocean'}
 
 env.cssfiles = ["bower_components/leaflet-control-datetime/fontello/css/fontello.css",
