@@ -39,7 +39,8 @@
     "leaflet-control-forecast-print": "https://github.com/jblarsen/leaflet-control-forecast-print.git",
     "jQuery-ajaxTransport-XDomainRequest": "https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest.git#~1.0.4",
     "leaflet-geojsonlayer-msi": "https://github.com/jblarsen/leaflet-geojsonlayer-msi.git",
-    "leaflet-geojsonlayer-fwarn": "https://github.com/jblarsen/leaflet-geojsonlayer-fwarn.git"
+    "leaflet-geojsonlayer-fwarn": "https://github.com/jblarsen/leaflet-geojsonlayer-fwarn.git",
+    "leaflet-tilelayer-impact": "https://github.com/jblarsen/leaflet-tilelayer-impact.git"
   },
   "resolutions": {
     "leaflet": "master",
