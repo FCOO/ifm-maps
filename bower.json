@@ -42,7 +42,8 @@
     "leaflet-geojsonlayer-fwarn": "https://github.com/jblarsen/leaflet-geojsonlayer-fwarn.git"
   },
   "resolutions": {
-    "leaflet": "master"
+    "leaflet": "master",
+    "jquery": "~2.1.4"
   },
   "moduleType": [
     "es6"
