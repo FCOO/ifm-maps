@@ -310,7 +310,7 @@
         var callback = callback_obj.changeDatetime;
         var datetime_pos = 'bottomleft';
         if (large) {
-            datetime_pos = 'topright';
+            datetime_pos = 'bottomright';
         }
         function checkTimesteps() {
             var dates = getTimeSteps(overlayMaps);
@@ -319,6 +319,15 @@
                 if (urlParams.hidecontrols == "true") {
                     visibility = "hidden";
                 }
+                // Add permanent link control
+                map.addControl(new L.Control.Permalink({
+                    layers: layerControl,
+                    locator: locator,
+                    useAnchor: true,
+                    useLocation: true,
+                    position: 'bottomright'
+                }));
+                //$(".leaflet-control-permalink").css("visibility", "hidden");
                 var datetimeControl = (new L.Control.Datetime({
                         title: getI18n('datetime', localLang),
                         datetimes: dates,
@@ -329,15 +338,6 @@
                         vertical: false,
                         position: datetime_pos
                 })).addTo(map);
-                // Add permanent link control
-                map.addControl(new L.Control.Permalink({
-                    layers: layerControl,
-                    locator: locator,
-                    useAnchor: true,
-                    useLocation: true,
-                    position: 'bottomright'
-                }));
-                //$(".leaflet-control-permalink").css("visibility", "hidden");
 
                 // Make sure that overlays are updated
                 map.fire("overlayadd");
@@ -356,7 +356,7 @@
                         $datetimeElem.detach();
                         var $container = $('.leaflet-bottom.leaflet-left');
                         if (large) {
-                            $container = $('.leaflet-top.leaflet-right');
+                            $container = $('.leaflet-bottom.leaflet-right');
                         }
                         $container.append($datetimeElem);
 
