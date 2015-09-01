@@ -78,6 +78,7 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-model.js",
                "bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-fcoo.js",
                "bower_components/leaflet-tilelayer-wms-fcoo/wms-ajax-proxy.js",
+               "bower_components/leaflet-layer-sealevel-denmark/leaflet-layer-sealevel-denmark.js",
                "bower_components/leaflet-pip/leaflet-pip.js",
                "bower_components/leaflet-geojsonlayer-msi/leaflet-geojsonlayer-msi.js",
                "bower_components/leaflet-geojsonlayer-fwarn/leaflet-geojsonlayer-fwarn.js",
@@ -156,6 +157,7 @@ def build_web():
     local('cp index.html dist/.')
     local('cp -r www dist/.')
     local('cp -r json dist/.')
+    local('cp bower_components/leaflet-layer-sealevel-denmark/sealevel_stations_denmark.json dist/json/.')
     #local('cp -r javascript dist/.')
     #local('cp -r leaflet dist/.')
     #local('cp -r bower_components dist/.')

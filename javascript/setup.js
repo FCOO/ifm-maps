@@ -202,7 +202,7 @@
                 "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}})
             },
             "Point forecasts": {
-                "Sea level": undefined,
+                "Sea level": new L.GeoJSON.Sealevel()
             },
             "Celestial information": {
                 "Solar Terminator": store.solarTerminator
@@ -561,28 +561,7 @@
         if (domain === 'denmark_impact' || domain === 'denmark_impact_land') {
             initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
         } else if (domain === 'denmark') {
-            var link_template = location.protocol + "//chart.fcoo.dk/station_timeseries.asp?s=:003__STATION__:046SeaLvl:002DK:001DEFAULT:04d620:04e400:04f0:04a1:04b48:04i0:04c1:04g0:0641:05opopup";
-            $.getJSON("../json/Observations.json", function (data) {
-                var geojson = L.geoJson(data, {
-                    onEachFeature: function (feature, layer) {
-                        layer.bindPopup('<img src="' + link_template.replace('__STATION__', feature.properties.id) + '" height="350" width="500" />', {maxWidth: 700, maxHeight: 600});
-                    },
-                    /*jshint unused: true*/
-                    pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng, {
-                                   radius: 5,
-                                   fillColor: "#ff7800",
-                                   color: "#000",
-                                   weight: 1,
-                                   opacity: 1,
-                                   fillOpacity: 0.8
-                        });
-                    }
-                    /*jshint unused: false*/
-                });
-                overlays["Point forecasts"]["Sea level"] = geojson;
-                initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
-            });
+            initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
         } else if (domain === 'faroe_islands' || domain === 'faroe_islands_impact') {
             initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat, lon, tilesize, enablePrint, enableWarnings, useGeoMetoc);
         } else if (domain === 'greenland' || domain === 'greenland_impact') {
