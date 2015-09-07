@@ -71,6 +71,11 @@
             map.attributionControl.setPrefix("");
         }
 
+        // Workaround for https://github.com/Leaflet/Leaflet/issues/3765
+        //map.on('zoomend', function (e) {
+            //map.fire('dragend');
+        //});
+
         // Optionally use FCOO Geolocated METOC service (on right click)
         if (useGeoMetoc) {
             map.on('contextmenu', function (e) {
