@@ -45,6 +45,7 @@ env.cssfiles = ["bower_components/leaflet-control-datetime/fontello/css/fontello
                 "bower_components/leaflet-geojsonlayer-msi/leaflet-geojsonlayer-msi.css",
                 "bower_components/leaflet-geojsonlayer-fwarn/leaflet-geojsonlayer-fwarn.css",
                 "bower_components/leaflet-tilelayer-impact/leaflet-tilelayer-impact.css",
+                "bower_components/leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css",
                 "leaflet/Control.OSMGeocoder.ifm-maps.css",
                 "css/ifm-maps.css"]
 
@@ -86,6 +87,7 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "bower_components/leaflet-tilelayer-impact/leaflet-tilelayer-impact.js",
                "bower_components/leaflet-tilelayer-impact/leaflet-tilelayer-impact-store.js",
                "bower_components/leaflet-tilelayer-impact/Permalink.ImpactLayer.js",
+               "bower_components/leaflet-graphicscale/dist/Leaflet.GraphicScale.min.js",
                "leaflet/Permalink.Locate.js",
                "leaflet/Permalink.CategorizedLayer.js",
                "leaflet/Permalink.CategorizedOverlay.js",

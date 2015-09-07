@@ -222,7 +222,11 @@
         }));
 
         // Add length scale control
-        L.control.scale().addTo(map);
+        L.control.graphicScale({
+          type         : 'both',
+          position     : 'bottomleft',
+          maxUnitsWidth: 200,
+        }).addTo(map);
 
         // patch layer control to add some titles
         var patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
@@ -279,7 +283,7 @@
         $(".leaflet-control-zoom").addClass("show-on-large");
         $(".leaflet-control-home").addClass("show-on-large");
         $(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("show-on-large");
-        $(".leaflet-control-scale").addClass("show-on-large");
+        $(".leaflet-control-graphicscale").addClass("show-on-large");
         $(".leaflet-control-geocoder").addClass("show-on-large");
         $(".leaflet-control-position").addClass("show-on-large");
         $(".leaflet-control-print").addClass("show-on-large");
