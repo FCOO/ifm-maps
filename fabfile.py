@@ -38,6 +38,7 @@ env.cssfiles = ["bower_components/leaflet-control-datetime/fontello/css/fontello
                 "external/flag-icon-css/css/flag-icon.css",
                 "bower_components/leaflet-control-position/leaflet-control-position.css",
                 "bower_components/leaflet-control-home/leaflet-control-home.css",
+                "bower_components/leaflet-categorized-layers/src/radio-checkbox.css",
                 "bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.css",
                 "bower_components/leaflet-control-datetime/leaflet-control-datetime.css",
                 "bower_components/leaflet-control-legend/leaflet-control-legend.css",
@@ -48,7 +49,6 @@ env.cssfiles = ["bower_components/leaflet-control-datetime/fontello/css/fontello
                 "bower_components/leaflet-graphicscale/dist/Leaflet.GraphicScale.min.css",
                 "leaflet/Control.OSMGeocoder.ifm-maps.css",
                 "css/ifm-maps.css"]
-
 
 env.cssfiles_min = ["external/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css",
                     "external/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css"]
@@ -71,6 +71,8 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "bower_components/Leaflet.Terminator/L.Terminator.js",
                "bower_components/leaflet-control-position/leaflet-control-position.js",
                "bower_components/leaflet-control-home/leaflet-control-home.js",
+               "bower_components/leaflet-categorized-layers/src/namespace.js",
+               "bower_components/leaflet-categorized-layers/src/radio-checkbox.js",
                "bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.js",
                "bower_components/leaflet-control-datetime/leaflet-control-datetime.js",
                "bower_components/leaflet-tilelayer-counting/leaflet-tilelayer-counting.js",
