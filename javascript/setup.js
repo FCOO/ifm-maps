@@ -383,7 +383,7 @@
                 "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sss'})
             }, 
             "Point forecasts": {
-                "Tidal predictions": undefined
+                "Tidal predictions": new L.GeoJSON.Tides({'language': lang})
             },
             "Celestial information": {
                 "Solar Terminator": store.solarTerminator
