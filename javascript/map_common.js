@@ -227,6 +227,8 @@
         L.control.graphicScale({
           type         : 'both',
           position     : 'bottomleft',
+          backgroundColor: 'white',
+          opacity: 0.4,
           maxUnitsWidth: 200,
         }).addTo(map);
 
