@@ -208,8 +208,7 @@
                 "Solar Terminator": store.solarTerminator
             },
             "Static layers": {
-                "EEZ": store.EEZ,
-                "Firing areas": store.firingAreas
+                "EEZ": store.EEZ
             }
         };
         proxy.doAjax();

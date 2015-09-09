@@ -20,6 +20,7 @@
             urlParams,
             map;
         localLang = getLocalLanguage();
+        var store = new L.Control.FcooLayerStore({language: localLang});
         var large = false;
         if (mediaQueriesSupported()) {
             var mq = window.matchMedia('screen and (min-width: 641px) and (min-height: 641px)');
@@ -92,6 +93,7 @@
             map.addLayer(new L.GeoJSON.MSI({language: localLang}));
 
             // Add firing warnings
+            map.addLayer(store.firingAreas);
             map.addLayer(new L.GeoJSON.Fwarn({language: localLang}));
         }
 
