@@ -53,6 +53,10 @@
             da: {
                 maps: 'Kort',
                 'Home': 'Hjem',
+                'Save settings': 'Gem indstillinger',
+                'Please create a bookmark in your browser to save current map state': 'Lav et bogmærke i din browser for at gemme kortets nuværende tilstand',
+                'Press Cmd+D to save current map state in a bookmark': 'Tryk Cmd+D for at gemme kortets nuværende tilstand som et bogmærke',
+                'Press Ctrl+D to save current map state in a bookmark': 'Tryk Ctrl+D for at gemme kortets nuværende tilstand som et bogmærke',
                 'Navigate to home page': 'Naviger til hjemmesiden',
                 'Background Maps': 'Baggrundskort',
                 'Point forecasts': 'Punktprognoser',

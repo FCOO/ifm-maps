@@ -102,7 +102,30 @@
             text: getI18n('Home', localLang),
             title: getI18n('Navigate to home page', localLang),
             href: location.protocol + '//fcoo.dk',
-            icon: 'icon-home'
+            icon: 'fa fa-home fa-2x'
+        }));
+
+        // Add bookmark/save icon
+        map.addControl(new L.Control.FontAwesomeButton({
+            onclick: function (evt) {
+                evt.preventDefault(); // Prevent link from being processed
+                var bookmarkURL = window.location.href;
+                var bookmarkTitle = document.title;
+                var triggerDefault = false;
+                if (window.external && ('AddFavorite' in window.external)) {
+                    // IE Favorite
+                    window.external.AddFavorite(bookmarkURL, bookmarkTitle);
+                } else {
+                    // WebKit - Safari/Chrome - Mozilla Firefox
+                    noty({text: this.options.message, type: 'information', timeout: 10000});
+                }
+                return triggerDefault;
+            },
+            message: getI18n('Please create a bookmark in your browser to save current map state', localLang),
+
+            title: getI18n('Save settings', localLang),
+            fontAwesomeIcon: 'fa fa-floppy-o fa-2x',
+            className: 'leaflet-control-floppy-button'
         }));
 
         // Add language selector
@@ -172,8 +195,6 @@
                 popup: getI18n("You are within {distance} {unit} from this point", localLang),
                 outsideMapBoundsMsg: getI18n("You seem located outside the boundaries of the map", localLang)
             },
-            icon: 'icon-location',
-            iconLoading: 'icon-spinner',
             onLocationError: function(err) {
                 noty({text: err.message, type: 'information', timeout: 1000});
             },
@@ -251,7 +272,7 @@
         // Add print control
         if (enablePrint) {
             map.addControl(L.Control.print({
-                icon: 'icon-print',
+                icon: 'fa fa-print fa-2x',
             }));
         }
 
@@ -338,6 +359,7 @@
                     locator: locator,
                     useAnchor: true,
                     useLocation: true,
+                    text: '',
                     position: 'bottomright'
                 }));
                 //$(".leaflet-control-permalink").css("visibility", "hidden");

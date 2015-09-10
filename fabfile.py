@@ -29,11 +29,10 @@ env.setups = {'greenland': 'Greenland',
               'faroe_islands_impact': 'Faroe Islands',
               'indian_ocean_impact': 'Indian Ocean'}
 
-env.cssfiles = ["bower_components/leaflet-control-datetime/fontello/css/fontello.css",
+env.cssfiles = ["bower_components/fontawesome/css/font-awesome.min.css",
                 "bower_components/leaflet/dist/leaflet.css",
                 "bower_components/Leaflet.MousePosition/src/L.Control.MousePosition.css",
                 "bower_components/leaflet-languageselector/leaflet-languageselector.css",
-                "bower_components/leaflet-control-osm-geocoder/Control.OSMGeocoder.css",
                 "bower_components/leaflet-locatecontrol/dist/L.Control.Locate.css",
                 "external/flag-icon-css/css/flag-icon.css",
                 "bower_components/leaflet-control-position/leaflet-control-position.css",
@@ -90,6 +89,7 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "bower_components/leaflet-tilelayer-impact/leaflet-tilelayer-impact-store.js",
                "bower_components/leaflet-tilelayer-impact/Permalink.ImpactLayer.js",
                "bower_components/leaflet-graphicscale/dist/leaflet-graphicscale.min.js",
+               "bower_components/leaflet-control-fa-button/leaflet-control-fa-button.js",
                "leaflet/Permalink.Locate.js",
                "leaflet/Permalink.CategorizedLayer.js",
                "leaflet/Permalink.CategorizedOverlay.js",
@@ -178,7 +178,8 @@ def build_web():
     local('cp -r external/jquery-ui-1.11.4.custom/images/* dist/css/images/.')
     local('cp -r bower_components/leaflet-control-forecast-print/images/printer.png dist/css/images/.')
     local('cp -r external/flag-icon-css/flags dist/.')
-    local('cp -r bower_components/leaflet-control-datetime/fontello/font dist/.')
+    #local('cp -r bower_components/leaflet-control-datetime/fontello/font dist/.')
+    local('cp -r bower_components/fontawesome/fonts dist/.')
 
     # Modify html files to use time stamped css and js files
     local('cp dist/www/index-prod.html dist/www/index-dev.html')

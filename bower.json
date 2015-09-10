@@ -43,7 +43,8 @@
     "leaflet-tilelayer-impact": "https://github.com/jblarsen/leaflet-tilelayer-impact.git",
     "leaflet-layer-sealevel-denmark": "https://github.com/jblarsen/leaflet-layer-sealevel-denmark.git#master",
     "leaflet-layer-tides-greenland": "https://github.com/jblarsen/leaflet-layer-tides-greenland.git#master",
-    "leaflet-graphicscale": "NielsHolt/leaflet-graphicscale#master"
+    "leaflet-graphicscale": "NielsHolt/leaflet-graphicscale#master",
+    "leaflet-control-fa-button": "https://github.com/jblarsen/leaflet-control-fa-button.git"
   },
   "resolutions": {
     "leaflet": "master",
