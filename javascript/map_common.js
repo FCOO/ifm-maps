@@ -178,7 +178,7 @@
                             opts)).addTo(map);
 
         // Add position control
-        map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomright'}));
+        map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomleft'}));
 
         // Add locator control
         var follow = true;
