@@ -530,11 +530,16 @@
     } else if (domain === 'mediterranean') {
         overlays = {
             "Forecasts": {
-                "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/T15', 'parameter': 'windSpeed'}),
-                "windbarbs": store.getLayer({'dataset': 'DMI/HIRLAM/T15', 'parameter': 'windDirection'}),
-                "pressure": store.getLayer({'dataset': 'DMI/HIRLAM/T15', 'parameter': 'seaLevelPressure'}),
-                "airtemp": store.getLayer({'dataset': 'DMI/HIRLAM/T15', 'parameter': 'airTemperature'}),
-                "cloudcover": store.getLayer({'dataset': 'DMI/HIRLAM/T15', 'parameter': 'totalCloudCover'}),
+                "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'windSpeed'}),
+                "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'windDirection'}),
+                "pressure": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'seaLevelPressure'}),
+                "precip": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'totalPrecipitation'}),
+                "airtemp": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'airTemperature'}),
+                "cloudcover": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'totalCloudCover'}),
+                "waveperiod": store.getLayer({'dataset': 'ECMWF/DXP/MEDITERRANEAN', 'parameter': 'wavePeriod'}),
+                "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/MEDITERRANEAN', 'parameter': 'waveHeight'}),
+                "seastate": store.getLayer({'dataset': 'ECMWF/DXP/MEDITERRANEAN', 'parameter': 'seaState'}),
+                "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/MEDITERRANEAN', 'parameter': 'waveDirection'}),
                 "currentspeed": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'currentSpeed'}),
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'currentDirection'}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'sst'}),
@@ -544,14 +549,14 @@
                 "Solar Terminator": store.solarTerminator
             },
             "Static layers": {
-                "EEZ": store.EEZ
+                "EEZ": store.EEZ,
             }
         };
         minZoom = 3;
         maxZoom = 12;
-        zoom = 8;
-        lat = 35.5;
-        lon = 33.9;
+        zoom = 5;
+        lat = 36.8;
+        lon = 20.4;
     } else {
         throw new Error('Valid domain not specified: ' + domain);
     }
