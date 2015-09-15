@@ -467,8 +467,7 @@
                 "Solar Terminator": store.solarTerminator
             },
             "Static layers": {
-                "EEZ": store.EEZ,
-                "DBPedia (experimental)": L.dbPediaLayer({lang: 'en', includeCities: true, minZoom: 8})
+                "EEZ": store.EEZ
             }
         };
         minZoom = 4;
