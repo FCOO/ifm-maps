@@ -18,6 +18,7 @@
     "Leaflet.MousePosition": "https://github.com/ardhi/Leaflet.MousePosition.git",
     "Leaflet.dbpediaLayer": "https://github.com/kr1/Leaflet.dbpediaLayer.git",
     "flag-icon-css": "~0.6.5",
+    "latlng-format": "NielsHolt/latlng-format#master",
     "jquery-placeholder": "~2.1.1",
     "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
     "leaflet-languageselector": "https://github.com/buche/leaflet-languageselector.git",
