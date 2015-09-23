@@ -92,7 +92,7 @@
             // Add MSI information
             map.addLayer(new L.GeoJSON.MSI({language: localLang}));
 
-            // Add firing warnings
+            // Add firing warnings static and dynamic layers
             map.addLayer(store.firingAreas);
             map.addLayer(new L.GeoJSON.Fwarn({language: localLang}));
         }
@@ -178,7 +178,7 @@
                             opts)).addTo(map);
 
         // Add position control
-        map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomright'}));
+        map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomleft'}));
 
         // Add locator control
         var follow = true;
@@ -374,17 +374,26 @@
                         position: datetime_pos
                 })).addTo(map);
 
+                // Move legends to above datetime control if they are already 
+                // on map
+                var $legendContainer = $('.fcoo-legend-container');
+                var $container = $('.leaflet-bottom.leaflet-left');
+                $legendContainer.detach();
+                $container = $('.leaflet-bottom.leaflet-left');
+                $container.prepend($legendContainer);
+
                 // Make sure that overlays are updated
                 map.fire("overlayadd");
 
                 // Dynamic responsive design
                 if (mediaQueriesSupported()) {
                     mq.addListener(function (){
-                        // Modify layer control
                         var large = mq.matches;
+                        // Modify layer control
                         layerControl.options.collapsed = !large;
                         map.removeControl(layerControl);
                         layerControl.addTo(map);
+                        $(".leaflet-control-layers").addClass("hide-on-print");
 
                         // Move datetime control
                         var $datetimeElem = $('.leaflet-control-datetime');
@@ -393,16 +402,13 @@
                         if (large) {
                             $container = $('.leaflet-bottom.leaflet-right');
                         }
-                        $container.append($datetimeElem);
+                        $container.prepend($datetimeElem);
 
-                        // Move legends
+                        // Move legends to above datetime control
                         var $legendContainer = $('.fcoo-legend-container');
                         $legendContainer.detach();
-                        $container = $('.leaflet-top.leaflet-left');
-                        if (large) {
-                            $container = $('.leaflet-bottom.leaflet-left');
-                        }
-                        $container.append($legendContainer);
+                        $container = $('.leaflet-bottom.leaflet-left');
+                        $container.prepend($legendContainer);
                     });
                 }
             } else {
