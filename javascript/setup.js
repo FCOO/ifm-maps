@@ -25,7 +25,7 @@
     var basemap = "FCOO Standard";
     var langs = ['da', 'en'];
     var useGeoMetoc = false;
-    var enablePrint = true;
+    var enablePrint = false;
     var enableWarnings = false;
     var stdOpts;
 

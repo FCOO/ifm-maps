@@ -92,7 +92,7 @@
             // Add MSI information
             map.addLayer(new L.GeoJSON.MSI({language: localLang}));
 
-            // Add firing warnings
+            // Add firing warnings static and dynamic layers
             map.addLayer(store.firingAreas);
             map.addLayer(new L.GeoJSON.Fwarn({language: localLang}));
         }
