@@ -49,7 +49,8 @@
   },
   "resolutions": {
     "leaflet": "master",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "moment": "master"
   },
   "moduleType": [
     "es6"
