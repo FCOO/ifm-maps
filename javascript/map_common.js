@@ -354,23 +354,13 @@
         if (large) {
             datetime_pos = 'bottomright';
         }
+        var visibility = "visible";
+        if (urlParams.hidecontrols == "true") {
+            visibility = "hidden";
+        }
         function checkTimesteps() {
             var dates = getTimeSteps(overlayMaps);
             if (dates !== null) {
-                var visibility = "visible";
-                if (urlParams.hidecontrols == "true") {
-                    visibility = "hidden";
-                }
-                // Add permanent link control
-                map.addControl(new L.Control.Permalink({
-                    layers: layerControl,
-                    locator: locator,
-                    useAnchor: true,
-                    useLocation: true,
-                    text: '',
-                    position: 'bottomright'
-                }));
-                //$(".leaflet-control-permalink").css("visibility", "hidden");
                 var datetimeControl = (new L.Control.Datetime({
                     title: getI18n('datetime', localLang),
                     datetimes: dates,
@@ -383,18 +373,45 @@
                 })).addTo(map);
                 // TODO: Put new time slider in here
 
-                // Add level control (info for level control is also available
-                // by now)
-                var levels = getLevels(overlayMaps);
-                var levelControl = (new L.Control.Vertical({
-                    title: getI18n('Select vertical level', localLang),
-                    levels: levels.values,
-                    units: levels.units,
-                    language: localLang,
-                    visibility: visibility,
-                    initialLevelIndex: initial_level,
-                    position: datetime_pos
-                })).addTo(map);
+                var dt_current_levels = 0;
+                var checkLevels = function() {
+                    var levels = getLevels(overlayMaps);
+                    if (levels !== null) {
+                        //if (levels.length > 0) {
+                            // Add level control
+                            var levelControl = (new L.Control.Vertical({
+                                title: getI18n('Select vertical level', localLang),
+                                levels: levels.values,
+                                units: levels.units,
+                                language: localLang,
+                                visibility: visibility,
+                                initialLevelIndex: initial_level,
+                                position: datetime_pos
+                            })).addTo(map);
+                        //}
+                        // Add permanent link control
+                        map.addControl(new L.Control.Permalink({
+                            layers: layerControl,
+                            locator: locator,
+                            levelControl: levelControl,
+                            useAnchor: true,
+                            useLocation: true,
+                            text: '',
+                            position: 'bottomright'
+                        }));
+                        //$(".leaflet-control-permalink").css("visibility", "hidden");
+                    } else {
+                        if (dt_current_levels <= dt_max) {
+                            dt_current_levels += dt_check;
+                            setTimeout(function (){checkLevels();}, dt_check);
+                        } else {
+                            var msg = "Timeout encountered while getting timesteps";
+                            noty({text: msg, type: "error"});
+                            throw new Error(msg);
+                        }
+                    }
+                }
+                checkLevels();
 
                 // Move legends to above datetime control if they are already 
                 // on map
@@ -444,7 +461,8 @@
                 }
             }
         }
-        setTimeout(function (){checkTimesteps();}, dt_check);
+        checkTimesteps();
+        
         return map;
     }
     window.initCommonMap = initCommonMap;
