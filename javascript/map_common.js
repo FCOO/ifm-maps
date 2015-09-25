@@ -377,18 +377,19 @@
                 var checkLevels = function() {
                     var levels = getLevels(overlayMaps);
                     if (levels !== null) {
-                        //if (levels.length > 0) {
-                            // Add level control
-                            var levelControl = (new L.Control.Vertical({
-                                title: getI18n('Select vertical level', localLang),
-                                levels: levels.values,
-                                units: levels.units,
-                                language: localLang,
-                                visibility: visibility,
-                                initialLevelIndex: initial_level,
-                                position: datetime_pos
-                            })).addTo(map);
-                        //}
+                        // Add level control
+                        if (levels.values.length === 0) {
+                            visibility = "hidden";
+                        }
+                        var levelControl = (new L.Control.Vertical({
+                            title: getI18n('Select vertical level', localLang),
+                            levels: levels.values,
+                            units: levels.units,
+                            language: localLang,
+                            visibility: visibility,
+                            initialLevelIndex: initial_level,
+                            position: datetime_pos
+                        })).addTo(map);
                         // Add permanent link control
                         map.addControl(new L.Control.Permalink({
                             layers: layerControl,
