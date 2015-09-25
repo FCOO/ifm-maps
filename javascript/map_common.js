@@ -410,7 +410,7 @@
                             throw new Error(msg);
                         }
                     }
-                }
+                };
                 checkLevels();
 
                 // Move legends to above datetime control if they are already 
@@ -623,6 +623,7 @@
      */
     function getLevels(overlayMaps) {
         var overlay;
+        var msg;
         var level_min = 8640000000000000;
         var level_max = -8640000000000000;
         var outlevels = {};
@@ -634,7 +635,7 @@
                 if (overlay.levels !== undefined) {
                     if (overlay.levels.hasOwnProperty('positive')) {
                         if (outlevels.hasOwnProperty('positive') && outlevels.positive != overlay.levels.positive) {
-                            var msg = 'Internal error getting vertical level direction';
+                            msg = 'Internal error getting vertical level direction';
                             noty({text: msg, type: 'error'});
                             throw new Error(msg);
                         }
@@ -642,7 +643,7 @@
                     }
                     if (overlay.levels.hasOwnProperty('units')) {
                         if (outlevels.hasOwnProperty('units') && outlevels.units != overlay.levels.units) {
-                            var msg = 'Internal error getting vertical level units';
+                            msg = 'Internal error getting vertical level units';
                             noty({text: msg, type: 'error'});
                             throw new Error(msg);
                         }
