@@ -373,6 +373,7 @@
                         vertical: false,
                         position: datetime_pos
                 })).addTo(map);
+                // TODO: Put new time slider in here
 
                 // Move legends to above datetime control if they are already 
                 // on map

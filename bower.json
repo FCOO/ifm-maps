@@ -17,6 +17,10 @@
   "dependencies": {
     "Leaflet.MousePosition": "https://github.com/ardhi/Leaflet.MousePosition.git",
     "Leaflet.dbpediaLayer": "https://github.com/kr1/Leaflet.dbpediaLayer.git",
+    "jquery-autoclick-while-pressed": "silviubogan/jquery-autoclick-while-pressed",
+    "jquery-base-slider": "NielsHolt/jquery-base-slider#~2.3.4",
+    "jquery-time-slider": "NielsHolt/jquery-time-slider#~3.0.3",
+    "leaflet-control-box": "NielsHolt/leaflet-control-box#~1.0.0",
     "flag-icon-css": "~0.6.5",
     "latlng-format": "NielsHolt/latlng-format#master",
     "jquery-placeholder": "~2.1.1",
@@ -45,7 +49,8 @@
     "leaflet-layer-sealevel-denmark": "https://github.com/jblarsen/leaflet-layer-sealevel-denmark.git#master",
     "leaflet-layer-tides-greenland": "https://github.com/jblarsen/leaflet-layer-tides-greenland.git#master",
     "leaflet-graphicscale": "NielsHolt/leaflet-graphicscale#master",
-    "leaflet-control-fa-button": "https://github.com/jblarsen/leaflet-control-fa-button.git"
+    "leaflet-control-fa-button": "https://github.com/jblarsen/leaflet-control-fa-button.git",
+    "leaflet-control-vertical": "https://github.com/jblarsen/leaflet-control-vertical.git"
   },
   "resolutions": {
     "leaflet": "master",
