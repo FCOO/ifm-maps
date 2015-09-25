@@ -333,6 +333,14 @@
             initial_datetime = null;
         }
 
+        var initial_level;
+        // Initialize level control with this level if in URL
+        if (urlParams.level !== undefined) {
+            initial_level = window.unescape(urlParams.level);
+        } else {
+            initial_level = null;
+        }
+        
         // Add datetime control. This is done when the overlays have been
         // properly initialized (they retrieve the current timesteps in
         // the forecast files asynchronously, so we have to wait until
@@ -364,16 +372,29 @@
                 }));
                 //$(".leaflet-control-permalink").css("visibility", "hidden");
                 var datetimeControl = (new L.Control.Datetime({
-                        title: getI18n('datetime', localLang),
-                        datetimes: dates,
-                        language: localLang,
-                        callback: callback,
-                        visibility: visibility,
-                        initialDatetime: initial_datetime,
-                        vertical: false,
-                        position: datetime_pos
+                    title: getI18n('datetime', localLang),
+                    datetimes: dates,
+                    language: localLang,
+                    callback: callback,
+                    visibility: visibility,
+                    initialDatetime: initial_datetime,
+                    vertical: false,
+                    position: datetime_pos
                 })).addTo(map);
                 // TODO: Put new time slider in here
+
+                // Add level control (info for level control is also available
+                // by now)
+                var levels = getLevels(overlayMaps);
+                var levelControl = (new L.Control.Vertical({
+                    title: getI18n('Select vertical level', localLang),
+                    levels: levels.values,
+                    units: levels.units,
+                    language: localLang,
+                    visibility: visibility,
+                    initialLevelIndex: initial_level,
+                    position: datetime_pos
+                })).addTo(map);
 
                 // Move legends to above datetime control if they are already 
                 // on map
@@ -566,6 +587,61 @@
             }
         }
         return outdates;
+    }
+
+    function levelArrayUnique(array) {
+        var a = array.concat();
+        for(var i=0; i<a.length; ++i) {
+            for(var j=i+1; j<a.length; ++j) {
+                if(a[i] == a[j])
+                    a.splice(j--, 1);
+            }
+        }
+        return a;
+    }
+
+    /**
+     * Get vertical levels from a hash of overlays.
+     */
+    function getLevels(overlayMaps) {
+        var overlay;
+        var level_min = 8640000000000000;
+        var level_max = -8640000000000000;
+        var outlevels = {};
+        var outvalues = [];
+        for (var i in overlayMaps) {
+            var category = overlayMaps[i];
+            for (var j in category) {
+                overlay = category[j];
+                if (overlay.levels !== undefined) {
+                    if (overlay.levels.hasOwnProperty('positive')) {
+                        if (outlevels.hasOwnProperty('positive') && outlevels.positive != overlay.levels.positive) {
+                            var msg = 'Internal error getting vertical level direction';
+                            noty({text: msg, type: 'error'});
+                            throw new Error(msg);
+                        }
+                        outlevels.positive = overlay.levels.positive;
+                    }
+                    if (overlay.levels.hasOwnProperty('units')) {
+                        if (outlevels.hasOwnProperty('units') && outlevels.units != overlay.levels.units) {
+                            var msg = 'Internal error getting vertical level units';
+                            noty({text: msg, type: 'error'});
+                            throw new Error(msg);
+                        }
+                        outlevels.units = overlay.levels.units;
+                    }
+                    var levels = overlay.levels.values;
+                    if (levels[0] < level_min || levels[levels.length-1] > level_max) {
+                        outvalues = levelArrayUnique(outvalues.concat(levels));
+                        outvalues.sort(function (a,b){
+                            return a - b;
+                        });
+                    }
+                }
+            }
+        }
+        outlevels.values = outvalues;
+        return outlevels;
     }
 
     function mediaQueriesSupported() {
