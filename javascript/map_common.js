@@ -382,7 +382,7 @@
                             visibility = "hidden";
                         }
                         var levelControl = (new L.Control.Vertical({
-                            title: getI18n('Select vertical level', localLang),
+                            title: getI18n('Select depth', localLang),
                             levels: levels.values,
                             units: levels.units,
                             language: localLang,

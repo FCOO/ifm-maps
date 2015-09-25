@@ -189,12 +189,6 @@
                 "seatemp": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'sst', 'options': {ajaxProxy: proxy}}),
                 "salinity": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'sss', 'options': {ajaxProxy: proxy}})
             },
-            "Short range 3D forecasts": {
-                "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'currentSpeed3D', 'options': {ajaxProxy: proxy}}),
-                "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'currentDirection3D', 'options': {ajaxProxy: proxy}}),
-                "seatemp": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'temperature3D', 'options': {ajaxProxy: proxy}}),
-                "salinity": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'salinity3D', 'options': {ajaxProxy: proxy}})
-            },
             "Medium range forecasts": {
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
                 "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
@@ -206,6 +200,12 @@
                 "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
                 "seastate": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
                 "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}})
+            },
+            "Underwater forecasts": {
+                "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'currentSpeed3D', 'options': {ajaxProxy: proxy}}),
+                "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'currentDirection3D', 'options': {ajaxProxy: proxy}}),
+                "seatemp": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'temperature3D', 'options': {ajaxProxy: proxy}}),
+                "salinity": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'salinity3D', 'options': {ajaxProxy: proxy}})
             },
             "Point forecasts": {
                 "Sea level": new L.GeoJSON.Sealevel()
