@@ -351,8 +351,10 @@
         var callback_obj = new DatetimeCallback(overlayMaps);
         var callback = callback_obj.changeDatetime;
         var datetime_pos = 'bottomleft';
+        var level_pos = 'topleft';
         if (large) {
             datetime_pos = 'bottomright';
+            level_pos = 'bottomright';
         }
         var visibility = "visible";
         if (urlParams.hidecontrols == "true") {
@@ -388,8 +390,15 @@
                             language: localLang,
                             visibility: visibility,
                             initialLevelIndex: initial_level,
-                            position: datetime_pos
+                            position: level_pos
                         })).addTo(map);
+                        // Set as first element if on small unit
+                        if (! large) {
+                            var $verticalElem = $('.leaflet-control-vertical');
+                            $verticalElem.detach();
+                            var $container = $('.leaflet-top.leaflet-left');
+                            $container.prepend($verticalElem);
+                        }
                         // Add permanent link control
                         map.addControl(new L.Control.Permalink({
                             layers: layerControl,
@@ -443,6 +452,15 @@
                             $container = $('.leaflet-bottom.leaflet-right');
                         }
                         $container.prepend($datetimeElem);
+
+                        // Move vertical control
+                        var $verticalElem = $('.leaflet-control-vertical');
+                        $verticalElem.detach();
+                        var $container = $('.leaflet-top.leaflet-left');
+                        if (large) {
+                            $container = $('.leaflet-bottom.leaflet-right');
+                        }
+                        $container.prepend($verticalElem);
 
                         // Move legends to above datetime control
                         var $legendContainer = $('.fcoo-legend-container');
