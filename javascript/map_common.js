@@ -379,9 +379,10 @@
                 var checkLevels = function() {
                     var levels = getLevels(overlayMaps);
                     if (levels !== null) {
+                        var levelControl;
                         if (levels.values.length !== 0) {
                             // Add level control
-                            var levelControl = (new L.Control.Vertical({
+                            levelControl = (new L.Control.Vertical({
                                 title: getI18n('Select depth', localLang),
                                 levels: levels.values,
                                 units: levels.units,
