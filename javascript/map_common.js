@@ -456,7 +456,7 @@
                         // Move vertical control
                         var $verticalElem = $('.leaflet-control-vertical');
                         $verticalElem.detach();
-                        var $container = $('.leaflet-top.leaflet-left');
+                        $container = $('.leaflet-top.leaflet-left');
                         if (large) {
                             $container = $('.leaflet-bottom.leaflet-right');
                         }
