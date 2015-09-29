@@ -387,7 +387,7 @@
                                 levels: levels.values,
                                 units: levels.units,
                                 language: localLang,
-                                visibility: visibility,
+                                visibility: 'hidden',
                                 initialLevelIndex: initial_level,
                                 position: level_pos
                             })).addTo(map);
