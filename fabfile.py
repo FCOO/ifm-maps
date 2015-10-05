@@ -36,7 +36,6 @@ env.cssfiles = ["bower_components/fontawesome/css/font-awesome.min.css",
                 "bower_components/leaflet-locatecontrol/dist/L.Control.Locate.css",
                 "external/flag-icon-css/css/flag-icon.css",
                 "bower_components/leaflet-control-position/leaflet-control-position.css",
-                "bower_components/leaflet-control-box/dist/leaflet-control-box.min.css",
                 "bower_components/leaflet-control-home/leaflet-control-home.css",
                 "bower_components/leaflet-categorized-layers/src/radio-checkbox.css",
                 "bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.css",
@@ -53,7 +52,8 @@ env.cssfiles = ["bower_components/fontawesome/css/font-awesome.min.css",
                 "css/ifm-maps.css"]
 
 env.cssfiles_min = ["external/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css",
-                    "external/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css"]
+                    "external/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css",
+                    "bower_components/leaflet-control-box/dist/leaflet-control-box.min.css"]
 env.cssfiles_src = ["external/jquery-ui-1.11.4.custom/jquery-ui.structure.css",
                     "external/jquery-ui-1.11.4.custom/jquery-ui.theme.css"]
 
