@@ -35,13 +35,15 @@
     $(document).ajaxSend(function (evt) {
         numAjaxEvents += 1;
         if (numAjaxEvents === 1) {
-            var msg = getI18n('Loading forecast information...', lang);
+            var msg = getI18n('Loading forecast information', lang);
             notyMessage = noty({text: msg, type: 'information'});
         }
-    }).ajaxComplete(function () {
+    }).ajaxComplete(function (evt) {
         numAjaxEvents -= 1;
         if (numAjaxEvents === 0) {
             notyMessage.close();
+            var msg = getI18n('Finished loading forecast information', lang);
+            notyMessage = noty({text: msg, type: 'information', timeout: 1500});
         }
     });
 
