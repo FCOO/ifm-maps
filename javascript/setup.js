@@ -207,7 +207,7 @@
                 "seatemp": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'temperature3D', 'options': {ajaxProxy: proxy}}),
                 "salinity": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'salinity3D', 'options': {ajaxProxy: proxy}})
             },
-            "Point forecasts": {
+            "Measurements": {
                 "Sea level": new L.GeoJSON.Sealevel()
             },
             "Celestial information": {

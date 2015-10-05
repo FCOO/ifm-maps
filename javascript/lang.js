@@ -62,6 +62,7 @@
                 'Press Ctrl+D to save current map state in a bookmark': 'Tryk Ctrl+D for at gemme kortets nuværende tilstand som et bogmærke',
                 'Navigate to home page': 'Naviger til hjemmesiden',
                 'Background Maps': 'Baggrundskort',
+                'Measurements': 'Målinger',
                 'Point forecasts': 'Punktprognoser',
                 'Static layers': 'Statiske lag',
                 'Forecasts': 'Prognoser',
