@@ -36,14 +36,19 @@
         numAjaxEvents += 1;
         if (numAjaxEvents === 1) {
             var msg = getI18n('Loading forecast information', lang);
-            notyMessage = noty({text: msg, type: 'information'});
+            if (notyMessage === undefined) {
+                notyMessage = noty({text: msg, type: 'information'});
+            } else {
+                notyMessage.setText(msg);
+                notyMessage.setTimeout(false);
+            }
         }
     }).ajaxComplete(function (evt) {
         numAjaxEvents -= 1;
         if (numAjaxEvents === 0) {
-            notyMessage.close();
             var msg = getI18n('Finished loading forecast information', lang);
-            notyMessage = noty({text: msg, type: 'information', timeout: 1500});
+            notyMessage.setText(msg);
+            notyMessage.setTimeout(1500);
         }
     });
 
