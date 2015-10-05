@@ -81,6 +81,7 @@
                 'Solar Terminator': 'Dag og nat',
                 'Firing areas': 'Skydeområder',
                 'Select depth': 'Vælg dybde',
+                'Loading forecast information...': 'Henter prognoseinformation...',
                 layers: 'Lag',
                 boundaries: 'Grænser',
                 places: 'Steder',

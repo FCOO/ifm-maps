@@ -29,6 +29,22 @@
     var enableWarnings = false;
     var stdOpts;
 
+    // Notify user of outstanding AJAX events
+    var numAjaxEvents = 0;
+    var notyMessage;
+    $(document).ajaxSend(function (evt) {
+        numAjaxEvents += 1;
+        if (numAjaxEvents == 1) {
+            var msg = getI18n('Loading forecast information...', lang);
+            notyMessage = noty({text: msg, type: 'information'});
+        }
+    }).ajaxComplete(function () {
+        numAjaxEvents -= 1;
+        if (numAjaxEvents == 0) {
+            notyMessage.close();
+        }
+    });
+
     if (domain === 'denmark_impact') {
         minZoom = 4;
         maxZoom = 12;
