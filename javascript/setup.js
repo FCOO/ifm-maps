@@ -34,13 +34,13 @@
     var notyMessage;
     $(document).ajaxSend(function (evt) {
         numAjaxEvents += 1;
-        if (numAjaxEvents == 1) {
+        if (numAjaxEvents === 1) {
             var msg = getI18n('Loading forecast information...', lang);
             notyMessage = noty({text: msg, type: 'information'});
         }
     }).ajaxComplete(function () {
         numAjaxEvents -= 1;
-        if (numAjaxEvents == 0) {
+        if (numAjaxEvents === 0) {
             notyMessage.close();
         }
     });
