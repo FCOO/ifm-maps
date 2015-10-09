@@ -58,6 +58,7 @@
         // Construct map
         map = L.map('map', {
             center: new L.LatLng(lat, lon),
+            zoomControl: false,
             zoom: zoom,
             zoomAnimation: true, // There is a bug with layer hiding when enabled
             minZoom: minZoom,
@@ -102,8 +103,13 @@
             text: getI18n('Home', localLang),
             title: getI18n('Navigate to home page', localLang),
             href: location.protocol + '//fcoo.dk',
-            icon: 'fa fa-home fa-2x'
+            className: 'leaflet-control-fcoo',
+            icon: 'leaflet-control-fcoo-logo'
+            //icon: 'fa fa-home fa-2x'
         }));
+
+        // Add zoom control
+        new L.Control.Zoom({ position: 'topleft' }).addTo(map);
 
         // Add bookmark/save icon
         map.addControl(new L.Control.FontAwesomeButton({
@@ -279,7 +285,7 @@
         // Make sure that these controls are hidden on print
         $(".leaflet-control-layers").addClass("hide-on-print");
         $(".leaflet-control-zoom").addClass("hide-on-print");
-        $(".leaflet-control-home").addClass("hide-on-print");
+        $(".leaflet-control-fcoo").addClass("hide-on-print");
         $(".leaflet-control-locate").addClass("hide-on-print");
         $(".leaflet-control-geocoder").addClass("hide-on-print");
         $(".leaflet-control-position").addClass("hide-on-print");
@@ -293,7 +299,7 @@
         if (urlParams.hidecontrols == "true") {
             $(".leaflet-control-layers").css("visibility", "hidden");
             $(".leaflet-control-zoom").css("visibility", "hidden");
-            $(".leaflet-control-home").css("visibility", "hidden");
+            $(".leaflet-control-fcoo").css("visibility", "hidden");
             $(".leaflet-control-locate").css("visibility", "hidden");
             $(".leaflet-control-geocoder").css("visibility", "hidden");
             $(".leaflet-control-position").css("visibility", "hidden");
@@ -306,7 +312,7 @@
         // Make sure that these controls are hidden on small devices
         $(".leaflet-languageselector-control").addClass("show-on-large");
         $(".leaflet-control-zoom").addClass("show-on-large");
-        $(".leaflet-control-home").addClass("show-on-large");
+        $(".leaflet-control-fcoo").addClass("show-on-large");
         $(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("show-on-large");
         $(".leaflet-control-graphicscale").addClass("show-on-large");
         $(".leaflet-control-geocoder").addClass("show-on-large");
