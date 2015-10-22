@@ -138,9 +138,13 @@ def build_css(minify=True):
     cssfiles = env.cssfiles_src + [cssfile]
     cssfiles = ' '.join(cssfiles)
     local('awk \'FNR==1{print ""}1\' %s > tmp.css && mv tmp.css %s' % (cssfiles, cssfile))
+    # Remove source mapping lines
+    local("sed -i 's/\/\*# sourceMappingURL=/\/\* /' %s" % cssfile)
     cssfiles = env.cssfiles_min + [cssfile_min]
     cssfiles = ' '.join(cssfiles)
     local('awk \'FNR==1{print ""}1\' %s > tmp.css && mv tmp.css %s' % (cssfiles, cssfile_min))
+    # Remove source mapping lines
+    local("sed -i 's/\/\*# sourceMappingURL=/\/\* /' %s" % cssfile_min)
 
 @_booleanize
 def build_js(minify=True):
