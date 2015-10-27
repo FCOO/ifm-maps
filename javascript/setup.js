@@ -81,9 +81,9 @@
                 "Generic2": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/DENMARK', 'parameter': 'generic', 'options': {ajaxProxy: proxy}})
             },
             "Short range forecasts": {
-                "wind": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "visibility": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'visibility', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
@@ -94,7 +94,7 @@
                 "waveheight": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
                 "seastate": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
                 "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
-                "current": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "current": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver2'}, legendParams: {show: true}}),
                 "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
                 "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
                 "elev": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'seaLevel', 'options': {ajaxProxy: proxy}}),
@@ -122,9 +122,9 @@
                 "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/DENMARK', 'parameter': 'generic', 'options': {ajaxProxy: proxy}})
             },
             "Medium range forecasts": {
-                "wind": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
                 "precip": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'totalPrecipitation', 'options': {ajaxProxy: proxy}}),
@@ -163,9 +163,9 @@
                 "Air Defence": istore.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'air_defence', 'options': stdOpts}),
             },
             "Forecasts": {
-                "wind": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "visibility": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'visibility', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
@@ -176,7 +176,7 @@
                 "waveheight": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
                 "seastate": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
                 "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
-                "current": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "current": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver2'}, legendParams: {show: true}}),
                 "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
                 "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
                 "elev": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'seaLevel', 'options': {ajaxProxy: proxy}}),
@@ -203,9 +203,9 @@
 
         overlays = {
             "Short range forecasts": {
-                "wind": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "visibility": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'visibility', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
@@ -216,7 +216,7 @@
                 "waveheight": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
                 "seastate": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
                 "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/NSBALTIC_MERGED', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
-                "current": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "current": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver2'}, legendParams: {show: true}}),
                 "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
                 "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
                 "elev": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'seaLevel', 'options': {ajaxProxy: proxy}}),
@@ -224,9 +224,9 @@
                 "salinity": store.getLayer({'dataset': 'FCOO/GETM/NSBALTIC_MERGED', 'parameter': 'sss', 'options': {ajaxProxy: proxy}})
             },
             "Medium range forecasts": {
-                "wind": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
                 "precip": store.getLayer({'dataset': 'ECMWF/DXD/DENMARK', 'parameter': 'totalPrecipitation', 'options': {ajaxProxy: proxy}}),
@@ -238,7 +238,7 @@
                 "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/DENMARK', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}})
             },
             "Underwater forecasts": {
-                "current": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'currentDirection3D', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "current": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'currentDirection3D', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver2'}, legendParams: {show: true}}),
                 "currentspeed": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'currentSpeed3D', 'options': {ajaxProxy: proxy}}),
                 "currentdirection": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'currentDirection3D', 'options': {ajaxProxy: proxy}}),
                 "seatemp": store.getLayer({'dataset': 'FCOO/GETM/DK_MERGED', 'parameter': 'temperature3D', 'options': {ajaxProxy: proxy}}),
@@ -279,9 +279,9 @@
                 "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': {ajaxProxy: proxy}})
             },
             "Medium range forecasts": {
-                "wind": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
                 "precip": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'totalPrecipitation', 'options': {ajaxProxy: proxy}}),
@@ -291,7 +291,7 @@
                 "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
                 "seastate": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
                 "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
-                "current": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "current": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver2'}, legendParams: {show: true}}),
                 "currentspeed": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sst', 'options': {ajaxProxy: proxy}}),
@@ -313,9 +313,9 @@
     } else if (domain === 'faroe_islands') {
         overlays = {
             "Short range forecasts": {
-                "wind": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "visibility": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'visibility', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
@@ -328,9 +328,9 @@
                 "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/ARCTIC', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}})
             },
             "Medium range forecasts": {
-                "wind": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
                 "precip": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'totalPrecipitation', 'options': {ajaxProxy: proxy}}),
@@ -340,7 +340,7 @@
                 "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
                 "seastate": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
                 "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
-                "current": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "current": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', wmsParams: {styles: 'vector_method=color_quiver2'}, legendParams: {show: true}}),
                 "currentspeed": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sst', 'options': {ajaxProxy: proxy}}),
@@ -383,9 +383,9 @@
                 "Generic2": istore.getLayer({'dataset': 'DMI_FCOO/HIRLAM_WW3/GREENLAND', 'parameter': 'generic', 'options': {ajaxProxy: proxy}})
             },
             "Short range forecasts": {
-                "wind": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "visibility": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'visibility', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
@@ -419,9 +419,9 @@
                 "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/GREENLAND', 'parameter': 'generic', 'options': {ajaxProxy: proxy}})
             },
             "Medium range forecasts": {
-                "wind": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
                 "precip": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'totalPrecipitation', 'options': {ajaxProxy: proxy}}),
@@ -431,7 +431,7 @@
                 "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
                 "seastate": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
                 "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
-                "current": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "current": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver2'}, legendParams: {show: true}}),
                 "currentspeed": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sst', 'options': {ajaxProxy: proxy}}),
@@ -461,9 +461,9 @@
         lon = -45.0;
         overlays = {
             "Short range forecasts": {
-                "wind": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "visibility": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'visibility', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'DMI/HIRLAM/K05', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
@@ -477,9 +477,9 @@
                 "wavedirection": store.getLayer({'dataset': 'FCOO/WW3/ARCTIC', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}})
             },
             "Medium range forecasts": {
-                "wind": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
                 "precip": store.getLayer({'dataset': 'ECMWF/DXD/GREENLAND', 'parameter': 'totalPrecipitation', 'options': {ajaxProxy: proxy}}),
@@ -493,7 +493,7 @@
                 "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
                 "seastate": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
                 "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/GREENLAND', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
-                "current": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "current": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver2'}, legendParams: {show: true}}),
                 "currentspeed": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sst', 'options': {ajaxProxy: proxy}}),
@@ -513,9 +513,9 @@
     } else if (domain === 'indian_ocean') {
         overlays = {
             "Forecasts": {
-                "wind": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
                 "precip": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'totalPrecipitation', 'options': {ajaxProxy: proxy}}),
@@ -525,7 +525,7 @@
                 "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/AFR', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
                 "seastate": store.getLayer({'dataset': 'ECMWF/DXP/AFR', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
                 "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/AFR', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
-                "current": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "current": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver2'}, legendParams: {show: true}}),
                 "currentspeed": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'sst', 'options': {ajaxProxy: proxy}}),
@@ -567,9 +567,9 @@
                 "Generic2": istore.getLayer({'dataset': 'ECMWF/DXD_DXP/AFR', 'parameter': 'generic', 'options': {ajaxProxy: proxy}})
             },
             "Forecasts": {
-                "wind": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
                 "precip": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'totalPrecipitation', 'options': {ajaxProxy: proxy}}),
@@ -579,7 +579,7 @@
                 "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/AFR', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
                 "seastate": store.getLayer({'dataset': 'ECMWF/DXP/AFR', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
                 "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/AFR', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
-                "current": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "current": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver2'}, legendParams: {show: true}}),
                 "currentspeed": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'sst', 'options': {ajaxProxy: proxy}}),
@@ -600,9 +600,9 @@
     } else if (domain === 'mediterranean') {
         overlays = {
             "Forecasts": {
-                "wind": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "wind": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
                 "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'windSpeed', 'options': {ajaxProxy: proxy}}),
-                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'black_vector'}}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
                 "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'windDirection', 'options': {ajaxProxy: proxy}}),
                 "pressure": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'seaLevelPressure', 'options': {ajaxProxy: proxy}}),
                 "precip": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'totalPrecipitation', 'options': {ajaxProxy: proxy}}),
@@ -612,7 +612,7 @@
                 "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/MEDITERRANEAN', 'parameter': 'waveHeight', 'options': {ajaxProxy: proxy}}),
                 "seastate": store.getLayer({'dataset': 'ECMWF/DXP/MEDITERRANEAN', 'parameter': 'seaState', 'options': {ajaxProxy: proxy}}),
                 "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/MEDITERRANEAN', 'parameter': 'waveDirection', 'options': {ajaxProxy: proxy}}),
-                "current": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'color_quiver1'}, legendParams: {show: true}}),
+                "current": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}, wmsParams: {styles: 'vector_method=color_quiver2'}, legendParams: {show: true}}),
                 "currentspeed": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'currentSpeed', 'options': {ajaxProxy: proxy}}),
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'currentDirection', 'options': {ajaxProxy: proxy}}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'sst', 'options': {ajaxProxy: proxy}}),
