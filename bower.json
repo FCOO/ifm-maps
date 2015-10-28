@@ -50,7 +50,8 @@
     "leaflet-layer-tides-greenland": "https://github.com/jblarsen/leaflet-layer-tides-greenland.git#master",
     "leaflet-graphicscale": "NielsHolt/leaflet-graphicscale#master",
     "leaflet-control-fa-button": "https://github.com/jblarsen/leaflet-control-fa-button.git",
-    "leaflet-control-vertical": "https://github.com/jblarsen/leaflet-control-vertical.git"
+    "leaflet-control-vertical": "https://github.com/jblarsen/leaflet-control-vertical.git",
+    "Leaflet.Sync": "https://github.com/turban/Leaflet.Sync.git#~0.0.5"
   },
   "resolutions": {
     "leaflet": "master",
