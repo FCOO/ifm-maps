@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Information for Mariners Maps</title>
+    <meta charset="utf-8" />
+    <meta http-equiv='x-dns-prefetch-control' content='on'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="application-name" content="IFM Maps">
+    <meta name="apple-mobile-web-app-title" content="IFM Maps">
+    <meta name="msapplication-TileImage" content="/apple-touch-icon.png">
+    <meta name="msapplication-TileColor" content="#1C4B88">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="shortcut icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" type="text/css" href="../bower_components/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/Leaflet.MousePosition/src/L.Control.MousePosition.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-languageselector/leaflet-languageselector.css" />
+    <!---<link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-osm-geocoder/Control.OSMGeocoder.css" />-->
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-locatecontrol/dist/L.Control.Locate.css" />
+    <link rel="stylesheet" type="text/css" href="../external/jquery-ui-1.11.4.custom/jquery-ui.structure.css" />
+    <link rel="stylesheet" type="text/css" href="../external/jquery-ui-1.11.4.custom/jquery-ui.theme.css" />
+    <link rel="stylesheet" type="text/css" href="../external/flag-icon-css/css/flag-icon.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-position/leaflet-control-position.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-home/leaflet-control-home.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-categorized-layers/src/radio-checkbox.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-vertical/leaflet-control-vertical.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-datetime/leaflet-control-datetime.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-legend/leaflet-control-legend.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-geojsonlayer-msi/leaflet-geojsonlayer-msi.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-geojsonlayer-fwarn/leaflet-geojsonlayer-fwarn.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-forecast-print/leaflet-control-forecast-print.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-tilelayer-impact/leaflet-tilelayer-impact.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-graphicscale/dist/leaflet-graphicscale.min.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-box/dist/leaflet-control-box.min.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-layer-sealevel-denmark/leaflet-layer-sealevel-denmark.css" />
+    <link rel="stylesheet" type="text/css" href="../bower_components/jquery-base-slider/dist/jquery-base-slider.min.css" />
+    <link rel="stylesheet" type="text/css" href="../leaflet/Control.OSMGeocoder.ifm-maps.css" />
+    <link rel="stylesheet" type="text/css" href="../css/ifm-maps.css" />
+    <link rel="dns-prefetch" href="//api01.fcoo.dk">
+    <link rel="dns-prefetch" href="//api02.fcoo.dk">
+    <link rel="dns-prefetch" href="//api03.fcoo.dk">
+    <link rel="dns-prefetch" href="//api04.fcoo.dk">
+    <link rel="dns-prefetch" href="//tiles01.fcoo.dk">
+    <link rel="dns-prefetch" href="//tiles02.fcoo.dk">
+    <link rel="dns-prefetch" href="//tiles03.fcoo.dk">
+    <link rel="dns-prefetch" href="//tiles04.fcoo.dk">
+    <link rel="prefetch" href="../bower_components/leaflet-control-osm-geocoder/images/geocoder.png">
+    <link rel="prefetch" href="../external/flag-icon-css/flags/4x3/dk.svg">
+    <link rel="prefetch" href="../external/flag-icon-css/flags/4x3/gb.svg">
+    <link rel="prefetch" href="../external/jquery-ui-1.11.4.custom/images/ui-bg_glass_100_f6f6f6_1x400.png">
+    <link rel="prefetch" href="../external/jquery-ui-1.11.4.custom/images/ui-bg_glass_100_fdf5ce_1x400.png">
+    <link rel="prefetch" href="../external/jquery-ui-1.11.4.custom/images/ui-bg_glass_65_ffffff_1x400.png">
+    <script>window.L_PREFER_CANVAS = true;</script>
+    <style>
+        .map-container {
+            width: 48%; 
+            height: 98%;
+            border: 1px solid black;
+            margin: 2px;
+            float:left;
+        }
+    </style>
+</head>
+<body>
+    <div id="map1" class="map-container"></div>
+    <div id="map2" class="map-container"></div>
+    <script>
+        var version = 'development';
+        // The domain variable is used to determine which setup to use
+        var domain = 'denmark_impact'; // Default
+    </script>
+    <!--[if lt IE 10]><script type="text/javascript" src="../bower_components/typedarray/index.js"></script><![endif]-->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <!--[if lt IE 10]><script type="text/javascript" src="../bower_components/jQuery-ajaxTransport-XDomainRequest/jquery.xdomainrequest.min.js"></script><![endif]-->
+    <script src="../external/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+    <script src="../bower_components/noty/js/noty/packaged/jquery.noty.packaged.js"></script>
+    <script src="../bower_components/jquery-placeholder/jquery.placeholder.js"></script>
+    <script src="../bower_components/magellan/magellan.js"></script>
+    <script src="../bower_components/latlng-format/src/latlng-format.js"></script>
+    <script src="../bower_components/moment/min/moment-with-locales.js"></script>
+    <script src="../bower_components/leaflet/dist/leaflet-src.js"></script>
+    <script src="../bower_components/leaflet-plugins/control/Permalink.js"></script>
+    <script src="../bower_components/leaflet-languageselector/leaflet-languageselector.js"></script>
+    <script src="../bower_components/Leaflet.MousePosition/src/L.Control.MousePosition.js"></script>
+    <script src="../bower_components/leaflet-control-osm-geocoder/Control.OSMGeocoder.js"></script>
+    <script src="../bower_components/Leaflet.dbpediaLayer/dist/leaflet.dbpedialayer.js"></script>
+    <script src="../bower_components/leaflet-locatecontrol/src/L.Control.Locate.js"></script>
+    <script src="../bower_components/Leaflet.Terminator/L.Terminator.js"></script>
+    <script src="../bower_components/leaflet-control-position/leaflet-control-position.js"></script>
+    <script src="../bower_components/leaflet-control-home/leaflet-control-home.js"></script>
+    <script src="../bower_components/leaflet-categorized-layers/src/namespace.js"></script>
+    <script src="../bower_components/leaflet-categorized-layers/src/radio-checkbox.js"></script>
+    <script src="../bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.js"></script>
+    <script src="../bower_components/leaflet-control-vertical/leaflet-control-vertical.js"></script>
+    <script src="../bower_components/leaflet-control-datetime/leaflet-control-datetime.js"></script>
+    <script src="../bower_components/leaflet-tilelayer-counting/leaflet-tilelayer-counting.js"></script>
+    <script src="../bower_components/leaflet-control-legend/leaflet-control-legend.js"></script>
+    <script src="../bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-model.js"></script>
+    <script src="../bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-fcoo.js"></script>
+    <script src="../bower_components/leaflet-tilelayer-wms-fcoo/wms-ajax-proxy.js"></script>
+    <script src="../bower_components/Leaflet.Sync/L.Map.Sync.js"></script>
+    <script src="../bower_components/jquery-autoclick-while-pressed/autoclick-while-pressed.min.js"></script>
+    <script src="../bower_components/jquery-base-slider/dist/jquery-base-slider.min.js"></script>
+    <script src="../bower_components/jquery-time-slider/dist/jquery-time-slider.min.js"></script>
+    <script src="../bower_components/leaflet-control-box/dist/leaflet-control-box.min.js"></script>
+    <script src="../bower_components/leaflet-layer-sealevel-denmark/leaflet-layer-sealevel-denmark.js"></script>
+    <script src="../bower_components/leaflet-layer-tides-greenland/leaflet-layer-tides-greenland.js"></script>
+    <script src="../bower_components/leaflet-pip/leaflet-pip.js"></script>
+    <script src="../bower_components/leaflet-geojsonlayer-msi/leaflet-geojsonlayer-msi.js"></script>
+    <script src="../bower_components/leaflet-geojsonlayer-fwarn/leaflet-geojsonlayer-fwarn.js"></script>
+    <script src="../bower_components/leaflet-control-forecast-print/leaflet-control-forecast-print.js"></script>
+    <script src="../bower_components/leaflet-tilelayer-impact/leaflet-tilelayer-impact.js"></script>
+    <script src="../bower_components/leaflet-tilelayer-impact/leaflet-tilelayer-impact-store.js"></script>
+    <script src="../bower_components/leaflet-tilelayer-impact/Permalink.ImpactLayer.js"></script>
+    <script src="../bower_components/leaflet-graphicscale/dist/leaflet-graphicscale.min.js"></script>
+    <script src="../bower_components/leaflet-control-fa-button/leaflet-control-fa-button.js"></script>
+    <script src="../leaflet/Permalink.Locate.js"></script>
+    <script src="../leaflet/Permalink.Vertical.js"></script>
+    <script src="../leaflet/Permalink.CategorizedLayer.js"></script>
+    <script src="../leaflet/Permalink.CategorizedOverlay.js"></script>
+    <script src="../javascript/lang.js"></script>
+    <script src="../javascript/url.js"></script>
+    <script src="../javascript/map_common_impact.js"></script>
+    <script src="../javascript/setup_sync.js"></script>
+</body>
+</html>
