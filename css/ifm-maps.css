@@ -7,6 +7,13 @@ html, body, #map {
     height: 100%;
 }
 
+/* Container for multiple maps on a page */
+.map-container {
+    border: 1px solid black;
+    margin: 2px;
+    float:left;
+}
+
 .bold {
 	font-weight: bold;
 }
@@ -22,17 +29,17 @@ html, body, #map {
 	font-size: larger;
 	font-weight: bold;
 	display: block;
-        background-color: white;
+    background-color: white;
 	position: relative;
-        z-index: 9999;
+    z-index: 9999;
 }
 
 .icon-location {
-        font-size: 18px;
+    font-size: 18px;
 }
 
 .icon-spinner {
-        font-size: 18px;
+    font-size: 18px;
 }
 
 /*@media screen {
