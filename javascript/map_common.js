@@ -88,6 +88,10 @@
 
             // Construct layer controls
             layers.layerControls[mapKey] = new L.Control.CategorizedLayers(baseMaps, overlayMaps, opts);
+            $(layers.layerControls[mapKey]._container).addClass("hide-on-print");
+            if (urlParams.hidecontrols == "true") {
+                $(layers.layerControls[mapKey]._container).hide();
+            }
         });
 
         // List of languages to select from
@@ -115,6 +119,10 @@
             useAnchor: false,
             position: 'topright'
         });
+        $(controls.languageSelector._container).addClass("show-on-large");
+        if (urlParams.hidecontrols == "true") {
+            $(controls.languageSelector._container).hide();
+        }
 
         // Construct length scale control
         controls.graphicScale = L.control.graphicScale({
@@ -130,13 +138,24 @@
             position: 'topleft',
             collapsed: true,
             icon: 'icon-target',
+            className: 'leaflet-control-position'
         });
+        $(controls.position._container).addClass("hide-on-print");
+        $(controls.position._container).addClass("show-on-large");
+        if (urlParams.hidecontrols == "true") {
+            $(controls.position._container).hide();
+        }
 
         // Construct print control
         if (enablePrint) {
             controls.print = L.Control.print({
                 icon: 'fa fa-print fa-2x',
             });
+            $(controls.print._container).addClass("hide-on-print");
+            $(controls.print._container).addClass("show-on-large");
+            if (urlParams.hidecontrols == "true") {
+                $(controls.print._container).hide();
+            }
         }
 
         // Construct geocoder control
@@ -179,7 +198,8 @@
 
         // Construct position control
         controls.mousePosition = new L.control.mousePosition({
-            emptyString: '', position: 'bottomleft'
+            emptyString: '',
+            position: 'bottomleft'
         });
 
         // Construct locator control
@@ -207,10 +227,13 @@
             text: getI18n('Home', localLang),
             title: getI18n('Navigate to home page', localLang),
             href: location.protocol + '//fcoo.dk',
-            className: 'leaflet-control-fcoo',
+            className: 'leaflet-control-fcoo hide-on-print show-on-large',
             icon: 'leaflet-control-fcoo-logo'
             //icon: 'fa fa-home fa-2x'
         });
+        if (urlParams.hidecontrols == "true") {
+            $(controls.homeButton._container).hide();
+        }
 
         // Construct zoom control
         controls.zoom = new L.Control.Zoom({ position: 'topleft' });
@@ -294,6 +317,8 @@
             } else {
                 map.attributionControl.setPrefix("");
             }
+            $(map.attributionControl._container).addClass("show-on-large");
+            //$(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("show-on-large");
 
             if (index === 0) {
                 mainMap = map;
@@ -323,18 +348,38 @@
 
                 // Add zoom control
                 map.addControl(mapStore.controls.zoom);
+                $(mapStore.controls.zoom._container).addClass("hide-on-print");
+                if (! L.Browser.touch) {
+                    $(mapStore.controls.zoom._container).addClass("show-on-large");
+                }
+                if (urlParams.hidecontrols == "true") {
+                    $(mapStore.controls.zoom._container).hide();
+                }
 
                 // Add bookmark/save icon
                 map.addControl(mapStore.controls.bookmark);
+                $(mapStore.controls.bookmark._container).addClass("hide-on-print");
+                if (urlParams.hidecontrols == "true") {
+                    $(mapStore.controls.bookmark._container).hide();
+                }
 
                 // Add language selector
                 map.addControl(mapStore.controls.languageSelector);
 
                 // Add position control
                 map.addControl(mapStore.controls.mousePosition);
+                $(mapStore.controls.mousePosition._container).addClass("hide-on-print");
+                $(mapStore.controls.mousePosition._container).addClass("show-on-large");
+                if (urlParams.hidecontrols == "true") {
+                    $(mapStore.controls.mousePosition._container).hide();
+                }
     
                 // Add locator control
                 map.addControl(mapStore.controls.locate);
+                $(mapStore.controls.locate._container).addClass("hide-on-print");
+                if (urlParams.hidecontrols == "true") {
+                    $(mapStore.controls.locate._container).hide();
+                }
                 // Enable geolocation if locate query string parameter is true
                 if (urlParams.locate === "true") {
                     mapStore.controls.locate.start();
@@ -342,9 +387,16 @@
 
                 // Add geocoder control
                 map.addControl(mapStore.controls.OSMGeocoder);
+                $(mapStore.controls.OSMGeocoder._container).addClass("hide-on-print");
+                $(mapStore.controls.OSMGeocoder._container).addClass("show-on-large");
+                if (urlParams.hidecontrols == "true") {
+                    $(mapStore.controls.OSMGeocoder._container).hide();
+                }
 
                 // Add length scale control
                 map.addControl(mapStore.controls.graphicScale);
+                //$(mapStore.controls.graphicScale.).addClass("show-on-large");
+                $(mapStore.controls.graphicScale._container).addClass("show-on-large");
 
                 // Add text input position control
                 map.addControl(mapStore.controls.position);
@@ -452,7 +504,7 @@
                             }
                             if (index === 0) {
                                 // Add permanent link control
-                                map.addControl(new L.Control.Permalink({
+                                var permalinkControl = new L.Control.Permalink({
                                     layers: layerControl,
                                     locator: mapStore.controls.locate,
                                     levelControl: levelControl,
@@ -460,9 +512,14 @@
                                     useLocation: true,
                                     text: '',
                                     position: 'bottomright'
-                                }));
+                                });
+                                $(permalinkControl).addClass("hide-on-print");
+                                if (urlParams.hidecontrols == "true") {
+                                    $(permalinkControl).hide();
+                                }
+                                map.addControl(permalinkControl);
                             }
-                            //$(".leaflet-control-permalink").css("visibility", "hidden");
+                            //$(".leaflet-control-permalink").hide();
                         } else {
                             if (dt_current_levels <= dt_max) {
                                 dt_current_levels += dt_check;
@@ -535,47 +592,6 @@
             }
             checkTimesteps();
         });
-
-        // Make sure that these controls are hidden on print
-        $(".leaflet-control-layers").addClass("hide-on-print");
-        $(".leaflet-control-zoom").addClass("hide-on-print");
-        $(".leaflet-control-fcoo").addClass("hide-on-print");
-        $(".leaflet-control-locate").addClass("hide-on-print");
-        $(".leaflet-control-geocoder").addClass("hide-on-print");
-        $(".leaflet-control-position").addClass("hide-on-print");
-        if (enablePrint) {
-            $(".leaflet-control-print").addClass("hide-on-print");
-        }
-        $(".leaflet-control-mouseposition").addClass("hide-on-print");
-        $(".leaflet-control-permalink").addClass("hide-on-print");
-        $(".leaflet-control-floppy-button").addClass("hide-on-print");
-
-        // Hide all controls if hidecontrols in query string
-        if (urlParams.hidecontrols == "true") {
-            $(".leaflet-control-layers").css("visibility", "hidden");
-            $(".leaflet-control-zoom").css("visibility", "hidden");
-            $(".leaflet-control-fcoo").css("visibility", "hidden");
-            $(".leaflet-control-locate").css("visibility", "hidden");
-            $(".leaflet-control-geocoder").css("visibility", "hidden");
-            $(".leaflet-control-position").css("visibility", "hidden");
-            if (enablePrint) {
-                $(".leaflet-control-print").css("visibility", "hidden");
-            }
-            $(".leaflet-control-mouseposition").css("visibility", "hidden");
-            $(".leaflet-control-permalink").css("visibility", "hidden");
-            $(".leaflet-control-floppy-button").css("visibility", "hidden");
-        }
-
-        // Make sure that these controls are hidden on small devices
-        $(".leaflet-languageselector-control").addClass("show-on-large");
-        $(".leaflet-control-zoom").addClass("show-on-large");
-        $(".leaflet-control-fcoo").addClass("show-on-large");
-        $(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("show-on-large");
-        $(".leaflet-control-graphicscale").addClass("show-on-large");
-        $(".leaflet-control-geocoder").addClass("show-on-large");
-        $(".leaflet-control-position").addClass("show-on-large");
-        $(".leaflet-control-print").addClass("show-on-large");
-        $(".leaflet-control-mouseposition").addClass("show-on-large");
 
         // Add custom title (unescaped and sanitized) - used for print
         if (urlParams.title !== undefined) {
