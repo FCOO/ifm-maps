@@ -548,6 +548,7 @@
         }
         $(".leaflet-control-mouseposition").addClass("hide-on-print");
         $(".leaflet-control-permalink").addClass("hide-on-print");
+        $(".leaflet-control-floppy-button").addClass("hide-on-print");
 
         // Hide all controls if hidecontrols in query string
         if (urlParams.hidecontrols == "true") {
@@ -561,6 +562,8 @@
                 $(".leaflet-control-print").css("visibility", "hidden");
             }
             $(".leaflet-control-mouseposition").css("visibility", "hidden");
+            $(".leaflet-control-permalink").css("visibility", "hidden");
+            $(".leaflet-control-floppy-button").css("visibility", "hidden");
         }
 
         // Make sure that these controls are hidden on small devices
