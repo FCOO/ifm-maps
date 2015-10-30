@@ -450,16 +450,18 @@
                                     $container.prepend($verticalElem);
                                 }
                             }
-                            // Add permanent link control
-                            map.addControl(new L.Control.Permalink({
-                                layers: layerControl,
-                                locator: mapStore.controls.locate,
-                                levelControl: levelControl,
-                                useAnchor: true,
-                                useLocation: true,
-                                text: '',
-                                position: 'bottomright'
-                            }));
+                            if (index === 0) {
+                                // Add permanent link control
+                                map.addControl(new L.Control.Permalink({
+                                    layers: layerControl,
+                                    locator: mapStore.controls.locate,
+                                    levelControl: levelControl,
+                                    useAnchor: true,
+                                    useLocation: true,
+                                    text: '',
+                                    position: 'bottomright'
+                                }));
+                            }
                             //$(".leaflet-control-permalink").css("visibility", "hidden");
                         } else {
                             if (dt_current_levels <= dt_max) {
