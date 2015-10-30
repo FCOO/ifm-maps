@@ -9,6 +9,7 @@
      * Initialize the map.
      */
 
+    //console.profile('init');
     // Retrieve all URL parameters
     var urlParams = getUrlParameters();
 
@@ -660,13 +661,16 @@
     proxy.doAjax();
 
     // Init map
-    var mapStore = initCommonMap(langs, maps, enablePrint,
+    var mapStore = initCommonMap(store, langs, maps, enablePrint,
                                  enableWarnings);
+    //console.profileEnd();
 
     $(document).ready(function () {
-        createCommonMap(basemap, maps, minZoom, maxZoom, zoom, 
+        //console.profile('ready');
+        createCommonMap(store, basemap, maps, minZoom, maxZoom, zoom, 
                       lat, lon, enablePrint, enableWarnings, 
                       useGeoMetoc, mapStore);
+        //console.profileEnd();
     });
 
 })();

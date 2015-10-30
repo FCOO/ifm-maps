@@ -9,7 +9,7 @@
      * Initialization prior to DOM is loaded. We create most of the map controls
      * here.
      */
-    function initCommonMap(langs, maps, enablePrint, enableWarnings) {
+    function initCommonMap(store, langs, maps, enablePrint, enableWarnings) {
         var urlParams,
             localLang,
             lang,
@@ -42,7 +42,7 @@
         }
 
         // Initialize basemaps
-        layers.basemaps = initBaseMaps(localLang);
+        layers.basemaps = initBaseMaps(store, localLang);
 
         // Layer control options
         var collapsed = true;
@@ -274,14 +274,13 @@
     /**
      * Initialization after DOM is loaded
      */
-    function createCommonMap(basemap, maps, minZoom, maxZoom, zoom, lat,
+    function createCommonMap(store, basemap, maps, minZoom, maxZoom, zoom, lat,
                            lon, enablePrint, enableWarnings, useGeoMetoc,
                            mapStore) {
         var localLang,
             urlParams,
             mainMap;
         localLang = getLocalLanguage();
-        var store = new L.Control.FcooLayerStore({language: localLang});
         var large = false;
         if (mediaQueriesSupported()) {
             var mq = window.matchMedia('screen and (min-width: 641px) and (min-height: 641px)');
@@ -607,14 +606,13 @@
     /**
      * Initialize base maps
      */
-    function initBaseMaps(lang) {
+    function initBaseMaps(store, lang) {
         // Construct ESRI World Imagery layer
         var esri = L.tileLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.jpg", {
             maxZoom: 18, tileSize: 256, attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         });
 
         // Construct FCOO background layer
-        var store = new L.Control.FcooLayerStore({language: lang});
         var fcoo = store.background;
 
         // Put background layers into hash for easy consumption by layer control
