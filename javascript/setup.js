@@ -636,8 +636,8 @@
         var ny = parseInt(multimaps[1]);
         var ntot = nx*ny;
 
-        var dx = Math.floor(100.0 / nx) - 1;
-        var dy = Math.floor(100.0 / ny) - 1;
+        var dx = 100.0 / nx - 1.0;
+        var dy = 100.0 / ny - 1.0;
         var mapobj = $('#map');
         var newmaps = {};
         var submapIDs = [];
