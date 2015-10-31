@@ -239,25 +239,38 @@
         controls.zoom = new L.Control.Zoom({ position: 'topleft' });
 
         // Construct bookmark/save control
+        var useLocalStorage = false;
+        var msg = getI18n('Please create a bookmark in your browser to save current map state', localLang);
+        // Use localStorage in standalone mode
+        if (urlParams.standalone == "true") {
+            useLocalStorage = true;
+            msg = getI18n('Saved current map state', localLang);
+        }
         controls.bookmark = new L.Control.FontAwesomeButton({
             onclick: function (evt) {
                 evt.preventDefault(); // Prevent link from being processed
-                var bookmarkURL = window.location.href;
-                var bookmarkTitle = document.title;
                 var triggerDefault = false;
-                if (window.external && ('AddFavorite' in window.external)) {
-                    // IE Favorite
-                    window.external.AddFavorite(bookmarkURL, bookmarkTitle);
-                } else {
-                    // WebKit - Safari/Chrome - Mozilla Firefox
+                if (this.options.useLocalStorage) {
+                    var params = window.localStorage.getItem('paramsTemp');
+                    window.localStorage.setItem('params', params);
                     noty({text: this.options.message, type: 'information', timeout: 10000});
+                } else {
+                    var bookmarkURL = window.location.href;
+                    var bookmarkTitle = document.title;
+                    if (window.external && ('AddFavorite' in window.external)) {
+                        // IE Favorite
+                        window.external.AddFavorite(bookmarkURL, bookmarkTitle);
+                    } else {
+                        // WebKit - Safari/Chrome - Mozilla Firefox
+                        noty({text: this.options.message, type: 'information', timeout: 10000});
+                    }
                 }
                 return triggerDefault;
             },
-            message: getI18n('Please create a bookmark in your browser to save current map state', localLang),
-
+            message: msg,
             title: getI18n('Save settings', localLang),
             fontAwesomeIcon: 'fa fa-floppy-o fa-2x',
+            useLocalStorage: useLocalStorage,
             className: 'leaflet-control-floppy-button'
         });
 
@@ -503,12 +516,20 @@
                             }
                             if (index === 0) {
                                 // Add permanent link control
+                                var useLocation = true;
+                                var useLocalStorage = false;
+                                // Use localStorage in standalone mode
+                                if (urlParams.standalone == "true") {
+                                    useLocation = false;
+                                    useLocalStorage = true;
+                                }
                                 var permalinkControl = new L.Control.Permalink({
                                     layers: layerControl,
                                     locator: mapStore.controls.locate,
                                     levelControl: levelControl,
                                     useAnchor: true,
-                                    useLocation: true,
+                                    useLocation: useLocation,
+                                    useLocalStorage: useLocalStorage,
                                     text: '',
                                     position: 'bottomright'
                                 });
