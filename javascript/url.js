@@ -100,7 +100,7 @@
             (("standalone" in window.navigator) &&
              window.navigator.standalone)) {
              vars.push('standalone');
-             vars['standalone'] = 'true';
+             vars.standalone = 'true';
         }
         if (vars.standalone == "true") {
             var params = window.localStorage.getItem('params');
