@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Information for Mariners Maps - ${domain}</title>
+    <meta charset="utf-8" />
+    <meta http-equiv='x-dns-prefetch-control' content='on'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="application-name" content="IFM Maps">
+    <meta name="apple-mobile-web-app-title" content="IFM Maps">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileImage" content="/apple-touch-icon.png">
+    <meta name="msapplication-TileColor" content="#1C4B88">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="shortcut icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" type="text/css" href="../css/ifm-maps.css">
+    <link rel="dns-prefetch" href="//api01.fcoo.dk">
+    <link rel="dns-prefetch" href="//api02.fcoo.dk">
+    <link rel="dns-prefetch" href="//api03.fcoo.dk">
+    <link rel="dns-prefetch" href="//api04.fcoo.dk">
+    <link rel="dns-prefetch" href="//tiles01.fcoo.dk">
+    <link rel="dns-prefetch" href="//tiles02.fcoo.dk">
+    <link rel="dns-prefetch" href="//tiles03.fcoo.dk">
+    <link rel="dns-prefetch" href="//tiles04.fcoo.dk">
+    <link rel="prefetch" href="../css/images/geocoder.png">
+    <link rel="prefetch" href="../flags/4x3/dk.svg">
+    <link rel="prefetch" href="../flags/4x3/gb.svg">
+    <link rel="prefetch" href="../css/images/ui-bg_glass_100_f6f6f6_1x400.png">
+    <link rel="prefetch" href="../css/images/ui-bg_glass_100_fdf5ce_1x400.png">
+    <link rel="prefetch" href="../css/images/ui-bg_glass_65_ffffff_1x400.png">
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        var version = '${version}';
+        // The domain variable is used to determine which setup to use
+        var domain = 'denmark'; // Default
+    </script>
+    <script src="../javascript/ifm-maps.js"></script>
+    <script>window.L_PREFER_CANVAS = true;</script>
+    <!--[if lt IE 10]><script type="text/javascript" src="../javascript/typedarray.js"></script><![endif]-->
+    <!--[if lt IE 10]><script type="text/javascript" src="../javascript/jquery.xdomainrequest.min.js"></script><![endif]-->
+</body>
+</html>

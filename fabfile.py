@@ -198,19 +198,27 @@ def build_web():
     local('sed -i s/ifm-maps.js/ifm-maps_min_%s.js/ dist/www/index-prod.html' % env.now)
     local('sed -i s/ifm-maps.css/ifm-maps_%s.css/ dist/www/index-dev.html' % env.now)
     local('sed -i s/ifm-maps.js/ifm-maps_%s.js/ dist/www/index-dev.html' % env.now)
+    local('sed -i s/ifm-maps.css/ifm-maps_%s.css/ dist/www/app.html' % env.now)
+    local('sed -i s/ifm-maps.js/ifm-maps_%s.js/ dist/www/app.html' % env.now)
 
     # Make index.html files for each domain
     for setup, name in env.setups.iteritems():
         print('Processing %s' % setup)
         destdir = 'dist/%s' % setup
         local('mkdir -p %s' % destdir)
+        # Production index file
         local('cp dist/www/index-prod.html %s/index.html' % (destdir))
-        local('cp dist/www/index-dev.html %s/index-dev.html' % (destdir))
         local("sed -i 's/\${domain}/%s/' %s/index.html" % (name, destdir))
         local("sed -i 's/\${version}/%s/' %s/index.html" % (env.now, destdir))
         local("sed -i 's/denmark/%s/' %s/index.html" % (setup, destdir))
+        # Development index file (for debugging)
+        local('cp dist/www/index-dev.html %s/index-dev.html' % (destdir))
         local("sed -i 's/\${domain}/%s/' %s/index-dev.html" % (name, destdir))
         local("sed -i 's/denmark/%s/' %s/index-dev.html" % (setup, destdir))
+        # Other html files (for tests)
+        local('cp dist/www/app.html %s/app.html' % (destdir))
+        local("sed -i 's/\${domain}/%s/' %s/app.html" % (name, destdir))
+        local("sed -i 's/denmark/%s/' %s/app.html" % (setup, destdir))
 
     # Remove original index files
     local('rm -rf dist/www')
