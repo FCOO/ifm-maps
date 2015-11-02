@@ -62,6 +62,7 @@
                 'Please create a bookmark in your browser to save current map state': 'Lav et bogmærke i din browser for at gemme kortets nuværende tilstand',
                 'Press Cmd+D to save current map state in a bookmark': 'Tryk Cmd+D for at gemme kortets nuværende tilstand som et bogmærke',
                 'Press Ctrl+D to save current map state in a bookmark': 'Tryk Ctrl+D for at gemme kortets nuværende tilstand som et bogmærke',
+                'Saved current map state': 'Har gemt kortets nuværende tilstand',
                 'Navigate to home page': 'Naviger til hjemmesiden',
                 'Background Maps': 'Baggrundskort',
                 'Measurements': 'Målinger',
