@@ -114,7 +114,6 @@
                 }
             }
         } 
-
         return vars;
     }
     window.getUrlParameters = getUrlParameters;
