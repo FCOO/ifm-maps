@@ -215,8 +215,9 @@ def build_web():
         local('cp dist/www/index-dev.html %s/index-dev.html' % (destdir))
         local("sed -i 's/\${domain}/%s/' %s/index-dev.html" % (name, destdir))
         local("sed -i 's/denmark/%s/' %s/index-dev.html" % (setup, destdir))
-        # Other html files (for tests)
-        local('cp dist/www/app.html %s/app.html' % (destdir))
+        # Other html/json files (for tests)
+        local('cp dist/www/app.html %s/.' % (destdir))
+        local('cp dist/www/manifest.json %s/.' % (destdir))
         local("sed -i 's/\${domain}/%s/' %s/app.html" % (name, destdir))
         local("sed -i 's/denmark/%s/' %s/app.html" % (setup, destdir))
 
