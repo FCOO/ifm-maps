@@ -569,10 +569,12 @@
                         mq.addListener(function (){
                             var desktop = mq.matches;
                             // Modify layer control
-                            layerControl.options.collapsed = !desktop;
-                            map.removeControl(layerControl);
-                            layerControl.addTo(map);
-                            $(".leaflet-control-layers").addClass("hide-on-print");
+                            // Disabled since the control is not really designed
+                            // for such modifications after init
+                            //layerControl.options.collapsed = !desktop;
+                            //map.removeControl(layerControl);
+                            //layerControl.addTo(map);
+                            //$(".leaflet-control-layers").addClass("hide-on-print");
     
                             // Move datetime control
                             var $datetimeElem = $('.leaflet-control-datetime');
