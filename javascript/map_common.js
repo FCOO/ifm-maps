@@ -26,10 +26,10 @@
         localLang = getLocalLanguage();
 
         // Media queries
-        var large = false;
+        var desktop = false;
         if (mediaQueriesSupported()) {
-            var mq = window.matchMedia('screen and (min-width: 641px) and (min-height: 641px)');
-            large = mq.matches;
+            var mq = window.matchMedia('screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px)');
+            desktop = mq.matches;
         }
 
         controls = {};
@@ -46,7 +46,7 @@
 
         // Layer control options
         var collapsed = true;
-        if (large) {
+        if (desktop) {
             collapsed = false;
         }
         var opts = {
@@ -67,7 +67,7 @@
 
             // Remove Solar Terminator from overlays if on small units
             // to save battery + does not work on all mobiles
-            if (!large && overlays.hasOwnProperty("Celestial information")) {
+            if (!desktop && overlays.hasOwnProperty("Celestial information")) {
                 delete overlays["Celestial information"];
             }
 
@@ -294,10 +294,10 @@
             urlParams,
             mainMap;
         localLang = getLocalLanguage();
-        var large = false;
+        var desktop = false;
         if (mediaQueriesSupported()) {
-            var mq = window.matchMedia('screen and (min-width: 641px) and (min-height: 641px)');
-            large = mq.matches;
+            var mq = window.matchMedia('screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px)');
+            desktop = mq.matches;
         }
 
         // Retrieve URL parameters
@@ -467,7 +467,7 @@
             var callback = callback_obj.changeDatetime;
             var datetime_pos = 'bottomleft';
             var level_pos = 'topleft';
-            if (large) {
+            if (desktop) {
                 datetime_pos = 'bottomright';
                 level_pos = 'bottomright';
             }
@@ -507,7 +507,7 @@
                                     position: level_pos
                                 })).addTo(map);
                                 // Set as first element if on small unit
-                                if (! large) {
+                                if (! desktop) {
                                     var $verticalElem = $('.leaflet-control-vertical');
                                     $verticalElem.detach();
                                     var $container = $('.leaflet-top.leaflet-left');
@@ -567,9 +567,9 @@
                     // Dynamic responsive design
                     if (mediaQueriesSupported()) {
                         mq.addListener(function (){
-                            var large = mq.matches;
+                            var desktop = mq.matches;
                             // Modify layer control
-                            layerControl.options.collapsed = !large;
+                            layerControl.options.collapsed = !desktop;
                             map.removeControl(layerControl);
                             layerControl.addTo(map);
                             $(".leaflet-control-layers").addClass("hide-on-print");
@@ -578,7 +578,7 @@
                             var $datetimeElem = $('.leaflet-control-datetime');
                             $datetimeElem.detach();
                             var $container = $('.leaflet-bottom.leaflet-left');
-                            if (large) {
+                            if (desktop) {
                                 $container = $('.leaflet-bottom.leaflet-right');
                             }
                             $container.prepend($datetimeElem);
@@ -587,7 +587,7 @@
                             var $verticalElem = $('.leaflet-control-vertical');
                             $verticalElem.detach();
                             $container = $('.leaflet-top.leaflet-left');
-                            if (large) {
+                            if (desktop) {
                                 $container = $('.leaflet-bottom.leaflet-right');
                             }
                             $container.prepend($verticalElem);
