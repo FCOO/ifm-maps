@@ -440,7 +440,11 @@
             var initial_datetime;
             if (urlParams.datetime !== undefined) {
                 var res = window.unescape(urlParams.datetime).split('T');
+                // Colons are not unescaped since they are allowed in URI's
+                // but some browsers encode then
                 var res1 = res[0].split('-');
+                res[1] = res[1].replace(/%253A/g,':');
+                res[1] = res[1].replace(/%3A/g,':');
                 var res2 = res[1].split(':');
                 initial_datetime = new Date(res1[0], res1[1]-1, res1[2], res2[0], res2[1], res2[2]);
                 //initial_datetime = new Date(window.unescape(urlParams.datetime));
