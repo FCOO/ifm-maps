@@ -50,12 +50,14 @@
     "leaflet-layer-tides-greenland": "https://github.com/jblarsen/leaflet-layer-tides-greenland.git#master",
     "leaflet-graphicscale": "NielsHolt/leaflet-graphicscale#master",
     "leaflet-control-fa-button": "https://github.com/jblarsen/leaflet-control-fa-button.git",
-    "leaflet-control-vertical": "https://github.com/jblarsen/leaflet-control-vertical.git"
+    "leaflet-control-vertical": "https://github.com/jblarsen/leaflet-control-vertical.git",
+    "leaflet.markercluster": "https://github.com/Leaflet/Leaflet.markercluster.git#leaflet-master"
   },
   "resolutions": {
     "leaflet": "master",
     "jquery": "~2.1.4",
-    "moment": "master"
+    "moment": "master",
+    "leaflet.markercluster": "leaflet-master"
   },
   "moduleType": [
     "es6"

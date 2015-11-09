@@ -35,6 +35,9 @@
         controls = {};
         layers = {};
 
+        // Create clustering layer for putting layers to be clustered on
+        layers.cluster = L.markerClusterGroup({spiderfyDistanceMultiplier: 3});
+
         // Construct MSI and Fwarn layers
         if (enableWarnings) {
             layers.MSI = new L.GeoJSON.MSI({language: localLang});
@@ -207,7 +210,7 @@
         if (urlParams.follow === "false") {
             follow = false;
         }
-        controls.locate = L.control.locate({
+        controls.locate = new L.Control.FcooLocate({
             locateOptions: {maxZoom: 10, enableHighAccuracy: false},
             position: 'topleft',
             follow: follow,
@@ -335,6 +338,9 @@
             if (index === 0) {
                 mainMap = map;
 
+                // Add clustering layer for putting layers to be clustered on
+                map.addLayer(mapStore.layers.cluster);
+
                 // Optionally use FCOO Geolocated METOC service (on right click)
                 if (useGeoMetoc) {
                     map.on('contextmenu', function (e) {
@@ -348,7 +354,10 @@
 
                 if (enableWarnings) {
                     // Add MSI information
-                    map.addLayer(mapStore.layers.MSI);
+                    mapStore.layers.MSI.jqxhr.done(function() {
+                        //mapStore.layers.cluster.addLayer(mapStore.layers.MSI);
+                        map.addLayer(mapStore.layers.MSI);
+                    });
         
                     // Add firing warnings static and dynamic layers
                     map.addLayer(store.firingAreas);
