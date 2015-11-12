@@ -1,36 +1,98 @@
 (function (){
     "use strict";
     /*jslint browser: true*/
-    /*global $, L, noty, getLocalLanguage, getI18n, getUrlParameters, changeLanguage, updateURLParameter*/
-    /*exported initCommonMap*/
+    /*global $, L, console, version, noty, getLocalLanguage, getI18n,
+      getUrlParameters, changeLanguage */
+    /*exported initCommonMap, createCommonMap*/
 
     /**
-     * Initialize the map.
+     * Initialization prior to DOM is loaded. We create most of the map controls
+     * here.
      */
-    function initCommonMap(langs, basemap, overlays, minZoom, maxZoom, zoom, lat,
-                           lon, tilesize, enablePrint, enableWarnings, useGeoMetoc) {
-        var localLang,
-            tmplayers,
-            baseMaps,
-            topLayer,
+    function initCommonMap(store, langs, maps, enablePrint, enableWarnings) {
+        var urlParams,
+            localLang,
             lang,
             lang2,
             all_languages,
             languages,
-            urlParams,
-            map;
+            controls,
+            layers,
+            results;
+
+        // Retrieve URL parameters
+        urlParams = getUrlParameters();
+
         localLang = getLocalLanguage();
-        var store = new L.Control.FcooLayerStore({language: localLang});
-        var large = false;
+
+        // Media queries
+        var desktop = false;
         if (mediaQueriesSupported()) {
-            var mq = window.matchMedia('screen and (min-width: 641px) and (min-height: 641px)');
-            large = mq.matches;
+            var mq = window.matchMedia('screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px)');
+            desktop = mq.matches;
+        }
+
+        controls = {};
+        layers = {};
+
+        // Construct MSI and Fwarn layers
+        if (enableWarnings) {
+            layers.MSI = new L.GeoJSON.MSI({language: localLang});
+            layers.Fwarn = new L.GeoJSON.Fwarn({language: localLang});
         }
 
         // Initialize basemaps
-        tmplayers = initBaseMaps(localLang, tilesize);
-        baseMaps = tmplayers.baseMaps;
-        topLayer = tmplayers.topLayer;
+        layers.basemaps = initBaseMaps(store, localLang);
+
+        // Layer control options
+        var collapsed = true;
+        if (desktop) {
+            collapsed = false;
+        }
+        var opts = {
+            collapsed: collapsed,
+            groupsCollapsed: true, 
+            collapseActiveGroups: true, 
+            autoZIndex: false,
+            position: "topright"
+        };
+
+        layers.overlays = {};
+        layers.layerControls = {};
+        $.each(Object.keys(maps), function(index, mapKey) {
+            var baseMaps = layers.basemaps;
+
+            // Overlays
+            var overlays = maps[mapKey].overlays;
+
+            // Remove Solar Terminator from overlays if on small units
+            // to save battery + does not work on all mobiles
+            if (!desktop && overlays.hasOwnProperty("Celestial information")) {
+                delete overlays["Celestial information"];
+            }
+
+            // Construct layer control
+            var overlayMaps = [];
+            for (var key in overlays) {
+                var nkey = getI18n(key, localLang);
+                overlayMaps[nkey] = {};
+                for (var lkey in overlays[key]) {
+                    // Set English name for use in permalink
+                    overlays[key][lkey]._category_en = key;
+                    overlays[key][lkey]._name_en = lkey;
+                    // Make translated overlay dict to be shown in menu
+                    overlayMaps[nkey][getI18n(lkey, localLang)] = overlays[key][lkey];
+                }
+            }
+            layers.overlays[mapKey] = overlayMaps;
+
+            // Construct layer controls
+            layers.layerControls[mapKey] = new L.Control.CategorizedLayers(baseMaps, overlayMaps, opts);
+            $(layers.layerControls[mapKey]._container).addClass("hide-on-print");
+            if (urlParams.hidecontrols == "true") {
+                $(layers.layerControls[mapKey]._container).hide();
+            }
+        });
 
         // List of languages to select from
         all_languages = [L.langObject('da', '<button class="flag-icon flag-icon-dk"></button>'),
@@ -47,95 +109,8 @@
             }
         }
 
-        // Retrieve URL parameters
-        urlParams = getUrlParameters();
-        if (urlParams.zoom !== undefined && urlParams.lat !== undefined && urlParams.lon !== undefined) {
-            zoom = urlParams.zoom;
-            lat = urlParams.lat;
-            lon = urlParams.lon;
-        }
-
-        // Construct map
-        map = L.map('map', {
-            center: new L.LatLng(lat, lon),
-            zoomControl: false,
-            zoom: zoom,
-            zoomAnimation: true, // There is a bug with layer hiding when enabled
-            minZoom: minZoom,
-            maxZoom: maxZoom,
-            //crs: L.CRS.EPSG4326,
-            crs: L.CRS.EPSG3857,
-            layers: [baseMaps[Object.keys(baseMaps)[0]][basemap]]
-        });
-        if (version !== undefined) {
-            map.attributionControl.setPrefix("<a href='" + location.protocol + "//fcoo.dk/ifm-maps/'>IFM Maps version: " + version + "</a>");
-        } else {
-            map.attributionControl.setPrefix("");
-        }
-
-        // Workaround for https://github.com/Leaflet/Leaflet/issues/3765
-        //map.on('zoomend', function (e) {
-            //map.fire('dragend');
-        //});
-
-        // Optionally use FCOO Geolocated METOC service (on right click)
-        if (useGeoMetoc) {
-            map.on('contextmenu', function (e) {
-                var lat = e.latlng.lat;
-                var lon = e.latlng.lng;
-                var url = location.protocol + '//metoc.fcoo.dk/text?x=_X_&y=_Y_&coastline=c';
-                var win = window.open(url.replace('_X_', lon).replace('_Y_', lat), '_blank');
-                win.focus();
-            });
-        }
-
-        if (enableWarnings) {
-            // Add MSI information
-            map.addLayer(new L.GeoJSON.MSI({language: localLang}));
-
-            // Add firing warnings static and dynamic layers
-            map.addLayer(store.firingAreas);
-            map.addLayer(new L.GeoJSON.Fwarn({language: localLang}));
-        }
-
-        // Add link to homepage
-        map.addControl(L.control.homeButton({
-            text: getI18n('Home', localLang),
-            title: getI18n('Navigate to home page', localLang),
-            href: location.protocol + '//fcoo.dk',
-            className: 'leaflet-control-fcoo',
-            icon: 'leaflet-control-fcoo-logo'
-            //icon: 'fa fa-home fa-2x'
-        }));
-
-        // Add zoom control
-        new L.Control.Zoom({ position: 'topleft' }).addTo(map);
-
-        // Add bookmark/save icon
-        map.addControl(new L.Control.FontAwesomeButton({
-            onclick: function (evt) {
-                evt.preventDefault(); // Prevent link from being processed
-                var bookmarkURL = window.location.href;
-                var bookmarkTitle = document.title;
-                var triggerDefault = false;
-                if (window.external && ('AddFavorite' in window.external)) {
-                    // IE Favorite
-                    window.external.AddFavorite(bookmarkURL, bookmarkTitle);
-                } else {
-                    // WebKit - Safari/Chrome - Mozilla Firefox
-                    noty({text: this.options.message, type: 'information', timeout: 10000});
-                }
-                return triggerDefault;
-            },
-            message: getI18n('Please create a bookmark in your browser to save current map state', localLang),
-
-            title: getI18n('Save settings', localLang),
-            fontAwesomeIcon: 'fa fa-floppy-o fa-2x',
-            className: 'leaflet-control-floppy-button'
-        }));
-
-        // Add language selector
-        map.addControl(L.languageSelector({
+        // Construct language selector
+        controls.languageSelector = L.languageSelector({
             languages: languages,
             callback: changeLanguage,
             initialLanguage: localLang,
@@ -143,77 +118,48 @@
             vertical: false,
             useAnchor: false,
             position: 'topright'
-        }));
-
-        // Remove Solar Terminator from overlays if on small units
-        // to save battery + does not work on all mobiles
-        if (!large && overlays.hasOwnProperty("Celestial information")) {
-            delete overlays["Celestial information"];
+        });
+        $(controls.languageSelector._container).addClass("show-on-large");
+        if (urlParams.hidecontrols == "true") {
+            $(controls.languageSelector._container).hide();
         }
 
-        // Add base layers and overlays to map
-        var overlayMaps = [];
-        for (var key in overlays) {
-            var nkey = getI18n(key, localLang);
-            overlayMaps[nkey] = {};
-            for (var lkey in overlays[key]) {
-                // Set English name for use in permalink
-                overlays[key][lkey]._category_en = key;
-                overlays[key][lkey]._name_en = lkey;
-                // Make translated overlay dict to be shown in menu
-                overlayMaps[nkey][getI18n(lkey, localLang)] = overlays[key][lkey];
+        // Construct length scale control
+        controls.graphicScale = L.control.graphicScale({
+            type: 'both',
+            position: 'bottomleft',
+            backgroundColor: 'white',
+            opacity: 0.4,
+            maxUnitsWidth: 200,
+        });
+
+        // Construct text input position control
+        controls.position = new L.Control.Position({
+            position: 'topleft',
+            collapsed: true,
+            icon: 'icon-target',
+            className: 'leaflet-control-position'
+        });
+        $(controls.position._container).addClass("hide-on-print");
+        $(controls.position._container).addClass("show-on-large");
+        if (urlParams.hidecontrols == "true") {
+            $(controls.position._container).hide();
+        }
+
+        // Construct print control
+        if (enablePrint) {
+            controls.print = L.Control.print({
+                icon: 'fa fa-print fa-2x',
+            });
+            $(controls.print._container).addClass("hide-on-print");
+            $(controls.print._container).addClass("show-on-large");
+            if (urlParams.hidecontrols == "true") {
+                $(controls.print._container).hide();
             }
         }
 
-        // Add foreground layer (land contours, names, ...)
-        topLayer.addTo(map);
-
-        // Add layer control
-        var collapsed = true;
-        if (large) {
-            collapsed = false;
-        }
-        var opts = {
-            collapsed: collapsed,
-            groupsCollapsed: true, 
-            collapseActiveGroups: true, 
-            autoZIndex: false,
-            position: "topright"
-        };
-        var layerControl = (new L.Control.CategorizedLayers(baseMaps, overlayMaps, 
-                            opts)).addTo(map);
-
-        // Add position control
-        map.addControl(new L.control.mousePosition({emptyString: '', position: 'bottomleft'}));
-
-        // Add locator control
-        var follow = true;
-        if (urlParams.follow === "false") {
-            follow = false;
-        }
-        var locator = L.control.locate({
-            locateOptions: {maxZoom: 10, enableHighAccuracy: false},
-            position: 'topleft',
-            follow: follow,
-            stopFollowingOnDrag: true,
-            strings: {
-                title: getI18n("Show me where I am", localLang),
-                popup: getI18n("You are within {distance} {unit} from this point", localLang),
-                outsideMapBoundsMsg: getI18n("You seem located outside the boundaries of the map", localLang)
-            },
-            onLocationError: function(err) {
-                noty({text: err.message, type: 'information', timeout: 1000});
-            },
-
-        });
-        map.addControl(locator);
-        // Enable geolocation if locate query string parameter is true
-        if (urlParams.locate === "true") {
-            locator.start();
-        }
-
-        // Add geocoder control
-        map.addControl(new L.Control.OSMGeocoder({
+        // Construct geocoder control
+        controls.OSMGeocoder = new L.Control.OSMGeocoder({
             position: 'topleft',
             text: getI18n('Locate', localLang),
             callback: function (results) {
@@ -248,77 +194,430 @@
                 this._marker.on('click', _remove_marker);
                 this._marker.addTo(this._map);
             }
-        }));
+        });
 
-        // Add length scale control
-        L.control.graphicScale({
-          type         : 'both',
-          position     : 'bottomleft',
-          backgroundColor: 'white',
-          opacity: 0.4,
-          maxUnitsWidth: 200,
-        }).addTo(map);
+        // Construct position control
+        controls.mousePosition = new L.control.mousePosition({
+            emptyString: '',
+            position: 'bottomleft'
+        });
 
-        // patch layer control to add some titles
-        var patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
-        patch.innerHTML = getI18n('layers', localLang); // 'TileLayers';
-        layerControl._form.children[2].parentNode.insertBefore(patch, layerControl._form.children[2]);
-
-        patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
-        patch.innerHTML = getI18n('maps', localLang); // 'Maps';
-        layerControl._form.children[0].parentNode.insertBefore(patch, layerControl._form.children[0]);
-
-        // Add text input position control
-        map.addControl(new L.Control.Position({
+        // Construct locator control
+        var follow = true;
+        if (urlParams.follow === "false") {
+            follow = false;
+        }
+        controls.locate = new L.Control.FcooLocate({
+            locateOptions: {maxZoom: 10, enableHighAccuracy: false},
             position: 'topleft',
-            collapsed: true,
-            icon: 'icon-target',
-        }));
+            follow: follow,
+            stopFollowingOnDrag: true,
+            strings: {
+                title: getI18n("Show me where I am", localLang),
+                popup: getI18n("You are within {distance} {unit} from this point", localLang),
+                outsideMapBoundsMsg: getI18n("You seem located outside the boundaries of the map", localLang)
+            },
+            onLocationError: function(err) {
+                noty({text: err.message, type: 'information', timeout: 1000});
+            },
+        });
 
-        // Add print control
-        if (enablePrint) {
-            map.addControl(L.Control.print({
-                icon: 'fa fa-print fa-2x',
-            }));
-        }
-
-        // Make sure that these controls are hidden on print
-        $(".leaflet-control-layers").addClass("hide-on-print");
-        $(".leaflet-control-zoom").addClass("hide-on-print");
-        $(".leaflet-control-fcoo").addClass("hide-on-print");
-        $(".leaflet-control-locate").addClass("hide-on-print");
-        $(".leaflet-control-geocoder").addClass("hide-on-print");
-        $(".leaflet-control-position").addClass("hide-on-print");
-        if (enablePrint) {
-            $(".leaflet-control-print").addClass("hide-on-print");
-        }
-        $(".leaflet-control-mouseposition").addClass("hide-on-print");
-        $(".leaflet-control-permalink").addClass("hide-on-print");
-
-        // Hide all controls if hidecontrols in query string
+        // Construct home button control
+        controls.homeButton = L.control.homeButton({
+            text: getI18n('Home', localLang),
+            title: getI18n('Navigate to home page', localLang),
+            href: location.protocol + '//fcoo.dk',
+            className: 'leaflet-control-fcoo hide-on-print show-on-large',
+            icon: 'leaflet-control-fcoo-logo'
+            //icon: 'fa fa-home fa-2x'
+        });
         if (urlParams.hidecontrols == "true") {
-            $(".leaflet-control-layers").css("visibility", "hidden");
-            $(".leaflet-control-zoom").css("visibility", "hidden");
-            $(".leaflet-control-fcoo").css("visibility", "hidden");
-            $(".leaflet-control-locate").css("visibility", "hidden");
-            $(".leaflet-control-geocoder").css("visibility", "hidden");
-            $(".leaflet-control-position").css("visibility", "hidden");
-            if (enablePrint) {
-                $(".leaflet-control-print").css("visibility", "hidden");
-            }
-            $(".leaflet-control-mouseposition").css("visibility", "hidden");
+            $(controls.homeButton._container).hide();
         }
 
-        // Make sure that these controls are hidden on small devices
-        $(".leaflet-languageselector-control").addClass("show-on-large");
-        $(".leaflet-control-zoom").addClass("show-on-large");
-        $(".leaflet-control-fcoo").addClass("show-on-large");
-        $(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("show-on-large");
-        $(".leaflet-control-graphicscale").addClass("show-on-large");
-        $(".leaflet-control-geocoder").addClass("show-on-large");
-        $(".leaflet-control-position").addClass("show-on-large");
-        $(".leaflet-control-print").addClass("show-on-large");
-        $(".leaflet-control-mouseposition").addClass("show-on-large");
+        // Construct zoom control
+        controls.zoom = new L.Control.Zoom({ position: 'topleft' });
+
+        // Construct bookmark/save control
+        var useLocalStorage = false;
+        var msg = getI18n('Please create a bookmark in your browser to save current map state', localLang);
+        // Use localStorage in standalone mode
+        if (urlParams.standalone == "true") {
+            useLocalStorage = true;
+            msg = getI18n('Saved current map state', localLang);
+        }
+        controls.bookmark = new L.Control.FontAwesomeButton({
+            onclick: function (evt) {
+                evt.preventDefault(); // Prevent link from being processed
+                var triggerDefault = false;
+                if (this.options.useLocalStorage) {
+                    var params = window.localStorage.getItem('paramsTemp');
+                    window.localStorage.setItem('params', params);
+                    noty({text: this.options.message, type: 'information', timeout: 10000});
+                } else {
+                    var bookmarkURL = window.location.href;
+                    var bookmarkTitle = document.title;
+                    if (window.external && ('AddFavorite' in window.external)) {
+                        // IE Favorite
+                        window.external.AddFavorite(bookmarkURL, bookmarkTitle);
+                    } else {
+                        // WebKit - Safari/Chrome - Mozilla Firefox
+                        noty({text: this.options.message, type: 'information', timeout: 10000});
+                    }
+                }
+                return triggerDefault;
+            },
+            message: msg,
+            title: getI18n('Save settings', localLang),
+            fontAwesomeIcon: 'fa fa-floppy-o fa-2x',
+            useLocalStorage: useLocalStorage,
+            className: 'leaflet-control-floppy-button'
+        });
+
+        // Collect everything
+        results = {
+            layers: layers,
+            controls: controls
+        };
+
+        return results;
+    }
+    window.initCommonMap = initCommonMap;
+
+    /**
+     * Initialization after DOM is loaded
+     */
+    function createCommonMap(store, basemap, maps, minZoom, maxZoom, zoom, lat,
+                           lon, enablePrint, enableWarnings, useGeoMetoc,
+                           mapStore) {
+        var localLang,
+            urlParams,
+            mainMap;
+        localLang = getLocalLanguage();
+        var desktop = false;
+        if (mediaQueriesSupported()) {
+            var mq = window.matchMedia('screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px)');
+            desktop = mq.matches;
+        }
+
+        // Retrieve URL parameters
+        urlParams = getUrlParameters();
+        if (urlParams.zoom !== undefined && urlParams.lat !== undefined && urlParams.lon !== undefined) {
+            zoom = urlParams.zoom;
+            lat = urlParams.lat;
+            lon = urlParams.lon;
+        }
+
+        $.each(Object.keys(maps), function(index, mapKey) {
+            var map;
+            var baseMaps = mapStore.layers.basemaps;
+
+            // Construct map
+            map = L.map(mapKey, {
+                center: new L.LatLng(lat, lon),
+                zoomControl: false,
+                zoom: zoom,
+                zoomAnimation: true, // There is a bug with layer hiding when enabled
+                minZoom: minZoom,
+                maxZoom: maxZoom,
+                //crs: L.CRS.EPSG4326,
+                crs: L.CRS.EPSG3857,
+                layers: [baseMaps[Object.keys(baseMaps)[0]][basemap]]
+            });
+            if (version !== undefined) {
+                map.attributionControl.setPrefix("<a href='" + location.protocol + "//fcoo.dk/ifm-maps/'>IFM Maps version: " + version + "</a>");
+            } else {
+                map.attributionControl.setPrefix("");
+            }
+            $(map.attributionControl._container).addClass("show-on-large");
+            //$(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("show-on-large");
+
+            if (index === 0) {
+                mainMap = map;
+
+                // Optionally use FCOO Geolocated METOC service (on right click)
+                if (useGeoMetoc) {
+                    map.on('contextmenu', function (e) {
+                        var lat = e.latlng.lat;
+                        var lon = e.latlng.lng;
+                        var url = location.protocol + '//metoc.fcoo.dk/text?x=_X_&y=_Y_&coastline=c';
+                        var win = window.open(url.replace('_X_', lon).replace('_Y_', lat), '_blank');
+                        win.focus();
+                    });
+                }
+
+                if (enableWarnings) {
+                    // Add MSI information
+                    map.addLayer(mapStore.layers.MSI);
+        
+                    // Add firing warnings static and dynamic layers
+                    map.addLayer(store.firingAreas);
+                    map.addLayer(mapStore.layers.Fwarn);
+                }
+
+                // Add link to homepage
+                map.addControl(mapStore.controls.homeButton);
+
+                // Add zoom control
+                map.addControl(mapStore.controls.zoom);
+                $(mapStore.controls.zoom._container).addClass("hide-on-print");
+                if (desktop || !L.Browser.touch) {
+                    $(mapStore.controls.zoom._container).addClass("show-on-large");
+                }
+                if (urlParams.hidecontrols == "true") {
+                    $(mapStore.controls.zoom._container).hide();
+                }
+
+                // Add bookmark/save icon
+                map.addControl(mapStore.controls.bookmark);
+                $(mapStore.controls.bookmark._container).addClass("hide-on-print");
+                if (urlParams.hidecontrols == "true") {
+                    $(mapStore.controls.bookmark._container).hide();
+                }
+
+                // Add language selector
+                map.addControl(mapStore.controls.languageSelector);
+
+                // Add position control
+                map.addControl(mapStore.controls.mousePosition);
+                $(mapStore.controls.mousePosition._container).addClass("hide-on-print");
+                $(mapStore.controls.mousePosition._container).addClass("show-on-large");
+                if (urlParams.hidecontrols == "true") {
+                    $(mapStore.controls.mousePosition._container).hide();
+                }
+    
+                // Add locator control
+                map.addControl(mapStore.controls.locate);
+                $(mapStore.controls.locate._container).addClass("hide-on-print");
+                if (urlParams.hidecontrols == "true") {
+                    $(mapStore.controls.locate._container).hide();
+                }
+                // Enable geolocation if locate query string parameter is true
+                if (urlParams.locate === "true") {
+                    mapStore.controls.locate.start();
+                }
+
+                // Add geocoder control
+                map.addControl(mapStore.controls.OSMGeocoder);
+                $(mapStore.controls.OSMGeocoder._container).addClass("hide-on-print");
+                $(mapStore.controls.OSMGeocoder._container).addClass("show-on-large");
+                if (urlParams.hidecontrols == "true") {
+                    $(mapStore.controls.OSMGeocoder._container).hide();
+                }
+
+                // Add length scale control
+                map.addControl(mapStore.controls.graphicScale);
+                //$(mapStore.controls.graphicScale.).addClass("show-on-large");
+                $(mapStore.controls.graphicScale._container).addClass("show-on-large");
+
+                // Add text input position control
+                map.addControl(mapStore.controls.position);
+
+                // Add print control
+                if (enablePrint) {
+                    map.addControl(mapStore.controls.print);
+                }
+            }
+    
+            // Add foreground layer (land contours, names, ...)
+            map.addLayer(store.top);
+
+            // Add layer control
+            var overlayMaps = mapStore.layers.overlays[mapKey];
+            var layerControl = mapStore.layers.layerControls[mapKey];
+            map.addControl(layerControl); 
+
+            // patch layer control to add some titles
+            var patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
+            patch.innerHTML = getI18n('layers', localLang); // 'TileLayers';
+            layerControl._form.children[2].parentNode.insertBefore(patch, layerControl._form.children[2]);
+    
+            patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
+            patch.innerHTML = getI18n('maps', localLang); // 'Maps';
+            layerControl._form.children[0].parentNode.insertBefore(patch, layerControl._form.children[0]);
+
+            // Initialize datetime control with this time if in URL
+            var initial_datetime;
+            if (urlParams.datetime !== undefined) {
+                var res = window.unescape(urlParams.datetime).split('T');
+                // Colons are not unescaped since they are allowed in URI's
+                // but some browsers encode then
+                var res1 = res[0].split('-');
+                res[1] = res[1].replace(/%253A/g,':');
+                res[1] = res[1].replace(/%3A/g,':');
+                var res2 = res[1].split(':');
+                initial_datetime = new Date(Date.UTC(res1[0], res1[1]-1, res1[2], res2[0], res2[1], res2[2]));
+                //initial_datetime = new Date(window.unescape(urlParams.datetime));
+            } else {
+                initial_datetime = null;
+            }
+
+            var initial_level;
+            // Initialize level control with this level if in URL
+            if (urlParams.level !== undefined) {
+                initial_level = window.unescape(urlParams.level);
+            } else {
+                initial_level = null;
+            }
+        
+            // Add datetime control. This is done when the overlays have been
+            // properly initialized (they retrieve the current timesteps in
+            // the forecast files asynchronously, so we have to wait until
+            // they are ready).
+            var dt_check = 10; // How often to check
+            var dt_max = 30000; // When to give up
+            var dt_current = 0;
+            var callback_obj = new DatetimeCallback(overlayMaps);
+            var callback = callback_obj.changeDatetime;
+            var datetime_pos = 'bottomleft';
+            var level_pos = 'topleft';
+            if (desktop) {
+                datetime_pos = 'bottomright';
+                level_pos = 'bottomright';
+            }
+            var visibility = "visible";
+            if (urlParams.hidecontrols == "true") {
+                visibility = "hidden";
+            }
+            function checkTimesteps() {
+                var dates = getTimeSteps(overlayMaps);
+                if (dates !== null) {
+                    var datetimeControl = (new L.Control.Datetime({
+                        title: getI18n('datetime', localLang),
+                        datetimes: dates,
+                        language: localLang,
+                        callback: callback,
+                        visibility: visibility,
+                        initialDatetime: initial_datetime,
+                        vertical: false,
+                        position: datetime_pos
+                    })).addTo(map);
+                    // TODO: Put new time slider in here
+
+                    var dt_current_levels = 0;
+                    var checkLevels = function() {
+                        var levels = getLevels(overlayMaps);
+                        if (levels !== null) {
+                            var levelControl;
+                            if (levels.values.length !== 0) {
+                                // Add level control
+                                levelControl = (new L.Control.Vertical({
+                                    title: getI18n('Select depth', localLang),
+                                    levels: levels.values,
+                                    units: levels.units,
+                                    language: localLang,
+                                    visibility: 'hidden',
+                                    initialLevelIndex: initial_level,
+                                    position: level_pos
+                                })).addTo(map);
+                                // Set as first element if on small unit
+                                if (! desktop) {
+                                    var $verticalElem = $('.leaflet-control-vertical');
+                                    $verticalElem.detach();
+                                    var $container = $('.leaflet-top.leaflet-left');
+                                    $container.prepend($verticalElem);
+                                }
+                            }
+                            if (index === 0) {
+                                // Add permanent link control
+                                var useLocation = true;
+                                var useLocalStorage = false;
+                                // Use localStorage in standalone mode
+                                if (urlParams.standalone == "true") {
+                                    useLocation = false;
+                                    useLocalStorage = true;
+                                }
+                                var permalinkControl = new L.Control.Permalink({
+                                    layers: layerControl,
+                                    locator: mapStore.controls.locate,
+                                    levelControl: levelControl,
+                                    useAnchor: true,
+                                    useLocation: useLocation,
+                                    useLocalStorage: useLocalStorage,
+                                    text: '',
+                                    position: 'bottomright'
+                                });
+                                $(permalinkControl).addClass("hide-on-print");
+                                if (urlParams.hidecontrols == "true") {
+                                    $(permalinkControl).hide();
+                                }
+                                map.addControl(permalinkControl);
+                            }
+                            //$(".leaflet-control-permalink").hide();
+                        } else {
+                            if (dt_current_levels <= dt_max) {
+                                dt_current_levels += dt_check;
+                                setTimeout(function (){checkLevels();}, dt_check);
+                            } else {
+                                var msg = "Timeout encountered while getting timesteps";
+                                noty({text: msg, type: "error"});
+                                throw new Error(msg);
+                            }
+                        }
+                    };
+                    checkLevels();
+
+                    // Move legends to above datetime control if they are already 
+                    // on map
+                    var $legendContainer = $('.fcoo-legend-container');
+                    var $container = $('.leaflet-bottom.leaflet-left');
+                    $legendContainer.detach();
+                    $container = $('.leaflet-bottom.leaflet-left');
+                    $container.prepend($legendContainer);
+
+                    // Make sure that overlays are updated
+                    map.fire("overlayadd");
+
+                    // Dynamic responsive design
+                    if (mediaQueriesSupported()) {
+                        mq.addListener(function (){
+                            var desktop = mq.matches;
+                            // Modify layer control
+                            // Disabled since the control is not really designed
+                            // for such modifications after init
+                            //layerControl.options.collapsed = !desktop;
+                            //map.removeControl(layerControl);
+                            //layerControl.addTo(map);
+                            //$(".leaflet-control-layers").addClass("hide-on-print");
+    
+                            // Move datetime control
+                            var $datetimeElem = $('.leaflet-control-datetime');
+                            $datetimeElem.detach();
+                            var $container = $('.leaflet-bottom.leaflet-left');
+                            if (desktop) {
+                                $container = $('.leaflet-bottom.leaflet-right');
+                            }
+                            $container.prepend($datetimeElem);
+    
+                            // Move vertical control
+                            var $verticalElem = $('.leaflet-control-vertical');
+                            $verticalElem.detach();
+                            $container = $('.leaflet-top.leaflet-left');
+                            if (desktop) {
+                                $container = $('.leaflet-bottom.leaflet-right');
+                            }
+                            $container.prepend($verticalElem);
+    
+                            // Move legends to above datetime control
+                            var $legendContainer = $('.fcoo-legend-container');
+                            $legendContainer.detach();
+                            $container = $('.leaflet-bottom.leaflet-left');
+                            $container.prepend($legendContainer);
+                        });
+                    }
+                } else {
+                    if (dt_current <= dt_max) {
+                        dt_current += dt_check;
+                        setTimeout(function (){checkTimesteps();}, dt_check);
+                    } else {
+                        var msg = "Timeout encountered while getting timesteps";
+                        noty({text: msg, type: "error"});
+                        throw new Error(msg);
+                    }
+                }
+            }
+            checkTimesteps();
+        });
 
         // Add custom title (unescaped and sanitized) - used for print
         if (urlParams.title !== undefined) {
@@ -327,182 +626,20 @@
             $('#map').prepend(title);
         }
 
-        // Initialize datetime control with this time if in URL
-        var initial_datetime;
-        if (urlParams.datetime !== undefined) {
-            var res = window.unescape(urlParams.datetime).split('T');
-            var res1 = res[0].split('-');
-            var res2 = res[1].split(':');
-            initial_datetime = new Date(res1[0], res1[1]-1, res1[2], res2[0], res2[1], res2[2]);
-            //initial_datetime = new Date(window.unescape(urlParams.datetime));
-        } else {
-            initial_datetime = null;
-        }
-
-        var initial_level;
-        // Initialize level control with this level if in URL
-        if (urlParams.level !== undefined) {
-            initial_level = window.unescape(urlParams.level);
-        } else {
-            initial_level = null;
-        }
-        
-        // Add datetime control. This is done when the overlays have been
-        // properly initialized (they retrieve the current timesteps in
-        // the forecast files asynchronously, so we have to wait until
-        // they are ready).
-        var dt_check = 10; // How often to check
-        var dt_max = 30000; // When to give up
-        var dt_current = 0;
-        var callback_obj = new DatetimeCallback(overlayMaps);
-        var callback = callback_obj.changeDatetime;
-        var datetime_pos = 'bottomleft';
-        var level_pos = 'topleft';
-        if (large) {
-            datetime_pos = 'bottomright';
-            level_pos = 'bottomright';
-        }
-        var visibility = "visible";
-        if (urlParams.hidecontrols == "true") {
-            visibility = "hidden";
-        }
-        function checkTimesteps() {
-            var dates = getTimeSteps(overlayMaps);
-            if (dates !== null) {
-                var datetimeControl = (new L.Control.Datetime({
-                    title: getI18n('datetime', localLang),
-                    datetimes: dates,
-                    language: localLang,
-                    callback: callback,
-                    visibility: visibility,
-                    initialDatetime: initial_datetime,
-                    vertical: false,
-                    position: datetime_pos
-                })).addTo(map);
-                // TODO: Put new time slider in here
-
-                var dt_current_levels = 0;
-                var checkLevels = function() {
-                    var levels = getLevels(overlayMaps);
-                    if (levels !== null) {
-                        var levelControl;
-                        if (levels.values.length !== 0) {
-                            // Add level control
-                            levelControl = (new L.Control.Vertical({
-                                title: getI18n('Select depth', localLang),
-                                levels: levels.values,
-                                units: levels.units,
-                                language: localLang,
-                                visibility: 'hidden',
-                                initialLevelIndex: initial_level,
-                                position: level_pos
-                            })).addTo(map);
-                            // Set as first element if on small unit
-                            if (! large) {
-                                var $verticalElem = $('.leaflet-control-vertical');
-                                $verticalElem.detach();
-                                var $container = $('.leaflet-top.leaflet-left');
-                                $container.prepend($verticalElem);
-                            }
-                        }
-                        // Add permanent link control
-                        map.addControl(new L.Control.Permalink({
-                            layers: layerControl,
-                            locator: locator,
-                            levelControl: levelControl,
-                            useAnchor: true,
-                            useLocation: true,
-                            text: '',
-                            position: 'bottomright'
-                        }));
-                        //$(".leaflet-control-permalink").css("visibility", "hidden");
-                    } else {
-                        if (dt_current_levels <= dt_max) {
-                            dt_current_levels += dt_check;
-                            setTimeout(function (){checkLevels();}, dt_check);
-                        } else {
-                            var msg = "Timeout encountered while getting timesteps";
-                            noty({text: msg, type: "error"});
-                            throw new Error(msg);
-                        }
-                    }
-                };
-                checkLevels();
-
-                // Move legends to above datetime control if they are already 
-                // on map
-                var $legendContainer = $('.fcoo-legend-container');
-                var $container = $('.leaflet-bottom.leaflet-left');
-                $legendContainer.detach();
-                $container = $('.leaflet-bottom.leaflet-left');
-                $container.prepend($legendContainer);
-
-                // Make sure that overlays are updated
-                map.fire("overlayadd");
-
-                // Dynamic responsive design
-                if (mediaQueriesSupported()) {
-                    mq.addListener(function (){
-                        var large = mq.matches;
-                        // Modify layer control
-                        layerControl.options.collapsed = !large;
-                        map.removeControl(layerControl);
-                        layerControl.addTo(map);
-                        $(".leaflet-control-layers").addClass("hide-on-print");
-
-                        // Move datetime control
-                        var $datetimeElem = $('.leaflet-control-datetime');
-                        $datetimeElem.detach();
-                        var $container = $('.leaflet-bottom.leaflet-left');
-                        if (large) {
-                            $container = $('.leaflet-bottom.leaflet-right');
-                        }
-                        $container.prepend($datetimeElem);
-
-                        // Move vertical control
-                        var $verticalElem = $('.leaflet-control-vertical');
-                        $verticalElem.detach();
-                        $container = $('.leaflet-top.leaflet-left');
-                        if (large) {
-                            $container = $('.leaflet-bottom.leaflet-right');
-                        }
-                        $container.prepend($verticalElem);
-
-                        // Move legends to above datetime control
-                        var $legendContainer = $('.fcoo-legend-container');
-                        $legendContainer.detach();
-                        $container = $('.leaflet-bottom.leaflet-left');
-                        $container.prepend($legendContainer);
-                    });
-                }
-            } else {
-                if (dt_current <= dt_max) {
-                    dt_current += dt_check;
-                    setTimeout(function (){checkTimesteps();}, dt_check);
-                } else {
-                    var msg = "Timeout encountered while getting timesteps";
-                    noty({text: msg, type: "error"});
-                    throw new Error(msg);
-                }
-            }
-        }
-        checkTimesteps();
-        
-        return map;
+        return mainMap;
     }
-    window.initCommonMap = initCommonMap;
+    window.createCommonMap = createCommonMap;
 
     /**
      * Initialize base maps
      */
-    function initBaseMaps(lang, tilesize) {
+    function initBaseMaps(store, lang) {
         // Construct ESRI World Imagery layer
         var esri = L.tileLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.jpg", {
             maxZoom: 18, tileSize: 256, attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         });
 
         // Construct FCOO background layer
-        var store = new L.Control.FcooLayerStore({language: lang});
         var fcoo = store.background;
 
         // Put background layers into hash for easy consumption by layer control
@@ -513,10 +650,7 @@
             "ESRI Aerial": esri
         };
 
-        // Construct FCOO foreground/top layer
-        var topLayer = store.top;
-
-        return {baseMaps: baseMaps, topLayer: topLayer};
+        return baseMaps;
     }
 
     /*

@@ -7,6 +7,13 @@ html, body, #map {
     height: 100%;
 }
 
+/* Container for multiple maps on a page */
+.map-container {
+    border: 1px solid black;
+    margin: 2px;
+    float:left;
+}
+
 .bold {
 	font-weight: bold;
 }
@@ -22,17 +29,17 @@ html, body, #map {
 	font-size: larger;
 	font-weight: bold;
 	display: block;
-        background-color: white;
+    background-color: white;
 	position: relative;
-        z-index: 9999;
+    z-index: 9999;
 }
 
 .icon-location {
-        font-size: 18px;
+    font-size: 18px;
 }
 
 .icon-spinner {
-        font-size: 18px;
+    font-size: 18px;
 }
 
 /*@media screen {
@@ -65,7 +72,20 @@ html, body, #map {
     visibility: hidden;
     display: none;
 }
-@media screen and (min-width: 641px) and (min-height: 641px) {
+
+/* Prevent iOS from resizing small fonts on iPhones */
+@media screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px) {
+@media screen and (max-device-width: 480px) {
+    body {
+        -webkit-text-size-adjust: none;
+    }
+    /*input, textarea {
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
+    }*/
+}
+
+@media screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px) {
     .show-on-large {
         visibility: visible;
         display: block;

@@ -1,0 +1,11 @@
+{
+  "short_name": "IFM Maps",
+  "name": "Information for Mariners Maps",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "150x150"
+    }
+  ],
+  "start_url": "index.html?standalone=true"
+}

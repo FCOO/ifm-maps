@@ -96,6 +96,7 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "bower_components/leaflet-tilelayer-impact/Permalink.ImpactLayer.js",
                "bower_components/leaflet-graphicscale/dist/leaflet-graphicscale.min.js",
                "bower_components/leaflet-control-fa-button/leaflet-control-fa-button.js",
+               "leaflet/Control.FcooLocate.js",
                "leaflet/Permalink.Locate.js",
                "leaflet/Permalink.Vertical.js",
                "leaflet/Permalink.CategorizedLayer.js",
@@ -204,13 +205,17 @@ def build_web():
         print('Processing %s' % setup)
         destdir = 'dist/%s' % setup
         local('mkdir -p %s' % destdir)
+        # Production index file
         local('cp dist/www/index-prod.html %s/index.html' % (destdir))
-        local('cp dist/www/index-dev.html %s/index-dev.html' % (destdir))
         local("sed -i 's/\${domain}/%s/' %s/index.html" % (name, destdir))
         local("sed -i 's/\${version}/%s/' %s/index.html" % (env.now, destdir))
         local("sed -i 's/denmark/%s/' %s/index.html" % (setup, destdir))
+        # Development index file (for debugging)
+        local('cp dist/www/index-dev.html %s/index-dev.html' % (destdir))
         local("sed -i 's/\${domain}/%s/' %s/index-dev.html" % (name, destdir))
         local("sed -i 's/denmark/%s/' %s/index-dev.html" % (setup, destdir))
+        # Manifest file for webapp mode
+        local('cp dist/www/manifest.json %s/.' % (destdir))
 
     # Remove original index files
     local('rm -rf dist/www')
