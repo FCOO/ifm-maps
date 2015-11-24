@@ -446,7 +446,7 @@
             },
             "Static layers": {
                 "EEZ": store.getEEZ(),
-                "SAR": store.SAR
+                "SAR": store.getSAR()
             }
         };
         zoom = 6;
@@ -504,7 +504,7 @@
             },
             "Static layers": {
                 "EEZ": store.getEEZ(),
-                "SAR": store.SAR
+                "SAR": store.getSAR()
             }
         };
     } else if (domain === 'indian_ocean') {
