@@ -489,17 +489,28 @@
                 if (dates !== null) {
                     // Only include datetime selector in first window
                     if (index === 0) {
-                        var datetimeControl = (new L.Control.Datetime({
-                            title: getI18n('datetime', localLang),
-                            datetimes: dates,
-                            language: localLang,
-                            callback: callback,
-                            visibility: visibility,
-                            initialDatetime: initial_datetime,
-                            vertical: false,
-                            position: datetime_pos
-                        })).addTo(map);
+                        //var datetimeControl = (new L.Control.Datetime({
+                            //title: getI18n('datetime', localLang),
+                            //datetimes: dates,
+                            //language: localLang,
+                            //callback: callback,
+                            //visibility: visibility,
+                            //initialDatetime: initial_datetime,
+                            //vertical: false,
+                            //position: datetime_pos
+                        //})).addTo(map);
                         // TODO: Put new time slider in here
+                        var datetimeControl = new L.Control.TimeSlider({
+                              lang: localLang,
+                              position: datetime_pos,
+                              defaultMinimized: false,
+                              displayAsLocal    : false,
+                              minMoment : moment().add(-1, 'd'), 
+                              maxMoment : moment().add(2, 'd'), 
+                              fromMoment: moment(),
+                              step          : 1,
+                              callback: function( result ){ console.log(result); } 
+                        }).addTo(map);                        
                     }
 
                     var dt_current_levels = 0;
