@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="application-name" content="IFM Maps">
     <meta name="apple-mobile-web-app-title" content="IFM Maps">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
     <meta name="msapplication-TileImage" content="/apple-touch-icon.png">
     <meta name="msapplication-TileColor" content="#1C4B88">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -72,6 +75,7 @@
     <script src="../bower_components/latlng-format/src/latlng-format.js"></script>
     <script src="../bower_components/moment/min/moment-with-locales.js"></script>
     <script src="../bower_components/leaflet/dist/leaflet-src.js"></script>
+    <script src="../bower_components/Leaflet.Sync/L.Map.Sync.js"></script>
     <script src="../bower_components/leaflet-plugins/control/Permalink.js"></script>
     <script src="../bower_components/leaflet-languageselector/leaflet-languageselector.js"></script>
     <script src="../bower_components/Leaflet.MousePosition/src/L.Control.MousePosition.js"></script>
@@ -116,5 +120,21 @@
     <script src="../javascript/url.js"></script>
     <script src="../javascript/map_common.js"></script>
     <script src="../javascript/setup.js"></script>
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(['disableCookies']);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.fcoo.dk/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 1]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//analytics.fcoo.dk/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
 </body>
 </html>

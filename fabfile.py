@@ -24,6 +24,7 @@ env.setups = {'greenland': 'Greenland',
               'mediterranean': 'Mediterranean',
               'indian_ocean': 'Indian Ocean',
               'denmark_impact': 'Denmark',
+              'denmark_impact_sync': 'Denmark',
               'denmark_impact_land': 'Denmark',
               'greenland_impact': 'Greenland',
               'faroe_islands_impact': 'Faroe Islands',
@@ -65,6 +66,7 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "bower_components/latlng-format/src/latlng-format.js",
                "bower_components/moment/min/moment-with-locales.js",
                "bower_components/leaflet/dist/leaflet-src.js",
+               "bower_components/Leaflet.Sync/L.Map.Sync.js",
                "bower_components/leaflet-plugins/control/Permalink.js",
                "bower_components/leaflet-languageselector/leaflet-languageselector.js",
                "bower_components/Leaflet.MousePosition/src/L.Control.MousePosition.js",
@@ -199,8 +201,6 @@ def build_web():
     local('sed -i s/ifm-maps.js/ifm-maps_min_%s.js/ dist/www/index-prod.html' % env.now)
     local('sed -i s/ifm-maps.css/ifm-maps_%s.css/ dist/www/index-dev.html' % env.now)
     local('sed -i s/ifm-maps.js/ifm-maps_%s.js/ dist/www/index-dev.html' % env.now)
-    local('sed -i s/ifm-maps.css/ifm-maps_%s.css/ dist/www/app.html' % env.now)
-    local('sed -i s/ifm-maps.js/ifm-maps_%s.js/ dist/www/app.html' % env.now)
 
     # Make index.html files for each domain
     for setup, name in env.setups.iteritems():
@@ -216,11 +216,8 @@ def build_web():
         local('cp dist/www/index-dev.html %s/index-dev.html' % (destdir))
         local("sed -i 's/\${domain}/%s/' %s/index-dev.html" % (name, destdir))
         local("sed -i 's/denmark/%s/' %s/index-dev.html" % (setup, destdir))
-        # Other html/json files (for tests)
-        local('cp dist/www/app.html %s/.' % (destdir))
+        # Manifest file for webapp mode
         local('cp dist/www/manifest.json %s/.' % (destdir))
-        local("sed -i 's/\${domain}/%s/' %s/app.html" % (name, destdir))
-        local("sed -i 's/denmark/%s/' %s/app.html" % (setup, destdir))
 
     # Remove original index files
     local('rm -rf dist/www')

@@ -44,9 +44,6 @@
             layers.Fwarn = new L.GeoJSON.Fwarn({language: localLang});
         }
 
-        // Initialize basemaps
-        layers.basemaps = initBaseMaps(store, localLang);
-
         // Layer control options
         var collapsed = true;
         if (desktop) {
@@ -60,10 +57,13 @@
             position: "topright"
         };
 
+        layers.basemaps = {};
         layers.overlays = {};
         layers.layerControls = {};
         $.each(Object.keys(maps), function(index, mapKey) {
-            var baseMaps = layers.basemaps;
+            // Initialize basemaps
+            var baseMaps = initBaseMaps(store, localLang);
+            layers.basemaps[mapKey] = baseMaps;
 
             // Overlays
             var overlays = maps[mapKey].overlays;
@@ -120,7 +120,7 @@
             hideSelected: false,
             vertical: false,
             useAnchor: false,
-            position: 'topright'
+            position: 'topleft'
         });
         $(controls.languageSelector._container).addClass("show-on-large");
         if (urlParams.hidecontrols == "true") {
@@ -311,9 +311,44 @@
             lon = urlParams.lon;
         }
 
+        // Initialize datetime control with this time if in URL
+        var initial_datetime;
+        if (urlParams.datetime !== undefined) {
+            var res = window.unescape(urlParams.datetime).split('T');
+            // Colons are not unescaped since they are allowed in URI's
+            // but some browsers encode then
+            var res1 = res[0].split('-');
+            res[1] = res[1].replace(/%253A/g,':');
+            res[1] = res[1].replace(/%3A/g,':');
+            var res2 = res[1].split(':');
+            initial_datetime = new Date(Date.UTC(res1[0], res1[1]-1, res1[2], res2[0], res2[1], res2[2]));
+            //initial_datetime = new Date(window.unescape(urlParams.datetime));
+        } else {
+            initial_datetime = null;
+        }
+
+        var initial_level;
+        // Initialize level control with this level if in URL
+        if (urlParams.level !== undefined) {
+            initial_level = window.unescape(urlParams.level);
+        } else {
+            initial_level = null;
+        }
+        
+        var datetime_pos = 'bottomleft';
+        var level_pos = 'topleft';
+        if (desktop) {
+            datetime_pos = 'bottomright';
+            level_pos = 'bottomright';
+        }
+        var visibility = "visible";
+        if (urlParams.hidecontrols == "true") {
+            visibility = "hidden";
+        }
+
         $.each(Object.keys(maps), function(index, mapKey) {
             var map;
-            var baseMaps = mapStore.layers.basemaps;
+            var baseMaps = mapStore.layers.basemaps[mapKey];
 
             // Construct map
             map = L.map(mapKey, {
@@ -360,12 +395,15 @@
                     });
         
                     // Add firing warnings static and dynamic layers
-                    map.addLayer(store.firingAreas);
+                    map.addLayer(store.getFiringAreas());
                     map.addLayer(mapStore.layers.Fwarn);
                 }
 
                 // Add link to homepage
                 map.addControl(mapStore.controls.homeButton);
+
+                // Add language selector
+                map.addControl(mapStore.controls.languageSelector);
 
                 // Add zoom control
                 map.addControl(mapStore.controls.zoom);
@@ -383,9 +421,6 @@
                 if (urlParams.hidecontrols == "true") {
                     $(mapStore.controls.bookmark._container).hide();
                 }
-
-                // Add language selector
-                map.addControl(mapStore.controls.languageSelector);
 
                 // Add position control
                 map.addControl(mapStore.controls.mousePosition);
@@ -428,12 +463,17 @@
                 }
             }
     
+            // Enable sync between maps
+            if (index !== 0) {
+                mainMap.sync(map);
+            }
+
             // Add foreground layer (land contours, names, ...)
-            map.addLayer(store.top);
+            map.addLayer(store.getTopLayer());
 
             // Add layer control
-            var overlayMaps = mapStore.layers.overlays[mapKey];
-            var layerControl = mapStore.layers.layerControls[mapKey];
+            var overlayMaps = jQuery.extend(true, {}, mapStore.layers.overlays[mapKey]);
+            var layerControl = jQuery.extend(true, {}, mapStore.layers.layerControls[mapKey]);
             map.addControl(layerControl); 
 
             // patch layer control to add some titles
@@ -444,31 +484,6 @@
             patch = L.DomUtil.create('div', 'fcoo-layercontrol-header');
             patch.innerHTML = getI18n('maps', localLang); // 'Maps';
             layerControl._form.children[0].parentNode.insertBefore(patch, layerControl._form.children[0]);
-
-            // Initialize datetime control with this time if in URL
-            var initial_datetime;
-            if (urlParams.datetime !== undefined) {
-                var res = window.unescape(urlParams.datetime).split('T');
-                // Colons are not unescaped since they are allowed in URI's
-                // but some browsers encode then
-                var res1 = res[0].split('-');
-                res[1] = res[1].replace(/%253A/g,':');
-                res[1] = res[1].replace(/%3A/g,':');
-                var res2 = res[1].split(':');
-                initial_datetime = new Date(res1[0], res1[1]-1, res1[2], res2[0], res2[1], res2[2]);
-                //initial_datetime = new Date(window.unescape(urlParams.datetime));
-            } else {
-                initial_datetime = null;
-            }
-
-            var initial_level;
-            // Initialize level control with this level if in URL
-            if (urlParams.level !== undefined) {
-                initial_level = window.unescape(urlParams.level);
-            } else {
-                initial_level = null;
-            }
-        
             // Add datetime control. This is done when the overlays have been
             // properly initialized (they retrieve the current timesteps in
             // the forecast files asynchronously, so we have to wait until
@@ -478,30 +493,23 @@
             var dt_current = 0;
             var callback_obj = new DatetimeCallback(overlayMaps);
             var callback = callback_obj.changeDatetime;
-            var datetime_pos = 'bottomleft';
-            var level_pos = 'topleft';
-            if (desktop) {
-                datetime_pos = 'bottomright';
-                level_pos = 'bottomright';
-            }
-            var visibility = "visible";
-            if (urlParams.hidecontrols == "true") {
-                visibility = "hidden";
-            }
             function checkTimesteps() {
                 var dates = getTimeSteps(overlayMaps);
                 if (dates !== null) {
-                    var datetimeControl = (new L.Control.Datetime({
-                        title: getI18n('datetime', localLang),
-                        datetimes: dates,
-                        language: localLang,
-                        callback: callback,
-                        visibility: visibility,
-                        initialDatetime: initial_datetime,
-                        vertical: false,
-                        position: datetime_pos
-                    })).addTo(map);
-                    // TODO: Put new time slider in here
+                    // Only include datetime selector in first window
+                    if (index === 0) {
+                        var datetimeControl = (new L.Control.Datetime({
+                            title: getI18n('datetime', localLang),
+                            datetimes: dates,
+                            language: localLang,
+                            callback: callback,
+                            visibility: visibility,
+                            initialDatetime: initial_datetime,
+                            vertical: false,
+                            position: datetime_pos
+                        })).addTo(map);
+                        // TODO: Put new time slider in here
+                    }
 
                     var dt_current_levels = 0;
                     var checkLevels = function() {
@@ -649,7 +657,7 @@
         });
 
         // Construct FCOO background layer
-        var fcoo = store.background;
+        var fcoo = store.getBackground();
 
         // Put background layers into hash for easy consumption by layer control
         var bgstring = getI18n("Background Maps", lang);
