@@ -9,7 +9,7 @@
      * Initialization prior to DOM is loaded. We create most of the map controls
      * here.
      */
-    function initCommonMap(store, langs, maps, enablePrint, enableWarnings) {
+    function initCommonMap(store, langs, maps, enablePrint) {
         var urlParams,
             localLang,
             lang,
@@ -37,12 +37,6 @@
 
         // Create clustering layer for putting layers to be clustered on
         //layers.cluster = L.markerClusterGroup({spiderfyDistanceMultiplier: 3});
-
-        // Construct MSI and Fwarn layers
-        if (enableWarnings) {
-            layers.MSI = new L.GeoJSON.MSI({language: localLang});
-            layers.Fwarn = new L.GeoJSON.Fwarn({language: localLang});
-        }
 
         // Layer control options
         var collapsed = true;
@@ -291,7 +285,7 @@
      * Initialization after DOM is loaded
      */
     function createCommonMap(store, basemap, maps, minZoom, maxZoom, zoom, lat,
-                           lon, enablePrint, enableWarnings, useGeoMetoc,
+                           lon, enablePrint, useGeoMetoc,
                            mapStore) {
         var localLang,
             urlParams,
@@ -387,18 +381,6 @@
                     });
                 }
 
-                if (enableWarnings) {
-                    // Add MSI information
-                    mapStore.layers.MSI.jqxhr.done(function() {
-                        //mapStore.layers.cluster.addLayer(mapStore.layers.MSI);
-                        map.addLayer(mapStore.layers.MSI);
-                    });
-        
-                    // Add firing warnings static and dynamic layers
-                    map.addLayer(store.getFiringAreas());
-                    map.addLayer(mapStore.layers.Fwarn);
-                }
-
                 // Add link to homepage
                 map.addControl(mapStore.controls.homeButton);
 
@@ -472,8 +454,8 @@
             map.addLayer(store.getTopLayer());
 
             // Add layer control
-            var overlayMaps = jQuery.extend(true, {}, mapStore.layers.overlays[mapKey]);
-            var layerControl = jQuery.extend(true, {}, mapStore.layers.layerControls[mapKey]);
+            var overlayMaps = mapStore.layers.overlays[mapKey];
+            var layerControl = mapStore.layers.layerControls[mapKey];
             map.addControl(layerControl); 
 
             // patch layer control to add some titles
@@ -559,6 +541,18 @@
                                     $(permalinkControl).hide();
                                 }
                                 map.addControl(permalinkControl);
+
+                                // Modify overlays to include MSI and firing warnings
+                                var appendOverlays = 'Safety.MSI%2CSafety.Firing warnings%2CStatic layers.Firing areas';
+                                var overlayNames = permalinkControl.options.layers.overlayNames();
+                                if (overlayNames == '') {
+                                    appendOverlays = appendOverlays;
+                                } else {
+                                    appendOverlays = permalinkControl.options.layers.overlayNames() + '%2C' + appendOverlays;
+                                }
+                                permalinkControl._update({overlays: appendOverlays});
+                                permalinkControl.options.layers.setOverlays(appendOverlays);
+                                //map.fire('update');
                             }
                             //$(".leaflet-control-permalink").hide();
                         } else {
