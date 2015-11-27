@@ -101,7 +101,7 @@
                 winddirection: 'Vindretning',
                 waveperiod: 'Bølgeperiode',
                 waveheight: 'Bølgehøjde',
-                seastate: 'Bølgehøje (WMO-skala)',
+                seastate: 'Bølgehøjde (WMO-skala)',
                 wavedirection: 'Bølgeretning',
                 current: 'Strøm',
                 currentspeed: 'Strømhastighed',
