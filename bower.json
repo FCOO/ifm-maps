@@ -52,7 +52,7 @@
     "leaflet-control-fa-button": "https://github.com/jblarsen/leaflet-control-fa-button.git",
     "leaflet-control-vertical": "https://github.com/jblarsen/leaflet-control-vertical.git",
     "Leaflet.Sync": "https://github.com/turban/Leaflet.Sync.git#~0.0.5",
-    "leaflet-time-slider": "https://github.com/FCOO/leaflet-time-slider.git#~1.0.1"
+    "leaflet-time-slider": "https://github.com/FCOO/leaflet-time-slider.git#latest"
   },
   "resolutions": {
     "leaflet": "master",

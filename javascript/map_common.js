@@ -318,10 +318,10 @@
             res[1] = res[1].replace(/%253A/g,':');
             res[1] = res[1].replace(/%3A/g,':');
             var res2 = res[1].split(':');
-            initial_datetime = new Date(Date.UTC(res1[0], res1[1]-1, res1[2], res2[0], res2[1], res2[2]));
+            initial_datetime = moment(new Date(Date.UTC(res1[0], res1[1]-1, res1[2], res2[0], res2[1], res2[2])));
             //initial_datetime = new Date(window.unescape(urlParams.datetime));
         } else {
-            initial_datetime = null;
+            initial_datetime = moment();
         }
 
         var initial_level;
@@ -482,35 +482,43 @@
             var dt_check = 10; // How often to check
             var dt_max = 30000; // When to give up
             var dt_current = 0;
-            var callback_obj = new DatetimeCallback(overlayMaps);
-            var callback = callback_obj.changeDatetime;
+            //var callback_obj = new DatetimeCallback(overlayMaps);
+            //var callback = callback_obj.changeDatetime;
             function checkTimesteps() {
                 var dates = getTimeSteps(overlayMaps);
                 if (dates !== null) {
                     // Only include datetime selector in first window
                     if (index === 0) {
-                        //var datetimeControl = (new L.Control.Datetime({
-                            //title: getI18n('datetime', localLang),
-                            //datetimes: dates,
-                            //language: localLang,
-                            //callback: callback,
-                            //visibility: visibility,
-                            //initialDatetime: initial_datetime,
-                            //vertical: false,
-                            //position: datetime_pos
-                        //})).addTo(map);
-                        // TODO: Put new time slider in here
                         var datetimeControl = new L.Control.TimeSlider({
                               lang: localLang,
                               position: datetime_pos,
                               defaultMinimized: false,
-                              displayAsLocal    : false,
-                              minMoment : moment().add(-1, 'd'), 
-                              maxMoment : moment().add(2, 'd'), 
-                              fromMoment: moment(),
-                              step          : 1,
-                              callback: function( result ){ console.log(result); } 
-                        }).addTo(map);                        
+                              displayAsLocal: true,
+                              minMoment: moment(dates[0]),
+                              maxMoment: moment(dates[dates.length-1]), 
+                              fromMoment: moment(initial_datetime),
+                              step: moment(dates[1]).diff(moment(dates[0]), 'hours', true),
+                              callbackLocal: function( displayAsLocal ) {
+                                  var tz = displayAsLocal ? 'local' : 'UTC';
+                                  map.fire('timezonechange', {timezone: tz});
+                              },
+                              callback: function( result ) {
+                                  map.fire('datetimechange', {datetime: result.fromMoment.toISOString()});
+                              } 
+                        }).addTo(map);
+                        // When an overlay is added to the map we want the 
+                        // datetime control to send a signal that the datetime
+                        // is updated so that the time setting of the just
+                        // added overlay can be set
+                        map.addEventListener(
+                            'overlayadd',
+                            function(evt) {
+                                map.fire('datetimechange', {datetime: this.timeSlider.result.fromMoment.toISOString()});
+                            },
+                            datetimeControl
+                        );
+                        // Let overlays on the map know what time it is
+                        map.fire('datetimechange', {datetime: initial_datetime.toISOString()});
                     }
 
                     var dt_current_levels = 0;
