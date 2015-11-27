@@ -36,7 +36,7 @@
         layers = {};
 
         // Create clustering layer for putting layers to be clustered on
-        layers.cluster = L.markerClusterGroup({spiderfyDistanceMultiplier: 3});
+        //layers.cluster = L.markerClusterGroup({spiderfyDistanceMultiplier: 3});
 
         // Construct MSI and Fwarn layers
         if (enableWarnings) {
@@ -374,7 +374,7 @@
                 mainMap = map;
 
                 // Add clustering layer for putting layers to be clustered on
-                map.addLayer(mapStore.layers.cluster);
+                //map.addLayer(mapStore.layers.cluster);
 
                 // Optionally use FCOO Geolocated METOC service (on right click)
                 if (useGeoMetoc) {
