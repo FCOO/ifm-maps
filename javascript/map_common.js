@@ -545,7 +545,7 @@
                                 // Modify overlays to include MSI and firing warnings
                                 var appendOverlays = 'Safety.MSI%2CSafety.Firing warnings%2CStatic layers.Firing areas';
                                 var overlayNames = permalinkControl.options.layers.overlayNames();
-                                if (overlayNames == '') {
+                                if (overlayNames === '') {
                                     appendOverlays = appendOverlays;
                                 } else {
                                     appendOverlays = permalinkControl.options.layers.overlayNames() + '%2C' + appendOverlays;
