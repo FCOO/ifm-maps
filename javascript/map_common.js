@@ -543,7 +543,7 @@
                                 map.addControl(permalinkControl);
 
                                 // Modify overlays to include MSI and firing warnings
-                                var appendOverlays = 'Safety.MSI%2CSafety.Firing warnings%2CStatic layers.Firing areas';
+                                var appendOverlays = 'Safety.MSI%2CSafety.Firing warnings';
                                 var overlayNames = permalinkControl.options.layers.overlayNames();
                                 if (overlayNames === '') {
                                     appendOverlays = appendOverlays;
