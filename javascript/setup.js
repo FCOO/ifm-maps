@@ -255,14 +255,13 @@
             },
             "Safety": {
                 "MSI": new L.GeoJSON.MSI({language: lang}),
-                "Firing warnings": new L.GeoJSON.Fwarn({language: lang})
+                "Firing warnings": L.layerGroup([new L.GeoJSON.Fwarn({language: lang}), store.getFiringAreas()])
             },
             "Celestial information": {
                 "Solar Terminator": store.getSolarTerminator()
             },
             "Static layers": {
                 "EEZ": store.getEEZ(),
-                "Firing areas": store.getFiringAreas()
 
             }
         };
