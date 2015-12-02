@@ -390,8 +390,9 @@
                 // Add zoom control
                 map.addControl(mapStore.controls.zoom);
                 $(mapStore.controls.zoom._container).addClass("hide-on-print");
+                $(mapStore.controls.zoom._container).addClass("show-on-large");
                 if (desktop || !L.Browser.touch) {
-                    $(mapStore.controls.zoom._container).show();
+                    $(mapStore.controls.zoom._container).removeClass("show-on-large");
                 }
                 if (urlParams.hidecontrols == "true") {
                     $(mapStore.controls.zoom._container).hide();
