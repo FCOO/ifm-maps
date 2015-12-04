@@ -73,18 +73,6 @@ html, body, #map {
     display: none;
 }
 
-/* Prevent iOS from resizing small fonts on iPhones */
-@media screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px) {
-@media screen and (max-device-width: 480px) {
-    body {
-        -webkit-text-size-adjust: none;
-    }
-    /*input, textarea {
-        -webkit-appearance: none;
-        -webkit-border-radius: 0;
-    }*/
-}
-
 @media screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px) {
     .show-on-large {
         visibility: visible;

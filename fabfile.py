@@ -43,6 +43,8 @@ env.cssfiles = ["bower_components/fontawesome/css/font-awesome.min.css",
                 "bower_components/leaflet-control-vertical/leaflet-control-vertical.css",
                 "bower_components/leaflet-control-datetime/leaflet-control-datetime.css",
                 "bower_components/leaflet-control-legend/leaflet-control-legend.css",
+                "bower_components/leaflet.markercluster/dist/MarkerCluster.css",
+                "bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css",
                 "bower_components/leaflet-layer-sealevel-denmark/leaflet-layer-sealevel-denmark.css",
                 "bower_components/leaflet-control-forecast-print/leaflet-control-forecast-print.css",
                 "bower_components/leaflet-geojsonlayer-msi/leaflet-geojsonlayer-msi.css",
@@ -84,6 +86,7 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "bower_components/leaflet-control-datetime/leaflet-control-datetime.js",
                "bower_components/leaflet-tilelayer-counting/leaflet-tilelayer-counting.js",
                "bower_components/leaflet-control-legend/leaflet-control-legend.js",
+               "bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js",
                "bower_components/leaflet-control-forecast-print/leaflet-control-forecast-print.js",
                "bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-model.js",
                "bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-fcoo.js",
@@ -105,8 +108,9 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "leaflet/Permalink.CategorizedOverlay.js",
                "javascript/lang.js",
                "javascript/url.js",
-               "javascript/map_common.js",
-               "javascript/setup.js"]
+               "javascript/map_common.js"]
+
+env.jsfiles_run = ["javascript/setup.js"]
 
 env.jsfiles_extra = []
 #env.jsfiles_extra = ["bower_components/jquery/dist/jquery.min.js",
@@ -152,13 +156,16 @@ def build_css(minify=True):
 @_booleanize
 def build_js(minify=True):
     local('mkdir -p dist')
+
     jsfiles = env.jsfiles
     jsfiles_min = env.jsfiles_extra
+    jsfiles_run = env.jsfiles_run
+
     destdir = 'dist/javascript'
     local('mkdir -p %s' % destdir)
     jsfilestr = ' '.join(jsfiles)
-    jsfile = '%s/ifm-maps_%s.js' % (destdir, env.now)
-    jsfile_min = '%s/ifm-maps_min_%s.js' % (destdir, env.now)
+    jsfile = '%s/ifm-maps_lib_%s.js' % (destdir, env.now)
+    jsfile_min = '%s/ifm-maps_lib_min_%s.js' % (destdir, env.now)
     local('awk \'FNR==1{print ""}1\' %s > %s' % (jsfilestr, jsfile))
     if minify:
         local('/usr/bin/node /usr/bin/uglifyjs -o %s %s' % (jsfile_min, jsfile))
@@ -169,6 +176,14 @@ def build_js(minify=True):
     jsfiles_all = jsfiles_min + [jsfile_min]
     jsfilestr = ' '.join(jsfiles_all)
     local('awk \'FNR==1{print ""}1\' %s > tmp.js && mv tmp.js %s' % (jsfilestr, jsfile_min))
+
+    # Make the js file which should run immediately
+    jsfilestr_run = ' '.join(jsfiles_run)
+    jsfile_run = '%s/ifm-maps_%s.js' % (destdir, env.now)
+    jsfile_min_run = '%s/ifm-maps_min_%s.js' % (destdir, env.now)
+    local('awk \'FNR==1{print ""}1\' %s > %s' % (jsfilestr_run, jsfile_run))
+    if minify:
+        local('/usr/bin/node /usr/bin/uglifyjs -o %s %s' % (jsfile_min_run, jsfile_run))
 
 @_booleanize
 def build_web():
@@ -184,6 +199,8 @@ def build_web():
     #local('cp -r css/ifm-maps.css dist/css/.')
     local('cp -r leaflet/images dist/css/.')
     local('cp -r bower_components/leaflet/dist/images/* dist/css/images/.')
+    local('cp bower_components/matchMedia/matchMedia.js dist/javascript/.')
+    local('cp bower_components/matchMedia/matchMedia.addListener.js dist/javascript/.')
     local('cp bower_components/typedarray/index.js dist/javascript/typedarray.js')
     local('cp bower_components/jQuery-ajaxTransport-XDomainRequest/jquery.xdomainrequest.min.js dist/javascript/jquery.xdomainrequest.min.js')
     local('cp -r bower_components/leaflet-control-home/images/* dist/css/images/.')
@@ -198,8 +215,10 @@ def build_web():
     # Modify html files to use time stamped css and js files
     local('cp dist/www/index-prod.html dist/www/index-dev.html')
     local('sed -i s/ifm-maps.css/ifm-maps_min_%s.css/ dist/www/index-prod.html' % env.now)
+    local('sed -i s/ifm-maps_lib.js/ifm-maps_lib_min_%s.js/ dist/www/index-prod.html' % env.now)
     local('sed -i s/ifm-maps.js/ifm-maps_min_%s.js/ dist/www/index-prod.html' % env.now)
     local('sed -i s/ifm-maps.css/ifm-maps_%s.css/ dist/www/index-dev.html' % env.now)
+    local('sed -i s/ifm-maps_lib.js/ifm-maps_lib_%s.js/ dist/www/index-dev.html' % env.now)
     local('sed -i s/ifm-maps.js/ifm-maps_%s.js/ dist/www/index-dev.html' % env.now)
 
     # Make index.html files for each domain

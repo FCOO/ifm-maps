@@ -9,7 +9,7 @@
      * Initialization prior to DOM is loaded. We create most of the map controls
      * here.
      */
-    function initCommonMap(store, langs, maps, enablePrint, enableWarnings) {
+    function initCommonMap(store, langs, maps, enablePrint) {
         var urlParams,
             localLang,
             lang,
@@ -35,11 +35,8 @@
         controls = {};
         layers = {};
 
-        // Construct MSI and Fwarn layers
-        if (enableWarnings) {
-            layers.MSI = new L.GeoJSON.MSI({language: localLang});
-            layers.Fwarn = new L.GeoJSON.Fwarn({language: localLang});
-        }
+        // Create clustering layer for putting layers to be clustered on
+        //layers.cluster = L.markerClusterGroup({spiderfyDistanceMultiplier: 3});
 
         // Layer control options
         var collapsed = true;
@@ -288,7 +285,7 @@
      * Initialization after DOM is loaded
      */
     function createCommonMap(store, basemap, maps, minZoom, maxZoom, zoom, lat,
-                           lon, enablePrint, enableWarnings, useGeoMetoc,
+                           lon, enablePrint, useGeoMetoc,
                            mapStore) {
         var localLang,
             urlParams,
@@ -370,6 +367,9 @@
             if (index === 0) {
                 mainMap = map;
 
+                // Add clustering layer for putting layers to be clustered on
+                //map.addLayer(mapStore.layers.cluster);
+
                 // Optionally use FCOO Geolocated METOC service (on right click)
                 if (useGeoMetoc) {
                     map.on('contextmenu', function (e) {
@@ -381,15 +381,6 @@
                     });
                 }
 
-                if (enableWarnings) {
-                    // Add MSI information
-                    map.addLayer(mapStore.layers.MSI);
-        
-                    // Add firing warnings static and dynamic layers
-                    map.addLayer(store.getFiringAreas());
-                    map.addLayer(mapStore.layers.Fwarn);
-                }
-
                 // Add link to homepage
                 map.addControl(mapStore.controls.homeButton);
 
@@ -399,8 +390,9 @@
                 // Add zoom control
                 map.addControl(mapStore.controls.zoom);
                 $(mapStore.controls.zoom._container).addClass("hide-on-print");
+                $(mapStore.controls.zoom._container).addClass("show-on-large");
                 if (desktop || !L.Browser.touch) {
-                    $(mapStore.controls.zoom._container).addClass("show-on-large");
+                    $(mapStore.controls.zoom._container).removeClass("show-on-large");
                 }
                 if (urlParams.hidecontrols == "true") {
                     $(mapStore.controls.zoom._container).hide();
@@ -463,8 +455,8 @@
             map.addLayer(store.getTopLayer());
 
             // Add layer control
-            var overlayMaps = jQuery.extend(true, {}, mapStore.layers.overlays[mapKey]);
-            var layerControl = jQuery.extend(true, {}, mapStore.layers.layerControls[mapKey]);
+            var overlayMaps = mapStore.layers.overlays[mapKey];
+            var layerControl = mapStore.layers.layerControls[mapKey];
             map.addControl(layerControl); 
 
             // patch layer control to add some titles
@@ -569,6 +561,18 @@
                                     $(permalinkControl).hide();
                                 }
                                 map.addControl(permalinkControl);
+
+                                // Modify overlays to include MSI and firing warnings
+                                var appendOverlays = 'Safety.MSI%2CSafety.Firing warnings';
+                                var overlayNames = permalinkControl.options.layers.overlayNames();
+                                if (overlayNames === '') {
+                                    appendOverlays = appendOverlays;
+                                } else {
+                                    appendOverlays = permalinkControl.options.layers.overlayNames() + '%2C' + appendOverlays;
+                                }
+                                permalinkControl._update({overlays: appendOverlays});
+                                permalinkControl.options.layers.setOverlays(appendOverlays);
+                                //map.fire('update');
                             }
                             //$(".leaflet-control-permalink").hide();
                         } else {

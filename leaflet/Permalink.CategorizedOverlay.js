@@ -39,7 +39,15 @@
     L.Control.CategorizedLayers.include({
         setOverlays: function(overlaynames_str) {
             var overlaynames = decodeURIComponent(overlaynames_str).split(',');
-            var obj, idx=0;
+            // Remove double entries
+            var result = [];
+            $.each(overlaynames, function(i, e) {
+                if ($.inArray(e, result) == -1) result.push(e);
+            });
+            overlaynames = result;
+            // Start processing
+            var obj;
+            // Remove all layers not in overlaynames and add those in
             for (var i in this._overlays) {
                 if (!this._overlays.hasOwnProperty(i))
                     continue;
@@ -49,18 +57,18 @@
                         continue;
                     obj = layerGroup[j];
                     if (obj._overlay) {
-                        // visible if specified
                         var name = obj._category_en + '.' + obj._name_en;
-                        var visible = (overlaynames[idx] == name);
-                        if (visible) {
-                            idx++;
+                        var addOverlay = false;
+                        for (var ii in overlaynames) {
+                            if (overlaynames[ii] == name) {
+                                addOverlay = true;
+                            }
                         }
-                        if (!visible && this._map.hasLayer(obj)) {
-                            idx++;
+                        if (!addOverlay && this._map.hasLayer(obj)) {
                             this._map.removeLayer(obj);
-                        } else if (visible && !this._map.hasLayer(obj)) {
+                        } 
+                        if (addOverlay && !this._map.hasLayer(obj)) {
                             this._map.addLayer(obj);
-                        } else {
                         }
                     }
                 }

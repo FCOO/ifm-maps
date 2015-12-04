@@ -51,13 +51,16 @@
     "leaflet-graphicscale": "NielsHolt/leaflet-graphicscale#master",
     "leaflet-control-fa-button": "https://github.com/jblarsen/leaflet-control-fa-button.git",
     "leaflet-control-vertical": "https://github.com/jblarsen/leaflet-control-vertical.git",
+    "leaflet.markercluster": "https://github.com/Leaflet/Leaflet.markercluster.git#leaflet-master",
     "Leaflet.Sync": "https://github.com/turban/Leaflet.Sync.git#~0.0.5",
-    "leaflet-time-slider": "https://github.com/FCOO/leaflet-time-slider.git#latest"
+    "leaflet-time-slider": "https://github.com/FCOO/leaflet-time-slider.git#latest",
+    "matchMedia": "https://github.com/paulirish/matchMedia.js.git#~0.2.0"
   },
   "resolutions": {
     "leaflet": "master",
     "jquery": "~2.1.4",
-    "moment": "master"
+    "moment": "master",
+    "leaflet.markercluster": "leaflet-master"
   },
   "moduleType": [
     "es6"

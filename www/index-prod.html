@@ -37,10 +37,13 @@
         // The domain variable is used to determine which setup to use
         var domain = 'denmark'; // Default
     </script>
-    <script src="../javascript/ifm-maps.js"></script>
+    <script src="../javascript/ifm-maps_lib.js"></script>
     <script>window.L_PREFER_CANVAS = true;</script>
+    <!--[if lt IE 10]><script type="text/javascript" src="../javascript/matchMedia.js"></script><![endif]-->
+    <!--[if lt IE 10]><script type="text/javascript" src="../javascript/matchMedia.addListener.js"></script><![endif]-->
     <!--[if lt IE 10]><script type="text/javascript" src="../javascript/typedarray.js"></script><![endif]-->
     <!--[if lt IE 10]><script type="text/javascript" src="../javascript/jquery.xdomainrequest.min.js"></script><![endif]-->
+    <script src="../javascript/ifm-maps.js" async="async"></script>
     <!-- Piwik -->
     <script type="text/javascript">
       var _paq = _paq || [];

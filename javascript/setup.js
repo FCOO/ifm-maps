@@ -40,7 +40,6 @@
     var langs = ['da', 'en'];
     var useGeoMetoc = false;
     var enablePrint = false;
-    var enableWarnings = false;
     var stdOpts = {ajaxProxy: proxy};
     var seaOpts = {ajaxProxy: proxy, foreground: store.getForeground()};
     var maps;
@@ -207,7 +206,6 @@
         lat = 55.7;
         lon = 11.1;
         enablePrint = false;
-        enableWarnings = true;
 
         overlays = {
             "Short range forecasts": {
@@ -255,11 +253,16 @@
             "Measurements": {
                 "Sea level": new L.GeoJSON.Sealevel()
             },
+            "Safety": {
+                "MSI": new L.GeoJSON.MSI({language: lang}),
+                "Firing warnings": L.layerGroup([new L.GeoJSON.Fwarn({language: lang}), store.getFiringAreas()])
+            },
             "Celestial information": {
                 "Solar Terminator": store.getSolarTerminator()
             },
             "Static layers": {
-                "EEZ": store.getEEZ()
+                "EEZ": store.getEEZ(),
+
             }
         };
     } else if (domain === 'faroe_islands_impact') {
@@ -781,15 +784,13 @@
     proxy.doAjax();
 
     // Init map
-    var mapStore = initCommonMap(store, langs, maps, enablePrint,
-                                 enableWarnings);
+    var mapStore = initCommonMap(store, langs, maps, enablePrint);
     //console.profileEnd();
 
     $(document).ready(function () {
         //console.profile('ready');
         createCommonMap(store, basemap, maps, minZoom, maxZoom, zoom, 
-                      lat, lon, enablePrint, enableWarnings, 
-                      useGeoMetoc, mapStore);
+                      lat, lon, enablePrint, useGeoMetoc, mapStore);
         //console.profileEnd();
     });
 
