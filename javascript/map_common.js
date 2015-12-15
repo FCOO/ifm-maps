@@ -30,6 +30,10 @@
         if (mediaQueriesSupported()) {
             var mq = window.matchMedia('screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px)');
             desktop = mq.matches;
+            // Special handling of IE8 and below
+            if (isIE8) {
+                desktop = true;
+            }
         }
 
         controls = {};
@@ -64,7 +68,7 @@
 
             // Remove Solar Terminator from overlays if on small units
             // to save battery + does not work on all mobiles
-            if (!desktop && overlays.hasOwnProperty("Celestial information")) {
+            if ((isIE8 || !desktop) && overlays.hasOwnProperty("Celestial information")) {
                 delete overlays["Celestial information"];
             }
 
@@ -245,7 +249,12 @@
         }
         controls.bookmark = new L.Control.FontAwesomeButton({
             onclick: function (evt) {
-                evt.preventDefault(); // Prevent link from being processed
+                // Prevent link from being processed
+                if (evt.preventDefault) {
+                    evt.preventDefault();
+                } else {
+                    evt.returnValue = false;
+                }
                 var triggerDefault = false;
                 if (this.options.useLocalStorage) {
                     var params = window.localStorage.getItem('paramsTemp');
@@ -295,6 +304,10 @@
         if (mediaQueriesSupported()) {
             var mq = window.matchMedia('screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px)');
             desktop = mq.matches;
+            // Special handling of IE8 and below
+            if (isIE8) {
+                desktop = true;
+            }
         }
 
         // Retrieve URL parameters
@@ -413,23 +426,26 @@
                     $(mapStore.controls.mousePosition._container).hide();
                 }
     
-                // Add locator control
-                map.addControl(mapStore.controls.locate);
-                $(mapStore.controls.locate._container).addClass("hide-on-print");
-                if (urlParams.hidecontrols == "true") {
-                    $(mapStore.controls.locate._container).hide();
-                }
-                // Enable geolocation if locate query string parameter is true
-                if (urlParams.locate === "true") {
-                    mapStore.controls.locate.start();
-                }
+                // We do not support these on IE8
+                if (!isIE8) {
+                    // Add locator control
+                    map.addControl(mapStore.controls.locate);
+                    $(mapStore.controls.locate._container).addClass("hide-on-print");
+                    if (urlParams.hidecontrols == "true") {
+                        $(mapStore.controls.locate._container).hide();
+                    }
+                    // Enable geolocation if locate query string parameter is true
+                    if (urlParams.locate === "true") {
+                        mapStore.controls.locate.start();
+                    }
 
-                // Add geocoder control
-                map.addControl(mapStore.controls.OSMGeocoder);
-                $(mapStore.controls.OSMGeocoder._container).addClass("hide-on-print");
-                $(mapStore.controls.OSMGeocoder._container).addClass("show-on-large");
-                if (urlParams.hidecontrols == "true") {
-                    $(mapStore.controls.OSMGeocoder._container).hide();
+                    // Add geocoder control
+                    map.addControl(mapStore.controls.OSMGeocoder);
+                    $(mapStore.controls.OSMGeocoder._container).addClass("hide-on-print");
+                    $(mapStore.controls.OSMGeocoder._container).addClass("show-on-large");
+                    if (urlParams.hidecontrols == "true") {
+                        $(mapStore.controls.OSMGeocoder._container).hide();
+                    }
                 }
 
                 // Add length scale control
@@ -584,6 +600,11 @@
                     if (mediaQueriesSupported()) {
                         mq.addListener(function (){
                             var desktop = mq.matches;
+                            // Special handling of IE8 and below
+                            if (isIE8) {
+                                desktop = true;
+                            }
+
                             // Modify layer control
                             // Disabled since the control is not really designed
                             // for such modifications after init
