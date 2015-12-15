@@ -88,9 +88,9 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "bower_components/leaflet-control-legend/leaflet-control-legend.js",
                "bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js",
                "bower_components/leaflet-control-forecast-print/leaflet-control-forecast-print.js",
-               "bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-model.js",
+               "bower_components/leaflet-tilelayer-wms-pydap/wms-ajax-proxy.js",
+               "bower_components/leaflet-tilelayer-wms-pydap/leaflet-tilelayer-wms-pydap.js",
                "bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-fcoo.js",
-               "bower_components/leaflet-tilelayer-wms-fcoo/wms-ajax-proxy.js",
                "bower_components/leaflet-layer-sealevel-denmark/leaflet-layer-sealevel-denmark.js",
                "bower_components/leaflet-layer-tides-greenland/leaflet-layer-tides-greenland.js",
                "bower_components/leaflet-pip/leaflet-pip.js",
@@ -211,6 +211,11 @@ def build_web():
     local('cp -r external/flag-icon-css/flags dist/.')
     #local('cp -r bower_components/leaflet-control-datetime/fontello/font dist/.')
     local('cp -r bower_components/fontawesome/fonts dist/.')
+
+    local('cp javascript/ie8polyfill.js dist/javascript/.')
+    local('cp bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.ie8.css dist/css/.')
+    local('cp bower_components/leaflet-control-datetime/leaflet-control-datetime.ie8.css dist/css/.')
+    local('cp bower_components/leaflet-control-legend/leaflet-control-legend.ie8.css dist/css/.')
 
     # Modify html files to use time stamped css and js files
     local('cp dist/www/index-prod.html dist/www/index-dev.html')
