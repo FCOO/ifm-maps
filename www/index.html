@@ -27,9 +27,12 @@
     <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-home/leaflet-control-home.css" />
     <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-categorized-layers/src/radio-checkbox.css" />
     <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="../bower_components/leaflet-categorized-layers/src/leaflet-categorized-layers.ie8.css" /><![endif]-->
     <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-vertical/leaflet-control-vertical.css" />
     <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-datetime/leaflet-control-datetime.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-datetime/leaflet-control-datetime.ie8.css" /><![endif]-->
     <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-legend/leaflet-control-legend.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-legend/leaflet-control-legend.ie8.css" /><![endif]-->
     <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-geojsonlayer-msi/leaflet-geojsonlayer-msi.css" />
     <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-geojsonlayer-fwarn/leaflet-geojsonlayer-fwarn.css" />
     <link rel="stylesheet" type="text/css" href="../bower_components/leaflet-control-forecast-print/leaflet-control-forecast-print.css" />
@@ -64,7 +67,14 @@
         var version = 'development';
         // The domain variable is used to determine which setup to use
         var domain = 'denmark'; // Default
+        var isIE8 = false;
     </script>
+    <!--[if IE 8]>
+        <script type='text/javascript'>
+            isIE8 = true;
+        </script>
+    <![endif]-->
+    <!--[if lt IE 9]><script type="text/javascript" src="../javascript/ie8polyfill.js"></script><![endif]-->
     <!--[if lt IE 10]><script type="text/javascript" src="../bower_components/matchMedia/matchMedia.js"></script><![endif]-->
     <!--[if lt IE 10]><script type="text/javascript" src="../bower_components/matchMedia/matchMedia.addListener.js"></script><![endif]-->
     <!--[if lt IE 10]><script type="text/javascript" src="../bower_components/typedarray/index.js"></script><![endif]-->
@@ -94,9 +104,9 @@
     <script src="../bower_components/leaflet-control-datetime/leaflet-control-datetime.js"></script>
     <script src="../bower_components/leaflet-tilelayer-counting/leaflet-tilelayer-counting.js"></script>
     <script src="../bower_components/leaflet-control-legend/leaflet-control-legend.js"></script>
-    <script src="../bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-model.js"></script>
+    <script src="../bower_components/leaflet-tilelayer-wms-pydap/wms-ajax-proxy.js"></script>
+    <script src="../bower_components/leaflet-tilelayer-wms-pydap/leaflet-tilelayer-wms-pydap.js"></script>
     <script src="../bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-fcoo.js"></script>
-    <script src="../bower_components/leaflet-tilelayer-wms-fcoo/wms-ajax-proxy.js"></script>
     <script src="../bower_components/jquery-autoclick-while-pressed/autoclick-while-pressed.min.js"></script>
     <script src="../bower_components/jquery-base-slider/dist/jquery-base-slider.min.js"></script>
     <script src="../bower_components/jquery-time-slider/dist/jquery-time-slider.min.js"></script>
