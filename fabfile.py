@@ -26,6 +26,7 @@ env.setups = {'greenland': 'Greenland',
               'denmark_impact': 'Denmark',
               'denmark_impact_sync': 'Denmark',
               'denmark_impact_land': 'Denmark',
+              'denmark_impact_air': 'Denmark',
               'greenland_impact': 'Greenland',
               'faroe_islands_impact': 'Faroe Islands',
               'indian_ocean_impact': 'Indian Ocean'}
