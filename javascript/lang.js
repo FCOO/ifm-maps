@@ -86,6 +86,7 @@
                 'Firing warnings': 'Skydevarsler',
                 'Firing areas': 'Skydeområder',
                 'Select depth': 'Vælg dybde',
+                'Select height': 'Vælg højde',
                 'Loading forecast information': 'Henter prognoseinformation',
                 'Finished loading forecast information': 'Færdig med at hente prognoseinformation',
                 layers: 'Lag',

@@ -517,8 +517,12 @@
                             var levelControl;
                             if (levels.values.length !== 0) {
                                 // Add level control
+                                var lvlMsg = 'Select depth';
+                                if (levels.positive !== undefined && levels.positive == 'up') {
+                                    lvlMsg = 'Select height';
+                                }
                                 levelControl = (new L.Control.Vertical({
-                                    title: getI18n('Select depth', localLang),
+                                    title: getI18n(lvlMsg, localLang),
                                     levels: levels.values,
                                     units: levels.units,
                                     language: localLang,
