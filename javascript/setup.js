@@ -201,6 +201,39 @@
                 "Firing areas": store.getFiringAreas()
             }
         };
+    } else if (domain === 'denmark_impact_air') {
+        zoom = 7;
+        lat = 55.7;
+        lon = 11.1;
+        overlays = {
+            "Impacts": {
+                "Bombing midlevel": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Bombing lowlevel": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "UAV": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Recon high": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Recon low": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Recon ground": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Aerial refueling": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Tactical airlift": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Infrared systems": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Combat SFC support": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "HELO (general)": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "HELO (attack)": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Close air support": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Deep air support": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Electrical optical/NVG": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Intel/Electronic": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Intel/Recce": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts}),
+                "Night vision goggles": istore.getLayer({'dataset': 'TEST/HIRLAM/S03', 'parameter': 'UAV', 'options': stdOpts})
+            },
+            "Celestial information": {
+                "Solar Terminator": store.getSolarTerminator()
+            },
+            "Static layers": {
+                "EEZ": store.getEEZ(),
+                "Firing areas": store.getFiringAreas()
+            }
+        };
     } else if (domain === 'denmark') {
         zoom = 7;
         lat = 55.7;

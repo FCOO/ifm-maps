@@ -15,6 +15,9 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="shortcut icon" href="/apple-touch-icon.png">
     <link rel="stylesheet" type="text/css" href="../css/ifm-maps.css">
+    <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="../css/leaflet-categorized-layers.ie8.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="../css/leaflet-control-datetime.ie8.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="../css/leaflet-control-legend.ie8.css" /><![endif]-->
     <link rel="dns-prefetch" href="//api01.fcoo.dk">
     <link rel="dns-prefetch" href="//api02.fcoo.dk">
     <link rel="dns-prefetch" href="//api03.fcoo.dk">
@@ -36,8 +39,15 @@
         var version = '${version}';
         // The domain variable is used to determine which setup to use
         var domain = 'denmark'; // Default
+        var isIE8 = false;
     </script>
+    <!--[if IE 8]>
+        <script type='text/javascript'>
+            isIE8 = true;
+        </script>
+    <![endif]-->
     <script src="../javascript/ifm-maps_lib.js"></script>
+    <!--[if lt IE 9]><script type="text/javascript" src="../javascript/ie8polyfill.js"></script><![endif]-->
     <script>window.L_PREFER_CANVAS = true;</script>
     <!--[if lt IE 10]><script type="text/javascript" src="../javascript/matchMedia.js"></script><![endif]-->
     <!--[if lt IE 10]><script type="text/javascript" src="../javascript/matchMedia.addListener.js"></script><![endif]-->

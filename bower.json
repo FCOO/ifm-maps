@@ -36,10 +36,11 @@
     "leaflet-control-position": "https://github.com/jblarsen/leaflet-control-position.git",
     "leaflet-control-home": "https://github.com/jblarsen/leaflet-control-home.git",
     "leaflet-categorized-layers": "https://github.com/jblarsen/leaflet-categorized-layers.git#master",
-    "leaflet": "https://github.com/jblarsen/Leaflet.git#master",
+    "leaflet": "https://github.com/jblarsen/Leaflet.git#master-dist",
     "leaflet-control-datetime": "https://github.com/jblarsen/leaflet-control-datetime.git",
     "leaflet-tilelayer-counting": "https://github.com/jblarsen/leaflet-tilelayer-counting.git",
     "leaflet-control-legend": "https://github.com/jblarsen/leaflet-control-legend.git",
+    "leaflet-tilelayer-wms-pydap": "https://github.com/jblarsen/leaflet-tilelayer-wms-pydap.git",
     "leaflet-tilelayer-wms-fcoo": "https://github.com/jblarsen/leaflet-tilelayer-wms-fcoo.git",
     "leaflet-control-forecast-print": "https://github.com/jblarsen/leaflet-control-forecast-print.git",
     "jQuery-ajaxTransport-XDomainRequest": "https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest.git#~1.0.4",
@@ -58,7 +59,7 @@
   },
   "resolutions": {
     "leaflet": "master",
-    "jquery": "~2.1.4",
+    "jquery": "~1.11.3",
     "moment": "master",
     "leaflet.markercluster": "leaflet-master"
   },
