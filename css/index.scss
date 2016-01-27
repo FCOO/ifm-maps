@@ -1,0 +1,51 @@
+/* 
+	SCSS for start page of ifm.fcoo.dk
+*/
+
+
+//Default = lang-da
+
+.show-for-lang-da	{ display: inherit	!important; }
+.show-for-lang-en	{ display: none			!important;	}
+
+.lang-en {
+	.show-for-lang-en	{ display: inherit	!important;	}
+	.show-for-lang-da	{ display: none			!important;	}
+}
+
+
+
+
+body {
+	background-color: white;
+	.logo, select, #map  {
+		display: block;
+		margin: 0 auto;
+	}
+	h1 {
+		margin: 5px;
+		text-align: center;
+		color: #1c4b88;
+    font-size: 18pt;
+    font-weight: bold;
+		font-family: Tahoma,​Helvetica,​sans-serif;
+	}
+	select {
+		width: 300px;
+	}
+	select, select option {
+		color: #1c4b88;
+    font-size: 14pt;
+    font-weight: bold;
+		font-family: Tahoma,​Helvetica,​sans-serif;
+		text-align: center;
+	}
+
+	#map {
+		margin-top: 10px;
+		width			: 460px;//90%;
+		//min-width	: 480px;
+		height		: 460px;
+		
+	}
+}

@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/* 
+	SCSS for start page of ifm.fcoo.dk
+*/
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/web-dev\/ifm-maps\/css\/index\.scss}line{font-family:\000038}}
+.show-for-lang-da {
+  display: inherit	!important;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/web-dev\/ifm-maps\/css\/index\.scss}line{font-family:\000039}}
+.show-for-lang-en {
+  display: none			!important;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/web-dev\/ifm-maps\/css\/index\.scss}line{font-family:\0000312}}
+.lang-en .show-for-lang-en {
+  display: inherit	!important;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/web-dev\/ifm-maps\/css\/index\.scss}line{font-family:\0000313}}
+.lang-en .show-for-lang-da {
+  display: none			!important;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/web-dev\/ifm-maps\/css\/index\.scss}line{font-family:\0000319}}
+body {
+  background-color: white;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/web-dev\/ifm-maps\/css\/index\.scss}line{font-family:\0000321}}
+body .logo, body select, body #map {
+  display: block;
+  margin: 0 auto;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/web-dev\/ifm-maps\/css\/index\.scss}line{font-family:\0000325}}
+body h1 {
+  margin: 5px;
+  text-align: center;
+  color: #1c4b88;
+  font-size: 18pt;
+  font-weight: bold;
+  font-family: Tahoma,ÔÇïHelvetica,ÔÇïsans-serif;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/web-dev\/ifm-maps\/css\/index\.scss}line{font-family:\0000333}}
+body select {
+  width: 300px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/web-dev\/ifm-maps\/css\/index\.scss}line{font-family:\0000336}}
+body select, body select option {
+  color: #1c4b88;
+  font-size: 14pt;
+  font-weight: bold;
+  font-family: Tahoma,ÔÇïHelvetica,ÔÇïsans-serif;
+  text-align: center;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/web-dev\/ifm-maps\/css\/index\.scss}line{font-family:\0000344}}
+body #map {
+  margin-top: 10px;
+  width: 460px;
+  height: 460px;
+}
+
+/*# sourceMappingURL=index.css.map */
