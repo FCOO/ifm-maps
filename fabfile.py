@@ -188,8 +188,15 @@ def build_js(minify=True):
 
 @_booleanize
 def build_web():
-    local('mkdir -p dist')
+    local('mkdir -p dist/css')
+
+    # Make frontpage
     local('cp index.html dist/.')
+    local('cp css/index.min.css dist/css/.')
+    local('cp leaflet.js dist/.')
+    local('cp leaflet.css dist/.')
+
+    # Make IFM Maps itself
     local('cp -r www dist/.')
     local('mkdir dist/json')
     local('cp bower_components/leaflet-layer-tides-greenland/tidal_stations_greenland.json dist/json/.')
@@ -246,6 +253,7 @@ def build_web():
 
     # Remove original index files
     local('rm -rf dist/www')
+
 
 @_booleanize
 def build(minify=True):
