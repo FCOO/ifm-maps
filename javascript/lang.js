@@ -17,7 +17,16 @@
     function getI18n(key, lang) {
         var i18n = {
             en: {
-                maps: 'Maps',
+								'fcoo-name'	: 'Defence Centre for Operational Oceanography',
+								'ifm-name'	: 'Marine Forecast',
+
+								'domain-denmark'			: 'Denmark',				
+								'domain-greenland'		: 'Greenland',			
+								'domain-faroe_islands': 'Faroe Islands',	
+								'domain-mediterranean': 'Mediterranean',	
+								'domain-indian_ocean'	: 'Indian Ocean',		
+
+								maps: 'Maps',
                 layers: 'Layers',
                 boundaries: 'Boundaries',
                 places: 'Places',
@@ -56,7 +65,16 @@
                 //visibility: 'Erseqqarissuseq'
             //},
             da: {
-                maps: 'Kort',
+								'fcoo-name'	: 'Forsvarets Center for Operativ Oceanografi',
+								'ifm-name'	: 'Sejladsudsigt',
+
+								'domain-denmark'			: 'Danmark',
+								'domain-greenland'		: 'Grønland',
+								'domain-faroe_islands': 'Færøerne',
+								'domain-mediterranean': 'Middelhavet',
+								'domain-indian_ocean'	: 'Indiske Ocean',
+				
+                'maps': 'Kort',
                 'Home': 'Hjem',
                 'Save settings': 'Gem indstillinger',
                 'Please create a bookmark in your browser to save current map state': 'Lav et bogmærke i din browser for at gemme kortets nuværende tilstand',
