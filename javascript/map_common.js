@@ -310,7 +310,12 @@
             }
         }
 
-        // Retrieve URL parameters
+				//Setting title of document
+				document.title = 'fcoo.dk - ' + getI18n('ifm-name', localLang) + ' - ' + getI18n('domain-'+domain, localLang);
+				
+				
+				
+				// Retrieve URL parameters
         urlParams = getUrlParameters();
         if (urlParams.zoom !== undefined && urlParams.lat !== undefined && urlParams.lon !== undefined) {
             zoom = urlParams.zoom;
@@ -369,11 +374,14 @@
                 crs: L.CRS.EPSG3857,
                 layers: [baseMaps[Object.keys(baseMaps)[0]][basemap]]
             });
-            if (version !== undefined) {
-                map.attributionControl.setPrefix("<a href='" + location.protocol + "//fcoo.dk/ifm-maps/'>IFM Maps version: " + version + "</a>");
-            } else {
-                map.attributionControl.setPrefix("");
-            }
+
+						map.attributionControl.setPrefix(version !== undefined ? "Version: "+version : "");	
+						//if (version !== undefined) {
+            //    map.attributionControl.setPrefix("<a href='" + location.protocol + "//fcoo.dk/ifm-maps/'>IFM Maps version: " + version + "</a>");
+            //} else {
+            //    map.attributionControl.setPrefix("");
+            //}
+
             $(map.attributionControl._container).addClass("show-on-large");
             //$(".leaflet-control-attribution:not(.leaflet-control-permalink)").addClass("show-on-large");
 
