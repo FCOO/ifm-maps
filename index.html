@@ -15,16 +15,17 @@
 		<link rel="stylesheet" href="leaflet.css" />
 </head>
 <body>
-	<a class="show-for-lang-da" href="//fcoo.dk/" border="0"><img class="logo" width="270" height="90" src="http://media.fcoo.dk/logos/FCOO_logo_270x90.png" alt="Forsvarets Center for Operativ Oceanografi"></a>
-	<a class="show-for-lang-en" href="//fcoo.dk/?lang=eng" border="0"><img class="logo" width="270" height="90" src="http://media.fcoo.dk/logos/FCOO_logo_270x90.png" alt="Defence Centre for Operational Oceanography"></a>
-	
-	<h1 class="show-for-lang-da">Sejladsudsigt</h1>
-	<h1 class="show-for-lang-en">Marine Forecast</h1>
+	<div class="container">
+		<a class="show-for-lang-da" href="//fcoo.dk/" border="0"><img class="logo" width="270" height="90" src="//media.fcoo.dk/logos/FCOO_logo_270x90.png" alt="Forsvarets Center for Operativ Oceanografi"></a>
+		<a class="show-for-lang-en" href="//fcoo.dk/?lang=eng" border="0"><img class="logo" width="270" height="90" src="//media.fcoo.dk/logos/FCOO_logo_270x90.png" alt="Defence Centre for Operational Oceanography"></a>
 
-	<select id="select-area" onchange="onChange(this)"></select>	
+		<h1 class="show-for-lang-da">Sejladsudsigt</h1>
+		<h1 class="show-for-lang-en">Marine Forecast</h1>
 
-	<div id="map"></div>		
+		<select id="select-area" onchange="onChange(this)"></select>	
 
+		<div id="map"></div>		
+	</div>
 
 	<script src="leaflet.js"></script>
 	<script type="text/javascript">
@@ -78,18 +79,18 @@
 		
 		
 		//Create Leaflet map
-		var minZoom = 2, 
+		var minZoom = 1, 
+				defaultZoom = 2,
 				maxZoom	= 4,
-				areaIsNotSelected = true,
 				style				= {color: 'cornflowerblue', weight: 1,		opacity: 0.5, fillOpacity:0.4},
 				hoverStyle	= {color: 'blue',						weight: 1.5,	opacity: 0.9, fillOpacity:0.4},
 				clickStyle	= {color: 'red',						weight: 1.5,	opacity: 0.9, fillOpacity:0.4},
 
-				map = L.map('map').setView([45.3367, -1.7578], minZoom);
+				map = L.map('map').setView([45.3367, -1.7578], defaultZoom);
 
 //For debug		map.on('click', function(e){ console.log('mouse:',e.latlng, 'map-center', map.getCenter(), 'map-zoom', map.getZoom()); });
 
-		L.tileLayer('https://tiles{s}.fcoo.dk/tiles/tiles_bckgrnd_512_mercator_201508030000/{z}/{x}/{y}.png', {maxZoom: 18, minZoom: minZoom, maxZoom: maxZoom, subdomains:['01','02','03'], tileSize:512,  continuousWorld: false	}).addTo(map);
+		L.tileLayer('https://tiles{s}.fcoo.dk/tiles/tiles_bckgrnd_512_mercator_201508030000/{z}/{x}/{y}.png', {minZoom: minZoom, maxZoom: maxZoom, subdomains:['01','02','03'], tileSize:512,  continuousWorld: false	}).addTo(map);
 //		L.tileLayer('https://tiles{s}.fcoo.dk/tiles/tiles_top_512_mercator_201508030000/{z}/{x}/{y}.png', {maxZoom: 18, minZoom: minZoom, maxZoom: maxZoom, subdomains:['01','02','03'], tileSize:512,  continuousWorld: false	}).addTo(map);
 
 		for (i=0; i<areas.length; i++ ){
@@ -99,25 +100,18 @@
 			
 			area.rect = rect;
 
-			rect.on('click',			function( event ){ selectAreaByIndex( event.target.options._area_index );				});
-			rect.on('mousedown',	function( event ){ 
-				if (areaIsNotSelected) {
-					event.target.setStyle( clickStyle	);	
-				}
-			});
+			rect.on('click',			function( event ){ selectAreaByIndex( event.target.options._area_index );	});
+			rect.on('mousedown',	function( event ){ event.target.setStyle( clickStyle	);									});
 
 			rect.on('mouseover',	function( event ){ 
-				if (areaIsNotSelected) {
-					var rect = event.target;
-					rect.setStyle( hoverStyle	);	
-					select.selectedIndex = rect.options._area_index + 1;
-				}
+				var rect = event.target;
+				rect.setStyle( hoverStyle	);	
+				select.selectedIndex = rect.options._area_index + 1;
 			});
+
 			rect.on('mouseout',		function( event ){ 
-				if (areaIsNotSelected) {
-					event.target.setStyle( style			);	
-					select.selectedIndex = 0;
-				}
+				event.target.setStyle( style			);	
+				select.selectedIndex = 0;
 			});
 
 			rect._container.setAttribute('title', area.name);
@@ -126,11 +120,8 @@
 		//Select the area	
 		function selectAreaByIndex( index ) { 
 			var area = areas[index];
-			if (areaIsNotSelected) {
-				areaIsNotSelected = false;
-				area.rect.setStyle( clickStyle ); 
-				window.location.href = area.href + (isEn ? '?lang=en' : '');
-			}
+			area.rect.setStyle( clickStyle ); 
+			window.location.href = area.href + (isEn ? '?lang=en' : '');
 		}
 
 	</script>		
