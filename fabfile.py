@@ -57,7 +57,8 @@ env.cssfiles = ["bower_components/fontawesome/css/font-awesome.min.css",
 
 env.cssfiles_min = ["external/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css",
                     "external/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css",
-                    "bower_components/leaflet-control-box/dist/leaflet-control-box.min.css"]
+                    "bower_components/leaflet-control-box/dist/leaflet-control-box.min.css",
+                    "bower_components/jquery-base-slider/dist/jquery-base-slider.min.css"]
 env.cssfiles_src = ["external/jquery-ui-1.11.4.custom/jquery-ui.structure.css",
                     "external/jquery-ui-1.11.4.custom/jquery-ui.theme.css"]
 
@@ -92,6 +93,10 @@ env.jsfiles = ["bower_components/jquery/dist/jquery.js",
                "bower_components/leaflet-tilelayer-wms-pydap/wms-ajax-proxy.js",
                "bower_components/leaflet-tilelayer-wms-pydap/leaflet-tilelayer-wms-pydap.js",
                "bower_components/leaflet-tilelayer-wms-fcoo/leaflet-tilelayer-wms-fcoo.js",
+               "bower_components/jquery-autoclick-while-pressed/autoclick-while-pressed.min.js",
+               "bower_components/jquery-base-slider/dist/jquery-base-slider.min.js",
+               "bower_components/jquery-time-slider/dist/jquery-time-slider.min.js",
+               "bower_components/leaflet-time-slider/dist/leaflet-time-slider.js",
                "bower_components/leaflet-layer-sealevel-denmark/leaflet-layer-sealevel-denmark.js",
                "bower_components/leaflet-layer-tides-greenland/leaflet-layer-tides-greenland.js",
                "bower_components/leaflet-pip/leaflet-pip.js",
