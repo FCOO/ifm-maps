@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* 
 	SCSS for start page of ifm.fcoo.dk
 */
@@ -51,7 +50,7 @@ body h1 {
   color: #1c4b88;
   font-size: 16pt;
   font-weight: bold;
-  font-family: Tahoma,ÔÇïHelvetica,ÔÇïsans-serif;
+  font-family: Tahoma,Helvetica,sans-serif;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/web-dev\/ifm-maps\/css\/index\.scss}line{font-family:\0000350}}
 body select {
@@ -62,7 +61,7 @@ body select, body select option {
   color: #1c4b88;
   font-size: 12pt;
   font-weight: bold;
-  font-family: Tahoma,ÔÇïHelvetica,ÔÇïsans-serif;
+  font-family: Tahoma,Helvetica,sans-serif;
   text-align: center;
   text-align-last: center;
 }
