@@ -1,7 +1,7 @@
 (function (){
     "use strict";
     /*jslint browser: true*/
-    /*global $, L, initCommonMap, createCommonMap, 
+    /*global $, L, initCommonMap, createCommonMap,
       getTilesize, getLocalLanguage, getUrlParameters, WmsAjaxProxy,
       getI18n, noty */
 
@@ -13,7 +13,7 @@
     // Retrieve all URL parameters
     var urlParams = getUrlParameters();
 
-    // The domain variable is used to determine which setup to use
+		// The domain variable is used to determine which setup to use
     if (urlParams.domain !== undefined) {
         domain = urlParams.domain;
     }
@@ -338,7 +338,7 @@
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': stdOpts}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sst', 'options': stdOpts}),
                 "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sss', 'options': stdOpts})
-            }, 
+            },
             "Celestial information": {
                 "Solar Terminator": store.getSolarTerminator()
             },
@@ -385,7 +385,7 @@
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': stdOpts}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sst', 'options': stdOpts}),
                 "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sss', 'options': stdOpts})
-            }, 
+            },
             "Celestial information": {
                 "Solar Terminator": store.getSolarTerminator()
             },
@@ -473,7 +473,7 @@
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': stdOpts}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sst', 'options': stdOpts}),
                 "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sss', 'options': stdOpts})
-            }, 
+            },
             "Point forecasts": {
                 "Tidal predictions": new L.GeoJSON.Tides({'language': lang})
             },
@@ -531,7 +531,7 @@
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'currentDirection', 'options': stdOpts}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sst', 'options': stdOpts}),
                 "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/GREENLAND', 'parameter': 'sss', 'options': stdOpts})
-            }, 
+            },
             "Point forecasts": {
                 "Tidal predictions": new L.GeoJSON.Tides({'language': lang})
             },
@@ -563,7 +563,7 @@
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'currentDirection', 'options': stdOpts}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'sst', 'options': stdOpts}),
                 "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'sss', 'options': stdOpts})
-            }, 
+            },
             "Celestial information": {
                 "Solar Terminator": store.getSolarTerminator()
             },
@@ -614,7 +614,7 @@
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'currentDirection', 'options': stdOpts}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'sst', 'options': stdOpts}),
                 "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/EAST_AFRICA', 'parameter': 'sss', 'options': stdOpts})
-            }, 
+            },
             "Celestial information": {
                 "Solar Terminator": store.getSolarTerminator()
             },
@@ -645,7 +645,7 @@
                 "currentdirection": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'currentDirection', 'options': stdOpts}),
                 "seatemp": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'sst', 'options': stdOpts}),
                 "salinity": store.getLayer({'dataset': 'NOAA/HYCOM/MEDITERRANEAN', 'parameter': 'sss', 'options': stdOpts})
-            }, 
+            },
             "Celestial information": {
                 "Solar Terminator": store.getSolarTerminator()
             },
@@ -785,7 +785,7 @@
         var mapobj = $('#map');
         var newmaps = {};
         var submapIDs = [];
-        for (var i=0; i<ntot; i++) { 
+        for (var i=0; i<ntot; i++) {
             submapIDs[i] = 'map' + (i+1);
         }
         $.each(submapIDs, function(index, submapID) {
@@ -799,7 +799,7 @@
         });
         maps = newmaps;
     }
-     
+
     // Hardcoded for impact sync test
     if (domain === 'denmark_impact_sync') {
         // Construct maps
@@ -822,7 +822,7 @@
 
     $(document).ready(function () {
         //console.profile('ready');
-        createCommonMap(store, basemap, maps, minZoom, maxZoom, zoom, 
+        createCommonMap(store, basemap, maps, minZoom, maxZoom, zoom,
                       lat, lon, enablePrint, useGeoMetoc, mapStore);
         //console.profileEnd();
     });
