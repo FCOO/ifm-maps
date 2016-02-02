@@ -365,12 +365,17 @@
                 center: new L.LatLng(lat, lon),
                 zoomControl: false,
                 zoom: zoom,
-                zoomAnimation: true, // There is a bug with layer hiding when enabled
+                zoomAnimation: false, // There is a bug with layer hiding when enabled
                 minZoom: minZoom,
                 maxZoom: maxZoom,
                 //crs: L.CRS.EPSG4326,
                 crs: L.CRS.EPSG3857,
                 layers: [baseMaps[Object.keys(baseMaps)[0]][basemap]]
+            });
+
+            // Temporary fix for Leaflet issue #3765
+            map.on('zoomend', function() {
+                map.fire('viewreset');
             });
 
             map.attributionControl.setPrefix(version !== undefined ? "Version: "+version : "");	
