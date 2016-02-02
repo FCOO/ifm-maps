@@ -512,7 +512,7 @@
                         // We use the new time slider for desktop and the old
                         // one for mobile. This is a temporary solution.
                         if (desktop) {
-                            var datetimeControl = new L.Control.TimeSlider({
+                            datetimeControl = new L.Control.TimeSlider({
                                 lang: localLang,
                                 position: datetime_pos,
                                 defaultMinimized: false,
@@ -544,7 +544,7 @@
                             // Let overlays on the map know what time it is
                             map.fire('datetimechange', {datetime: initial_datetime.toISOString()});
                         } else {
-                            var datetimeControl = (new L.Control.Datetime({
+                            datetimeControl = (new L.Control.Datetime({
                                 title: getI18n('datetime', localLang),
                                 datetimes: dates,
                                 language: localLang,
