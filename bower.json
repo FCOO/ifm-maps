@@ -52,7 +52,7 @@
     "leaflet-double-scale": "fcoo/leaflet-double-scale#latest",
     "leaflet-control-fa-button": "https://github.com/jblarsen/leaflet-control-fa-button.git",
     "leaflet-control-vertical": "https://github.com/jblarsen/leaflet-control-vertical.git",
-    "leaflet.markercluster": "https://github.com/Leaflet/Leaflet.markercluster.git#master",
+    "leaflet.markercluster": "https://github.com/Leaflet/Leaflet.markercluster.git#1.0.0-beta.2.0",
     "Leaflet.Sync": "https://github.com/turban/Leaflet.Sync.git#~0.0.5",
     "leaflet-time-slider": "https://github.com/FCOO/leaflet-time-slider.git#latest",
     "matchMedia": "https://github.com/paulirish/matchMedia.js.git#~0.2.0"
@@ -62,7 +62,8 @@
     "jquery": "~1.11.3",
     "moment": "master",
     "latlng-format": "1.0.0",
-    "fontawesome": "~4.4.0"
+    "fontawesome": "~4.4.0",
+    "leaflet.markercluster": "1.0.0-beta.2.0"
   },
   "moduleType": [
     "es6"
