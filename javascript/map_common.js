@@ -496,43 +496,60 @@
             var dt_check = 10; // How often to check
             var dt_max = 30000; // When to give up
             var dt_current = 0;
-            //var callback_obj = new DatetimeCallback(overlayMaps);
-            //var callback = callback_obj.changeDatetime;
+            var callback_obj = new DatetimeCallback(overlayMaps);
+            var callback = callback_obj.changeDatetime;
             function checkTimesteps() {
                 var dates = getTimeSteps(overlayMaps);
                 if (dates !== null) {
                     // Only include datetime selector in first window
                     if (index === 0) {
-                        var datetimeControl = new L.Control.TimeSlider({
-                              lang: localLang,
-                              position: datetime_pos,
-                              defaultMinimized: false,
-                              displayAsLocal: true,
-                              minMoment: moment(dates[0]),
-                              maxMoment: moment(dates[dates.length-1]), 
-                              fromMoment: moment(initial_datetime),
-                              step: moment(dates[1]).diff(moment(dates[0]), 'hours', true),
-                              callbackLocal: function( displayAsLocal ) {
-                                  var tz = displayAsLocal ? 'local' : 'UTC';
-                                  map.fire('timezonechange', {timezone: tz});
-                              },
-                              callback: function( result ) {
-                                  map.fire('datetimechange', {datetime: result.fromMoment.toISOString()});
-                              } 
-                        }).addTo(map);
-                        // When an overlay is added to the map we want the 
-                        // datetime control to send a signal that the datetime
-                        // is updated so that the time setting of the just
-                        // added overlay can be set
-                        map.addEventListener(
-                            'overlayadd',
-                            function(evt) {
-                                map.fire('datetimechange', {datetime: this.timeSlider.result.fromMoment.toISOString()});
-                            },
-                            datetimeControl
-                        );
-                        // Let overlays on the map know what time it is
-                        map.fire('datetimechange', {datetime: initial_datetime.toISOString()});
+                        var datetimeControl;
+                        // We use the new time slider for desktop and the old
+                        // one for mobile. This is a temporary solution.
+                        if (desktop) {
+                            var datetimeControl = new L.Control.TimeSlider({
+                                lang: localLang,
+                                position: datetime_pos,
+                                defaultMinimized: false,
+                                displayAsLocal: true,
+                                minMoment: moment(dates[0]),
+                                maxMoment: moment(dates[dates.length-1]), 
+                                fromMoment: moment(initial_datetime),
+                                step: moment(dates[1]).diff(moment(dates[0]), 'hours', true),
+                                callbackLocal: function( displayAsLocal ) {
+                                    var tz = displayAsLocal ? 'local' : 'UTC';
+                                    map.fire('timezonechange', {timezone: tz});
+                                },
+                                callback: function( result ) {
+                                    map.fire('datetimechange', {datetime: result.fromMoment.toISOString()});
+                                } 
+                            }).addTo(map);
+ 
+                            // When an overlay is added to the map we want the 
+                            // datetime control to send a signal that the datetime
+                            // is updated so that the time setting of the just
+                            // added overlay can be set
+                            map.addEventListener(
+                                'overlayadd',
+                                function(evt) {
+                                    map.fire('datetimechange', {datetime: this.timeSlider.result.fromMoment.toISOString()});
+                                },
+                                datetimeControl
+                            );
+                            // Let overlays on the map know what time it is
+                            map.fire('datetimechange', {datetime: initial_datetime.toISOString()});
+                        } else {
+                            var datetimeControl = (new L.Control.Datetime({
+                                title: getI18n('datetime', localLang),
+                                datetimes: dates,
+                                language: localLang,
+                                callback: callback,
+                                visibility: visibility,
+                                initialDatetime: initial_datetime,
+                                vertical: false,
+                                position: datetime_pos
+                            })).addTo(map);
+                        }
                     }
 
                     var dt_current_levels = 0;
