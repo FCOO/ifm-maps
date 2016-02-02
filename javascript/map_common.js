@@ -126,7 +126,7 @@
         }
 
         // Construct length scale control
-        controls.graphicScale = L.control.graphicScale({
+        controls.doubleScale = L.control.doubleScale({
             type: 'both',
             position: 'bottomleft',
             backgroundColor: 'white',
@@ -457,9 +457,9 @@
                 }
 
                 // Add length scale control
-                map.addControl(mapStore.controls.graphicScale);
-                //$(mapStore.controls.graphicScale.).addClass("show-on-large");
-                $(mapStore.controls.graphicScale._container).addClass("show-on-large");
+                map.addControl(mapStore.controls.doubleScale);
+                //$(mapStore.controls.doubleScale.).addClass("show-on-large");
+                $(mapStore.controls.doubleScale._container).addClass("show-on-large");
 
                 // Add text input position control
                 map.addControl(mapStore.controls.position);

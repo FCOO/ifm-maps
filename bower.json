@@ -22,7 +22,7 @@
     "jquery-time-slider": "fcoo/jquery-time-slider#latest",
     "leaflet-control-box": "fcoo/leaflet-control-box#latest",
     "flag-icon-css": "~0.6.5",
-    "latlng-format": "fcoo/latlng-format#latest",
+    "latlng-format": "NielsHolt/latlng-format#latest",
     "jquery-placeholder": "~2.1.1",
     "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
     "leaflet-languageselector": "https://github.com/buche/leaflet-languageselector.git",
@@ -58,9 +58,11 @@
     "matchMedia": "https://github.com/paulirish/matchMedia.js.git#~0.2.0"
   },
   "resolutions": {
-    "leaflet": "master",
+    "leaflet": "master-dist",
     "jquery": "~1.11.3",
-    "moment": "master"
+    "moment": "master",
+    "latlng-format": "1.0.0",
+    "fontawesome": "~4.4.0"
   },
   "moduleType": [
     "es6"
