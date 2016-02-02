@@ -310,12 +310,10 @@
             }
         }
 
-				//Setting title of document
-				document.title = 'fcoo.dk - ' + getI18n('ifm-name', localLang) + ' - ' + getI18n('domain-'+domain, localLang);
-				
-				
-				
-				// Retrieve URL parameters
+        //Setting title of document
+        document.title = 'fcoo.dk - ' + getI18n('ifm-name', localLang) + ' - ' + getI18n('domain-'+domain, localLang);
+
+        // Retrieve URL parameters
         urlParams = getUrlParameters();
         if (urlParams.zoom !== undefined && urlParams.lat !== undefined && urlParams.lon !== undefined) {
             zoom = urlParams.zoom;
