@@ -373,8 +373,8 @@
                 layers: [baseMaps[Object.keys(baseMaps)[0]][basemap]]
             });
 
-						map.attributionControl.setPrefix(version !== undefined ? "Version: "+version : "");	
-						//if (version !== undefined) {
+            map.attributionControl.setPrefix(version !== undefined ? "Version: "+version : "");	
+            //if (version !== undefined) {
             //    map.attributionControl.setPrefix("<a href='" + location.protocol + "//fcoo.dk/ifm-maps/'>IFM Maps version: " + version + "</a>");
             //} else {
             //    map.attributionControl.setPrefix("");
