@@ -366,7 +366,7 @@
                 zoomControl: false,
                 zoom: zoom,
                 fadeAnimation: false, // Disabled (Leaflet issue #3765)
-                zoomAnimation: true,
+                //zoomAnimation: true,
                 minZoom: minZoom,
                 maxZoom: maxZoom,
                 //crs: L.CRS.EPSG4326,
