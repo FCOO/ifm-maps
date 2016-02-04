@@ -365,7 +365,8 @@
                 center: new L.LatLng(lat, lon),
                 zoomControl: false,
                 zoom: zoom,
-                zoomAnimation: true, // There is a bug with layer hiding when enabled
+                fadeAnimation: false, // Disabled (Leaflet issue #3765)
+                zoomAnimation: true,
                 minZoom: minZoom,
                 maxZoom: maxZoom,
                 //crs: L.CRS.EPSG4326,
