@@ -23,7 +23,6 @@
     "leaflet-control-box": "fcoo/leaflet-control-box#latest",
     "flag-icon-css": "~0.6.5",
     "latlng-format": "NielsHolt/latlng-format#latest",
-    "jquery-placeholder": "~2.1.1",
     "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
     "leaflet-languageselector": "https://github.com/buche/leaflet-languageselector.git",
     "leaflet-plugins": "https://github.com/jblarsen/leaflet-plugins.git#master",
@@ -55,11 +54,12 @@
     "leaflet.markercluster": "https://github.com/Leaflet/Leaflet.markercluster.git#1.0.0-beta.2.0",
     "Leaflet.Sync": "https://github.com/turban/Leaflet.Sync.git#~0.0.5",
     "leaflet-time-slider": "https://github.com/FCOO/leaflet-time-slider.git#latest",
-    "matchMedia": "https://github.com/paulirish/matchMedia.js.git#~0.2.0"
+    "matchMedia": "https://github.com/paulirish/matchMedia.js.git#~0.2.0",
+    "jquery": "^1"
   },
   "resolutions": {
     "leaflet": "master-dist",
-    "jquery": "~1.11.3",
+    "jquery": "^1",
     "moment": "master",
     "latlng-format": "1.0.0",
     "fontawesome": "~4.4.0",
