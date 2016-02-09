@@ -512,7 +512,7 @@
                         var datetimeControl;
                         // We use the new time slider for desktop and the old
                         // one for mobile. This is a temporary solution.
-                        if (desktop) {
+                        if (desktop && !isIE8) {
                             datetimeControl = new L.Control.TimeSlider({
                                 lang: localLang,
                                 position: datetime_pos,
