@@ -198,6 +198,8 @@ def build_web():
 
     # Make frontpage
     local('cp index.html dist/.')
+    local('cp apple-touch-icon.png dist/.')
+    local('cp favicon.ico dist/.')
     local('cp css/index.min.css dist/css/.')
     local('cp leaflet.js dist/.')
     local('cp leaflet.css dist/.')
