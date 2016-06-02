@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+   <msapplication>
+     <tile>
+        <TileImage src="/apple-touch-icon.png"/>
+        <TileColor>##1C4B88</TileColor>
+     </tile>
+   </msapplication>
+</browserconfig>

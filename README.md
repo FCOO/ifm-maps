@@ -1,60 +1,55 @@
-# IFM Maps
-Provides a web map interface to FCOO METOC forecasts. IFM Maps is 
-distributed under the GPL v.3 License, see COPYING for the full license. 
-Installation instructions can be found in the INSTALL file.
-
-## Feature Requests
-[![Feature Requests](http://feathub.com/FCOO/ifm-maps?format=svg)](http://feathub.com/FCOO/ifm-maps)
-
-## Installation
-Simply deploy the dist directory somewhere on your PHP enabled
-web server.
-
-## Development
-
-### Dependencies
-Before beginning to develop IFM Maps you need to install Bower:
-
-http://bower.io/
-
-Bower will need a recent version of node.js.
-
-To download the web dependencies for IFM Maps you should simply
-run:
-
-  bower install
+# Marine Forecast / Sejladsudsigt
+>Shows current meteorological and oceanographic forecast and measurements
 
 
-### Building and deploying
-We are using Fabric for building a deployment version of IFM Maps
-and for the deployment itself:
+## Description
+Provides a web map interface to FCOO METOC forecasts.
+ 
+Marine Forecast is distributed under the GPL v.3 License, see `COPYING` for the full license. 
 
-http://www.fabfile.org/
+## links
 
-In the build process we use the following tools which you will also
-need to download if you want to build an optimised version of
-IFM Maps:
+#### Main page [ifm.fcoo.dk](https://ifm.fcoo.dk) or [sejladsudsigt.dk](https://sejladsudsigt.dk)
 
-http://yui.github.io/yuicompressor/
+#### Specific domain ifm.fcoo.dk/DOMAIN e.g. [ifm.fcoo.dk/denmark](https://ifm.fcoo.dk/denmark)
 
-https://www.npmjs.com/package/uglify-js
+#### Information in [Danish](http://fcoo.dk/mf-info) or [English](http://fcoo.dk/mf-info/?lang=eng)
 
-You might have to change a few paths to executables in fabfile.py 
-when you run it.
+#### Manual in [Danish](http://fcoo.dk/mf-tutorial) or [English](http://fcoo.dk/mf-tutorial/?lang=eng)
 
-To build IFM Maps you simply type:
+## Parameters
+#### `lang=en`
+Show in English
 
-  fab build
+#### `domain=`*DOMAIN*
+Same as `ifm.fcoo.dk/`*DOMAIN*
 
-You can then copy the dist directory to whereever you want to deploy
-it. We have automated this process so that we can type:
 
-  fab -R staging deploy
+#### `hidecontrols=` *id1*`,`*id2*`,`..`,`*idN*
+Using [leaflet-control-display](https://github.com/FCOO/leaflet-control-display) to hide controls.
 
-or:
+| id | Controls |
+| :--: | :--- |
+| `zoom` | Zoom button (top-left) | 
+| `attribution` | Standard leaflet (bottom-right) |
+| `layers` | Layer selector (top-right) |
+| `scale` | km and nm scale (bottom-left) |
+| `legend` | Layer legends (bottom-left) |
+| `mouseposition` | Mouse-position (bottom-left) |
+| `ALL` | Hide all controls |
 
-  fab -R production deploy
+#### `showcontrols=` *id1*`,`*id2*`,`..`,`*idN*   
+Used together with `hidecontrols=ALL` to display specific controls. 
+E.q. `hidecontrols=ALL&showcontrols=scale` will hide all controls but the scale
 
-For our deployment. You are of course welcome to use the fabfile.py
-for inspiration for automating your deployment but you will need
-to dig into the details of the deploy method of the script.
+
+## Copyright and License
+
+Copyright (c) 2016 [FCOO](https://github.com/FCOO)
+
+## Contact information
+
+Jesper Baasch-Larsen jla@fcoo.dk
+Niels Holt nho@fcoo.dk
+
+

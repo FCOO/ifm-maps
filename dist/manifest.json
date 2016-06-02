@@ -1,0 +1,11 @@
+{
+  "short_name": "fcoo.dk",
+  "name": "Sejladsudsigt / Marine Forecast",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "150x150"
+    }
+  ],
+  "start_url": "index.html?standalone=true"
+}
