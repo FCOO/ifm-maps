@@ -1,95 +1,95 @@
 {
-  "name": "ifm-maps",
-  "version": "2.0.1",
-  "homepage": "https://github.com/FCOO/ifm-maps",
-  "authors": [
-    "Jesper Baasch-Larsen jla@fcoo.dk",
-    "Niels Holt nho@fcoo.dk"
-  ],
-  "description": "",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/FCOO/ifm-maps.git"
-  },
-  "dependencies": {
-    "fcoo-application": "fcoo/fcoo-application#0.0.*",
-    "fcoo-leaflet": "fcoo/fcoo-leaflet#0.2.*",
-    "moment": "^2.11.2",
-    "jquery-ui": "^1.11.4",
-    "noty": "^2.3.8",
-    "leaflet-control-position": "fcoo/leaflet-control-position#latest",
-    "leaflet-control-legend": "fcoo/leaflet-control-legend",
-    "leaflet-categorized-layers": "fcoo/leaflet-categorized-layers",
-    "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
-    "leaflet-plugins": "shramov/leaflet-plugins",
-    "leaflet-time-slider": "fcoo/leaflet-time-slider#latest",
-    "leaflet-control-vertical": "fcoo/leaflet-control-vertical",
-    "leaflet-control-datetime": "fcoo/leaflet-control-datetime",
-    "leaflet-languageselector": "fcoo/leaflet-languageselector",
-    "leaflet-control-fa-button": "fcoo/leaflet-control-fa-button",
-    "leaflet-tilelayer-wms-pydap": "fcoo/leaflet-tilelayer-wms-pydap",
-    "leaflet-tilelayer-wms-fcoo": "fcoo/leaflet-tilelayer-wms-fcoo",
-    "leaflet-geojsonlayer-fwarn": "fcoo/leaflet-geojsonlayer-fwarn",
-    "leaflet.locatecontrol": "jblarsen/leaflet-locatecontrol#^0.43.0",
-    "leaflet-layer-sealevel-denmark": "fcoo/leaflet-layer-sealevel-denmark",
-    "leaflet-layer-tides-greenland": "fcoo/leaflet-layer-tides-greenland",
-    "leaflet-geojsonlayer-msi": "fcoo/leaflet-geojsonlayer-msi",
-    "raven-js": "~3.2.1"
-  },
-  "overrides": {
-    "moment": {
-      "main": [
-        "min/moment.min.js"
-      ]
+    "name": "ifm-maps",
+    "version": "2.0.1",
+    "homepage": "https://github.com/FCOO/ifm-maps",
+    "authors": [
+        "Jesper Baasch-Larsen jla@fcoo.dk",
+        "Niels Holt nho@fcoo.dk"
+    ],
+    "description": "",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/FCOO/ifm-maps.git"
     },
-    "jquery-ui": {
-      "main": [
-        "jquery-ui.min.js",
-        "themes/base/core.css",
-        "themes/base/slider.css",
-        "themes/ui-lightness/theme.css",
-        "themes/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png",
-        "themes/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png"
-      ]
+    "dependencies": {
+        "fcoo-application": "fcoo/fcoo-application#0.0.*",
+        "fcoo-leaflet": "fcoo/fcoo-leaflet#0.2.*",
+        "moment": "^2.11.2",
+        "jquery-ui": "^1.11.4",
+        "noty": "^2.3.8",
+        "leaflet-control-position": "fcoo/leaflet-control-position#latest",
+        "leaflet-control-legend": "fcoo/leaflet-control-legend",
+        "leaflet-categorized-layers": "fcoo/leaflet-categorized-layers",
+        "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
+        "leaflet-plugins": "shramov/leaflet-plugins",
+        "leaflet-time-slider": "fcoo/leaflet-time-slider#latest",
+        "leaflet-control-vertical": "fcoo/leaflet-control-vertical",
+        "leaflet-control-datetime": "fcoo/leaflet-control-datetime",
+        "leaflet-languageselector": "fcoo/leaflet-languageselector",
+        "leaflet-control-fa-button": "fcoo/leaflet-control-fa-button",
+        "leaflet-tilelayer-wms-pydap": "fcoo/leaflet-tilelayer-wms-pydap",
+        "leaflet-tilelayer-wms-fcoo": "fcoo/leaflet-tilelayer-wms-fcoo",
+        "leaflet-geojsonlayer-fwarn": "fcoo/leaflet-geojsonlayer-fwarn",
+        "leaflet.locatecontrol": "jblarsen/leaflet-locatecontrol#^0.43.0",
+        "leaflet-layer-sealevel-denmark": "fcoo/leaflet-layer-sealevel-denmark",
+        "leaflet-layer-tides-greenland": "fcoo/leaflet-layer-tides-greenland",
+        "leaflet-geojsonlayer-msi": "fcoo/leaflet-geojsonlayer-msi",
+        "raven-js": "~3.2.1"
     },
-    "leaflet-languageselector": {
-      "main": [
-        "leaflet-languageselector.js",
-        "leaflet-languageselector.css"
-      ]
+    "overrides": {
+        "moment": {
+            "main": [
+                "min/moment.min.js"
+            ]
+        },
+        "jquery-ui": {
+            "main": [
+                "jquery-ui.min.js",
+                "themes/base/core.css",
+                "themes/base/slider.css",
+                "themes/ui-lightness/theme.css",
+                "themes/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png",
+                "themes/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png"
+            ]
+        },
+        "leaflet-languageselector": {
+            "main": [
+                "leaflet-languageselector.js",
+                "leaflet-languageselector.css"
+            ]
+        },
+        "leaflet-control-osm-geocoder": {
+            "main": [
+                "Control.OSMGeocoder.js",
+                "images/geocoder.png"
+            ]
+        },
+        "leaflet-plugins": {
+            "main": [
+                "control/Permalink.js"
+            ]
+        }
     },
-    "leaflet-control-osm-geocoder": {
-      "main": [
-        "Control.OSMGeocoder.js",
-        "images/geocoder.png"
-      ]
+    "devDependencies": {
+        "bourbon": "latest",
+        "modernizr-mixin": "latest",
+        "mathsass": "latest"
     },
-    "leaflet-plugins": {
-      "main": [
-        "control/Permalink.js"
-      ]
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "moduleType": [
+        "es6"
+    ],
+    "resolutions": {
+        "fcoo-application": "0.0.*",
+        "fcoo-leaflet": "0.2.*",
+        "jquery": "~1",
+        "leaflet": "1.0.0-rc.1"
     }
-  },
-  "devDependencies": {
-    "bourbon": "latest",
-    "modernizr-mixin": "latest",
-    "mathsass": "latest"
-  },
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "moduleType": [
-    "es6"
-  ],
-  "resolutions": {
-    "fcoo-application": "0.0.*",
-    "fcoo-leaflet": "0.2.*",
-    "jquery": "~1",
-    "leaflet": "1.0.0-rc.1"
-  }
 }
