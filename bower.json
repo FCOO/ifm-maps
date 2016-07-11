@@ -87,6 +87,8 @@
   ],
   "resolutions": {
     "fcoo-application": "0.0.*",
-    "fcoo-leaflet": "0.2.*"
+    "fcoo-leaflet": "0.2.*",
+    "jquery": "~1",
+    "leaflet": "1.0.0-rc.1"
   }
 }
