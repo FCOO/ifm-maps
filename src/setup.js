@@ -1,18 +1,20 @@
 ;(function ($, L, window, document, undefined){
     "use strict";
 
+    // Let raven report all uncaught exceptions to sentry
+    Raven.config('https://e351388bc0af4cf4a0503ff56dfb9d00@app.getsentry.com/78948').install()
 
-		/**
+    /**
      * Initialize the map.
      */
 
     //console.profile('init');
     // Retrieve all URL parameters
     var urlParams = window.getUrlParameters(),
-				protocol	= window.location.protocol == 'https:' ? 'https:' : 'http:';
+        protocol = window.location.protocol == 'https:' ? 'https:' : 'http:';
 
-		window.domain = null;
-		// The domain variable is used to determine which setup to use
+    window.domain = null;
+    // The domain variable is used to determine which setup to use
     if (urlParams.domain !== undefined) {
         window.domain = urlParams.domain;
     }

@@ -33,7 +33,8 @@
     "leaflet.locatecontrol": "jblarsen/leaflet-locatecontrol#^0.43.0",
     "leaflet-layer-sealevel-denmark": "fcoo/leaflet-layer-sealevel-denmark",
     "leaflet-layer-tides-greenland": "fcoo/leaflet-layer-tides-greenland",
-    "leaflet-geojsonlayer-msi": "fcoo/leaflet-geojsonlayer-msi"
+    "leaflet-geojsonlayer-msi": "fcoo/leaflet-geojsonlayer-msi",
+    "raven-js": "~3.2.1"
   },
   "overrides": {
     "moment": {
