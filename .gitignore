@@ -1,4 +1,6 @@
-/*.bak
 /node_modules/
 /bower_components/
 /.sass-cache/
+
+*.bak
+.*.swp
