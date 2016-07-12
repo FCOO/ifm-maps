@@ -316,6 +316,35 @@
 			break;
 
 			//*********************************
+			case 'europe':
+        overlays = {
+            "Forecasts": {
+                "wind": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'windDirection', 'options': stdOpts, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
+                "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'windSpeed', 'options': stdOpts}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'windDirection', 'options': stdOpts, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
+                "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'windDirection', 'options': stdOpts}),
+                "pressure": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'seaLevelPressure', 'options': stdOpts}),
+                "precip": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'totalPrecipitation', 'options': stdOpts}),
+                "airtemp": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'airTemperature', 'options': stdOpts}),
+                "cloudcover": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'totalCloudCover', 'options': stdOpts}),
+                "waveperiod": store.getLayer({'dataset': 'ECMWF/DXP/ATLANTIC', 'parameter': 'wavePeriod', 'options': stdOpts}),
+                "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/ATLANTIC', 'parameter': 'waveHeight', 'options': stdOpts}),
+                "seastate": store.getLayer({'dataset': 'ECMWF/DXP/ATLANTIC', 'parameter': 'seaState', 'options': stdOpts}),
+                "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/ATLANTIC', 'parameter': 'waveDirection', 'options': stdOpts})
+            },
+            "Celestial information": {
+                "Solar Terminator": store.getSolarTerminator()
+            },
+            "Static layers": {
+                "EEZ": store.getEEZ(),
+            }
+        };
+        zoom = 4;
+        lat = 55.0;
+        lon = -18.0;
+        break;
+
+			//*********************************
 			default:
 				var hash = window.location.hash.slice(1),
 						search = window.location.search,

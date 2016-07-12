@@ -49,10 +49,11 @@
 
 		//List of areas
 		var areas = [
+			{	da: 'Europa',		en:'Europe',	href: getHref('europe'),	bounds: [[85.9585, -85.9219], [28.0437, 41.9063]]	},
 			{	da: 'Danmark',				en:'Denmark',				href: getHref('denmark'),				bounds: [[61.0157,  -3.3618], [ 52.8558,  24.5214]]	},
 			{	da: 'Grønland',				en:'Greenland',			href: getHref('greenland'),			bounds: [[76.7605, -61.2158], [ 58.6198, -16.2158]]	},
 			{	da: 'Færøerne',				en:'Faroe Islands',	href: getHref('faroe_islands'),	bounds: [[63.8019, -13.9745], [ 59.7563,  -1.2744]]	},
-//			{	da: 'Middelhavet',		en:'Mediterranean',	href: getHref('mediterranean'),	bounds: [[46.3469, -11.8652], [ 26.6671,  39.0674]]	},
+			{	da: 'Middelhavet',		en:'Mediterranean',	href: getHref('mediterranean'),	bounds: [[46.3469, -11.8652], [ 28.0437,  39.0674]]	},
 //			{	da: 'Indiske Ocean',	en:'Indian Ocean',	href: getHref('indian_ocean'),	bounds: [[29.8406,	31.6406], [-19.8907,  69.9609]]	},
 		];
 
@@ -90,7 +91,7 @@
 				defaultZoom = 2,
 				maxZoom	= 4,
 				style				= {color: 'cornflowerblue', weight: 1,		opacity: 0.5, fillOpacity:0.4},
-				hoverStyle	= {color: 'blue',						weight: 1.5,	opacity: 0.9, fillOpacity:0.4},
+				hoverStyle	= {color: 'blue',						weight: 1.5,	opacity: 0.9, fillOpacity:0.3},
 				clickStyle	= {color: 'red',						weight: 1.5,	opacity: 0.9, fillOpacity:0.4},
 
 				map = L.map('map').setView([45.3367, -1.7578], defaultZoom);
