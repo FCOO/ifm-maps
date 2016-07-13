@@ -223,7 +223,7 @@
         document.title = 'fcoo.dk - ' + window.getI18n('ifm-name', localLang) + ' - ' + window.getI18n('domain-'+window.domain, localLang);
 
         // Retrieve URL parameters
-        urlParams = window.getUrlParameters();
+        urlParams = window.getParameters();
         if (urlParams.zoom !== undefined && urlParams.lat !== undefined && urlParams.lon !== undefined) {
             zoom = urlParams.zoom;
             lat = urlParams.lat;
@@ -341,13 +341,16 @@
 */  
                 // We do not support these on IE8
                 if (!window.isIE8) {
-                    // Add locator control
-                    map.addControl(mapStore.controls.locate);
-                    $(mapStore.controls.locate._container).addClass("hide-for-print");
+                    // Only supported over https for security reasons
+                    if (window.location.protocol === "https:") {
+                        // Add locator control
+                        map.addControl(mapStore.controls.locate);
+                        $(mapStore.controls.locate._container).addClass("hide-for-print");
 
-										// Enable geolocation if locate query string parameter is true
-                    if (urlParams.locate === "true") {
-                        mapStore.controls.locate.start();
+                        // Enable geolocation if locate query string parameter is true
+                        if (urlParams.locate === "true") {
+                            mapStore.controls.locate.start();
+                        }
                     }
 
                     // Add geocoder control
@@ -356,7 +359,7 @@
                 }
 
 /*
-								// Add length scale control
+                // Add length scale control
                 map.addControl(mapStore.controls.doubleScale);
                 //$(mapStore.controls.doubleScale.).addClass("show-on-large");
                 $(mapStore.controls.doubleScale._container).addClass("show-on-large");
@@ -612,7 +615,7 @@
     window.createCommonMap = createCommonMap;
 
 		
-		/**
+    /**
      * Initialization prior to DOM is loaded. We create most of the map controls
      * here.
      */
@@ -625,12 +628,41 @@
             languages,
             controls,
             layers,
-            results;
+            results,
+            hash,
+            hashes,
+            i;
 
         // Retrieve URL parameters
-        urlParams = window.getUrlParameters();
+        urlParams = window.getParameters();
 
-        localLang = window.getLocalLanguage();//TODO: Er det window.getLocalLanguage eller  window.Language();
+        // The app operates in standalone mode when it has a query string parameter
+        // "standalone=true" (generic), the navigator.standalone property is set 
+        // (iOS) or the display-mode is standalone (Android).
+        // For standalone apps we use localStorage for persisting state.
+        if (urlParams.standalone != "true") {
+            if ((("standalone" in window.navigator) &&
+               window.navigator.standalone) ||
+               (mediaQueriesSupported() &&
+               window.matchMedia('(display-mode: standalone)').matches)) {
+                urlParams.push('standalone');
+                urlParams.standalone = 'true';
+            }
+        }
+        if (urlParams.standalone == "true") {
+            var params = window.localStorage.getItem('params');
+            if (params !== null) {
+                window.localStorage.setItem('paramsTemp', params);
+                hashes = params.split('&');
+                for (i = 0; i < hashes.length; i = i + 1) {
+                    hash = hashes[i].split('=');
+                    urlParams.push(hash[0]);
+                    urlParams[hash[0]] = hash[1];
+                }
+            }
+        }
+
+        localLang = window.getLocalLanguage();
 
         // Media queries
         var desktop = false;
@@ -862,5 +894,64 @@
         return results;
     }
     window.initCommonMap = initCommonMap;
+
+    /**
+     * Get query string parameters or parameters from localStorage if
+     * in standalone mode.
+     * @return Array List of URL parameters key-value indexed
+     */
+    function getParameters() {
+        var vars = [],
+            hash,
+            hashes,
+            i;
+        i = window.location.href.indexOf('?');
+        if (i !== -1) {
+            hashes = window.location.href.slice(i + 1).split('&');
+            for (i = 0; i < hashes.length; i = i + 1) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+        }
+        i = window.location.href.indexOf('#');
+        if (i !== -1) {
+            hashes = window.location.href.slice(i + 1).split('&');
+            for (i = 0; i < hashes.length; i = i + 1) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+        }
+
+        // The app operates in standalone mode when it has a query
+        // string parameter "standalone=true" (generic) or 
+        // the navigator.standalone property is set (iOS).
+        // For standalone apps we use localStorage for persisting
+        // state.
+        if (vars.standalone != "true") {
+            if ((("standalone" in window.navigator) &&
+               window.navigator.standalone) ||
+               (mediaQueriesSupported() &&
+               window.matchMedia('(display-mode: standalone)').matches)) {
+                 vars.push('standalone');
+                 vars.standalone = 'true';
+            }
+        }
+        if (vars.standalone == "true") {
+            var params = window.localStorage.getItem('params');
+            if (params !== null) {
+                window.localStorage.setItem('paramsTemp', params);
+                hashes = params.split('&');
+                for (i = 0; i < hashes.length; i = i + 1) {
+                    hash = hashes[i].split('=');
+                    vars.push(hash[0]);
+                    vars[hash[0]] = hash[1];
+                }
+            }
+        }
+        return vars;
+    }
+    window.getParameters = getParameters;
 
 })(jQuery, L, this, document);

@@ -10,7 +10,7 @@
 
     //console.profile('init');
     // Retrieve all URL parameters
-    var urlParams = window.getUrlParameters(),
+    var urlParams = window.getParameters(),
         protocol = window.location.protocol == 'https:' ? 'https:' : 'http:';
 
     window.domain = null;
