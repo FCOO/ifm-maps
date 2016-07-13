@@ -33,6 +33,7 @@
 		"module"		: true,
 		"document"	: false,
 		"L"					: true,
+        "Raven"         : true,
 		"$"					: false,
 		"moment"		: false,
 		"_"					: false,

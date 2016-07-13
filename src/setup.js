@@ -1,18 +1,20 @@
-;(function ($, L, window, document, undefined){
+;(function ($, L, Raven, window, document, undefined){
     "use strict";
 
+    // Let raven report all uncaught exceptions to sentry
+    Raven.config('https://e351388bc0af4cf4a0503ff56dfb9d00@app.getsentry.com/78948').install();
 
-		/**
+    /**
      * Initialize the map.
      */
 
     //console.profile('init');
     // Retrieve all URL parameters
-    var urlParams = window.getUrlParameters(),
-				protocol	= window.location.protocol == 'https:' ? 'https:' : 'http:';
+    var urlParams = window.getParameters(),
+        protocol = window.location.protocol == 'https:' ? 'https:' : 'http:';
 
-		window.domain = null;
-		// The domain variable is used to determine which setup to use
+    window.domain = null;
+    // The domain variable is used to determine which setup to use
     if (urlParams.domain !== undefined) {
         window.domain = urlParams.domain;
     }
@@ -312,6 +314,35 @@
         lat = 36.8;
         lon = 20.4;
 			break;
+
+			//*********************************
+			case 'europe':
+        overlays = {
+            "Forecasts": {
+                "wind": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'windDirection', 'options': stdOpts, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
+                "windspeed": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'windSpeed', 'options': stdOpts}),
+                "winddirection": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'windDirection', 'options': stdOpts, wmsParams: {styles: 'vector_method=black_vector,vector_spacing=80,vector_offset=20'}}),
+                "windbarbs": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'windDirection', 'options': stdOpts}),
+                "pressure": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'seaLevelPressure', 'options': stdOpts}),
+                "precip": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'totalPrecipitation', 'options': stdOpts}),
+                "airtemp": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'airTemperature', 'options': stdOpts}),
+                "cloudcover": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'totalCloudCover', 'options': stdOpts}),
+                "waveperiod": store.getLayer({'dataset': 'ECMWF/DXP/ATLANTIC', 'parameter': 'wavePeriod', 'options': stdOpts}),
+                "waveheight": store.getLayer({'dataset': 'ECMWF/DXP/ATLANTIC', 'parameter': 'waveHeight', 'options': stdOpts}),
+                "seastate": store.getLayer({'dataset': 'ECMWF/DXP/ATLANTIC', 'parameter': 'seaState', 'options': stdOpts}),
+                "wavedirection": store.getLayer({'dataset': 'ECMWF/DXP/ATLANTIC', 'parameter': 'waveDirection', 'options': stdOpts})
+            },
+            "Celestial information": {
+                "Solar Terminator": store.getSolarTerminator()
+            },
+            "Static layers": {
+                "EEZ": store.getEEZ(),
+            }
+        };
+        zoom = 4;
+        lat = 55.0;
+        lon = -18.0;
+        break;
 
 			//*********************************
 			default:
@@ -1087,4 +1118,4 @@
 
 		});
 
-})(jQuery, L, this, document);
+})(jQuery, L, Raven, this, document);
