@@ -331,7 +331,7 @@
 */
                 // Add bookmark/save icon
                 map.addControl(mapStore.controls.bookmark);
-                $(mapStore.controls.bookmark._container).addClass("hide-for-print show-for-large-up");
+                $(mapStore.controls.bookmark._container).addClass("hide-for-print");
 
 /* Created in fcoo-leaflet
                 // Add position control
@@ -343,7 +343,7 @@
                 if (!window.isIE8) {
                     // Add locator control
                     map.addControl(mapStore.controls.locate);
-                    $(mapStore.controls.locate._container).addClass("hide-for-print show-for-large-up");
+                    $(mapStore.controls.locate._container).addClass("hide-for-print");
 
 										// Enable geolocation if locate query string parameter is true
                     if (urlParams.locate === "true") {
