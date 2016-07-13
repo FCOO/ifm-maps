@@ -1,6 +1,6 @@
 {
     "name": "ifm-maps",
-    "version": "2.0.1",
+    "version": "2.1.0",
     "homepage": "https://github.com/FCOO/ifm-maps",
     "authors": [
         "Jesper Baasch-Larsen jla@fcoo.dk",
@@ -21,7 +21,7 @@
         "leaflet-control-legend": "fcoo/leaflet-control-legend",
         "leaflet-categorized-layers": "fcoo/leaflet-categorized-layers",
         "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
-        "leaflet-plugins": "shramov/leaflet-plugins",
+        "leaflet-plugins": "jblarsen/leaflet-plugins#master",
         "leaflet-time-slider": "fcoo/leaflet-time-slider#latest",
         "leaflet-control-vertical": "fcoo/leaflet-control-vertical",
         "leaflet-control-datetime": "fcoo/leaflet-control-datetime",
