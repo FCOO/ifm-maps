@@ -1,4 +1,4 @@
-(function (window, document, undefined){
+(function (window /*, document, undefined*/){
     "use strict";
     /*jslint browser: true*/
     /*global updateUrlParameter*/
@@ -14,19 +14,19 @@
      * @param String lang the language id
      * @return String the localized text item or the id if there's no translation found
      */
-		function getI18n(key, lang) {
+    function getI18n(key, lang) {
         var i18n = {
             en: {
-								'fcoo-name'	: 'Defence Centre for Operational Oceanography',
-								'ifm-name'	: 'Marine Forecast',
+                'fcoo-name'	: 'Defence Centre for Operational Oceanography',
+                'ifm-name'	: 'Marine Forecast',
 
-								'domain-denmark'			: 'Denmark',
-								'domain-greenland'		: 'Greenland',
-								'domain-faroe_islands': 'Faroe Islands',
-								'domain-mediterranean': 'Mediterranean',
-								'domain-indian_ocean'	: 'Indian Ocean',
+                'domain-denmark'    	: 'Denmark',
+                'domain-greenland'    : 'Greenland',
+                'domain-faroe_islands': 'Faroe Islands',
+                'domain-mediterranean': 'Mediterranean',
+                'domain-indian_ocean'	: 'Indian Ocean',
 
-								maps: 'Maps',
+                maps: 'Maps',
                 layers: 'Layers',
                 boundaries: 'Boundaries',
                 places: 'Places',
@@ -65,14 +65,14 @@
                 //visibility: 'Erseqqarissuseq'
             //},
             da: {
-								'fcoo-name'	: 'Forsvarets Center for Operativ Oceanografi',
-								'ifm-name'	: 'Sejladsudsigt',
+                'fcoo-name'	: 'Forsvarets Center for Operativ Oceanografi',
+                'ifm-name'	: 'Sejladsudsigt',
 
-								'domain-denmark'			: 'Danmark',
-								'domain-greenland'		: 'Grønland',
-								'domain-faroe_islands': 'Færøerne',
-								'domain-mediterranean': 'Middelhavet',
-								'domain-indian_ocean'	: 'Indiske Ocean',
+                'domain-denmark'    	: 'Danmark',
+                'domain-greenland'    : 'Grønland',
+                'domain-faroe_islands': 'Færøerne',
+                'domain-mediterranean': 'Middelhavet',
+                'domain-indian_ocean'	: 'Indiske Ocean',
 
                 'maps': 'Kort',
                 'Home': 'Hjem',
@@ -171,9 +171,9 @@
 
 
         // 1. try to read URL parameter 'lang'
-				lang = window.getUrlParameters()['lang'];
+        lang = window.getUrlParameters()['lang'];
 /*
-				if (qs) {
+        if (qs) {
             if (qs.substring(0, 1) === '?') {
                 qs = qs.substring(1);
             }

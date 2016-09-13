@@ -1,4 +1,4 @@
-;(function (L, window, document, undefined){
+(function (L /*, window, document, undefined*/){
     "use strict";
 
     L.Control.Permalink.include({

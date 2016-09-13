@@ -1,0 +1,1 @@
+Directory for stylesheets and SASS files
