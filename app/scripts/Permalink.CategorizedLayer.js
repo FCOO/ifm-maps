@@ -1,4 +1,4 @@
-;(function (L, window, document, undefined){
+(function (L /*, window, document, undefined*/){
     "use strict";
 
 
@@ -41,7 +41,7 @@
     });
 
     //L.Control.Layers.include({
- 		L.Control.CategorizedLayers.include({
+    L.Control.CategorizedLayers.include({
         chooseBaseLayer: function(name) {
             //console.log('Choosing baselayer');
             var layer, obj, i;
