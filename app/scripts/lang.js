@@ -20,11 +20,11 @@
                 'fcoo-name'	: 'Defence Centre for Operational Oceanography',
                 'ifm-name'	: 'Marine Forecast',
 
-                'domain-denmark'    	: 'Denmark',
-                'domain-greenland'    : 'Greenland',
-                'domain-faroe_islands': 'Faroe Islands',
-                'domain-mediterranean': 'Mediterranean',
-                'domain-indian_ocean'	: 'Indian Ocean',
+                'domain-denmark'        : 'Denmark',
+                'domain-greenland'      : 'Greenland',
+                'domain-faroe_islands'  : 'Faroe Islands',
+                'domain-mediterranean'  : 'Mediterranean',
+                'domain-indian_ocean'   : 'Indian Ocean',
 
                 maps: 'Maps',
                 layers: 'Layers',
