@@ -21,7 +21,6 @@
         "leaflet-control-legend": "fcoo/leaflet-control-legend",
         "leaflet-categorized-layers": "fcoo/leaflet-categorized-layers",
         "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
-        "leaflet-plugins": "jblarsen/leaflet-plugins#master",
         "leaflet-time-slider": "fcoo/leaflet-time-slider#latest",
         "leaflet-control-vertical": "fcoo/leaflet-control-vertical",
         "leaflet-control-datetime": "fcoo/leaflet-control-datetime",
@@ -60,11 +59,6 @@
         "leaflet-control-osm-geocoder": {
             "main": [
                 "Control.OSMGeocoder.js"
-            ]
-        },
-        "leaflet-plugins": {
-            "main": [
-                "control/Permalink.js"
             ]
         }
     },
