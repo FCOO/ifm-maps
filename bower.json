@@ -30,7 +30,6 @@
         "leaflet-tilelayer-wms-pydap": "fcoo/leaflet-tilelayer-wms-pydap",
         "leaflet-tilelayer-wms-fcoo": "fcoo/leaflet-tilelayer-wms-fcoo",
         "leaflet-geojsonlayer-fwarn": "fcoo/leaflet-geojsonlayer-fwarn",
-        "leaflet.locatecontrol": "jblarsen/leaflet-locatecontrol#^0.44.0",
         "leaflet-layer-sealevel-denmark": "fcoo/leaflet-layer-sealevel-denmark",
         "leaflet-layer-tides-greenland": "fcoo/leaflet-layer-tides-greenland",
         "leaflet-geojsonlayer-msi": "fcoo/leaflet-geojsonlayer-msi",
@@ -86,7 +85,7 @@
         "es6"
     ],
     "resolutions": {
-        "fcoo-application": "0.0.*",
+        "fcoo-application": "^1.0.0",
         "fcoo-leaflet": "0.2.*",
         "jquery": "~1",
         "leaflet": "1.0.0-rc.1"
