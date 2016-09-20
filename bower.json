@@ -13,7 +13,7 @@
     },
     "dependencies": {
         "fcoo-application": "fcoo/fcoo-application#^1.0.0",
-        "fcoo-leaflet": "fcoo/fcoo-leaflet#0.2.*",
+        "fcoo-leaflet": "fcoo/fcoo-leaflet#^1.0.0",
         "moment": "^2.11.2",
         "jquery-ui": "^1.11.4",
         "noty": "^2.3.8",
@@ -80,8 +80,6 @@
     ],
     "resolutions": {
         "fcoo-application": "^1.0.0",
-        "fcoo-leaflet": "0.2.*",
-        "jquery": "~1",
-        "leaflet": "1.0.0-rc.1"
+        "fcoo-leaflet": "^1.0.0"
     }
 }
