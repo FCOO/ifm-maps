@@ -813,7 +813,7 @@
         if (urlParams.follow === "false") {
             follow = false;
         }
-        controls.locate = new L.Control.FcooLocate({
+        controls.locate = new L.Control.Locate({
             locateOptions: {maxZoom: 10, enableHighAccuracy: false},
             position: 'topleft',
             follow: follow,
