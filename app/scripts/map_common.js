@@ -806,11 +806,18 @@
             strings: {
                 title: window.getI18n("Show me where I am", localLang),
                 popup: window.getI18n("You are within {distance} {unit} from this point", localLang),
+                metersUnit: "meters",   //TODO: window.getI128n('meters');
+                feetUnit: "feet",       //TODO: window.getI128n('feet');
                 outsideMapBoundsMsg: window.getI18n("You seem located outside the boundaries of the map", localLang)
             },
             onLocationError: function(err) {
                 window.noty({text: err.message, type: 'information', timeout: 1000});
             },
+            onLocationOutsideMapBounds: function(control) {
+                control.stop();
+                this.onLocationError( control.options.strings.outsideMapBoundsMsg );
+            },
+
         });
 
         // Construct home button control
