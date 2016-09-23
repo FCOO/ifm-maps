@@ -12,7 +12,7 @@
     "url": "git://github.com/FCOO/ifm-maps.git"
   },
   "dependencies": {
-    "fcoo-application": "fcoo/fcoo-application#^1.1.0",
+    "fcoo-application": "fcoo/fcoo-application#^1.2.0",
     "fcoo-leaflet": "fcoo/fcoo-leaflet#^1.0.0",
     "moment": "^2.11.2",
     "jquery-ui": "^1.11.4",
@@ -78,7 +78,7 @@
     "es6"
   ],
   "resolutions": {
-    "fcoo-application": "^1.1.0",
+    "fcoo-application": "^1.2.0",
     "fcoo-leaflet": "^1.0.0"
   }
 }
