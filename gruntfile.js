@@ -18,8 +18,10 @@ module.exports = function(grunt) {
                     "name"          : "", //application name. Default="FCOO.dk"
 
                     "color"         : "", //background-color of favicons. Default="" => blue color of FCOO's logo. Must have format "#123456"
-                    "faviconColor"  : ""  //Color of the favicon. Default = "" => automatic set to highest contrast to "color" between 'white' and 'blue color of FCOO's logo'
-                                          //..Individual id:value can be added for specific application
+                    "faviconColor"  : "", //Color of the favicon. Default = "" => automatic set to highest contrast to "color" between 'white' and 'blue color of FCOO's logo'
+
+                    "sentryDSN"     : "https://e351388bc0af4cf4a0503ff56dfb9d00@app.getsentry.com/78948" //DSN for Sentry
+
                 },
 
                 "haveJavaScript": true,  //true if the application have js-files
