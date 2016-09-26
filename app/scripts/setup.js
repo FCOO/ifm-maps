@@ -2,7 +2,7 @@
     "use strict";
 
     // Let raven report all uncaught exceptions to sentry
-    Raven.config('https://e351388bc0af4cf4a0503ff56dfb9d00@app.getsentry.com/78948').install();
+//Moved to fcoo-leaflet : Raven.config('https://e351388bc0af4cf4a0503ff56dfb9d00@app.getsentry.com/78948').install();
 
     /**
      * Initialize the map.
