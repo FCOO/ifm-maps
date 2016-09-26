@@ -799,7 +799,9 @@
             follow = false;
         }
         controls.locate = new L.Control.Locate({
-            locateOptions: {maxZoom: 10, enableHighAccuracy: false},
+            locateOptions: {
+                enableHighAccuracy: false
+            },
             position: 'topleft',
             follow: follow,
             stopFollowingOnDrag: true,
