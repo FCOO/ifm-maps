@@ -79,6 +79,8 @@
   ],
   "resolutions": {
     "fcoo-application": "^1.2.0",
-    "fcoo-leaflet": "^1.0.0"
+    "fcoo-leaflet": "^1.0.0",
+    "jquery": ">=1.6",
+    "leaflet": "1.0.0-rc.3"
   }
 }
