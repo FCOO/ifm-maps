@@ -211,10 +211,6 @@
         if (mediaQueriesSupported()) {
             var mq = window.matchMedia('screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px)');
             desktop = mq.matches;
-            // Special handling of IE8 and below
-            if (window.isIE8) {
-                desktop = true;
-            }
         }
 
         //Setting title of document
@@ -337,24 +333,21 @@
                 $(mapStore.controls.mousePosition._container).addClass("hide-on-print");
                 $(mapStore.controls.mousePosition._container).addClass("show-on-large");
 */  
-                // We do not support these on IE8
-                if (!window.isIE8) {
-                    // Only supported over https for security reasons
-                    if (window.location.protocol === "https:") {
-                        // Add locator control
-                        map.addControl(mapStore.controls.locate);
-                        $(mapStore.controls.locate._container).addClass("hide-for-print");
+                // Only supported over https for security reasons
+                if (window.location.protocol === "https:") {
+                    // Add locator control
+                    map.addControl(mapStore.controls.locate);
+                    $(mapStore.controls.locate._container).addClass("hide-for-print");
 
-                        // Enable geolocation if locate query string parameter is true
-                        if (urlParams.locate === "true") {
-                            mapStore.controls.locate.start();
-                        }
+                    // Enable geolocation if locate query string parameter is true
+                    if (urlParams.locate === "true") {
+                        mapStore.controls.locate.start();
                     }
-
-                    // Add geocoder control
-                    map.addControl(mapStore.controls.OSMGeocoder);
-                    $(mapStore.controls.OSMGeocoder._container).addClass("hide-for-print show-for-large-up");
                 }
+
+                // Add geocoder control
+                map.addControl(mapStore.controls.OSMGeocoder);
+                $(mapStore.controls.OSMGeocoder._container).addClass("hide-for-print show-for-large-up");
 
 /*
                 // Add length scale control
@@ -412,7 +405,7 @@
                         var datetimeControl;
                         // We use the new time slider for desktop and the old
                         // one for mobile. This is a temporary solution.
-                        if (desktop && !window.isIE8) {
+                        if (desktop) {
                             datetimeControl = new L.Control.TimeSlider({
                                 lang: localLang,
                                 position: datetime_pos,
@@ -549,10 +542,6 @@
                     if (mediaQueriesSupported()) {
                         mq.addListener(function (){
                             var desktop = mq.matches;
-                            // Special handling of IE8 and below
-                            if (window.isIE8) {
-                                desktop = true;
-                            }
 
                             // Modify layer control
                             // Disabled since the control is not really designed
@@ -667,10 +656,6 @@
         if (mediaQueriesSupported()) {
             var mq = window.matchMedia('screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px)');
             desktop = mq.matches;
-            // Special handling of IE8 and below
-            if (window.isIE8) {
-                desktop = true;
-            }
         }
 
         controls = {};
@@ -705,7 +690,7 @@
 
             // Remove Solar Terminator from overlays if on small units
             // to save battery + does not work on all mobiles
-            if ((window.isIE8 || !desktop) && overlays.hasOwnProperty("Celestial information")) {
+            if (!desktop && overlays.hasOwnProperty("Celestial information")) {
                 delete overlays["Celestial information"];
             }
 
@@ -813,19 +798,28 @@
         if (urlParams.follow === "false") {
             follow = false;
         }
-        controls.locate = new L.Control.FcooLocate({
-            locateOptions: {maxZoom: 10, enableHighAccuracy: false},
+        controls.locate = new L.Control.Locate({
+            locateOptions: {
+                enableHighAccuracy: false
+            },
             position: 'topleft',
             follow: follow,
             stopFollowingOnDrag: true,
             strings: {
                 title: window.getI18n("Show me where I am", localLang),
                 popup: window.getI18n("You are within {distance} {unit} from this point", localLang),
+                metersUnit: "meters",   //TODO: window.getI128n('meters');
+                feetUnit: "feet",       //TODO: window.getI128n('feet');
                 outsideMapBoundsMsg: window.getI18n("You seem located outside the boundaries of the map", localLang)
             },
             onLocationError: function(err) {
                 window.noty({text: err.message, type: 'information', timeout: 1000});
             },
+            onLocationOutsideMapBounds: function(control) {
+                control.stop();
+                this.onLocationError( control.options.strings.outsideMapBoundsMsg );
+            },
+
         });
 
         // Construct home button control
