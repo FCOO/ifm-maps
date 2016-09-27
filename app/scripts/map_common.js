@@ -1,4 +1,4 @@
-;(function ($, L, window, document, undefined){
+(function ($, L, window /*, document, undefined*/){
     "use strict";
  
     /**
@@ -41,7 +41,6 @@
          */
         this.changeDatetime = function (type, arg) {
             var i, j, k,
-                myOverlays,
                 layergroup,
                 layer,
                 timesteps,
@@ -49,7 +48,6 @@
                 popstr,
                 t,
                 dt;
-            myOverlays = overlays;
             if (type == 'datetime') {
                 for (i in overlays) {
                     layergroup = overlays[i];
@@ -284,7 +282,7 @@
                 //map.fire('viewreset');
             //});
 
-            //map.attributionControl.setPrefix(window.version !== undefined ? "Version: "+window.version : "");	
+            //map.attributionControl.setPrefix(window.version !== undefined ? "Version: "+window.version : "");
             //if (version !== undefined) {
             //    map.attributionControl.setPrefix("<a href='" + location.protocol + "//fcoo.dk/ifm-maps/'>IFM Maps version: " + version + "</a>");
             //} else {
@@ -514,7 +512,7 @@
                                 var appendOverlays = 'Safety.MSI%2CSafety.Firing warnings';
                                 var overlayNames = permalinkControl.options.layers.overlayNames();
                                 if (overlayNames === '') {
-                                    appendOverlays = appendOverlays;
+                                    //appendOverlays = appendOverlays;
                                 } else {
                                     appendOverlays = permalinkControl.options.layers.overlayNames() + '%2C' + appendOverlays;
                                 }
@@ -778,7 +776,7 @@
             text: window.getI18n('Locate', localLang),
             callback: function (results) {
                 if (results.length === 0) {
-                    console.log("ERROR: didn't find a result");
+                    window.noty({text: "ERROR: didn't find a result", type: 'error'});
                     return;
                 }
                 var bbox = results[0].boundingbox,

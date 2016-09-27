@@ -1,6 +1,6 @@
 {
     "name": "ifm-maps",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "homepage": "https://github.com/FCOO/ifm-maps",
     "authors": [
         "Jesper Baasch-Larsen jla@fcoo.dk",
@@ -30,7 +30,7 @@
         "leaflet-tilelayer-wms-pydap": "fcoo/leaflet-tilelayer-wms-pydap",
         "leaflet-tilelayer-wms-fcoo": "fcoo/leaflet-tilelayer-wms-fcoo",
         "leaflet-geojsonlayer-fwarn": "fcoo/leaflet-geojsonlayer-fwarn",
-        "leaflet.locatecontrol": "jblarsen/leaflet-locatecontrol#^0.43.0",
+        "leaflet.locatecontrol": "jblarsen/leaflet-locatecontrol#^0.44.0",
         "leaflet-layer-sealevel-denmark": "fcoo/leaflet-layer-sealevel-denmark",
         "leaflet-layer-tides-greenland": "fcoo/leaflet-layer-tides-greenland",
         "leaflet-geojsonlayer-msi": "fcoo/leaflet-geojsonlayer-msi",
@@ -60,8 +60,7 @@
         },
         "leaflet-control-osm-geocoder": {
             "main": [
-                "Control.OSMGeocoder.js",
-                "images/geocoder.png"
+                "Control.OSMGeocoder.js"
             ]
         },
         "leaflet-plugins": {

@@ -1,4 +1,4 @@
-;(function ($, L, Raven, window, document, undefined){
+(function ($, L, Raven, window /*, document, undefined*/){
     "use strict";
 
     // Let raven report all uncaught exceptions to sentry
@@ -36,7 +36,7 @@
     var overlays2; // For impact maps test
     var lang = window.getLocalLanguage();
     var store = new L.Control.FcooLayerStore({language: lang});
-		//var istore = new L.Control.ImpactLayerStore({language: lang});
+    //var istore = new L.Control.ImpactLayerStore({language: lang});
     var basemap = "FCOO Standard";
     var langs = ['da', 'en'];
     var useGeoMetoc = false;
@@ -68,9 +68,9 @@
         }
     });
 
-		switch (window.domain){
-			//*********************************
-			case 'denmark':
+    switch (window.domain){
+        //*********************************
+        case 'denmark':
         zoom = 7;
         lat = 55.7;
         lon = 11.1;
@@ -124,9 +124,9 @@
             },
             "Safety": {
                 "MSI": new L.GeoJSON.MSI({
-										language: lang,
-										protocol: protocol
-								}),
+                    language: lang,
+                    protocol: protocol
+                }),
                 "Firing warnings": L.layerGroup([new L.GeoJSON.Fwarn({language: lang, protocol: protocol}), store.getFiringAreas()])
             },
             "Celestial information": {
@@ -137,10 +137,10 @@
 
             }
         };
-			break;
+        break;
 
-			//*********************************
-			case 'faroe_islands':
+        //*********************************
+        case 'faroe_islands':
         overlays = {
             "Short range forecasts": {
                 "wind": store.getLayer({'dataset': 'DMI/HIRLAM/S03', 'parameter': 'windDirection', 'options': stdOpts, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
@@ -187,10 +187,10 @@
         zoom = 7;
         lat = 61.5;
         lon = -6.0;
-			break;
+        break;
 
-			//*********************************
-			case 'greenland':
+        //*********************************
+        case 'greenland':
         zoom = 6;
         lat = 62.0;
         lon = -45.0;
@@ -245,10 +245,10 @@
                 "SAR": store.getSAR()
             }
         };
-			break;
+        break;
 
-			//*********************************
-			case 'indian_ocean':
+        //*********************************
+        case 'indian_ocean':
         overlays = {
             "Forecasts": {
                 "wind": store.getLayer({'dataset': 'ECMWF/DXD/AFR', 'parameter': 'windDirection', 'options': stdOpts, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
@@ -279,10 +279,10 @@
         zoom = 5;
         lat = 0.0;
         lon = 56.0;
-			break;
+        break;
 
-			//*********************************
-			case 'mediterranean':
+        //*********************************
+        case 'mediterranean':
         overlays = {
             "Forecasts": {
                 "wind": store.getLayer({'dataset': 'ECMWF/DXD/MEDITERRANEAN', 'parameter': 'windDirection', 'options': stdOpts, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
@@ -313,10 +313,10 @@
         zoom = 5;
         lat = 36.8;
         lon = 20.4;
-			break;
+        break;
 
-			//*********************************
-			case 'europe':
+        //*********************************
+        case 'europe':
         overlays = {
             "Forecasts": {
                 "wind": store.getLayer({'dataset': 'ECMWF/DXD/ATLANTIC', 'parameter': 'windDirection', 'options': stdOpts, wmsParams: {styles: 'vector_method=color_quiver1,vector_spacing=80,vector_offset=20'}, legendParams: {show: true}}),
@@ -344,20 +344,20 @@
         lon = -18.0;
         break;
 
-			//*********************************
-			default:
-				var hash = window.location.hash.slice(1),
-						search = window.location.search,
-						href = window.location.href,
-						hrefArray = href.split('/');
-						hrefArray.pop();
-						hrefArray.push('select');
-						hrefArray.push('index.html');
+        //*********************************
+        default:
+        var hash = window.location.hash.slice(1),
+            search = window.location.search,
+            href = window.location.href,
+            hrefArray = href.split('/');
+            hrefArray.pop();
+            hrefArray.push('select');
+            hrefArray.push('index.html');
 
-				window.location.href = hrefArray.join('/') + search + (hash ? '#' + hash : ''); 
-				return;
-				//throw new Error('Valid domain not specified: ' + window.domain);
-		}
+        window.location.href = hrefArray.join('/') + search + (hash ? '#' + hash : ''); 
+        return;
+        //throw new Error('Valid domain not specified: ' + window.domain);
+    }
 /*
     if (window.domain === 'denmark_impact') {
         zoom = 7;
@@ -1116,6 +1116,6 @@
         window.createCommonMap(store, basemap, maps, minZoom, maxZoom, zoom, lat, lon, enablePrint, useGeoMetoc, mapStore);
         //console.profileEnd();
 
-		});
+    });
 
 })(jQuery, L, Raven, this, document);

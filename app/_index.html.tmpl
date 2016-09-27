@@ -19,33 +19,34 @@ CONTACT       : info@fcoo.dk
     <meta charset="utf-8" />
     <meta http-equiv='x-dns-prefetch-control' content='on'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta name='copyright' content='fcoo.dk'>
-		<meta name='owner' content='fcoo.dk'>
-    <meta name="application-name" content="fcoo.dk">
-    <meta name="apple-mobile-web-app-title" content="fcoo.dk">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="manifest.json">
-    <meta name="msapplication-TileImage" content="/apple-touch-icon.png">
-    <meta name="msapplication-TileColor" content="#1C4B88">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="shortcut icon" href="/apple-touch-icon.png">
+	<meta name='copyright' content='fcoo.dk'>
+	<meta name='owner' content='fcoo.dk'>
 
-<!-- <meta http-equiv="refresh" content="30"> -->
-<!-- <meta name='description' content='150 words'> -->
-<!-- <meta name='subject' content='your website's subject'> -->
-<!-- <meta http-equiv='Expires' content='0'> -->
-
-	{HEAD}
 
   <link  href="{CSS_FILE_NAME}" rel="stylesheet">	
 	
 </head>
 <body>
-
-	{BODY}
+    <div id="map"></div>
 
 	<script type="text/javascript" src="{JS_FILE_NAME}"></script>
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(['disableCookies']);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//analytics.fcoo.dk/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 1]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//analytics.fcoo.dk/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
 
 </body>
 </html>
