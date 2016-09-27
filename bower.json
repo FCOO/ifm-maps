@@ -11,11 +11,6 @@
         "type": "git",
         "url": "git://github.com/FCOO/ifm-maps.git"
     },
-    "description": "",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/FCOO/ifm-maps.git"
-    },
     "dependencies": {
         "fcoo-application": "fcoo/fcoo-application#^1.2.0",
         "fcoo-leaflet": "fcoo/fcoo-leaflet#^1.0.0",
