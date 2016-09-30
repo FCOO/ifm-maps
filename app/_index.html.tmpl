@@ -52,6 +52,25 @@ CONTACT       : info@fcoo.dk
         <p><img src="//analytics.fcoo.dk/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p>
     </noscript>
 -->
+
+    <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['disableCookies']);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            var u="//analytics.fcoo.dk/piwik/";
+            _paq.push(['setTrackerUrl', u+'piwik.php']);
+            _paq.push(['setSiteId', {APPLICATION_PIWIKSITEID}]);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+
+    <noscript>
+        <p><img src="//analytics.fcoo.dk/piwik/piwik.php?idsite={APPLICATION_PIWIKSITEID}" style="border:0;" alt="" /></p>
+    </noscript>
+
     <!-- End Piwik Code -->
 
 </body>
