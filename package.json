@@ -15,5 +15,6 @@
     "grunt": "^1.0.1",
     "grunt-fcoo-grunt-plugin": "^2.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {}
 }
