@@ -1,16 +1,11 @@
 {
     "name": "ifm-maps",
-    "version": "3.0.0",
+    "version": "3.1.1",
     "homepage": "https://github.com/FCOO/ifm-maps",
     "authors": [
         "Jesper Baasch-Larsen jla@fcoo.dk",
         "Niels Holt nho@fcoo.dk"
     ],
-    "description": "",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/FCOO/ifm-maps.git"
-    },
     "description": "",
     "repository": {
         "type": "git",
