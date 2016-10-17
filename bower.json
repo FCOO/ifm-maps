@@ -36,7 +36,8 @@
     "overrides": {
         "moment": {
             "main": [
-                "min/moment.min.js"
+                "moment.js",
+                "locale/da.js"
             ]
         },
         "jquery-ui": {

@@ -207,6 +207,7 @@
             urlParams,
             mainMap;
         localLang = window.getLocalLanguage();
+        moment.locale(localLang); 
         var desktop = false;
         if (mediaQueriesSupported()) {
             var mq = window.matchMedia('screen and (orientation: landscape) and (min-width: 641px) and (min-height: 481px), screen and (orientation: portrait) and (min-width: 481px) and (min-height: 641px)');
@@ -436,7 +437,7 @@
                             );
                             // Let overlays on the map know what time it is
                             map.fire('datetimechange', {datetime: initial_datetime.toISOString()});
-                        } else {
+                        } else { 
                             datetimeControl = (new L.Control.Datetime({
                                 title: window.getI18n('datetime', localLang),
                                 datetimes: dates,
