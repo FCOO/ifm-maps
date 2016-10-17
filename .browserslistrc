@@ -1,8 +1,8 @@
 {
     "browserslist": [
-        "last 1 Chrome versions"         //Google Chrome.
+        "last 1 Chrome versions"           //Google Chrome.
         , "last 1 Firefox versions"        //Mozilla Firefox.
-        , "ie >= 9"                        //Explorer Internet Explorer.
+        , "ie >= 11"                       //Explorer Internet Explorer.
         , "last 1 Edge versions"           //Microsoft Edge.
         , "last 1 iOS versions"            //iOS Safari.
         , "last 1 Opera versions"          //Opera.
