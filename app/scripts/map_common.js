@@ -256,7 +256,8 @@
             level_pos = 'bottomright';
         }
 
-        $.each(Object.keys(maps), function(index, mapKey) {
+        //
+        $.each(Object.keys(maps), function(index, mapKey) { 
             var map;
             var baseMaps = mapStore.layers.basemaps[mapKey];
 
@@ -589,7 +590,7 @@
                 }
             }
             checkTimesteps();
-        });
+        }); //end of $.each(Object.keys(maps),.... 
 
         // Add custom title (unescaped and sanitized) - used for print
         if (urlParams.title !== undefined) {
@@ -893,7 +894,7 @@
      * in standalone mode.
      * @return Array List of URL parameters key-value indexed
      */
-    function getParameters() {
+    function getParameters() { 
         var vars = [],
             hash,
             hashes,
@@ -931,7 +932,8 @@
                  vars.standalone = 'true';
             }
         }
-        if (vars.standalone == "true") {
+
+        if (vars.standalone == "true") { 
             var params = window.localStorage.getItem('params');
             if (params !== null) {
                 window.localStorage.setItem('paramsTemp', params);
