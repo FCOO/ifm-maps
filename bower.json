@@ -25,7 +25,7 @@
         "leaflet-control-vertical": "fcoo/leaflet-control-vertical#1.0.0",
         "leaflet-control-datetime": "fcoo/leaflet-control-datetime#1.0.2",
         "leaflet-control-fa-button": "fcoo/leaflet-control-fa-button#1.0.2",
-        "leaflet-tilelayer-wms-pydap": "fcoo/leaflet-tilelayer-wms-pydap#1.1.3",
+        "leaflet-tilelayer-wms-pydap": "fcoo/leaflet-tilelayer-wms-pydap#1.1.4",
         "leaflet-tilelayer-wms-fcoo": "fcoo/leaflet-tilelayer-wms-fcoo#1.1.2",
         "leaflet-geojsonlayer-fwarn": "fcoo/leaflet-geojsonlayer-fwarn#0.2.4",
         "leaflet-layer-sealevel-denmark": "fcoo/leaflet-layer-sealevel-denmark#0.1.4",
