@@ -97,6 +97,5 @@
         "leaflet-layer-sealevel-denmark": "~0.1.4",
         "leaflet-layer-tides-greenland": "~0.1.5",
         "leaflet-geojsonlayer-msi": "~0.3.5"
-
     }
 }
