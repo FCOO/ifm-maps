@@ -10,8 +10,8 @@
             maxZoom: 18, tileSize: 256, attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         });
 
-        // Construct FCOO background layer
-        var fcoo = store.getBackground();
+        // Get Standard FCOO map layers
+        var fcoo = store.getMapStandard();
 
         // Put background layers into hash for easy consumption by layer control
         var bgstring = window.getI18n("Background Maps", lang);
@@ -372,9 +372,6 @@
             if (index !== 0) {
                 mainMap.sync(map);
             }
-
-            // Add foreground layer (land contours, names, ...)
-            map.addLayer(store.getTopLayer());
 
             // Add layer control
             var overlayMaps = mapStore.layers.overlays[mapKey];
