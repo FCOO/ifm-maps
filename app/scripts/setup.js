@@ -4,6 +4,18 @@
     // Let raven report all uncaught exceptions to sentry
 //Moved to fcoo-leaflet : Raven.config('https://e351388bc0af4cf4a0503ff56dfb9d00@app.getsentry.com/78948').install();
 
+    // Add attribute to body in case of unhandled javascript errors
+    // This is used to detect javascript errors in our Selenium scripts
+    var origOnError = window.onerror;
+    window.onerror = function() {
+        var retValue = false;
+        if (origOnError) {
+            retValue = origOnError.apply(this, arguments);
+        }
+        document.body.setAttribute("jserror", arguments[0]);
+        return retValue;
+    };
+
     /**
      * Initialize the map.
      */
