@@ -14,6 +14,7 @@
      * @param String lang the language id
      * @return String the localized text item or the id if there's no translation found
      */
+    
     function getI18n(key, lang) {
         var i18n = {
             en: {
