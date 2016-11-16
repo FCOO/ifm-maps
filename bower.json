@@ -1,6 +1,6 @@
 {
     "name": "ifm-maps",
-    "version": "3.3.0",
+    "version": "3.3.1",
     "homepage": "https://github.com/FCOO/ifm-maps",
     "authors": [
         "Jesper Baasch-Larsen jla@fcoo.dk",
@@ -60,6 +60,19 @@
             "main": [
                 "Control.OSMGeocoder.js"
             ]
+        },
+        "font-awesome": {
+            "main": []
+        },
+        "url.js": {
+            "main": [
+                "src/url.min.js"
+            ]
+        },
+        "leaflet-pip": {
+            "main": [
+                "leaflet-pip.js"
+            ]
         }
     },
     "devDependencies": {
@@ -96,6 +109,29 @@
         "leaflet-geojsonlayer-fwarn": "~0.2.4",
         "leaflet-layer-sealevel-denmark": "~0.1.4",
         "leaflet-layer-tides-greenland": "~0.1.5",
-        "leaflet-geojsonlayer-msi": "~0.3.5"
+        "leaflet-geojsonlayer-msi": "~0.3.5",
+        "jquery": "3.1.1",
+        "fcoo-fontawesome": "~2.0.0",
+        "javascript-utilities": "~0.2.2",
+        "fcoo-modernizr-mediaquery-device": "~1.2.0",
+        "fcoo-polyfill": "~2.1.0",
+        "fcoo-language": "~0.2.1",
+        "url.js-extensions": "~1.5.0",
+        "normalize-css": "5.0.0",
+        "raven-js": "3.8.0",
+        "font-awesome": "4.6.3",
+        "url.js": "2.4.0",
+        "leaflet": "1.0.1",
+        "leaflet-control-mouseposition": "~0.3.2",
+        "leaflet-double-scale": "~1.1.1",
+        "leaflet-popup-extensions": "~0.3.1",
+        "leaflet-control-display": "~0.2.0",
+        "leaflet-control-topcenter": "~1.0.1",
+        "leaflet-control-box": "~1.2.2",
+        "leaflet-control-home": "~1.0.6",
+        "leaflet-freeze": "~1.1.4",
+        "leaflet-zoom-modernizr": "~1.1.2",
+        "leaflet.locatecontrol": "0.56.0",
+        "leaflet-control-permalink": "~1.1.0"
     }
 }
