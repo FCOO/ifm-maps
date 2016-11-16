@@ -1,101 +1,137 @@
 {
-  "name": "ifm-maps",
-  "version": "3.3.1",
-  "homepage": "https://github.com/FCOO/ifm-maps",
-  "authors": [
-    "Jesper Baasch-Larsen jla@fcoo.dk",
-    "Niels Holt nho@fcoo.dk"
-  ],
-  "description": "",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/FCOO/ifm-maps.git"
-  },
-  "dependencies": {
-    "fcoo-application": "fcoo/fcoo-application#~1.6.0",
-    "fcoo-leaflet": "fcoo/fcoo-leaflet#~1.3.0",
-    "moment": "2.15.2",
-    "jquery-ui": "1.12.1",
-    "noty": "2.3.8",
-    "leaflet-control-position": "fcoo/leaflet-control-position#~0.2.5",
-    "leaflet-control-legend": "fcoo/leaflet-control-legend#~1.0.3",
-    "leaflet-categorized-layers": "fcoo/leaflet-categorized-layers#~0.1.2",
-    "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
-    "leaflet-time-slider": "fcoo/leaflet-time-slider#~1.2.3",
-    "leaflet-control-vertical": "fcoo/leaflet-control-vertical#~1.0.0",
-    "leaflet-control-datetime": "fcoo/leaflet-control-datetime#~1.0.2",
-    "leaflet-control-fa-button": "fcoo/leaflet-control-fa-button#~1.0.2",
-    "leaflet-tilelayer-wms-pydap": "fcoo/leaflet-tilelayer-wms-pydap#~1.1.4",
-    "leaflet-tilelayer-wms-fcoo": "fcoo/leaflet-tilelayer-wms-fcoo#~1.1.2",
-    "leaflet-geojsonlayer-fwarn": "fcoo/leaflet-geojsonlayer-fwarn#~0.2.4",
-    "leaflet-layer-sealevel-denmark": "fcoo/leaflet-layer-sealevel-denmark#~0.1.4",
-    "leaflet-layer-tides-greenland": "fcoo/leaflet-layer-tides-greenland#~0.1.5",
-    "leaflet-geojsonlayer-msi": "fcoo/leaflet-geojsonlayer-msi#~0.3.5",
-    "leaflet-languageselector": "buche/leaflet-languageselector"
-  },
-  "overrides": {
-    "moment": {
-      "main": [
-        "moment.js",
-        "locale/da.js"
-      ]
+    "name": "ifm-maps",
+    "version": "3.3.1",
+    "homepage": "https://github.com/FCOO/ifm-maps",
+    "authors": [
+        "Jesper Baasch-Larsen jla@fcoo.dk",
+        "Niels Holt nho@fcoo.dk"
+    ],
+    "description": "",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/FCOO/ifm-maps.git"
     },
-    "jquery-ui": {
-      "main": [
-        "jquery-ui.min.js",
-        "themes/base/core.css",
-        "themes/base/slider.css",
-        "themes/ui-lightness/theme.css",
-        "themes/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png",
-        "themes/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png"
-      ]
+    "dependencies": {
+        "fcoo-application": "fcoo/fcoo-application#~1.6.0",
+        "fcoo-leaflet": "fcoo/fcoo-leaflet#~1.3.0",
+        "moment": "2.15.2",
+        "jquery-ui": "1.12.1",
+        "noty": "2.3.8",
+        "leaflet-control-position": "fcoo/leaflet-control-position#~0.2.5",
+        "leaflet-control-legend": "fcoo/leaflet-control-legend#~1.0.3",
+        "leaflet-categorized-layers": "fcoo/leaflet-categorized-layers#~0.1.2",
+        "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
+        "leaflet-time-slider": "fcoo/leaflet-time-slider#~1.2.3",
+        "leaflet-control-vertical": "fcoo/leaflet-control-vertical#~1.0.0",
+        "leaflet-control-datetime": "fcoo/leaflet-control-datetime#~1.0.2",
+        "leaflet-control-fa-button": "fcoo/leaflet-control-fa-button#~1.0.2",
+        "leaflet-tilelayer-wms-pydap": "fcoo/leaflet-tilelayer-wms-pydap#~1.1.4",
+        "leaflet-tilelayer-wms-fcoo": "fcoo/leaflet-tilelayer-wms-fcoo#~1.1.2",
+        "leaflet-geojsonlayer-fwarn": "fcoo/leaflet-geojsonlayer-fwarn#~0.2.4",
+        "leaflet-layer-sealevel-denmark": "fcoo/leaflet-layer-sealevel-denmark#~0.1.4",
+        "leaflet-layer-tides-greenland": "fcoo/leaflet-layer-tides-greenland#~0.1.5",
+        "leaflet-geojsonlayer-msi": "fcoo/leaflet-geojsonlayer-msi#~0.3.5",
+        "leaflet-languageselector": "buche/leaflet-languageselector"
     },
-    "leaflet-languageselector": {
-      "main": [
-        "leaflet-languageselector.js",
-        "leaflet-languageselector.css"
-      ]
+    "overrides": {
+        "moment": {
+            "main": [
+                "moment.js",
+                "locale/da.js"
+            ]
+        },
+        "jquery-ui": {
+            "main": [
+                "jquery-ui.min.js",
+                "themes/base/core.css",
+                "themes/base/slider.css",
+                "themes/ui-lightness/theme.css",
+                "themes/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png",
+                "themes/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png"
+            ]
+        },
+        "leaflet-languageselector": {
+            "main": [
+                "leaflet-languageselector.js",
+                "leaflet-languageselector.css"
+            ]
+        },
+        "leaflet-control-osm-geocoder": {
+            "main": [
+                "Control.OSMGeocoder.js"
+            ]
+        },
+        "font-awesome": {
+            "main": []
+        },
+        "url.js": {
+            "main": [
+                "src/url.min.js"
+            ]
+        },
+        "leaflet-pip": {
+            "main": [
+                "leaflet-pip.js"
+            ]
+        }
     },
-    "leaflet-control-osm-geocoder": {
-      "main": [
-        "Control.OSMGeocoder.js"
-      ]
+    "devDependencies": {
+        "bourbon": "latest",
+        "modernizr-mixin": "latest",
+        "mathsass": "latest"
+    },
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "moduleType": [
+        "es6"
+    ],
+    "resolutions": {
+        "fcoo-application": "~1.6.0",
+        "fcoo-leaflet": "~1.3.0",
+        "moment": "2.15.2",
+        "jquery-ui": "1.12.1",
+        "noty": "2.3.8",
+        "leaflet-control-position": "~0.2.5",
+        "leaflet-control-legend": "~1.0.3",
+        "leaflet-categorized-layers": "~0.1.2",
+        "leaflet-time-slider": "~1.2.3",
+        "leaflet-control-vertical": "~1.0.0",
+        "leaflet-control-datetime": "~1.0.2",
+        "leaflet-control-fa-button": "~1.0.2",
+        "leaflet-tilelayer-wms-pydap": "~1.1.4",
+        "leaflet-tilelayer-wms-fcoo": "~1.1.2",
+        "leaflet-geojsonlayer-fwarn": "~0.2.4",
+        "leaflet-layer-sealevel-denmark": "~0.1.4",
+        "leaflet-layer-tides-greenland": "~0.1.5",
+        "leaflet-geojsonlayer-msi": "~0.3.5",
+        "jquery": "3.1.1",
+        "fcoo-fontawesome": "~2.0.0",
+        "javascript-utilities": "~0.2.2",
+        "fcoo-modernizr-mediaquery-device": "~1.2.0",
+        "fcoo-polyfill": "~2.1.0",
+        "fcoo-language": "~0.2.1",
+        "url.js-extensions": "~1.5.0",
+        "normalize-css": "5.0.0",
+        "raven-js": "3.8.0",
+        "font-awesome": "4.6.3",
+        "url.js": "2.4.0",
+        "leaflet": "1.0.1",
+        "leaflet-control-mouseposition": "~0.3.2",
+        "leaflet-double-scale": "~1.1.1",
+        "leaflet-popup-extensions": "~0.3.1",
+        "leaflet-control-display": "~0.2.0",
+        "leaflet-control-topcenter": "~1.0.1",
+        "leaflet-control-box": "~1.2.2",
+        "leaflet-control-home": "~1.0.6",
+        "leaflet-freeze": "~1.1.4",
+        "leaflet-zoom-modernizr": "~1.1.2",
+        "leaflet.locatecontrol": "0.56.0",
+        "leaflet-control-permalink": "~1.1.0"
     }
-  },
-  "devDependencies": {
-    "bourbon": "latest",
-    "modernizr-mixin": "latest",
-    "mathsass": "latest"
-  },
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "moduleType": [
-    "es6"
-  ],
-  "resolutions": {
-    "fcoo-application": "~1.6.0",
-    "fcoo-leaflet": "~1.3.0",
-    "moment": "2.15.2",
-    "jquery-ui": "1.12.1",
-    "noty": "2.3.8",
-    "leaflet-control-position": "~0.2.5",
-    "leaflet-control-legend": "~1.0.3",
-    "leaflet-categorized-layers": "~0.1.2",
-    "leaflet-time-slider": "~1.2.3",
-    "leaflet-control-vertical": "~1.0.0",
-    "leaflet-control-datetime": "~1.0.2",
-    "leaflet-control-fa-button": "~1.0.2",
-    "leaflet-tilelayer-wms-pydap": "~1.1.4",
-    "leaflet-tilelayer-wms-fcoo": "~1.1.2",
-    "leaflet-geojsonlayer-fwarn": "~0.2.4",
-    "leaflet-layer-sealevel-denmark": "~0.1.4",
-    "leaflet-layer-tides-greenland": "~0.1.5",
-    "leaflet-geojsonlayer-msi": "~0.3.5"
-  }
 }
