@@ -1,20 +1,21 @@
 {
-  "name": "ifm-maps",
-  "version": "3.3.0",
-  "homepage": "https://github.com/FCOO/ifm-maps",
-  "authors": [
-    "Jesper Baasch-Larsen jla@fcoo.dk",
-    "Niels Holt nho@fcoo.dk"
-  ],
-  "description": "package.json is only use for building the package. see bower.json for more info",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/FCOO/ifm-maps.git"
-  },
-  "dependencies": {
-    "grunt": "^1.0.1",
-    "grunt-fcoo-grunt-plugin": "^2.0.0"
-  },
-  "license": "MIT",
-  "devDependencies": {}
+    "name": "ifm-maps",
+    "version": "3.3.1",
+    "homepage": "https://github.com/FCOO/ifm-maps",
+    "authors": [
+        "Jesper Baasch-Larsen jla@fcoo.dk",
+        "Niels Holt nho@fcoo.dk"
+    ],
+    "description": "package.json is only use for building the package. see bower.json for more info",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/FCOO/ifm-maps.git"
+    },
+    "dependencies": {
+        "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+        "grunt-fcoo-grunt-plugin": "^2.0.0"
+    },
+    "license": "MIT",
+    "devDependencies": {}
 }
