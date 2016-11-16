@@ -1,1 +1,0 @@
-Directory for images used in the html-document
