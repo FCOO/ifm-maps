@@ -21,7 +21,7 @@
         "leaflet-control-legend": "fcoo/leaflet-control-legend#~1.0.3",
         "leaflet-categorized-layers": "fcoo/leaflet-categorized-layers#~0.1.2",
         "leaflet-control-osm-geocoder": "https://github.com/k4r573n/leaflet-control-osm-geocoder.git",
-        "leaflet-time-slider": "fcoo/leaflet-time-slider#~1.2.3",
+        "leaflet-time-slider": "fcoo/leaflet-time-slider#~1.3.0",
         "leaflet-control-vertical": "fcoo/leaflet-control-vertical#~1.0.0",
         "leaflet-control-datetime": "fcoo/leaflet-control-datetime#~1.0.2",
         "leaflet-control-fa-button": "fcoo/leaflet-control-fa-button#~1.0.2",
